@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample2.class.hpp                                  :+:      :+:    :+:   */
+/*   Sample3.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 20:42:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/07 22:00:16 by sguilher         ###   ########.fr       */
+/*   Created: 2022/12/07 21:57:41 by sguilher          #+#    #+#             */
+/*   Updated: 2022/12/07 22:02:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE2_CLASS_HPP
-# define SAMPLE2_CLASS_HPP
+#ifndef SAMPLE3_CLASS_HPP
+# define SAMPLE3_CLASS_HPP
 
-class	Sample2
+class	Sample3
 {
 	public:
-		Sample2(char p1, int p2, float p3);
-		~Sample2(void);
-		char	a1;
-		int		a2;
-		float	a3;
+		Sample3(float const f);
+		~Sample3(void);
+		float const	pi;
+		int			qd;
+		void	bar(void) const;
 };
 
 #endif
