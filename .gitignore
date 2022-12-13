@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+obj
 
 # Precompiled Headers
 *.gch
@@ -29,7 +30,8 @@
 # Executables
 *.exe
 *.out
-*.app
+megaphone
+
 
 # Others
 .vscode
