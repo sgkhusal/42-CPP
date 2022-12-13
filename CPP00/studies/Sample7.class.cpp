@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample5.class.hpp                                  :+:      :+:    :+:   */
+/*   Sample7.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 17:19:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/10 17:57:43 by sguilher         ###   ########.fr       */
+/*   Created: 2022/12/10 22:04:14 by sguilher          #+#    #+#             */
+/*   Updated: 2022/12/10 22:13:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE5_CLASS_H
-# define SAMPLE5_CLASS_H
+#include <iostream>
+#include "Sample7.class.hpp"
 
-class	Sample5
+Sample7::Sample7(void)
 {
-	public:
-		Sample5(void);
-		~Sample5(void);
+	std::cout << "Constructor called" << std::endl;
+	Sample7::_nbInst += 1;
+	return ;
+}
 
-		int		getFoo(void) const;
-		void	setFoo(int v);
+Sample7::~Sample7(void)
+{
+	std::cout << "Destructor called" << std::endl;
+	Sample7::_nbInst -= 1;
+	return ;
+}
 
-	private:
-		int		_foo;
-};
+int	Sample7::getNbInst(void)
+{
+	return (Sample7::_nbInst);
+}
 
-#endif
+int	Sample7::_nbInst = 0;

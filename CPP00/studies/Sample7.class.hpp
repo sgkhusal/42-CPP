@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample5.class.hpp                                  :+:      :+:    :+:   */
+/*   Sample7.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 17:19:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/10 17:57:43 by sguilher         ###   ########.fr       */
+/*   Created: 2022/12/10 22:04:17 by sguilher          #+#    #+#             */
+/*   Updated: 2022/12/10 22:06:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE5_CLASS_H
-# define SAMPLE5_CLASS_H
+#ifndef SAMPLE7_CLASS_H
+# define SAMPLE7_CLASS_H
 
-class	Sample5
+class	Sample7
 {
 	public:
-		Sample5(void);
-		~Sample5(void);
-
-		int		getFoo(void) const;
-		void	setFoo(int v);
+		Sample7(void);
+		~Sample7(void);
+		static int	getNbInst(void);
 
 	private:
-		int		_foo;
+		static int	_nbInst;
 };
 
 #endif

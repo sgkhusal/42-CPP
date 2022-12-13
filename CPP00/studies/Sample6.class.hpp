@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Sample5.class.hpp                                  :+:      :+:    :+:   */
+/*   Sample6.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 17:19:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/10 17:57:43 by sguilher         ###   ########.fr       */
+/*   Created: 2022/12/10 17:57:03 by sguilher          #+#    #+#             */
+/*   Updated: 2022/12/10 19:06:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE5_CLASS_H
-# define SAMPLE5_CLASS_H
+#ifndef SAMPLE6_CLASS_H
+# define SAMPLE6_CLASS_H
 
-class	Sample5
+class	Sample6
 {
 	public:
-		Sample5(void);
-		~Sample5(void);
+		Sample6(int v);
+		~Sample6(void);
 
-		int		getFoo(void) const;
-		void	setFoo(int v);
+		int	getFoo(void) const;
+		int	compare(Sample6 *other) const;
 
 	private:
-		int		_foo;
+		int	_foo;
 };
 
 #endif
