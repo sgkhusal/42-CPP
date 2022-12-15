@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:32:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/13 19:08:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:27:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ class Contact
 		void		set_nickname(std::string nickname);
 		std::string	get_nickname(void);
 		void		set_phone_number(std::string phone_number);
-		std::string	get_phone_number(void);
+		std::string	get_phone_number(void); // talvez não precise
 		void		set_darkest_secret(std::string darkest_secret);
-		std::string	get_darkest_secret(void);
+		std::string	get_darkest_secret(void); // talvez não precise
 	private:
 		std::string	_name;
 		std::string	_last_name;

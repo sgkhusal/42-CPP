@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/13 19:11:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/14 19:27:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,40 @@ std::string	Contact::get_last_name(void)
 {
 	return (this->_last_name);
 }
+
+void	Contact::set_nickname(std::string nickname)
+{
+	std::cout << "set_nickname called for: " << nickname << std::endl; /* remove */
+	this->_nickname = nickname;
+	return ;
+}
+
+std::string	Contact::get_nickname(void)
+{
+	return (this->_nickname);
+}
+
+void	Contact::set_phone_number(std::string phone_number)
+{
+	std::cout << "set_phone_number called for: " << phone_number << std::endl; /* remove */
+	this->_phone_number = phone_number;
+	return ;
+}
+
+std::string	Contact::get_phone_number(void) // talvez não precise
+{
+	return (this->_phone_number);
+}
+
+void	Contact::set_darkest_secret(std::string darkest_secret)
+{
+	std::cout << "set_darkest_secret called for: " << darkest_secret << std::endl; /* remove */
+	this->_darkest_secret = darkest_secret;
+	return ;
+}
+
+std::string	Contact::get_darkest_secret(void) // talvez não precise
+{
+	return (this->_darkest_secret);
+}
+
