@@ -6,82 +6,74 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/14 19:27:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/19 15:11:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Contact.hpp"
 
-Contact::Contact(void)
+Contact::Contact(void) // precisa inicializar os campos como nulos??
 {
-	std::cout << "Contact Constructor called" << std::endl; /* remove */
 	return ;
 }
 
-Contact::~Contact(void)
+Contact::~Contact(void) // precisaria ter o destructor??
 {
-	std::cout << "Contact Constructor called" << std::endl; /* remove */
 	return ;
 }
 
-void	Contact::set_name(std::string name)
+void	Contact::setFirstName(std::string firstName)
 {
-	std::cout << "set_name called for: " << name << std::endl; /* remove */
-	this->_name = name;
+	this->_firstName = firstName;
 	return ;
 }
 
-std::string	Contact::get_name(void)
+std::string	Contact::getFirstName(void)
 {
-	return (this->_name);
+	return (this->_firstName);
 }
 
-void	Contact::set_last_name(std::string last_name)
+void	Contact::setLastName(std::string lastName)
 {
-	std::cout << "set_last_name called for: " << last_name << std::endl; /* remove */
-	this->_last_name = last_name;
+	this->_lastName = lastName;
 	return ;
 }
 
-std::string	Contact::get_last_name(void)
+std::string	Contact::getLastName(void)
 {
-	return (this->_last_name);
+	return (this->_lastName);
 }
 
-void	Contact::set_nickname(std::string nickname)
+void	Contact::setNickname(std::string nickname)
 {
-	std::cout << "set_nickname called for: " << nickname << std::endl; /* remove */
 	this->_nickname = nickname;
 	return ;
 }
 
-std::string	Contact::get_nickname(void)
+std::string	Contact::getNickname(void)
 {
 	return (this->_nickname);
 }
 
-void	Contact::set_phone_number(std::string phone_number)
+void	Contact::setPhoneNumber(std::string phoneNumber)
 {
-	std::cout << "set_phone_number called for: " << phone_number << std::endl; /* remove */
-	this->_phone_number = phone_number;
+	this->_phoneNumber = phoneNumber;
 	return ;
 }
 
-std::string	Contact::get_phone_number(void) // talvez não precise
+std::string	Contact::getPhoneNumber(void)
 {
-	return (this->_phone_number);
+	return (this->_phoneNumber);
 }
 
-void	Contact::set_darkest_secret(std::string darkest_secret)
+void	Contact::setDarkestSecret(std::string darkestSecret)
 {
-	std::cout << "set_darkest_secret called for: " << darkest_secret << std::endl; /* remove */
-	this->_darkest_secret = darkest_secret;
+	this->_darkestSecret = darkestSecret;
 	return ;
 }
 
-std::string	Contact::get_darkest_secret(void) // talvez não precise
+std::string	Contact::getDarkestSecret(void)
 {
-	return (this->_darkest_secret);
+	return (this->_darkestSecret);
 }
-
