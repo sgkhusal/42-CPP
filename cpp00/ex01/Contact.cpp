@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 00:24:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/22 02:03:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ std::string	Contact::getDarkestSecret(void) {
 
 void	Contact::getContactInfoFromUser(void) {
 	std::cout << "Enter the contact data:" << std::endl;
-	std::cout << "    first name: " << std::endl;
+	std::cout << "first name:" << std::endl;
 	std::getline(std::cin, this->_firstName);
-	std::cout << "     last name: " << std::endl;
+	std::cout << "last name:" << std::endl;
 	std::getline(std::cin, this->_lastName);
-	std::cout << "      nickname: " << std::endl;
+	std::cout << "nickname:" << std::endl;
 	std::getline(std::cin, this->_nickname);
-	std::cout << "  phone number: " << std::endl;
-	std::getline(std::cin, this->_nickname);
-	std::cout << "darkest secret: " << std::endl;
+	std::cout << "phone number:" << std::endl;
 	std::getline(std::cin, this->_phoneNumber);
+	std::cout << "darkest secret:" << std::endl;
+	std::getline(std::cin, this->_darkestSecret);
 }
