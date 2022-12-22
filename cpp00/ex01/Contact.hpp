@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:32:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/19 15:09:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/22 00:24:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ class Contact
 	public:
 		Contact(void);
 		~Contact(void);
+		void		getContactInfoFromUser(void);
 		void		setFirstName(std::string firstName);
-		std::string	getFirstName(void);
+		std::string	getFirstName(void); // uma função get pode ser const?
 		void		setLastName(std::string lastName);
 		std::string	getLastName(void);
 		void		setNickname(std::string nickname);

@@ -6,11 +6,11 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/14 21:34:18 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/19 16:04:16 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		phonebook
+NAME =		my_phonebook
 
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
