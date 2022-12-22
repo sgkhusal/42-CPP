@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:36:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 00:47:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/22 02:26:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ t_actions	getUserAction(void) {
 	std::string	userAction;
 
 	std::getline(std::cin, userAction);
+	if (userAction.empty()) //////
+		return (NONE);
 	if (userAction.compare("ADD") == 0)
 		return (ADD);
 	if (userAction.compare("SEARCH") == 0)
 		return (SEARCH);
 	if (userAction.compare("EXIT") == 0)
 		return (EXIT);
-	std::cout << "Invalid command." << std::endl; /////
+	std::cout << "Invalid command: |" << userAction << "|" << std::endl; /////
 	putActionsMenu();
 	return (NONE);
 }

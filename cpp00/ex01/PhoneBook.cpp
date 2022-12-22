@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 00:58:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/22 02:26:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	PhoneBook::addContact(void) {
 
 	contact.getContactInfoFromUser();
 	index = _defineContactIndex();
-	this->_contacts[index] = contact;
-	/* this->_contacts[index].setFirstName(contact.getFirstName);
-	this->_contacts[index].setLastName(contact.getLastName);
-	this->_contacts[index].setNickname(contact.getNickname);
-	this->_contacts[index].setPhoneNumber(contact.getNickname); // precisa ter validação dos dados??
-	this->_contacts[index].setDarkestSecret(contact.getDarkestSecret); */
+	this->_contacts[index].setFirstName(contact.getFirstName());
+	this->_contacts[index].setLastName(contact.getLastName());
+	this->_contacts[index].setNickname(contact.getNickname());
+	this->_contacts[index].setPhoneNumber(contact.getPhoneNumber()); // precisa ter validação dos dados??
+	this->_contacts[index].setDarkestSecret(contact.getDarkestSecret());
 	std::cout << "-------- Contact saved successfully --------" << std::endl;
 }
 
@@ -56,7 +55,6 @@ int	PhoneBook::_defineContactIndex(void) {
 }
 
 void	PhoneBook::searchContactList(void) {
-	std::string	str;
 	int			userIndex;
 
 	if (this->_qty == 0)
@@ -70,15 +68,15 @@ void	PhoneBook::searchContactList(void) {
 	while (userIndex < 0 || userIndex > this->_qty - 1)
 	{
 		// Prompt the user again for the index of the entry to display.
-		std::getline(std::cin, str);
+		std::cin >> userIndex;
 		// pegar o índice e transformar - lidar com erros e usuário inválido
-		userIndex = str[0];
 		/* If the index is out of range or wrong, define a relevant behavior. */
 		if (userIndex > this->_qty - 1)
 			std::cout << "Select a valid contact index:" << std::endl;
 	}
 	// Otherwise, display the contact information, one field per line
 	_printContactInfo(userIndex);
+	std::cin.clear(); //////
 }
 
 void	PhoneBook::_printContactList(void) {
