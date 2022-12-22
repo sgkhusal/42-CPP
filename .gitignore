@@ -32,6 +32,7 @@ obj
 *.out
 megaphone
 phonebook
+my_phonebook
 
 
 # Others
