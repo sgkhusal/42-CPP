@@ -6,12 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 02:03:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 20:40:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Contact.hpp"
+#include "texts.hpp"
 
 Contact::Contact(void) {
 	return ;
@@ -61,16 +62,18 @@ std::string	Contact::getDarkestSecret(void) {
 	return (this->_darkestSecret);
 }
 
-void	Contact::getContactInfoFromUser(void) {
-	std::cout << "Enter the contact data:" << std::endl;
-	std::cout << "first name:" << std::endl;
-	std::getline(std::cin, this->_firstName);
-	std::cout << "last name:" << std::endl;
-	std::getline(std::cin, this->_lastName);
-	std::cout << "nickname:" << std::endl;
-	std::getline(std::cin, this->_nickname);
-	std::cout << "phone number:" << std::endl;
-	std::getline(std::cin, this->_phoneNumber);
-	std::cout << "darkest secret:" << std::endl;
-	std::getline(std::cin, this->_darkestSecret);
+void	Contact::getContactInfosFromUser(void) {
+	std::cout << std::endl;
+	instruction("Enter the contact data:");
+	_getInfo("first name:", this->_firstName);
+	_getInfo("last name:", this->_lastName);
+	_getInfo("nickname:", this->_nickname);
+	_getInfo("phone number:", this->_phoneNumber);
+	_getInfo("darkest secret:", this->_darkestSecret);
+}
+
+void	Contact::_getInfo(const char* info, std::string& var)
+{
+	instruction(info);
+	std::getline(std::cin, var);
 }
