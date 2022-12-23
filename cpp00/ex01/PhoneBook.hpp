@@ -6,19 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:30:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 00:22:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:58:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "Contact.hpp"
-
-// array of contacts of size
-// function add contact (accepts only 8)
-// dynamic allocation is forbidden
-
 #ifndef PHONEBOOK_H
 # define PHONEBOOK_H
+
+# include "Contact.hpp"
 
 class PhoneBook
 {
@@ -34,6 +29,7 @@ class PhoneBook
 		int			_defineContactIndex(void);
 		void		_printContactList(void);
 		void		_printContactInfo(int index);
+		void		_printInfo(const char *name, std::string info);
 };
 
 #endif

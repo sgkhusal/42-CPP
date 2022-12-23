@@ -6,12 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 02:26:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 20:41:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "PhoneBook.hpp"
+#include "texts.hpp"
 
 PhoneBook::PhoneBook(void) : _qty(0), _older_contact(0) {
 	return ;
@@ -26,14 +27,14 @@ void	PhoneBook::addContact(void) {
 	int			index;
 	Contact		contact;
 
-	contact.getContactInfoFromUser();
+	contact.getContactInfosFromUser();
 	index = _defineContactIndex();
 	this->_contacts[index].setFirstName(contact.getFirstName());
 	this->_contacts[index].setLastName(contact.getLastName());
 	this->_contacts[index].setNickname(contact.getNickname());
 	this->_contacts[index].setPhoneNumber(contact.getPhoneNumber()); // precisa ter validação dos dados??
 	this->_contacts[index].setDarkestSecret(contact.getDarkestSecret());
-	std::cout << "-------- Contact saved successfully --------" << std::endl;
+	success("Contact successfully saved");
 }
 
 int	PhoneBook::_defineContactIndex(void) {
@@ -59,11 +60,11 @@ void	PhoneBook::searchContactList(void) {
 
 	if (this->_qty == 0)
 	{
-		std::cout << "The contact's list is empty" << std::endl;
+		warning("The contact's list is empty");
 		return ;
 	}
-	std::cout << "Select the contact index:" << std::endl;
 	_printContactList();
+	instruction("Select the contact index:");
 	userIndex = -1;
 	while (userIndex < 0 || userIndex > this->_qty - 1)
 	{
@@ -72,7 +73,8 @@ void	PhoneBook::searchContactList(void) {
 		// pegar o índice e transformar - lidar com erros e usuário inválido
 		/* If the index is out of range or wrong, define a relevant behavior. */
 		if (userIndex > this->_qty - 1)
-			std::cout << "Select a valid contact index:" << std::endl;
+			warning("Select a valid contact index:");
+		// tá dando erro quando o input não é número (ele assume que o índice é zero)
 	}
 	// Otherwise, display the contact information, one field per line
 	_printContactInfo(userIndex);
@@ -81,13 +83,17 @@ void	PhoneBook::searchContactList(void) {
 
 void	PhoneBook::_printContactList(void) {
 	int	i;
+
+	std::cout << GREY;
+	std::cout << "              CONTACTS TABLE" << std::endl;
+	std::cout << "______________________________________________" << std::endl;
 	/* Display the saved contacts as a list of 4 columns: index, first name, last
 	name and nickname */
 	/* Each column must be 10 characters wide. A pipe character (’|’) separates
 	them. The text must be right-aligned. If the text is longer than the column,
 	it must be truncated and the last displayable character must be replaced by a
 	dot (’.’) */
-	std::cout << "    Index |First name| Last name| Nickname" << std::endl;
+	std::cout << "    INDEX |FIRST NAME| LAST NAME| NICKNAME" << std::endl;
 	i = 0;
 	while (i < this->_qty)
 	{
@@ -96,13 +102,18 @@ void	PhoneBook::_printContactList(void) {
 		std::cout << _contacts[i].getNickname() << std::endl;
 		i++;
 	}
+	std::cout << "______________________________________________" << std::endl;
+	std::cout << RESET << std::endl;
 }
 
 void	PhoneBook::_printContactInfo(int index) {
-	std::cout << "contact " << index << ":" << std::endl; // tira?
-	std::cout << "    first name: " << _contacts[index].getFirstName() << std::endl;
-	std::cout << "     last name: " << _contacts[index].getLastName() << std::endl;
-	std::cout << "      nickname: " << _contacts[index].getNickname() << std::endl;
-	std::cout << "  phone number: " << _contacts[index].getPhoneNumber() << std::endl;
-	std::cout << "darkest secret: " << _contacts[index].getDarkestSecret() << std::endl;
+	_printInfo("    first name: ", _contacts[index].getFirstName());
+	_printInfo("     last name: ", _contacts[index].getLastName());
+	_printInfo("      nickname: ", _contacts[index].getNickname());
+	_printInfo("  phone number: ", _contacts[index].getPhoneNumber());
+	_printInfo("darkest secret: ", _contacts[index].getDarkestSecret());
+}
+
+void	PhoneBook::_printInfo(const char *name, std::string info) {
+	std::cout << ORANGE << name << info << RESET << std::endl;
 }

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:36:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/22 02:26:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:42:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "PhoneBook.hpp"
-#include "Contact.hpp"
+#include "texts.hpp"
 
 typedef enum e_actions {
 	NONE,
@@ -20,16 +20,6 @@ typedef enum e_actions {
 	SEARCH,
 	EXIT
 }				t_actions;
-
-void	putActionsMenu(void) {
-	std::cout << std::endl;
-	// colocar um testinho legal
-	std::cout << "Select a command:" << std::endl;
-	std::cout << "* ADD: saves a new contact" << std::endl;
-	std::cout << "* SEARCH: displays a specific contact" << std::endl;
-	std::cout << "* EXIT: quits My PhoneBook. All data will be lost." << std::endl;
-	std::cout << std::endl;
-}
 
 t_actions	getUserAction(void) {
 	std::string	userAction;
@@ -43,7 +33,7 @@ t_actions	getUserAction(void) {
 		return (SEARCH);
 	if (userAction.compare("EXIT") == 0)
 		return (EXIT);
-	std::cout << "Invalid command: |" << userAction << "|" << std::endl; /////
+	warning("Invalid command");
 	putActionsMenu();
 	return (NONE);
 }
@@ -53,19 +43,19 @@ int	main(void)
 	PhoneBook	phoneBook;
 	t_actions	userAction;
 
-	std::cout << std::endl;
-	std::cout << "********* Welcome to My Phonebook *********" << std::endl;
+	welcome();
 	putActionsMenu();
+	userAction = NONE;
 	while (userAction != EXIT)
 	{
-		userAction = NONE;
+		selectCommand();
 		userAction = getUserAction();
 		if (userAction == ADD)
 			phoneBook.addContact();
 		if (userAction == SEARCH)
 			phoneBook.searchContactList();
 		if (userAction == EXIT)
-			std::cout << "Goodbye" << std::endl; ///////
+			goodbye();
 	}
 	return (0);
 }
