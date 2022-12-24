@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 20:41:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:51:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	PhoneBook::addContact(void) {
 	this->_contacts[index].setNickname(contact.getNickname());
 	this->_contacts[index].setPhoneNumber(contact.getPhoneNumber()); // precisa ter validação dos dados??
 	this->_contacts[index].setDarkestSecret(contact.getDarkestSecret());
-	success("Contact successfully saved");
+	Texts::success("Contact successfully saved");
 }
 
 int	PhoneBook::_defineContactIndex(void) {
@@ -60,25 +60,26 @@ void	PhoneBook::searchContactList(void) {
 
 	if (this->_qty == 0)
 	{
-		warning("The contact's list is empty");
+		Texts::warning("The contact's list is empty");
 		return ;
 	}
 	_printContactList();
-	instruction("Select the contact index:");
+	Texts::instruction("Select the contact index:");
 	userIndex = -1;
 	while (userIndex < 0 || userIndex > this->_qty - 1)
 	{
-		// Prompt the user again for the index of the entry to display.
 		std::cin >> userIndex;
-		// pegar o índice e transformar - lidar com erros e usuário inválido
-		/* If the index is out of range or wrong, define a relevant behavior. */
-		if (userIndex > this->_qty - 1)
-			warning("Select a valid contact index:");
-		// tá dando erro quando o input não é número (ele assume que o índice é zero)
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			std::cin.ignore(__INT_MAX__, '\n');
+			userIndex = -1;
+		}
+		if (userIndex < 0 ||  userIndex > this->_qty - 1)
+			Texts::warning("Select a valid contact index:");
 	}
-	// Otherwise, display the contact information, one field per line
 	_printContactInfo(userIndex);
-	std::cin.clear(); //////
+	std::cin.ignore();
 }
 
 void	PhoneBook::_printContactList(void) {
@@ -107,6 +108,7 @@ void	PhoneBook::_printContactList(void) {
 }
 
 void	PhoneBook::_printContactInfo(int index) {
+	std::cout << std::endl;
 	_printInfo("    first name: ", _contacts[index].getFirstName());
 	_printInfo("     last name: ", _contacts[index].getLastName());
 	_printInfo("      nickname: ", _contacts[index].getNickname());

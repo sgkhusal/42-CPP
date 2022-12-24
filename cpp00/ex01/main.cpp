@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:36:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 17:42:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,41 @@
 #include "PhoneBook.hpp"
 #include "texts.hpp"
 
-typedef enum e_actions {
-	NONE,
-	ADD,
-	SEARCH,
-	EXIT
-}				t_actions;
-
-t_actions	getUserAction(void) {
+PhoneBook::t_actions	getUserAction(void) {
 	std::string	userAction;
 
 	std::getline(std::cin, userAction);
-	if (userAction.empty()) //////
-		return (NONE);
+	if (userAction.empty())
+		return (PhoneBook::NONE);
 	if (userAction.compare("ADD") == 0)
-		return (ADD);
+		return (PhoneBook::ADD);
 	if (userAction.compare("SEARCH") == 0)
-		return (SEARCH);
+		return (PhoneBook::SEARCH);
 	if (userAction.compare("EXIT") == 0)
-		return (EXIT);
-	warning("Invalid command");
-	putActionsMenu();
-	return (NONE);
+		return (PhoneBook::EXIT);
+	Texts::warning("Invalid command");
+	Texts::putActionsMenu();
+	return (PhoneBook::NONE);
 }
 
 int	main(void)
 {
 	PhoneBook	phoneBook;
-	t_actions	userAction;
+	PhoneBook::t_actions	userAction;
 
-	welcome();
-	putActionsMenu();
-	userAction = NONE;
-	while (userAction != EXIT)
+	Texts::welcome();
+	Texts::putActionsMenu();
+	userAction = PhoneBook::NONE;
+	while (userAction != PhoneBook::EXIT)
 	{
-		selectCommand();
+		Texts::selectCommand();
 		userAction = getUserAction();
-		if (userAction == ADD)
+		if (userAction == PhoneBook::ADD)
 			phoneBook.addContact();
-		if (userAction == SEARCH)
+		if (userAction == PhoneBook::SEARCH)
 			phoneBook.searchContactList();
-		if (userAction == EXIT)
-			goodbye();
+		if (userAction == PhoneBook::EXIT)
+			Texts::goodbye();
 	}
 	return (0);
 }
-
-// input pode ser um enter!!

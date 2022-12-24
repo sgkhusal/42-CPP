@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 20:40:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:45:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ std::string	Contact::getDarkestSecret(void) {
 
 void	Contact::getContactInfosFromUser(void) {
 	std::cout << std::endl;
-	instruction("Enter the contact data:");
+	Texts::instruction("Enter the contact data:");
 	_getInfo("first name:", this->_firstName);
 	_getInfo("last name:", this->_lastName);
 	_getInfo("nickname:", this->_nickname);
@@ -74,6 +74,6 @@ void	Contact::getContactInfosFromUser(void) {
 
 void	Contact::_getInfo(const char* info, std::string& var)
 {
-	instruction(info);
+	Texts::instruction(info);
 	std::getline(std::cin, var);
 }
