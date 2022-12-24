@@ -1,0 +1,20 @@
+hello
+hello world
+hello
+hello world 42 !!!
+hello world 42 !!!
+42
+21 42
+42
+Harry Potter
+Hermione Granger
+Ronald Weasley
+Rubeos Hagrid
+Albus Dumbledore
+-42
+ola
+2147483647
+Batatinha quando nasce esparrama pelo chão
+-2147483648
+2147483648
+-1
