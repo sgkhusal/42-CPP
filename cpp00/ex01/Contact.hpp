@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:32:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 20:38:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:14:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ class Contact
 		std::string	_nickname;
 		std::string	_phoneNumber;
 		std::string	_darkestSecret;
-		void		_getInfo(const char* info, std::string& var);
+		typedef void(Contact::* fptr)(std::string);
+		void		_getInfo(const char* info, fptr setter);
 };
+
 
 #endif
