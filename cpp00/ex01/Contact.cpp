@@ -6,11 +6,12 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 23:45:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/24 03:19:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cctype>
 #include "Contact.hpp"
 #include "texts.hpp"
 
@@ -47,6 +48,21 @@ std::string	Contact::getNickname(void) {
 }
 
 void	Contact::setPhoneNumber(std::string phoneNumber) {
+	for (size_t i = 0; i < phoneNumber.size(); i++)
+	{
+		if (!isdigit(phoneNumber[i]))
+		{
+			Texts::warning("Invalid phone number. It accepts only numbers");
+			_getInfo("phone number:", &Contact::setPhoneNumber);
+			return ;
+		}
+	}
+	if (phoneNumber.size() < 8 || phoneNumber.size() > 11)
+	{
+		Texts::warning("Invalid phone number size");
+		_getInfo("phone number:", &Contact::setPhoneNumber);
+		return ;
+	}
 	this->_phoneNumber = phoneNumber;
 }
 
@@ -65,15 +81,18 @@ std::string	Contact::getDarkestSecret(void) {
 void	Contact::getContactInfosFromUser(void) {
 	std::cout << std::endl;
 	Texts::instruction("Enter the contact data:");
-	_getInfo("first name:", this->_firstName);
-	_getInfo("last name:", this->_lastName);
-	_getInfo("nickname:", this->_nickname);
-	_getInfo("phone number:", this->_phoneNumber);
-	_getInfo("darkest secret:", this->_darkestSecret);
+	_getInfo("first name:", &Contact::setFirstName);
+	_getInfo("last name:", &Contact::setLastName);
+	_getInfo("nickname:", &Contact::setNickname);
+	_getInfo("phone number:", &Contact::setPhoneNumber);
+	_getInfo("darkest secret:", &Contact::setDarkestSecret);
 }
 
-void	Contact::_getInfo(const char* info, std::string& var)
+void	Contact::_getInfo(const char* info, fptr setter)
 {
+	std::string	var;
+
 	Texts::instruction(info);
 	std::getline(std::cin, var);
+	(this->*setter)(var);
 }

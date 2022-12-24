@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:30:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 23:37:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/24 02:18:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class PhoneBook
 		int			_older_contact;
 		int			_defineContactIndex(void);
 		void		_printContactList(void);
+		void		_printListFormat(std::string info);
 		void		_printContactInfo(int index);
 		void		_printInfo(const char *name, std::string info);
 };

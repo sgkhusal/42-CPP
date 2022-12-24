@@ -6,11 +6,12 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 23:51:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/24 02:34:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <iomanip>
 #include "PhoneBook.hpp"
 #include "texts.hpp"
 
@@ -94,17 +95,28 @@ void	PhoneBook::_printContactList(void) {
 	them. The text must be right-aligned. If the text is longer than the column,
 	it must be truncated and the last displayable character must be replaced by a
 	dot (’.’) */
-	std::cout << "    INDEX |FIRST NAME| LAST NAME| NICKNAME" << std::endl;
+	std::cout << "     INDEX|FIRST NAME| LAST NAME|  NICKNAME" << std::endl;
 	i = 0;
 	while (i < this->_qty)
 	{
-		std::cout << "        " << i << " | " << _contacts[i].getFirstName();
-		std::cout << " | " << _contacts[i].getLastName() << " | ";
-		std::cout << _contacts[i].getNickname() << std::endl;
+		std::cout << std::setw(10) << i << "|";
+		_printListFormat(_contacts[i].getFirstName());
+		std::cout << "|";
+		_printListFormat(_contacts[i].getLastName());
+		std::cout << "|";
+		_printListFormat(_contacts[i].getNickname());
+		std::cout << std::endl;
 		i++;
 	}
 	std::cout << "______________________________________________" << std::endl;
 	std::cout << RESET << std::endl;
+}
+
+void	PhoneBook::_printListFormat(std::string info) {
+	if (info.length() > 10)
+		std::cout << info.substr(0,9) + '.';
+	else
+		std::cout << std::setw(10) << info;
 }
 
 void	PhoneBook::_printContactInfo(int index) {
