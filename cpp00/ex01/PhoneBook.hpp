@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:30:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 17:58:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/23 23:37:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ class PhoneBook
 		~PhoneBook(void);
 		void		addContact(void);
 		void		searchContactList(void);
+		typedef enum e_actions {
+			NONE,
+			ADD,
+			SEARCH,
+			EXIT
+		}				t_actions;
 	private:
 		Contact		_contacts[8];
 		int			_qty;
