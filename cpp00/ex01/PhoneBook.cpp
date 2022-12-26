@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/24 02:34:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:02:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,11 @@ void	PhoneBook::_printContactList(void) {
 	std::cout << GREY;
 	std::cout << "              CONTACTS TABLE" << std::endl;
 	std::cout << "______________________________________________" << std::endl;
-	/* Display the saved contacts as a list of 4 columns: index, first name, last
-	name and nickname */
-	/* Each column must be 10 characters wide. A pipe character (’|’) separates
-	them. The text must be right-aligned. If the text is longer than the column,
-	it must be truncated and the last displayable character must be replaced by a
-	dot (’.’) */
 	std::cout << "     INDEX|FIRST NAME| LAST NAME|  NICKNAME" << std::endl;
 	i = 0;
 	while (i < this->_qty)
 	{
-		std::cout << std::setw(10) << i << "|";
+		std::cout << std::setw(10) << i + 1 << "|";
 		_printListFormat(_contacts[i].getFirstName());
 		std::cout << "|";
 		_printListFormat(_contacts[i].getLastName());
@@ -128,6 +122,6 @@ void	PhoneBook::_printContactInfo(int index) {
 	_printInfo("darkest secret: ", _contacts[index].getDarkestSecret());
 }
 
-void	PhoneBook::_printInfo(const char *name, std::string info) {
-	std::cout << ORANGE << name << info << RESET << std::endl;
+void	PhoneBook::_printInfo(const char *key, std::string value) {
+	std::cout << ORANGE << key << value << RESET << std::endl;
 }
