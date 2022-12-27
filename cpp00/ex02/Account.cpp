@@ -6,12 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 16:12:38 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/27 17:54:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:18:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 #include "iostream"
+#include "ctime"
 
 Account::Account(int initial_deposit) : _accountIndex(Account::_nbAccounts),
 										_amount(initial_deposit),
@@ -109,7 +110,14 @@ void	Account::displayStatus(void) const {
 }
 
 void	Account::_displayTimestamp(void) {
-	std::cout << "[19920104_091532] "; //////// é setado na hora que inicia o programa!!
+	std::time_t	timetoday;
+	std::tm 	*timestamp;
+
+	std::time(&timetoday);
+	timestamp = std::localtime(&timetoday);
+	std::cout << "[" << 1900 + timestamp->tm_year << timestamp->tm_mon \
+			<< timestamp->tm_mday << "_" << timestamp->tm_hour \
+			<< timestamp->tm_min << timestamp->tm_sec << "] ";
 }
 
 int	Account::_nbAccounts = 0;
