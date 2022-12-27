@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:32:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/24 03:14:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:14:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ class Contact
 		~Contact(void);
 		void		getContactInfosFromUser(void);
 		void		setFirstName(std::string firstName);
-		std::string	getFirstName(void);
 		void		setLastName(std::string lastName);
-		std::string	getLastName(void);
 		void		setNickname(std::string nickname);
-		std::string	getNickname(void);
 		void		setPhoneNumber(std::string phoneNumber);
-		std::string	getPhoneNumber(void);
 		void		setDarkestSecret(std::string darkestSecret);
+		std::string	getFirstName(void);
+		std::string	getLastName(void);
+		std::string	getNickname(void);
+		std::string	getPhoneNumber(void);
 		std::string	getDarkestSecret(void);
 	private:
 		std::string	_firstName;
@@ -38,6 +38,5 @@ class Contact
 		typedef void(Contact::* fptr)(std::string);
 		void		_getInfo(const char* info, fptr setter);
 };
-
 
 #endif

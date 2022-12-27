@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/26 12:02:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/26 12:07:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	PhoneBook::addContact(void) {
 	this->_contacts[index].setFirstName(contact.getFirstName());
 	this->_contacts[index].setLastName(contact.getLastName());
 	this->_contacts[index].setNickname(contact.getNickname());
-	this->_contacts[index].setPhoneNumber(contact.getPhoneNumber()); // precisa ter validação dos dados??
+	this->_contacts[index].setPhoneNumber(contact.getPhoneNumber());
 	this->_contacts[index].setDarkestSecret(contact.getDarkestSecret());
 	Texts::success("Contact successfully saved");
 }
