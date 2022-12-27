@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/24 03:19:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/27 19:22:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ std::string	Contact::getNickname(void) {
 }
 
 void	Contact::setPhoneNumber(std::string phoneNumber) {
-	for (size_t i = 0; i < phoneNumber.size(); i++)
-	{
+	for (size_t i = 0; i < phoneNumber.size(); i++) {
 		if (!isdigit(phoneNumber[i]))
 		{
 			Texts::warning("Invalid phone number. It accepts only numbers");
@@ -57,8 +56,7 @@ void	Contact::setPhoneNumber(std::string phoneNumber) {
 			return ;
 		}
 	}
-	if (phoneNumber.size() < 8 || phoneNumber.size() > 11)
-	{
+	if (phoneNumber.size() < 8 || phoneNumber.size() > 11) {
 		Texts::warning("Invalid phone number size");
 		_getInfo("phone number:", &Contact::setPhoneNumber);
 		return ;
@@ -90,9 +88,23 @@ void	Contact::getContactInfosFromUser(void) {
 
 void	Contact::_getInfo(const char* info, fptr setter)
 {
-	std::string	var;
+	std::string	value;
+	int			init_cut; /// melhorar esses nomes
+	int			final_cut;
 
 	Texts::instruction(info);
-	std::getline(std::cin, var);
-	(this->*setter)(var);
+	std::getline(std::cin, value);
+	init_cut = 0;
+	while (value[init_cut] && (value[init_cut] == ' ' || value[init_cut] == '\t'))
+		init_cut++;
+	final_cut = init_cut;
+	while (value[final_cut] && value[final_cut] != ' ' && value[final_cut] != '\t')
+		final_cut++;
+	if (init_cut != 0 || final_cut != value.length() - 1)
+		value = value.substr(init_cut, final_cut);
+	if (value.empty()) {
+		_getInfo(info, setter);
+		return ;
+	}
+	(this->*setter)(value);
 }
