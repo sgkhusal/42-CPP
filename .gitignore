@@ -37,3 +37,5 @@ my_phonebook
 
 # Others
 .vscode
+*.log
+log
