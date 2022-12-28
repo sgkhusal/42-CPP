@@ -1,0 +1,75 @@
+SEARCH
+
+hello world
+ADD
+Harry
+Potter
+The boy who lived
+12345
+invalid_phone_number
+1234567890
+He was a horcrux and so he was able to share some of Voldemort's thoughts and abilities
+ADD
+Hermione
+Granger
+Hermi
+9876543210
+She needs to study all the time
+ADD
+Ronald
+Weasley
+Rony
+0123456789
+He wishes he was an only child
+SEARCH
+0
+4
+1
+ADD
+Albus Percival Wulfric Brian
+Dumbledore
+Dumbledore
+88888888
+He blames himself for his sister's dead
+ADD
+Rubeos
+Hagrid
+Hagrid
+777777777
+He was expelled from Hogwarts and was send to Azkanban when he was a teenager
+ADD
+Frederick
+Weasley
+Fred
+55555555
+The the marauder's map
+ADD
+George
+Weasley
+George
+44444444
+The the marauder's map
+ADD
+	Ginevra
+   Weasley
+     Ginny
+33333333
+She loves Harry Potter (but everybody already knows that)
+SEARCH
+9
+8
+ADD
+Neville
+Longbottom
+Neville
+22222222
+his parents were tortured with the Cruciatus curse and went mad and have been living in the St Mungo's Hospital for Magical Maladies and Injuries since then
+ADD
+Luna
+Lovegood
+Looney Lovegood
+11111111
+She has none
+SEARCH
+2
+EXIT
