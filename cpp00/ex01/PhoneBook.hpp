@@ -6,14 +6,18 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:30:10 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/24 02:18:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:14:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_H
 # define PHONEBOOK_H
 
+# include <string>
+# include <iomanip> // std::setw
+# include <iostream>
 # include "Contact.hpp"
+# include "Texts.hpp"
 
 class PhoneBook
 {

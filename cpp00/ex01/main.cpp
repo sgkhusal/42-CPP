@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:36:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 23:48:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:05:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "PhoneBook.hpp"
-#include "texts.hpp"
+#include "Texts.hpp"
 
 PhoneBook::t_actions	getUserAction(void) {
 	std::string	userAction;

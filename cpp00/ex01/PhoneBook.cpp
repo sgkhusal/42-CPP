@@ -6,14 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 17:33:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:16:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
 #include "PhoneBook.hpp"
-#include "texts.hpp"
 
 PhoneBook::PhoneBook(void) : _qty(0), _older_contact(0) {
 	return ;
@@ -80,7 +77,7 @@ void	PhoneBook::searchContactList(void) {
 			Texts::warning("Select a valid contact index:");
 	}
 	_printContactInfo(userIndex - 1);
-	std::cin.ignore();
+	std::cin.ignore(__INT_MAX__, '\n');
 }
 
 void	PhoneBook::_printContactList(void) {

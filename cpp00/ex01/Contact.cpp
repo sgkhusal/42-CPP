@@ -6,14 +6,11 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 17:39:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:13:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cctype> //
 #include "Contact.hpp"
-#include "texts.hpp"
 
 Contact::Contact(void) {
 	return ;

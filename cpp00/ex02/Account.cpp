@@ -6,13 +6,18 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 16:12:38 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/27 19:18:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:17:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include "iostream"
-#include "ctime"
+#include <iostream>
+#include <ctime>
+
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
 Account::Account(int initial_deposit) : _accountIndex(Account::_nbAccounts),
 										_amount(initial_deposit),
@@ -119,8 +124,3 @@ void	Account::_displayTimestamp(void) {
 			<< timestamp->tm_mday << "_" << timestamp->tm_hour \
 			<< timestamp->tm_min << timestamp->tm_sec << "] ";
 }
-
-int	Account::_nbAccounts = 0;
-int	Account::_totalAmount = 0;
-int	Account::_totalNbDeposits = 0;
-int	Account::_totalNbWithdrawals = 0;

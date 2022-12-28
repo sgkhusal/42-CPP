@@ -6,12 +6,16 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:32:17 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 17:40:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:13:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
 # define CONTACT_H
+
+# include <string>
+# include <iostream>
+# include "Texts.hpp"
 
 class Contact
 {

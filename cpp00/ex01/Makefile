@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/23 15:18:48 by sguilher         ###   ########.fr        #
+#    Updated: 2022/12/28 19:05:30 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME =		my_phonebook
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
-SRC =		main.cpp Contact.cpp PhoneBook.cpp texts.cpp
-HEADERS =	Contact.hpp PhoneBook.hpp texts.hpp
+SRC =		main.cpp Contact.cpp PhoneBook.cpp Texts.cpp
+HEADERS =	Contact.hpp PhoneBook.hpp Texts.hpp
 INCLUDE =	-I ./
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)

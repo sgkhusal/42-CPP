@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texts.cpp                                          :+:      :+:    :+:   */
+/*   Texts.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:41:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 17:11:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 19:14:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "texts.hpp"
+#include "Texts.hpp"
 
 namespace Texts {
 	void	welcome(void) {
@@ -74,5 +73,5 @@ namespace Texts {
 		std::cout << GREY << msg << RESET << std::endl;
 	}
 
-	
+
 }
