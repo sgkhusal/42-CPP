@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 17:28:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:39:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,36 @@ Contact::~Contact(void) {
 	return ;
 }
 
-void	Contact::setFirstName(std::string firstName) {
-	this->_firstName = firstName;
-}
-
 std::string	Contact::getFirstName(void) {
 	return (this->_firstName);
-}
-
-void	Contact::setLastName(std::string lastName) {
-	this->_lastName = lastName;
 }
 
 std::string	Contact::getLastName(void) {
 	return (this->_lastName);
 }
 
-void	Contact::setNickname(std::string nickname) {
-	this->_nickname = nickname;
-}
-
 std::string	Contact::getNickname(void) {
 	return (this->_nickname);
+}
+
+std::string	Contact::getPhoneNumber(void) {
+	return (this->_phoneNumber);
+}
+
+std::string	Contact::getDarkestSecret(void) {
+	return (this->_darkestSecret);
+}
+
+void	Contact::setFirstName(std::string firstName) {
+	this->_firstName = firstName;
+}
+
+void	Contact::setLastName(std::string lastName) {
+	this->_lastName = lastName;
+}
+
+void	Contact::setNickname(std::string nickname) {
+	this->_nickname = nickname;
 }
 
 void	Contact::setPhoneNumber(std::string phoneNumber) {
@@ -64,16 +72,8 @@ void	Contact::setPhoneNumber(std::string phoneNumber) {
 	this->_phoneNumber = phoneNumber;
 }
 
-std::string	Contact::getPhoneNumber(void) {
-	return (this->_phoneNumber);
-}
-
 void	Contact::setDarkestSecret(std::string darkestSecret) {
 	this->_darkestSecret = darkestSecret;
-}
-
-std::string	Contact::getDarkestSecret(void) {
-	return (this->_darkestSecret);
 }
 
 void	Contact::getContactInfosFromUser(void) {
@@ -109,12 +109,9 @@ void	Contact::_cleanInput(std::string *value) {
 	cut1 = 0;
 	while ((*value)[cut1] && ((*value)[cut1] == ' ' || (*value)[cut1] == '\t'))
 		cut1++;
-	std::cout << "cut1: " << cut1 << std::endl;
 	cut2 = value->length() - 1;
 	while (cut2 > cut1 && ((*value)[cut2] == ' ' || (*value)[cut2] == '\t'))
 		cut2--;
-	std::cout << "cut2: " << cut2 << std::endl;
 	if (cut1 != 0 || cut2 != value->length() - 1)
 		*value = value->substr(cut1, cut2 - cut1 + 1);
-	std::cout << "string: |" << *value << '|' << std::endl;
 }

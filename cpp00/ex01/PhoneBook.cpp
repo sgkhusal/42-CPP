@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:59:44 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/26 12:07:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:33:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	PhoneBook::searchContactList(void) {
 	_printContactList();
 	Texts::instruction("Select the contact index:");
 	userIndex = -1;
-	while (userIndex < 0 || userIndex > this->_qty - 1)
+	while (userIndex < 1 || userIndex > this->_qty)
 	{
 		std::cin >> userIndex;
 		if (std::cin.fail())
@@ -76,10 +76,10 @@ void	PhoneBook::searchContactList(void) {
 			std::cin.ignore(__INT_MAX__, '\n');
 			userIndex = -1;
 		}
-		if (userIndex < 0 ||  userIndex > this->_qty - 1)
+		if (userIndex < 1 ||  userIndex > this->_qty)
 			Texts::warning("Select a valid contact index:");
 	}
-	_printContactInfo(userIndex);
+	_printContactInfo(userIndex - 1);
 	std::cin.ignore();
 }
 
