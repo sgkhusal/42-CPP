@@ -6,12 +6,12 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/27 19:22:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:28:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cctype>
+#include <cctype> //
 #include "Contact.hpp"
 #include "texts.hpp"
 
@@ -89,22 +89,32 @@ void	Contact::getContactInfosFromUser(void) {
 void	Contact::_getInfo(const char* info, fptr setter)
 {
 	std::string	value;
-	int			init_cut; /// melhorar esses nomes
-	int			final_cut;
 
 	Texts::instruction(info);
 	std::getline(std::cin, value);
-	init_cut = 0;
-	while (value[init_cut] && (value[init_cut] == ' ' || value[init_cut] == '\t'))
-		init_cut++;
-	final_cut = init_cut;
-	while (value[final_cut] && value[final_cut] != ' ' && value[final_cut] != '\t')
-		final_cut++;
-	if (init_cut != 0 || final_cut != value.length() - 1)
-		value = value.substr(init_cut, final_cut);
+	if (!value.empty())
+		_cleanInput(&value);
 	if (value.empty()) {
 		_getInfo(info, setter);
 		return ;
 	}
 	(this->*setter)(value);
+}
+
+void	Contact::_cleanInput(std::string *value) {
+
+	size_t		cut1;
+	size_t		cut2;
+
+	cut1 = 0;
+	while ((*value)[cut1] && ((*value)[cut1] == ' ' || (*value)[cut1] == '\t'))
+		cut1++;
+	std::cout << "cut1: " << cut1 << std::endl;
+	cut2 = value->length() - 1;
+	while (cut2 > cut1 && ((*value)[cut2] == ' ' || (*value)[cut2] == '\t'))
+		cut2--;
+	std::cout << "cut2: " << cut2 << std::endl;
+	if (cut1 != 0 || cut2 != value->length() - 1)
+		*value = value->substr(cut1, cut2 - cut1 + 1);
+	std::cout << "string: |" << *value << '|' << std::endl;
 }

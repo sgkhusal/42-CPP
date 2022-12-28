@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 14:41:22 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/23 23:44:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 17:11:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,6 @@ namespace Texts {
 	void	instruction(const char* msg) {
 		std::cout << GREY << msg << RESET << std::endl;
 	}
+
+	
 }
