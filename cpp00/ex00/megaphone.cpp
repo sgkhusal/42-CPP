@@ -6,18 +6,17 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:25:49 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/14 19:43:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:30:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 
 static void	amplifyMessage(std::string *message)
 {
 	for (size_t i = 0; i < message->length(); i++)
 		(*message)[i] = toupper((*message)[i]);
-	/* for (std::string::iterator it = message->begin(); it != message->end(); it++)
-		*it = toupper(*it); */ /* remove */
 }
 
 static void	megaphone(std::string message)
