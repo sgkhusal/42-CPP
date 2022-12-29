@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 00:57:07 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/28 19:13:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:37:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	Contact::setPhoneNumber(std::string phoneNumber) {
 			return ;
 		}
 	}
-	if (phoneNumber.size() < 8 || phoneNumber.size() > 11) {
+	if (phoneNumber.size() < 8 || phoneNumber.size() > 14) {
 		Texts::warning("Invalid phone number size");
 		_getInfo("phone number:", &Contact::setPhoneNumber);
 		return ;
