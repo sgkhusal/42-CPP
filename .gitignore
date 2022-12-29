@@ -9,6 +9,8 @@ obj
 megaphone
 my_phonebook
 tests
+# cpp01
+zombie
 
 # Others
 .vscode
