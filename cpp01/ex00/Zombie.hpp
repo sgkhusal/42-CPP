@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:36:05 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/29 19:13:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:36:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 class Zombie {
 	private:
 		std::string	_name;
-		std::string	_getZombieName(void);
 	public:
 		Zombie(void);
 		Zombie(std::string name);

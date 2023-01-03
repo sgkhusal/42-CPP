@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/29 16:23:59 by sguilher         ###   ########.fr        #
+#    Updated: 2023/01/02 21:05:27 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
-	@echo "          phonebook created"
+	@echo "            zombie created"
 	@echo "************************************"
 	@echo "$(RESET)"
 
