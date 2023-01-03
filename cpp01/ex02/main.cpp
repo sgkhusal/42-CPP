@@ -6,15 +6,15 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 21:13:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/02 21:31:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:23:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 
-# define GREY	"\033[38;5;244m"
-# define RESET	"\033[0m"
+#define GREY	"\033[38;5;244m"
+#define RESET	"\033[0m"
 
 int	main(void) {
 	std::string		string = "HI THIS IS BRAIN";
