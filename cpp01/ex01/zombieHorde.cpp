@@ -12,7 +12,7 @@
 
 #include "Zombie.hpp"
 
-Zombie*	zombieHorde(int n, std::string name) {
+Zombie*	zombieHorde(int n, std::string const name) {
 	Zombie* zombies;
 
 	zombies = new Zombie[n];

@@ -27,10 +27,10 @@ class Zombie {
 		Zombie(void);
 		~Zombie(void);
 		static int	totalZombies;
-		void		announce(void);
-		void		setZombieName(std::string name);
+		void		announce(void) const;
+		void		setZombieName(std::string const name);
 };
 
-Zombie*	zombieHorde(int n, std::string name);
+Zombie*	zombieHorde(int n, std::string const name);
 
 #endif

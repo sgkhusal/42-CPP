@@ -12,8 +12,8 @@
 
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon& weapon): _name(name),
-														_weapon(weapon) {
+HumanA::HumanA(std::string name, Weapon const& weapon): _name(name),
+													_weapon(weapon) {
 	return ;
 }
 

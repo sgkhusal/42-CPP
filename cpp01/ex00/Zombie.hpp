@@ -28,11 +28,11 @@ class Zombie {
 		Zombie(void);
 		Zombie(std::string name);
 		~Zombie(void);
-		void		announce(void);
-		void		setZombieName(std::string name);
+		void		announce(void) const;
+		void		setZombieName(std::string const name);
 };
 
-Zombie	*newZombie(std::string name);
-void	randomChump(std::string name);
+Zombie	*newZombie(std::string const name);
+void	randomChump(std::string const name);
 
 #endif
