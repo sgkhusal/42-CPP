@@ -3,54 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   Sed.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:15:35 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/03 19:03:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:37:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Sed.hpp"
 
-Sed::Sed(std::string const inputFileName): _infile(inputFileName),
-										_outfile(this->_infile + ".replace") {
+Sed::Sed(void) {
 	return ;
 }
 
-Sed::~Sed() {
+Sed::~Sed(void) {
 	return ;
 }
 
-std::string	Sed::_getFileContent(void) {
+std::string const	Sed::_read(std::string const filename) {
 	std::string			buffer;
-	std::ifstream	    infileStream;
+	std::ifstream		ifs;
 	std::ostringstream	stringBufferStream;
-	
-	infileStream.open(this->_infile.c_str());
-	stringBufferStream << infileStream.rdbuf();
+
+	ifs.open(filename.c_str());
+	if (ifs.fail()) {
+		std::cout << "Error reading " << filename << std::endl;
+		return (buffer);
+	}
+	stringBufferStream << ifs.rdbuf();
 	buffer = stringBufferStream.str();
-	infileStream.close();
+	ifs.close();
 	return (buffer);
 }
 
-std::string	Sed::_newContent(std::string str, std::string const s1, std::string const s2) {
+std::string const	Sed::_replace(std::string const s1,
+								std::string const s2,
+								std::string const str) {
 	size_t	pos;
-	
+
 	pos = str.find(s1);
 	if (pos == std::string::npos)
 		return (str);
-	return (str.substr(0, pos) + s2 + _newContent(
-		str.substr(pos + s1.size(), str.size() - pos - s1.size()), s1, s2));
+	return (str.substr(0, pos) + s2 + _replace(s1, s2,
+		str.substr(pos + s1.size(), str.size() - pos - s1.size())));
 }
 
-void Sed::replace(std::string const s1, std::string const s2) {
-	std::string			buffer;
-	std::ofstream	    outfileStream;
-	std::istringstream	stringBufferStream;
+void	Sed::_write(std::string const content, std::string const filename) {
+	std::ofstream	ofs;
 
-	buffer = _newContent(_getFileContent(), s1, s2);
-	outfileStream.open(this->_outfile.c_str());
-	stringBufferStream.str(buffer);
-	stringBufferStream >> outfileStream.rdbuf();
-	outfileStream.close();
+	ofs.open((filename).c_str());
+	if (ofs.fail()) {
+		std::cout << "Error creating " << filename << std::endl;
+		return ;
+	}
+	ofs << content;
+	ofs.close();
+}
+
+void	Sed::replace(std::string const s1,
+					std::string const s2,
+					std::string const filename) {
+	std::string	buffer;
+	std::string	outfile;
+
+	buffer = _replace(s1, s2, _read(filename));
+	outfile = filename + ".replace";
+	_write(buffer, outfile);
 }

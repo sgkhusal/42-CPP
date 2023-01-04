@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2023/01/03 18:33:23 by sguilher         ###   ########.fr        #
+#    Updated: 2023/01/04 17:24:27 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ clean:
 		$(RM_DIR) $(OBJ_DIR)
 
 fclean:		clean
-		$(RM) $(NAME)
+		$(RM) $(NAME) *.replace
 
 re:			fclean all
 
