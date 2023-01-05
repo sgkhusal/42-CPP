@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:15:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/04 17:18:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:52:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define SED_H
 
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
+#include <fstream> // ifstream, ofstream
+#include <sstream> // ostringstream
+#include <iostream> // cerr
+#include <cstdlib> // exit
 
 class Sed
 {

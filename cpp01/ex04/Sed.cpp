@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:15:35 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/04 17:37:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:52:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ Sed::~Sed(void) {
 std::string const	Sed::_read(std::string const filename) {
 	std::string			buffer;
 	std::ifstream		ifs;
-	std::ostringstream	stringBufferStream;
+	std::ostringstream	outputStringStream;
 
 	ifs.open(filename.c_str());
 	if (ifs.fail()) {
-		std::cout << "Error reading " << filename << std::endl;
-		return (buffer);
+		std::cerr << "Error reading " << filename << std::endl;
+		exit(1);
 	}
-	stringBufferStream << ifs.rdbuf();
-	buffer = stringBufferStream.str();
+	outputStringStream << ifs.rdbuf();
+	buffer = outputStringStream.str();
 	ifs.close();
 	return (buffer);
 }
@@ -53,8 +53,8 @@ void	Sed::_write(std::string const content, std::string const filename) {
 
 	ofs.open((filename).c_str());
 	if (ofs.fail()) {
-		std::cout << "Error creating " << filename << std::endl;
-		return ;
+		std::cerr << "Error creating " << filename << std::endl;
+		exit(2);
 	}
 	ofs << content;
 	ofs.close();
