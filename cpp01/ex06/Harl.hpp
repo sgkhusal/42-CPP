@@ -21,7 +21,7 @@
 # define WARNING		"\033[1;33m"
 # define ERROR			"\033[38;5;196m"
 # define RESET			"\033[0m"
-# define INSIGNIFICANT	"\033[38;5;244m"
+# define INSIGNIFICANT	"\033[0;38;5;166m"
 
 class	Harl {
 	private:

@@ -38,5 +38,6 @@ int	main(void) {
 	harl.complain("Hello world");
 	harl.complain("");
 	harl.complain("42");
+	std::cout << std::endl;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 21:13:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/02 22:23:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/06 02:05:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int	main(void) {
 			<< *stringPTR << RESET << std::endl;
 	std::cout << "The value pointed to by stringREF is: " << GREY \
 			<< stringREF << RESET << std::endl;
+	std::cout << std::endl;
 	return (0);
 }
