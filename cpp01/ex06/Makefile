@@ -6,11 +6,11 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2023/01/05 14:20:39 by sguilher         ###   ########.fr        #
+#    Updated: 2023/01/05 15:51:59 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		harl
+NAME =		harlFilter
 
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
@@ -35,7 +35,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
-	@echo "            harl created"
+	@echo "          harlFilter created"
 	@echo "************************************"
 	@echo "$(RESET)"
 

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 00:56:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/05 21:26:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/05 20:43:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,40 @@ void	Harl::_error(void) {
 			<< RESET << std::endl;
 }
 
-void	Harl::complain(std::string level) {
-	int	i = 0;
+int	Harl::complain(std::string level) {
+	int	i;
 
+	i = 0;
 	while(level.compare(this->_complainTable[i].level) && i < 4)
 		i++;
-	if (i == 4) {
-		std::cerr << ERROR << "Invalid complain" << RESET << std::endl;
-		return ;
+	switch (i)
+	{
+		case 0:
+			std::cout << DEBUG << "[ DEBUG ]" << RESET << std::endl;
+			(this->*_complainTable[0].f)();
+			std::cout << std::endl;
+			/* Falls through. */
+		case 1:
+			std::cout << INFO << "[ INFO ]" << RESET << std::endl;
+			(this->*_complainTable[1].f)();
+			std::cout << std::endl;
+			/* Falls through. */
+		case 2:
+			std::cout << WARNING << "[ WARNING ]" << RESET << std::endl;
+			(this->*_complainTable[2].f)();
+			std::cout << std::endl;
+			/* Falls through. */
+		case 3:
+			std::cout << ERROR << "[ ERROR ]" << RESET << std::endl;
+			(this->*_complainTable[3].f)();
+			std::cout << std::endl;
+			break ;
+		default:
+			std::cout << INSIGNIFICANT \
+					<< "[ Probably complaining about insignificant problems ]"
+					<< RESET << std::endl;
 	}
-	(this->*_complainTable[i].f)();
+	return (0);
 }
 
 Harl::_t_line	Harl::_complainTable[4] = {

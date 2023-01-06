@@ -16,7 +16,7 @@ brain
 unnecessary_violence
 sed
 *.replace
-harl
+harl*
 
 # Others
 .vscode
