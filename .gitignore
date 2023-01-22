@@ -17,6 +17,8 @@ unnecessary_violence
 sed
 *.replace
 harl*
+# cpp02
+fixed
 
 # Others
 .vscode
