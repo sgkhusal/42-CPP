@@ -6,41 +6,39 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:04:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/22 12:29:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/22 17:00:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
 static void	additional_integer_tests(int integer, std::string description) {
-	Fixed		fixed;
 	static int	n = 1;
 
+	std::cout << std::endl;
 	std::cout << YELLOW << "2." << n << ". Testing " << description
 			<< RESET << std::endl;
-	fixed = Fixed(integer);
+	Fixed fixed = Fixed(integer);
 	std::cout << "fixed is " << fixed << std::endl;
 	std::cout << "fixed is " << fixed.toInt() << " as integer" << std::endl;
-	std::cout << std::endl;
 	n++;
 }
 
 static void	additional_float_tests(float f) {
-	Fixed		fixed;
 	static int	n = 1;
 
+	std::cout << std::endl;
 	std::cout << YELLOW << "1." << n << ". " << f << RESET << std::endl;
-	fixed = Fixed(f);
+	Fixed fixed = Fixed(f);
 	std::cout << "fixed is " << fixed << std::endl;
 	std::cout << "fixed is " << fixed.toInt() << " as integer" << std::endl;
-	std::cout << std::endl;
 	n++;
 }
 
 static void	additional_tests(void) {
-	std::cout << PURPLE << "********* Additional tests *********"
-			<< RESET << std::endl;
 	std::cout << std::endl;
+	std::cout << PURPLE << "********* Additional tests *********"
+			<< RESET << std::endl << std::endl;
 	std::cout << YELLOW << "1. Testing float rounding" << RESET << std::endl;
 	additional_float_tests(1234.4391f);
 	additional_float_tests(8.388607);
@@ -75,7 +73,7 @@ int	main(void) {
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-	std::cout << std::endl;
 	additional_tests();
+	std::cout << std::endl;
 	return (0);
 }
