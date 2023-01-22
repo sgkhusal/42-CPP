@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:04:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/22 16:26:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/22 16:49:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,25 @@ int	main(void) {
 	std::cout << GREY << "a >= b: " << (a >= b ? "true" : "false") << std::endl;
 	std::cout << GREY << "a == b: " << (a == b ? "true" : "false") << std::endl;
 	std::cout << GREY << "a != b: " << (a != b ? "true" : "false") << std::endl;
+	Fixed const c(8.388607f);
+	std::cout << YELLOW << "Others: c = " << c << std::endl;
+	std::cout << GREY << "c > c: " << (c > c ? "true" : "false") << std::endl;
+	std::cout << GREY << "c < c: " << (c < c ? "true" : "false") << std::endl;
+	std::cout << GREY << "c >= c: " << (c >= c ? "true" : "false") << std::endl;
+	std::cout << GREY << "c <= c: " << (c <= c ? "true" : "false") << std::endl;
+	std::cout << GREY << "c == c: " << (c == c ? "true" : "false") << std::endl;
+	std::cout << GREY << "c != c: " << (c != c ? "true" : "false") << std::endl;
 
 	std::cout << std::endl;
 	std::cout << PURPLE << "********* Arithmetic operators *********"
 			<< RESET << std::endl;
 	a = Fixed(1.5f);
-	Fixed	c(0.5f);
-	std::cout << YELLOW << "a = " << a << " and c = " << c << std::endl;
-	std::cout << GREY << "a + c = " << a + c << std::endl;
-	std::cout << GREY << "a - c = " << a - c << std::endl;
-	std::cout << GREY << "a * c = " << a * c << std::endl;
-	std::cout << GREY << "a / c = " << a / c << std::endl;
+	Fixed const d(0.5f);
+	std::cout << YELLOW << "a = " << a << " and d = " << d << std::endl;
+	std::cout << GREY << "a + d = " << a + d << std::endl;
+	std::cout << GREY << "a - d = " << a - d << std::endl;
+	std::cout << GREY << "a * d = " << a * d << std::endl;
+	std::cout << GREY << "a / d = " << a / d << RESET << std::endl;
 	std::cout << std::endl;
 	return (0);
 }
