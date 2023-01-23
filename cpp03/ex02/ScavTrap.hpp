@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:36:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/23 17:22:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <iostream>
 
 # define CYAN "\033[0;36m"
+# define LIGHT_PURPLE "\033[1;35m"
 
 class ScavTrap: public ClapTrap {
 	public:

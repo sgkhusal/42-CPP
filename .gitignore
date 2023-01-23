@@ -23,6 +23,7 @@ bsp
 # cpp03
 claptrap
 scavtrap
+fragtrap
 
 # Others
 .vscode

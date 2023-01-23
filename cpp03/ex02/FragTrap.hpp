@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:36:48 by sguilher         ###   ########.fr       */
+/*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
+/*   Updated: 2023/01/23 19:35:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_H
-# define SCAVTRAP_H
+#ifndef FRAGTRAP_H
+# define FRAGTRAP_H
 
 # include "ClapTrap.hpp"
 
@@ -20,19 +20,18 @@
 
 # define CYAN "\033[0;36m"
 
-class ScavTrap: public ClapTrap {
+class FragTrap: public ClapTrap {
 	public:
-		ScavTrap(void);
-		ScavTrap(ScavTrap const& st);
-		ScavTrap(std::string const name);
-		~ScavTrap(void);
-		ScavTrap& operator=(ScavTrap const& st);
+		FragTrap(void);
+		FragTrap(FragTrap const& st);
+		FragTrap(std::string const name);
+		~FragTrap(void);
+		FragTrap& operator=(FragTrap const& st);
 
-		void	guardGate(void);
-		void	attack(const std::string& target);
+		void    highFiveGuys(void);
 
 	private:
-		static int 	_sentinel_nb;
+		static int 	_droid_nb;
 
 		void	_constructor_called(std::string type);
 };
