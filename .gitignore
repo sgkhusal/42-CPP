@@ -19,6 +19,7 @@ sed
 harl*
 # cpp02
 fixed
+bsp
 
 # Others
 .vscode
