@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:04:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/22 22:39:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/22 22:46:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void test_bsp(Point const a, Point const b, Point const c,
 			<< "C = (" << c.getX() << ", " << c.getY() << "), "
 			<< "P = (" << p.getX() << ", " << p.getY() << "): ";
 	if (bsp(a, b, c, p) == expected)
-		std::cout << GREEN << "OK" << std::endl;
+		std::cout << GREEN << "OK" << RESET << std::endl;
 	else
-		std::cout << RED << "KO" << std::endl;
+		std::cout << RED << "KO" << RESET << std::endl;
 	n++;
 }
 
