@@ -22,6 +22,7 @@ fixed
 bsp
 # cpp03
 claptrap
+scavtrap
 
 # Others
 .vscode
