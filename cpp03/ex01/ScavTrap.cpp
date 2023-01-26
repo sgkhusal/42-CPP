@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:23:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 23:52:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:36:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ ScavTrap::ScavTrap(void): ClapTrap() {
 
 	++ScavTrap::_sentinel_nb;
 	index.push_back(ScavTrap::_sentinel_nb + 48);
-	this->_name = "Sentinel " + index;
-	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->setName("Sentinel " + index);
+	this->setHitPoints(100);
+	this->setEnergyPoints(50);
+	this->setAttackDamage(20);
 	_constructor_msg("Default");
 }
 
 ScavTrap::ScavTrap(std::string const name): ClapTrap(name) {
-	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+	this->setHitPoints(100);
+	this->setEnergyPoints(50);
+	this->setAttackDamage(20);
 	_constructor_msg("Named");
 }
 
@@ -56,8 +56,20 @@ ScavTrap& ScavTrap::operator=(ScavTrap const& st) {
 }
 
 void	ScavTrap::guardGate(void) {
-	std::cout << YELLOW << "ScavTrap " << this->getName()
-			<< " is in gate keeper mode" << std::endl;
+	int	hitPoints = this->getHitPoints();
+	int energyPoints = this->getEnergyPoints();
+
+	if (hitPoints <= 0)
+		std::cout << RED << "ScavTrap " << this->getName()
+				<< " unable to enter in gate keeper mode: hit points = "
+				<< hitPoints << RESET << std::endl;
+	if (energyPoints <= 0)
+		std::cout << RED << "ScavTrap " << this->getName()
+				<< " unable to enter in gate keeper mode: energy points = "
+				<< energyPoints << RESET << std::endl;
+	if (hitPoints > 0 && energyPoints > 0)
+		std::cout << YELLOW << "ScavTrap " << this->getName()
+				<< " is in gate keeper mode" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target) {

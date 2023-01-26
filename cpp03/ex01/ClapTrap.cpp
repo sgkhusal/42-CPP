@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 23:52:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:20:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ ClapTrap::~ClapTrap(void) {
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& ct) {
 	if (this != &ct) {
-		this->setName(ct.getName());
-		this->setHitPoints(ct.getHitPoints());
-		this->setEnergyPoints(ct.getEnergyPoints());
-		this->setAttackDamage(ct.getAttackDamage());
+		this->_name = ct.getName();
+		this->_hitPoints = ct.getHitPoints();
+		this->_energyPoints = ct.getEnergyPoints();
+		this->_attackDamage = ct.getAttackDamage();
 		std::cout << GREY << "ClapTrap " << this->getName()
 				<< " copied" << RESET << std::endl;
 	}

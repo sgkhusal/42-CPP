@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 22:13:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:48:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int main(void) {
 
 	std::cout << std::endl;
 	sentinel.guardGate();
+	sentinel.setEnergyPoints(0);
+	sentinel.setHitPoints(0);
+	sentinel.guardGate();
 
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
@@ -82,6 +85,8 @@ int main(void) {
 	std::cout << std::endl;
 	bb8.highFiveGuys();
 	bb8.beRepaired(10);
+	cp3po.setEnergyPoints(0);
+	cp3po.setHitPoints(0);
 	cp3po.highFiveGuys();
 
 	std::cout << std::endl;
@@ -89,11 +94,9 @@ int main(void) {
 	droid1.takeDamage(ultron.getAttackDamage());
 
 	std::cout << std::endl;
-	r2d2.attack(bb8_clone.getName()); // não está atualizando o valor do ataque??
+	r2d2.attack(bb8_clone.getName());
 	bb8_clone.takeDamage(r2d2.getAttackDamage());
 
 	std::cout << std::endl;
 	return (0);
 }
-
-// precisa incluir testes da diminuição de energia

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 22:34:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:49:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ FragTrap::FragTrap(FragTrap const& st): ClapTrap() {
 }
 
 FragTrap::FragTrap(std::string const name): ClapTrap(name) {
-	this->setName(name);
 	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
+	this->setEnergyPoints(100);
+	this->setAttackDamage(30);
 	_constructor_msg("Named");
 }
 
@@ -46,17 +45,29 @@ FragTrap::~FragTrap(void) {
 
 FragTrap& FragTrap::operator=(FragTrap const& st) {
 	if (this != &st) {
-		this->setName(st.getName());
-		this->setHitPoints(st.getHitPoints());
-		this->setEnergyPoints(st.getEnergyPoints());
-		this->setAttackDamage(st.getAttackDamage());
+		this->_name = st.getName();
+		this->_hitPoints = st.getHitPoints();
+		this->_energyPoints = st.getEnergyPoints();
+		this->_attackDamage = st.getAttackDamage();
 	}
-	std::cout << GREY << "FragTrap " << this->getName() << " copied" << RESET << std::endl;
+	std::cout << GREY << "FragTrap " << this->getName()
+			<< " copied" << RESET << std::endl;
 	return (*this);
 }
 
-//This member function displays a positive high fives request on the standard output
 void	FragTrap::highFiveGuys(void) {
+	int	hitPoints = this->getHitPoints();
+	int energyPoints = this->getEnergyPoints();
+
+	if (hitPoints <= 0)
+		std::cout << RED << "ScavTrap " << this->getName()
+				<< " unable to give a high five message: hit points = "
+				<< hitPoints << RESET << std::endl;
+	if (energyPoints <= 0)
+		std::cout << RED << "ScavTrap " << this->getName()
+				<< " unable to give a high five message: energy points = "
+				<< energyPoints << RESET << std::endl;
+	if (hitPoints > 0 && energyPoints > 0)
 	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl;
 }
 

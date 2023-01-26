@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 22:12:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 00:45:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int main(void) {
 	sentinelCopy.beRepaired(10);
 
 	std::cout << std::endl;
+	sentinel.guardGate();
+	sentinel.setEnergyPoints(0);
+	sentinel.setHitPoints(0);
 	sentinel.guardGate();
 
 	std::cout << std::endl;
