@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 17:54:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:52:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ int ClapTrap::_robot_nb = 0;
 
 ClapTrap::ClapTrap(void): _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::string index;
-	
+
 	++ClapTrap::_robot_nb;
 	index.push_back(ClapTrap::_robot_nb + 48);
 	this->setName("Robot " + index);
-	this->_constructor_called("Default");
+	_constructor_msg("Default");
+}
+
+ClapTrap::ClapTrap(std::string const name): _name(name),
+											_hitPoints(10),
+											_energyPoints(10),
+											_attackDamage(0) {
+	_constructor_msg("Named");
 }
 
 ClapTrap::ClapTrap(ClapTrap const& ct) {
 	*this = ct;
-	this->_constructor_called("Copy");
-}
-
-ClapTrap::ClapTrap(std::string const name): _name(name), 
-											_hitPoints(10), 
-											_energyPoints(10), 
-											_attackDamage(0) {
-	this->_constructor_called("Named");
+	_constructor_msg("Copy");
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << ORANGE << "ClapTrap " << this->getName() 
+	std::cout << ORANGE << "ClapTrap " << this->getName()
 			<< " destroyed" << RESET << std::endl;
 }
 
@@ -46,8 +46,9 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& ct) {
 		this->setHitPoints(ct.getHitPoints());
 		this->setEnergyPoints(ct.getEnergyPoints());
 		this->setAttackDamage(ct.getAttackDamage());
+		std::cout << GREY << "ClapTrap " << this->getName()
+				<< " copied" << RESET << std::endl;
 	}
-	std::cout << GREY << "ClapTrap " << this->getName() << " copied" << RESET << std::endl;
 	return (*this);
 }
 
@@ -56,25 +57,26 @@ void ClapTrap::attack(const std::string& target) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << RED << "ClapTrap " << this->getName() << " unable to attack " 
-				<< target << ": hit points = " << hitPoints 
+		std::cout << RED << "ClapTrap " << this->getName() << " unable to attack "
+				<< target << ": hit points = " << hitPoints
 				<< RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << RED << "ClapTrap " << this->getName() << " unable to attack " 
-				<< target << ": energy points = " << energyPoints 
+		std::cout << RED << "ClapTrap " << this->getName() << " unable to attack "
+				<< target << ": energy points = " << energyPoints
 				<< RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0) {
 		this->_energyPoints--;
-		std::cout << PURPLE << "ClapTrap " << this->getName() << " attacks " 
-				<< target << " causing " << this->getAttackDamage() 
+		std::cout << PURPLE << "ClapTrap " << this->getName() << " attacks "
+				<< target << " causing " << this->getAttackDamage()
 				<< " points of damage!" << RESET << std::endl;
 	}
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	this->_hitPoints -= amount;
-	std::cout << RED << "ClapTrap " << this->getName() << " attacked with damage amount of " 
-			<< amount << ", resulting in a total of " << this->getHitPoints() 
+	this->_hitPoints -= (int)amount;
+	std::cout << RED << "ClapTrap " << this->getName()
+			<< " attacked with damage amount of " << amount
+			<< ", resulting in a total of " << this->getHitPoints()
 			<< " hit points" << RESET << std::endl;
 }
 
@@ -83,20 +85,20 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << RED << "ClapTrap " << this->getName()  
-				<< " unable to be repaired: hit points = " << hitPoints  
+		std::cout << RED << "ClapTrap " << this->getName()
+				<< " unable to be repaired: hit points = " << hitPoints
 				<< RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << RED << "ClapTrap " << this->getName()  
-				<< " unable to be repaired: energy points = " << energyPoints 
+		std::cout << RED << "ClapTrap " << this->getName()
+				<< " unable to be repaired: energy points = " << energyPoints
 				<< RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0) {
 		this->_hitPoints += amount;
 		this->_energyPoints--;
-		std::cout << GREEN << "ClapTrap " << this->getName() 
+		std::cout << GREEN << "ClapTrap " << this->getName()
 				<< " repaired with " << amount
-				<< " hit points, resulting in a total of " << this->getHitPoints() 
-				<< " hit points" << RESET << std::endl;
+				<< " hit points, resulting in a total of "
+				<< this->getHitPoints() << " hit points" << RESET << std::endl;
 	}
 }
 
@@ -132,8 +134,8 @@ void ClapTrap::setAttackDamage(int const attackDamage) {
 	this->_attackDamage = attackDamage;
 }
 
-void ClapTrap::_constructor_called(std::string type) {
-	std::cout << BLUE << "ClapTrap " << this->getName() 
-			<< " created in " << type << " constructor" 
+void ClapTrap::_constructor_msg(std::string type) {
+	std::cout << BLUE << "ClapTrap " << this->getName()
+			<< " created in " << type << " constructor"
 			<< RESET << std::endl;
 }

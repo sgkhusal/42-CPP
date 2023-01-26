@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 01:04:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/22 22:46:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:12:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ int	main(void) {
 			<< RESET << std::endl << std::endl;
 	std::cout << YELLOW << "Point inside" << std::endl;
 	test_bsp(a, b, c, Point(10, 15), true);
-	test_bsp(a, b, c, Point(10, 0), true);
-	test_bsp(a, b, c, Point(15, 15), true);
 	test_bsp(Point(0, -10), b, c, Point(5, -5), true);
 	test_bsp(Point(7, 7), Point(11, 1), Point(2, 2), Point(7, 3), true);
+	std::cout << std::endl << YELLOW << "Point on the line" << std::endl;
+	test_bsp(a, b, c, Point(10, 0), false);
+	test_bsp(a, b, c, Point(15, 15), false);
+	std::cout << std::endl << YELLOW << "Point on one vertice" << std::endl;
+	test_bsp(a, b, c, a, false);
 	std::cout << std::endl << YELLOW << "Point outside" << std::endl;
 	test_bsp(a, b, c, Point(15, 15.002f), false);
 	test_bsp(a, b, c, Point(30, 15), false);

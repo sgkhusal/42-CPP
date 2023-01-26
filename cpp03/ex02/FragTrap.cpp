@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:36:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:34:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ FragTrap::FragTrap(void): ClapTrap() {
 	this->setHitPoints(100);
 	this->setEnergyPoints(100);
 	this->setAttackDamage(30);
-	this->_constructor_called("Default");
+	_constructor_msg("Default");
 }
 
 FragTrap::FragTrap(FragTrap const& st): ClapTrap() {
 	*this = st;
-	this->_constructor_called("Copy");
+	_constructor_msg("Copy");
 }
 
 FragTrap::FragTrap(std::string const name): ClapTrap(name) {
@@ -36,11 +36,11 @@ FragTrap::FragTrap(std::string const name): ClapTrap(name) {
 	this->setHitPoints(100);
 	this->setEnergyPoints(50);
 	this->setAttackDamage(20);
-	this->_constructor_called("Named");
+	_constructor_msg("Named");
 }
 
 FragTrap::~FragTrap(void) {
-	std::cout << CYAN << "FragTrap " << this->getName() 
+	std::cout << CYAN << "FragTrap " << this->getName()
 			<< " destroyed" << RESET << std::endl;
 }
 
@@ -57,11 +57,11 @@ FragTrap& FragTrap::operator=(FragTrap const& st) {
 
 //This member function displays a positive high fives request on the standard output
 void	FragTrap::highFiveGuys(void) {
-	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl; 
+	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl;
 }
 
-void FragTrap::_constructor_called(std::string type) {
-	std::cout << CYAN << "FragTrap " << this->getName() 
-			<< " created in " << type << " constructor" 
+void FragTrap::_constructor_msg(std::string type) {
+	std::cout << CYAN << "FragTrap " << this->getName()
+			<< " created in " << type << " constructor"
 			<< RESET << std::endl;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 17:22:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:48:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <iostream>
 
 # define CYAN "\033[0;36m"
-# define LIGHT_PURPLE "\033[1;35m"
 
 class ScavTrap: public ClapTrap {
 	public:
@@ -32,10 +31,11 @@ class ScavTrap: public ClapTrap {
 		void	guardGate(void);
 		void	attack(const std::string& target);
 
+	protected:
+		void	_constructor_msg(std::string type);
+
 	private:
 		static int 	_sentinel_nb;
-
-		void	_constructor_called(std::string type);
 };
 
 #endif

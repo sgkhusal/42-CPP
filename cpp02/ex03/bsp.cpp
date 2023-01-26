@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 17:13:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/22 22:41:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:09:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,25 @@ static Fixed triangle_area(Point const a, Point const b, Point const c) {
 	return (area);
 }
 
-static bool compare_fixed(Fixed const a, Fixed const b)
+/* static bool compare_fixed(Fixed const a, Fixed const b)
 {
 	if (a > b)
 		return ((a - b) < EPSILON);
 	return ((b - a) < EPSILON);
-}
+} */
 
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
 	Fixed	area;
 	Fixed	sum_areas;
+	Fixed	a1, a2, a3;
+	Fixed	zero;
 
 	area = triangle_area(a, b, c);
-	sum_areas = triangle_area(a, b, point)
-				+ triangle_area(a, point, c)
-				+ triangle_area(point, b, c);
-	return (compare_fixed(area, sum_areas));
+	a1 = triangle_area(a, b, point);
+	a2 = triangle_area(a, point, c);
+	a3 = triangle_area(point, b, c);
+	if (a1 == zero || a2 == zero || a3 == zero)
+		return (false);
+	sum_areas = a1 + a2 + a3;
+	return (area == sum_areas);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:39:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:13:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 int main(void) {
 	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE 
-			<< "------------------------- Tests ex00 -------------------------" 
+	std::cout << LIGHT_PURPLE
+			<< "------------------------- Tests ex00 -------------------------"
 			<< std::endl;
 	ClapTrap robot1;
 	ClapTrap robot2;
@@ -37,22 +37,18 @@ int main(void) {
 	marvinCopy.beRepaired(10);
 
 	std::cout << std::endl;
-	while (robot1.getEnergyPoints()) {
-		robot1.setEnergyPoints(robot1.getEnergyPoints() - 1);
-	}
-	robot1.attack(marvinCopy2.getName());
-	robot1.beRepaired(1);
+	robot1.setEnergyPoints(0);
+    robot1.attack(marvinCopy2.getName());
+    robot1.beRepaired(1);
+
+    std::cout << std::endl;
+    robot2.takeDamage(20);
+    robot2.attack(marvin.getName());
+    robot2.beRepaired(1);
 
 	std::cout << std::endl;
-	while (robot2.getHitPoints()) {
-		robot2.takeDamage(10);
-	}
-	robot2.attack(marvin.getName());
-	robot2.beRepaired(1);
-
-	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE 
-			<< "------------------------- Tests ex01 -------------------------" 
+	std::cout << LIGHT_PURPLE
+			<< "------------------------- Tests ex01 -------------------------"
 			<< std::endl;
 	ScavTrap sentinel;
 	ScavTrap sentinel2;
@@ -62,7 +58,7 @@ int main(void) {
 	std::cout << std::endl;
 	ultron.attack(marvin.getName());
 	marvin.takeDamage(ultron.getAttackDamage());
-	
+
 	std::cout << std::endl;
 	sentinel2.attack(sentinelCopy.getName());
 	sentinelCopy.takeDamage(sentinel2.getAttackDamage());
@@ -70,10 +66,10 @@ int main(void) {
 
 	std::cout << std::endl;
 	sentinel.guardGate();
-	
+
 	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE 
-			<< "------------------------- Tests ex02 -------------------------" 
+	std::cout << LIGHT_PURPLE
+			<< "------------------------- Tests ex02 -------------------------"
 			<< std::endl;
 
 	FragTrap droid1;
@@ -87,11 +83,11 @@ int main(void) {
 	bb8.highFiveGuys();
 	bb8.beRepaired(10);
 	cp3po.highFiveGuys();
-	
+
 	std::cout << std::endl;
 	ultron.attack(droid1.getName());
 	droid1.takeDamage(ultron.getAttackDamage());
-	
+
 	std::cout << std::endl;
 	r2d2.attack(bb8_clone.getName()); // não está atualizando o valor do ataque??
 	bb8_clone.takeDamage(r2d2.getAttackDamage());

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 16:17:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:07:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,12 @@ int main(void) {
     marvinCopy.beRepaired(10);
 
     std::cout << std::endl;
-    while (robot1.getEnergyPoints()) {
-        robot1.setEnergyPoints(robot1.getEnergyPoints() - 1);
-    }
+    robot1.setEnergyPoints(0);
     robot1.attack(marvinCopy2.getName());
     robot1.beRepaired(1);
 
     std::cout << std::endl;
-    while (robot2.getHitPoints()) {
-        robot2.takeDamage(10);
-    }
+    robot2.takeDamage(20);
     robot2.attack(marvin.getName());
     robot2.beRepaired(1);
 

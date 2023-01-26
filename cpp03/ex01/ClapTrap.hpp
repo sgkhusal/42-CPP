@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:37:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:47:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,16 @@ class ClapTrap {
 		void		setEnergyPoints(int const energyPoints);
 		void		setAttackDamage(int const attackDamage);
 
-	private:
+	protected:
 		std::string _name;
 		int         _hitPoints;
 		int         _energyPoints;
 		int         _attackDamage;
+		void		_constructor_msg(std::string type);
+
+	private:
 		static int 	_robot_nb;
-		
-		void		_constructor_called(std::string type);
+
 };
 
 #endif

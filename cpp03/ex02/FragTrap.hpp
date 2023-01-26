@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/23 19:35:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/25 21:46:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class FragTrap: public ClapTrap {
 	private:
 		static int 	_droid_nb;
 
-		void	_constructor_called(std::string type);
+		void	_constructor_msg(std::string type);
 };
 
 #endif
