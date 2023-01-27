@@ -6,12 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 22:38:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:38:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 static void	tests_ex00(void) {
 	std::cout << std::endl;
@@ -49,10 +51,7 @@ static void	tests_ex00(void) {
 	std::cout << std::endl;
 }
 
-int main(void) {
-	
-	tests_ex00();
-
+static void	tests_ex01(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex01 -------------------------"
@@ -66,17 +65,83 @@ int main(void) {
 	std::cout << std::endl;
 	ultron.attack(sentinel.getName());
 	sentinel.takeDamage(ultron.getAttackDamage());
+	sentinel.beRepaired(10);
 
 	std::cout << std::endl;
 	sentinel2.attack(sentinelCopy.getName());
 	sentinelCopy.takeDamage(sentinel2.getAttackDamage());
-	sentinelCopy.beRepaired(10);
 
 	std::cout << std::endl;
 	sentinel.guardGate();
 	sentinel.setEnergyPoints(0);
 	sentinel.setHitPoints(0);
 	sentinel.guardGate();
+
+	std::cout << std::endl;
+}
+
+static void	tests_ex02(void) {
+	std::cout << std::endl;
+	std::cout << LIGHT_PURPLE
+			<< "------------------------- Tests ex02 -------------------------"
+			<< std::endl;
+
+	FragTrap droid1;
+	FragTrap droid2;
+	FragTrap cp3po("CP3PO");
+	FragTrap r2d2("R2-D2");
+	FragTrap bb8("BB-8");
+	FragTrap bb8_clone(bb8);
+
+	std::cout << std::endl;
+	bb8.highFiveGuys();
+	bb8.beRepaired(10);
+	cp3po.setEnergyPoints(0);
+	cp3po.setHitPoints(0);
+	cp3po.highFiveGuys();
+
+	std::cout << std::endl;
+	droid2.attack(droid1.getName());
+	droid1.takeDamage(droid2.getAttackDamage());
+
+	std::cout << std::endl;
+}
+
+int main(void) {
+
+	tests_ex00();
+	tests_ex01();
+	tests_ex02();
+
+	std::cout << std::endl;
+	std::cout << LIGHT_PURPLE
+			<< "------------------------- Tests ex03 -------------------------"
+			<< std::endl;
+	DiamondTrap diamond;
+	ClapTrap	robot;
+	ScavTrap	scav;
+	FragTrap	frag;
+
+	std::cout << std::endl;
+	std::cout << "ClapTrap:  " << robot.getName() << "   - "
+			<< robot.getEnergyPoints() << " "
+			<< robot.getHitPoints() << "  "
+			<< robot.getAttackDamage() << std::endl;
+	std::cout << "ScarvTrap: " << scav.getName() << " - "
+			<< scav.getEnergyPoints() << " "
+			<< scav.getHitPoints() << " "
+			<< scav.getAttackDamage() << std::endl;
+	std::cout << "FragTrap:  " << frag.getName() << "   - "
+			<< frag.getEnergyPoints() << " "
+			<< frag.getHitPoints() << " "
+			<< frag.getAttackDamage() << std::endl;
+	std::cout << "Diamond:   " << diamond.getName() << " - "
+			<< diamond.getEnergyPoints() << " "
+			<< diamond.getHitPoints() << " "
+			<< diamond.getAttackDamage() << std::endl;
+
+	std::cout << std::endl;
+	diamond.attack(robot.getName());
 
 	std::cout << std::endl;
 	return (0);
