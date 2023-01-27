@@ -6,11 +6,10 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 22:40:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:58:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
@@ -18,7 +17,7 @@ static void	tests_ex00(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex00 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ClapTrap robot1;
 	ClapTrap robot2;
@@ -54,7 +53,7 @@ static void	tests_ex01(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex01 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ScavTrap sentinel;
 	ScavTrap sentinel2;
@@ -79,15 +78,20 @@ static void	tests_ex01(void) {
 	std::cout << std::endl;
 }
 
-int main(void) {
+int main(int argc, char *argv[]) {
 
-	tests_ex00();
-	tests_ex01();
+	if (argc > 1) {
+		std::string mode = argv[1];
+		if (mode.compare("all") == 0) {
+			tests_ex00();
+			tests_ex01();
+		}
+	}
 
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex02 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	FragTrap droid1;
 	FragTrap droid2;

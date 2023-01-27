@@ -6,18 +6,17 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 22:38:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:59:12 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
 static void	tests_ex00(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex00 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ClapTrap robot1;
 	ClapTrap robot2;
@@ -49,14 +48,19 @@ static void	tests_ex00(void) {
 	std::cout << std::endl;
 }
 
-int main(void) {
-	
-	tests_ex00();
+int main(int argc, char *argv[]) {
+
+	if (argc > 1) {
+		std::string mode = argv[1];
+		if (mode.compare("all") == 0) {
+			tests_ex00();
+		}
+	}
 
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex01 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ScavTrap sentinel;
 	ScavTrap sentinel2;

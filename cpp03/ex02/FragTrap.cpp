@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 00:49:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:50:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ FragTrap::FragTrap(void): ClapTrap() {
 	++FragTrap::_droid_nb;
 	index.push_back(FragTrap::_droid_nb + 48);
 	this->setName("Droid " + index);
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
+	this->setHitPoints(FRAG_TRAP_INIT_HP);
+	this->setEnergyPoints(FRAG_TRAP_INIT_EP);
+	this->setAttackDamage(FRAG_TRAP_INIT_AD);
 	_constructor_msg("Default");
 }
 
@@ -32,9 +32,9 @@ FragTrap::FragTrap(FragTrap const& st): ClapTrap() {
 }
 
 FragTrap::FragTrap(std::string const name): ClapTrap(name) {
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
+	this->setHitPoints(FRAG_TRAP_INIT_HP);
+	this->setEnergyPoints(FRAG_TRAP_INIT_EP);
+	this->setAttackDamage(FRAG_TRAP_INIT_AD);
 	_constructor_msg("Named");
 }
 
@@ -60,11 +60,11 @@ void	FragTrap::highFiveGuys(void) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to give a high five message: hit points = "
 				<< hitPoints << RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to give a high five message: energy points = "
 				<< energyPoints << RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0)

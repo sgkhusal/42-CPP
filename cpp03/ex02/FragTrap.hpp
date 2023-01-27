@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/25 21:46:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:52:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <string>
 # include <iostream>
 
-# define CYAN "\033[0;36m"
+# define FRAG_TRAP_INIT_HP	100
+# define FRAG_TRAP_INIT_EP	100
+# define FRAG_TRAP_INIT_AD	30
 
 class FragTrap: public ClapTrap {
 	public:
