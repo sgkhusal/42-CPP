@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/27 00:14:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 01:12:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ FragTrap::FragTrap(void): ClapTrap() {
 	_constructor_msg("Default");
 }
 
-FragTrap::FragTrap(FragTrap const& st): ClapTrap() {
-	*this = st;
+FragTrap::FragTrap(FragTrap const& ft): ClapTrap() {
+	*this = ft;
 	_constructor_msg("Copy");
 }
 
@@ -42,12 +42,12 @@ FragTrap::~FragTrap(void) {
 			<< " destroyed" << RESET << std::endl;
 }
 
-FragTrap& FragTrap::operator=(FragTrap const& st) {
-	if (this != &st) {
-		this->_name = st.getName();
-		this->_hitPoints = st.getHitPoints();
-		this->_energyPoints = st.getEnergyPoints();
-		this->_attackDamage = st.getAttackDamage();
+FragTrap& FragTrap::operator=(FragTrap const& ft) {
+	if (this != &ft) {
+		this->_name = ft.getName();
+		this->_hitPoints = ft.getHitPoints();
+		this->_energyPoints = ft.getEnergyPoints();
+		this->_attackDamage = ft.getAttackDamage();
 	}
 	std::cout << GREY << "FragTrap " << this->getName()
 			<< " copied" << RESET << std::endl;
@@ -59,11 +59,11 @@ void	FragTrap::highFiveGuys(void) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << ORANGE << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "FragTrap " << this->getName()
 				<< " unable to give a high five message: hit points = "
 				<< hitPoints << RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << ORANGE << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "FragTrap " << this->getName()
 				<< " unable to give a high five message: energy points = "
 				<< energyPoints << RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0)
