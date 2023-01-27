@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:23:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 00:38:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:26:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ ScavTrap::ScavTrap(void): ClapTrap() {
 	++ScavTrap::_sentinel_nb;
 	index.push_back(ScavTrap::_sentinel_nb + 48);
 	this->setName("Sentinel " + index);
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
+	this->setHitPoints(SCAV_TRAP_INIT_HP);
+	this->setEnergyPoints(SCAV_TRAP_INIT_EP);
+	this->setAttackDamage(SCAV_TRAP_INIT_AD);
 	_constructor_msg("Default");
 }
 
 ScavTrap::ScavTrap(std::string const name): ClapTrap(name) {
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
+	this->setHitPoints(SCAV_TRAP_INIT_HP);
+	this->setEnergyPoints(SCAV_TRAP_INIT_EP);
+	this->setAttackDamage(SCAV_TRAP_INIT_AD);
 	_constructor_msg("Named");
 }
 
@@ -60,11 +60,11 @@ void	ScavTrap::guardGate(void) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to enter in gate keeper mode: hit points = "
 				<< hitPoints << RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to enter in gate keeper mode: energy points = "
 				<< energyPoints << RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0)
@@ -77,18 +77,18 @@ void ScavTrap::attack(const std::string& target) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to attack " << target
 				<< ": hit points = " << hitPoints
 				<< RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << RED << "ScavTrap " << this->getName()
+		std::cout << ORANGE << "ScavTrap " << this->getName()
 				<< " unable to attack " << target
 				<< ": energy points = " << energyPoints
 				<< RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0) {
 		this->setEnergyPoints(energyPoints - 1);
-		std::cout << PURPLE << "ScavTrap " << this->getName() << " attacks "
+		std::cout << YELLOW << "ScavTrap " << this->getName() << " attacks "
 				<< target << " causing " << this->getAttackDamage()
 				<< " points of damage!" << RESET << std::endl;
 	}

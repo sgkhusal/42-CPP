@@ -6,20 +6,18 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 22:38:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:57:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
+#include <iomanip>
 
 static void	tests_ex00(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex00 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ClapTrap robot1;
 	ClapTrap robot2;
@@ -55,7 +53,7 @@ static void	tests_ex01(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex01 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	ScavTrap sentinel;
 	ScavTrap sentinel2;
@@ -84,7 +82,7 @@ static void	tests_ex02(void) {
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex02 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 
 	FragTrap droid1;
 	FragTrap droid2;
@@ -107,23 +105,40 @@ static void	tests_ex02(void) {
 	std::cout << std::endl;
 }
 
-int main(void) {
+void	print_infos(ClapTrap const& robot, std::string const& type) {
+	std::cout << LIGHT_GREY << std::setw(12) << type
+			<< std::setw(11) << robot.getName() << " | "
+			<< robot.getEnergyPoints() << " | "
+			<< robot.getHitPoints() << " | "
+			<< robot.getAttackDamage() << RESET << std::endl;
+}
 
-	tests_ex00();
-	tests_ex01();
-	tests_ex02();
+int main(int argc, char *argv[]) {
+
+	if (argc > 1) {
+		std::string mode = argv[1];
+		if (mode.compare("all") == 0) {
+			tests_ex00();
+			tests_ex01();
+			tests_ex02();
+		}
+	}
 
 	std::cout << std::endl;
 	std::cout << LIGHT_PURPLE
 			<< "------------------------- Tests ex03 -------------------------"
-			<< std::endl;
+			<< std::endl << std::endl;
 	DiamondTrap diamond;
 	ClapTrap	robot;
-	ScavTrap	scav;
-	FragTrap	frag;
+	ScavTrap	sentinel;
+	FragTrap	droid;
 
 	std::cout << std::endl;
-	std::cout << "ClapTrap:  " << robot.getName() << "   - "
+	print_infos(robot, " ClapTrap: ");
+	print_infos(sentinel, "ScarvTrap: ");
+	print_infos(droid, " FragTrap: ");
+	print_infos(diamond, "  Diamond: ");
+	/* std::cout << "ClapTrap:  " << robot.getName() << "   - "
 			<< robot.getEnergyPoints() << " "
 			<< robot.getHitPoints() << "  "
 			<< robot.getAttackDamage() << std::endl;
@@ -134,7 +149,7 @@ int main(void) {
 	std::cout << "FragTrap:  " << frag.getName() << "   - "
 			<< frag.getEnergyPoints() << " "
 			<< frag.getHitPoints() << " "
-			<< frag.getAttackDamage() << std::endl;
+			<< frag.getAttackDamage() << std::endl; */
 	std::cout << "Diamond:   " << diamond.getName() << " - "
 			<< diamond.getEnergyPoints() << " "
 			<< diamond.getHitPoints() << " "

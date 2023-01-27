@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 18:50:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:53:18 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <string>
 # include <iostream>
 
-# define CYAN "\033[0;36m"
+# define SCAV_TRAP_INIT_HP	100
+# define SCAV_TRAP_INIT_EP	50
+# define SCAV_TRAP_INIT_AD	20
 
 class ScavTrap: virtual public ClapTrap {
 	public:

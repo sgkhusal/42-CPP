@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 00:56:16 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 22:04:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:19:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,7 @@ void DiamondTrap::_constructor_msg(std::string type) {
 /* void DiamondTrap::attack(const std::string& target) {
 	ScavTrap::attack(target);
 } */
+
+std::string DiamondTrap::getName(void) const {
+	return (this->_name);
+}
