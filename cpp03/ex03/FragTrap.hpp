@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:53:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:13:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <string>
 # include <iostream>
+# include <sstream>
 
 # define FRAG_TRAP_INIT_HP	100
 # define FRAG_TRAP_INIT_EP	100

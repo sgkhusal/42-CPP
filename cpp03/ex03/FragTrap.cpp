@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:25:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:13:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 int FragTrap::_droid_nb = 0;
 
 FragTrap::FragTrap(void): ClapTrap() {
-	std::string index;
+	std::stringstream index;
 
-	++FragTrap::_droid_nb;
-	index.push_back(FragTrap::_droid_nb + 48);
-	this->setName("Droid " + index);
+	index << ++FragTrap::_droid_nb;
+	this->setName("Droid " + index.str());
 	this->setHitPoints(FRAG_TRAP_INIT_HP);
 	this->setEnergyPoints(FRAG_TRAP_INIT_EP);
 	this->setAttackDamage(FRAG_TRAP_INIT_AD);

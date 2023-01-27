@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:52:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:12:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <string>
 # include <iostream>
+# include <sstream>
 
 # define SCAV_TRAP_INIT_HP	100
 # define SCAV_TRAP_INIT_EP	50

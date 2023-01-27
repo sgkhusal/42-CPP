@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 00:56:16 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:19:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:06:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ DiamondTrap::DiamondTrap(void): ScavTrap(), FragTrap() {
 	++DiamondTrap::_diamond_nb;
 	index.push_back(DiamondTrap::_diamond_nb + 48);
 	this->_name = "Diamond " + index;
+	ClapTrap::_name = "Diamond " + index + "_clap_name";
 	/* this->setHitPoints(100);
 	this->setEnergyPoints(50);
 	this->setAttackDamage(20); */
@@ -37,9 +38,9 @@ void DiamondTrap::_constructor_msg(std::string type) {
 			<< RESET << std::endl;
 }
 
-/* void DiamondTrap::attack(const std::string& target) {
+void DiamondTrap::attack(const std::string& target) {
 	ScavTrap::attack(target);
-} */
+}
 
 std::string DiamondTrap::getName(void) const {
 	return (this->_name);

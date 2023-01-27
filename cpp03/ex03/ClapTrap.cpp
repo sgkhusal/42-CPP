@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:26:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:14:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ int ClapTrap::_robot_nb = 0;
 ClapTrap::ClapTrap(void): _hitPoints(CLAP_TRAP_INIT_HP),
 							_energyPoints(CLAP_TRAP_INIT_EP),
 							_attackDamage(CLAP_TRAP_INIT_AD) {
-	std::string index;
-	std::stringstream ss;
+	std::stringstream index;
 
-	ss << ++ClapTrap::_robot_nb;
-	this->setName("Robot " + ss.str());
+	index << ++ClapTrap::_robot_nb;
+	this->setName("Robot " + index.str());
 	_constructor_msg("Default");
 }
 

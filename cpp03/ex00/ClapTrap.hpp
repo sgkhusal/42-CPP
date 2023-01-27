@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:46:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:07:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <string>
 # include <iostream>
+# include <sstream>
 
 # define ORANGE	"\033[0;38;5;166m"
 # define BLUE	"\033[38;5;75m"

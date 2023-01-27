@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:23:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:26:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/27 00:12:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 int ScavTrap::_sentinel_nb = 0;
 
 ScavTrap::ScavTrap(void): ClapTrap() {
-	std::string index;
+	std::stringstream index;
 
-	++ScavTrap::_sentinel_nb;
-	index.push_back(ScavTrap::_sentinel_nb + 48);
-	this->setName("Sentinel " + index);
+	index << ++ScavTrap::_sentinel_nb;
+	this->setName("Sentinel " + index.str());
 	this->setHitPoints(SCAV_TRAP_INIT_HP);
 	this->setEnergyPoints(SCAV_TRAP_INIT_EP);
 	this->setAttackDamage(SCAV_TRAP_INIT_AD);
