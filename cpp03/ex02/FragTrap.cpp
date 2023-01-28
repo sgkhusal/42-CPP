@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:03:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:38:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	FragTrap::highFiveGuys(void) {
 				<< " unable to give a high five message: energy points = "
 				<< energyPoints << RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0)
-	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl;
+		std::cout << YELLOW << this->getName()
+				<< ": High five guys!!!" << std::endl;
 }
 
 void FragTrap::_constructorMsg(std::string const& type) {

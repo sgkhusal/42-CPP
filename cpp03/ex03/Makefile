@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 01:04:26 by sguilher          #+#    #+#              #
-#    Updated: 2023/01/26 12:00:17 by sguilher         ###   ########.fr        #
+#    Updated: 2023/01/27 00:45:20 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		diamondtrap
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
 SRC =		main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 HEADERS =	ClapTrap.hpp ScavTrap.hpp FragTrap.hpp DiamondTrap.hpp

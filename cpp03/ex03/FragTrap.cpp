@@ -6,50 +6,53 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/27 00:13:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:38:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-int FragTrap::_droid_nb = 0;
+int FragTrap::_droidNb = 0;
 
 FragTrap::FragTrap(void): ClapTrap() {
 	std::stringstream index;
 
-	index << ++FragTrap::_droid_nb;
+	index << ++FragTrap::_droidNb;
 	this->setName("Droid " + index.str());
-	this->setHitPoints(FRAG_TRAP_INIT_HP);
-	this->setEnergyPoints(FRAG_TRAP_INIT_EP);
-	this->setAttackDamage(FRAG_TRAP_INIT_AD);
-	_constructor_msg("Default");
+	this->setHitPoints(FRAG_INIT_HP);
+	this->setEnergyPoints(FRAG_INIT_EP);
+	this->setAttackDamage(FRAG_INIT_AD);
+	this->setType(FRAG);
+	_constructorMsg("Default");
 }
 
-FragTrap::FragTrap(FragTrap const& st): ClapTrap() {
-	*this = st;
-	_constructor_msg("Copy");
+FragTrap::FragTrap(std::string const& name): ClapTrap(name) {
+	this->setHitPoints(FRAG_INIT_HP);
+	this->setEnergyPoints(FRAG_INIT_EP);
+	this->setAttackDamage(FRAG_INIT_AD);
+	this->setType(FRAG);
+	_constructorMsg("Named");
 }
 
-FragTrap::FragTrap(std::string const name): ClapTrap(name) {
-	this->setHitPoints(FRAG_TRAP_INIT_HP);
-	this->setEnergyPoints(FRAG_TRAP_INIT_EP);
-	this->setAttackDamage(FRAG_TRAP_INIT_AD);
-	_constructor_msg("Named");
+FragTrap::FragTrap(FragTrap const& ft): ClapTrap() {
+	*this = ft;
+	_constructorMsg("Copy");
 }
 
 FragTrap::~FragTrap(void) {
-	std::cout << CYAN << "FragTrap " << this->getName()
+	std::cout << CYAN << FRAG << this->getName()
 			<< " destroyed" << RESET << std::endl;
 }
 
-FragTrap& FragTrap::operator=(FragTrap const& st) {
-	if (this != &st) {
-		this->_name = st.getName();
-		this->_hitPoints = st.getHitPoints();
-		this->_energyPoints = st.getEnergyPoints();
-		this->_attackDamage = st.getAttackDamage();
+FragTrap& FragTrap::operator=(FragTrap const& ft) {
+	if (this != &ft) {
+		this->_name = ft.getName();
+		this->_hitPoints = ft.getHitPoints();
+		this->_energyPoints = ft.getEnergyPoints();
+		this->_attackDamage = ft.getAttackDamage();
+		this->_type = ft.getType();
 	}
-	std::cout << GREY << "FragTrap " << this->getName()
+	std::cout << GREY << this->getType() << this->getName()
 			<< " copied" << RESET << std::endl;
 	return (*this);
 }
@@ -59,19 +62,20 @@ void	FragTrap::highFiveGuys(void) {
 	int energyPoints = this->getEnergyPoints();
 
 	if (hitPoints <= 0)
-		std::cout << ORANGE << "ScavTrap " << this->getName()
+		std::cout << GREY << this->getType()  << this->getName()
 				<< " unable to give a high five message: hit points = "
 				<< hitPoints << RESET << std::endl;
 	if (energyPoints <= 0)
-		std::cout << ORANGE << "ScavTrap " << this->getName()
+		std::cout << GREY << this->getType()  << this->getName()
 				<< " unable to give a high five message: energy points = "
 				<< energyPoints << RESET << std::endl;
 	if (hitPoints > 0 && energyPoints > 0)
-	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl;
+		std::cout << YELLOW << this->getType() << this->getName()
+				<< ": High five guys!!!" << std::endl;
 }
 
-void FragTrap::_constructor_msg(std::string type) {
-	std::cout << CYAN << "FragTrap " << this->getName()
+void FragTrap::_constructorMsg(std::string const& type) {
+	std::cout << CYAN << FRAG << this->getName()
 			<< " created in " << type << " constructor"
 			<< RESET << std::endl;
 }

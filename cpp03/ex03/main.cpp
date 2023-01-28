@@ -6,111 +6,117 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/26 23:57:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 11:06:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
-#include <iomanip>
+
+static void	description(const std::string& text) {
+	std::cout << std::endl
+			<< LIGHT_PURPLE << text << RESET << std::endl;
+}
 
 static void	tests_ex00(void) {
-	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE
-			<< "------------------------- Tests ex00 -------------------------"
-			<< std::endl << std::endl;
+	description("------------------------- Tests ex00 -------------------------");
 
+	description("Constructors messages");
 	ClapTrap robot1;
 	ClapTrap robot2;
 	ClapTrap marvin("Marvin");
 	ClapTrap marvinCopy = marvin;
 	ClapTrap marvinCopy2(marvin);
 
-	std::cout << std::endl;
+	description("Testing functions");
 	robot1.attack(marvin.getName());
 	marvin.takeDamage(robot1.getAttackDamage());
-	marvin.beRepaired(1);
 	marvin.beRepaired(5);
 
-	std::cout << std::endl;
+	description("Testing instance copy");
 	robot2.attack(marvinCopy.getName());
 	marvinCopy.takeDamage(robot1.getAttackDamage());
 	marvinCopy.beRepaired(10);
 
-	std::cout << std::endl;
+	description("Testing negative values");
+	marvinCopy.beRepaired(-10);
+	marvinCopy.takeDamage(-20);
+
+	description("Testing energy <= 0");
 	robot1.setEnergyPoints(0);
 	robot1.attack(marvinCopy2.getName());
 	robot1.beRepaired(1);
 
-	std::cout << std::endl;
+	description("Testing hit points <= 0");
 	robot2.takeDamage(20);
 	robot2.attack(marvin.getName());
 	robot2.beRepaired(1);
 
-	std::cout << std::endl;
+	description("Destructors messages");
 }
 
 static void	tests_ex01(void) {
-	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE
-			<< "------------------------- Tests ex01 -------------------------"
-			<< std::endl << std::endl;
+	description("------------------------- Tests ex01 -------------------------");
 
+	description("Constructors messages");
 	ScavTrap sentinel;
 	ScavTrap sentinel2;
 	ScavTrap sentinelCopy(sentinel);
 	ScavTrap ultron("Ultron");
 
-	std::cout << std::endl;
+	description("Testing functions");
 	ultron.attack(sentinel.getName());
 	sentinel.takeDamage(ultron.getAttackDamage());
 	sentinel.beRepaired(10);
+	sentinel.guardGate();
 
-	std::cout << std::endl;
+	description("Testing instance copy");
 	sentinel2.attack(sentinelCopy.getName());
 	sentinelCopy.takeDamage(sentinel2.getAttackDamage());
+	sentinelCopy.beRepaired(20);
+	sentinelCopy.guardGate();
 
-	std::cout << std::endl;
-	sentinel.guardGate();
+	description("Testing energy <= 0 and hit points <= 0");
 	sentinel.setEnergyPoints(0);
 	sentinel.setHitPoints(0);
 	sentinel.guardGate();
 
-	std::cout << std::endl;
+	description("Destructors messages");
 }
 
 static void	tests_ex02(void) {
-	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE
-			<< "------------------------- Tests ex02 -------------------------"
-			<< std::endl << std::endl;
+	description("------------------------- Tests ex02 -------------------------");
 
+	description("Constructors messages");
 	FragTrap droid1;
 	FragTrap droid2;
-	FragTrap cp3po("CP3PO");
+	FragTrap c3po("C-3PO");
 	FragTrap r2d2("R2-D2");
 	FragTrap bb8("BB-8");
 	FragTrap bb8_clone(bb8);
 
-	std::cout << std::endl;
+	description("Testing functions");
 	bb8.highFiveGuys();
 	bb8.beRepaired(10);
-	cp3po.setEnergyPoints(0);
-	cp3po.setHitPoints(0);
-	cp3po.highFiveGuys();
-
-	std::cout << std::endl;
 	droid2.attack(droid1.getName());
 	droid1.takeDamage(droid2.getAttackDamage());
 
-	std::cout << std::endl;
+	description("Testing instance copy");
+	bb8_clone.highFiveGuys();
+
+	description("Testing energy <= 0 and hit points <= 0");
+	c3po.setEnergyPoints(0);
+	c3po.setHitPoints(0);
+	c3po.highFiveGuys();
+
+	description("Destructors messages");
 }
 
-void	print_infos(ClapTrap const& robot, std::string const& type) {
-	std::cout << LIGHT_GREY << std::setw(12) << type
+void	print_infos(ClapTrap const& robot) {
+	std::cout << LIGHT_GREY << std::setw(12) << robot.getType()  << " | "
 			<< std::setw(11) << robot.getName() << " | "
-			<< robot.getEnergyPoints() << " | "
-			<< robot.getHitPoints() << " | "
-			<< robot.getAttackDamage() << RESET << std::endl;
+			<< std::setw(13) << robot.getEnergyPoints() << " | "
+			<< std::setw(10) << robot.getHitPoints() << " | "
+			<< std::setw(13) << robot.getAttackDamage() << RESET << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -124,40 +130,43 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	std::cout << std::endl;
-	std::cout << LIGHT_PURPLE
-			<< "------------------------- Tests ex03 -------------------------"
-			<< std::endl << std::endl;
-	DiamondTrap diamond;
+	description("------------------------- Tests ex03 -------------------------");
+
+	description("Constructors messages");
+	DiamondTrap diamond1;
+	DiamondTrap diamond2("Destroyer");
+	DiamondTrap diamond3(diamond2);
 	ClapTrap	robot;
 	ScavTrap	sentinel;
 	FragTrap	droid;
 
-	std::cout << std::endl;
-	print_infos(robot, " ClapTrap: ");
-	print_infos(sentinel, "ScarvTrap: ");
-	print_infos(droid, " FragTrap: ");
-	print_infos(diamond, "  Diamond: ");
-	/* std::cout << "ClapTrap:  " << robot.getName() << "   - "
-			<< robot.getEnergyPoints() << " "
-			<< robot.getHitPoints() << "  "
-			<< robot.getAttackDamage() << std::endl;
-	std::cout << "ScarvTrap: " << scav.getName() << " - "
-			<< scav.getEnergyPoints() << " "
-			<< scav.getHitPoints() << " "
-			<< scav.getAttackDamage() << std::endl;
-	std::cout << "FragTrap:  " << frag.getName() << "   - "
-			<< frag.getEnergyPoints() << " "
-			<< frag.getHitPoints() << " "
-			<< frag.getAttackDamage() << std::endl; */
-	std::cout << "Diamond:   " << diamond.getName() << " - "
-			<< diamond.getEnergyPoints() << " "
-			<< diamond.getHitPoints() << " "
-			<< diamond.getAttackDamage() << std::endl;
+	description("Comparing types");
+	std::cout << LIGHT_GREY
+			<< "  ROBOT TYPE |  ROBOT NAME | ENERGY POINTS | HIT POINTS | ATTACK DAMAGE"
+			<< std::endl;
+	print_infos(robot);
+	print_infos(sentinel);
+	print_infos(droid);
+	print_infos(diamond1);
+	print_infos(diamond2);
+	print_infos(diamond3);
 
-	std::cout << std::endl;
-	diamond.attack(robot.getName());
+	description("Testing functions");
+	diamond1.attack(robot.getName());
+	diamond1.beRepaired(100);
+	diamond1.takeDamage(50);
+	diamond1.guardGate();
+	diamond1.highFiveGuys();
+	diamond1.whoAmI();
 
-	std::cout << std::endl;
+	description("Testing instance copy");
+	diamond3.whoAmI();
+
+	description("Testing energy <= 0 and hit points <= 0");
+	diamond2.setEnergyPoints(0);
+	diamond2.setHitPoints(0);
+	diamond2.whoAmI();
+
+	description("Destructors messages");
 	return (0);
 }
