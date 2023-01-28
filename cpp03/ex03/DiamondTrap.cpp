@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 00:56:16 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 11:05:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:49:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ DiamondTrap::DiamondTrap(void): ScavTrap(), FragTrap() {
 	_constructorMsg("Default");
 }
 
-DiamondTrap::DiamondTrap(std::string const& name): ScavTrap(), FragTrap() {
-	this->_name = name;
+DiamondTrap::DiamondTrap(std::string const& name): ScavTrap(), FragTrap(), _name(name) {
 	ClapTrap::_name = name + "_clap_name";
 	FragTrap::_hitPoints = FRAG_INIT_HP;
 	ScavTrap::_energyPoints = SCAV_INIT_EP;
@@ -37,7 +36,7 @@ DiamondTrap::DiamondTrap(std::string const& name): ScavTrap(), FragTrap() {
 	_constructorMsg("Named");
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap const& d): ClapTrap(), ScavTrap(), FragTrap() { ///////////////////////
+DiamondTrap::DiamondTrap(DiamondTrap const& d): ClapTrap(), ScavTrap(), FragTrap() {
 	*this = d;
 	_constructorMsg("Copy");
 }

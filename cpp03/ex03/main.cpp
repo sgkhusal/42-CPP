@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 11:06:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:17:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,23 +136,23 @@ int main(int argc, char *argv[]) {
 	DiamondTrap diamond1;
 	DiamondTrap diamond2("Destroyer");
 	DiamondTrap diamond3(diamond2);
-	ClapTrap	robot;
-	ScavTrap	sentinel;
-	FragTrap	droid;
+	ClapTrap	clap;
+	ScavTrap	scav;
+	FragTrap	frag;
 
 	description("Comparing types");
 	std::cout << LIGHT_GREY
 			<< "  ROBOT TYPE |  ROBOT NAME | ENERGY POINTS | HIT POINTS | ATTACK DAMAGE"
 			<< std::endl;
-	print_infos(robot);
-	print_infos(sentinel);
-	print_infos(droid);
+	print_infos(clap);
+	print_infos(scav);
+	print_infos(frag);
 	print_infos(diamond1);
 	print_infos(diamond2);
 	print_infos(diamond3);
 
 	description("Testing functions");
-	diamond1.attack(robot.getName());
+	diamond1.attack(clap.getName());
 	diamond1.beRepaired(100);
 	diamond1.takeDamage(50);
 	diamond1.guardGate();
@@ -166,6 +166,13 @@ int main(int argc, char *argv[]) {
 	diamond2.setEnergyPoints(0);
 	diamond2.setHitPoints(0);
 	diamond2.whoAmI();
+
+	description("Testing ClapTrap receives a DiamondTrap");
+	clap.attack(frag.getName());
+	clap = diamond1;
+	clap.attack(frag.getName());
+	std::cout << "clap name is: " << clap.getName() << std::endl;
+	std::cout << "clap name is: " << clap.ClapTrap::getName() << std::endl;
 
 	description("Destructors messages");
 	return (0);

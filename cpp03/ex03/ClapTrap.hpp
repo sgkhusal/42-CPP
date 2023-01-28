@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:39:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 18:18:34 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ class ClapTrap {
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
 
-		virtual std::string	getName(void) const; //////
+		virtual std::string	getName(void) const;
 		int			getHitPoints(void) const;
 		int			getEnergyPoints(void) const;
 		int			getAttackDamage(void) const;
-		virtual void	setName(std::string const& name); ////
+		virtual void	setName(std::string const& name);
 		void		setHitPoints(int const hitPoints);
 		void		setEnergyPoints(int const energyPoints);
 		void		setAttackDamage(int const attackDamage);
 
-		std::string	getType(void) const; /////////
-		void		setType(std::string const& type); /////////
+		std::string	getType(void) const;
+		void		setType(std::string const& type);
 
 	protected:
-		std::string _name; // precisa colocar virtual aqui tb?? - não aceita...
-		std::string _type; //////////////
+		std::string _name;
+		std::string _type;
 		int         _hitPoints;
 		int         _energyPoints;
 		int         _attackDamage;
