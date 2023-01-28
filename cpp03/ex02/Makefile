@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 01:04:26 by sguilher          #+#    #+#              #
-#    Updated: 2023/01/23 19:33:07 by sguilher         ###   ########.fr        #
+#    Updated: 2023/01/28 23:10:27 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		fragtrap
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g -fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
 SRC =		main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 HEADERS =	ClapTrap.hpp ScavTrap.hpp FragTrap.hpp
