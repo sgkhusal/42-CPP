@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/27 01:08:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:28:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <iostream>
 # include <sstream>
 
-# define FRAG_TRAP_INIT_HP	100
-# define FRAG_TRAP_INIT_EP	100
-# define FRAG_TRAP_INIT_AD	30
+# define FRAG_INIT_HP	100
+# define FRAG_INIT_EP	100
+# define FRAG_INIT_AD	30
+
+# define FRAG	"FragTrap "
 
 class FragTrap: public ClapTrap {
 	public:
@@ -34,9 +36,9 @@ class FragTrap: public ClapTrap {
 		void    highFiveGuys(void);
 
 	private:
-		static int 	_droid_nb;
+		static int 	_droidNb;
 
-		void	_constructor_msg(std::string type);
+		void	_constructorMsg(std::string type);
 };
 
 #endif

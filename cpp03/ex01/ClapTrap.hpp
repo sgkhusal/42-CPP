@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:00:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:30:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
 
-# define CT_INIT_HP	10
-# define CT_INIT_EP	10
-# define CT_INIT_AD	0
+# define CLAP_INIT_HP	10
+# define CLAP_INIT_EP	10
+# define CLAP_INIT_AD	0
 
-# define CLAP_TRAP "ClapTrap "
+# define CLAP "ClapTrap "
 
 class ClapTrap {
 	public:

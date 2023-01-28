@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 08:57:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:30:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <iostream>
 # include <sstream>
 
-# define ST_INIT_HP	100
-# define ST_INIT_EP	50
-# define ST_INIT_AD	20
+# define SCAV_INIT_HP	100
+# define SCAV_INIT_EP	50
+# define SCAV_INIT_AD	20
 
-# define SCAV_TRAP "ScavTrap "
+# define SCAV "ScavTrap "
 
 class ScavTrap: public ClapTrap {
 	public:

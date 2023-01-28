@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:22:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:33:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	description(const std::string& text) {
 
 static void	tests_ex00(void) {
 	description("------------------------- Tests ex00 -------------------------");
+
 	description("Constructors messages");
 	ClapTrap robot1;
 	ClapTrap robot2;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/27 00:12:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:30:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 # include <iostream>
 # include <sstream>
 
-# define SCAV_TRAP_INIT_HP	100
-# define SCAV_TRAP_INIT_EP	50
-# define SCAV_TRAP_INIT_AD	20
+# define SCAV_INIT_HP	100
+# define SCAV_INIT_EP	50
+# define SCAV_INIT_AD	20
+
+# define SCAV "ScavTrap "
 
 class ScavTrap: public ClapTrap {
 	public:
@@ -35,10 +37,10 @@ class ScavTrap: public ClapTrap {
 		void	attack(const std::string& target);
 
 	protected:
-		void	_constructor_msg(std::string type);
+		void	_constructorMsg(std::string type);
 
 	private:
-		static int 	_sentinel_nb;
+		static int 	_sentinelNb;
 };
 
 #endif

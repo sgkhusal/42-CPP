@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:01:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:30:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int ClapTrap::_robotNb = 0;
 
-ClapTrap::ClapTrap(void): _hitPoints(CT_INIT_HP),
-							_energyPoints(CT_INIT_EP),
-							_attackDamage(CT_INIT_AD) {
+ClapTrap::ClapTrap(void): _hitPoints(CLAP_INIT_HP),
+							_energyPoints(CLAP_INIT_EP),
+							_attackDamage(CLAP_INIT_AD) {
 	std::stringstream index;
 
 	index << ++ClapTrap::_robotNb;
@@ -27,9 +27,9 @@ ClapTrap::ClapTrap(void): _hitPoints(CT_INIT_HP),
 }
 
 ClapTrap::ClapTrap(std::string const name): _name(name),
-											_hitPoints(CT_INIT_HP),
-											_energyPoints(CT_INIT_EP),
-											_attackDamage(CT_INIT_AD) {
+											_hitPoints(CLAP_INIT_HP),
+											_energyPoints(CLAP_INIT_EP),
+											_attackDamage(CLAP_INIT_AD) {
 	_constructorMsg("Named");
 }
 
@@ -39,7 +39,7 @@ ClapTrap::ClapTrap(ClapTrap const& ct) {
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << BLUE << CLAP_TRAP << this->getName()
+	std::cout << BLUE << CLAP << this->getName()
 			<< " destroyed" << RESET << std::endl;
 }
 
@@ -49,14 +49,14 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& ct) {
 		this->_hitPoints = ct.getHitPoints();
 		this->_energyPoints = ct.getEnergyPoints();
 		this->_attackDamage = ct.getAttackDamage();
-		std::cout << GREY << CLAP_TRAP << this->getName()
+		std::cout << GREY << CLAP << this->getName()
 				<< " copied" << RESET << std::endl;
 	}
 	return (*this);
 }
 
 void ClapTrap::attack(const std::string& target) {
-	attack_type(target, CLAP_TRAP);
+	attack_type(target, CLAP);
 }
 
 void	ClapTrap::attack_type(const std::string& target,
@@ -154,7 +154,7 @@ void ClapTrap::setAttackDamage(int const attackDamage) {
 }
 
 void ClapTrap::_constructorMsg(std::string type) {
-	std::cout << BLUE << CLAP_TRAP << this->getName()
+	std::cout << BLUE << CLAP << this->getName()
 			<< " created in " << type << " constructor"
 			<< RESET << std::endl;
 }
