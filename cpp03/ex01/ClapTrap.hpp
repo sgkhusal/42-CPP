@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/27 00:08:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 09:00:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
 
-# define CLAP_TRAP_INIT_HP	10
-# define CLAP_TRAP_INIT_EP	10
-# define CLAP_TRAP_INIT_AD	0
+# define CT_INIT_HP	10
+# define CT_INIT_EP	10
+# define CT_INIT_AD	0
+
+# define CLAP_TRAP "ClapTrap "
 
 class ClapTrap {
 	public:
@@ -56,10 +58,12 @@ class ClapTrap {
 		int         _hitPoints;
 		int         _energyPoints;
 		int         _attackDamage;
-		void		_constructor_msg(std::string type);
+		void		_constructorMsg(std::string type);
+		void		attack_type(const std::string& target,
+								const std::string& type);
 
 	private:
-		static int 	_robot_nb;
+		static int 	_robotNb;
 
 };
 
