@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:28 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 08:11:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 08:23:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int main(void) {
 	robot2.attack(marvinCopy.getName());
 	marvinCopy.takeDamage(robot1.getAttackDamage());
 	marvinCopy.beRepaired(10);
+
+	std::cout << std::endl
+			<< LIGHT_PURPLE << "Testing negative values" << RESET << std::endl;
+	marvinCopy.beRepaired(-10);
+	marvinCopy.takeDamage(-20);
 
 	std::cout << std::endl
 			<< LIGHT_PURPLE << "Testing energy <= 0" << RESET << std::endl;
