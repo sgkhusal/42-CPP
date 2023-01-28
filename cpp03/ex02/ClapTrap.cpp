@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:30:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:08:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ ClapTrap::ClapTrap(void): _hitPoints(CLAP_INIT_HP),
 	_constructorMsg("Default");
 }
 
-ClapTrap::ClapTrap(std::string const name): _name(name),
+ClapTrap::ClapTrap(std::string const& name): _name(name),
 											_hitPoints(CLAP_INIT_HP),
 											_energyPoints(CLAP_INIT_EP),
 											_attackDamage(CLAP_INIT_AD) {
@@ -55,12 +55,12 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& ct) {
 	return (*this);
 }
 
-void ClapTrap::attack(const std::string& target) {
+void ClapTrap::attack(std::string const& target) {
 	attack_type(target, CLAP);
 }
 
-void	ClapTrap::attack_type(const std::string& target,
-							const std::string& type) {
+void	ClapTrap::attack_type(std::string const& target,
+							std::string const& type) {
 	int	hitPoints = this->getHitPoints();
 	int energyPoints = this->getEnergyPoints();
 
@@ -128,7 +128,7 @@ int ClapTrap::getAttackDamage(void) const {
 	return (this->_attackDamage);
 }
 
-void ClapTrap::setName(std::string const name) {
+void ClapTrap::setName(std::string const& name) {
 	this->_name = name;
 }
 
@@ -153,7 +153,7 @@ void ClapTrap::setAttackDamage(int const attackDamage) {
 		this->_attackDamage = 0;
 }
 
-void ClapTrap::_constructorMsg(std::string type) {
+void ClapTrap::_constructorMsg(std::string const& type) {
 	std::cout << BLUE << CLAP << this->getName()
 			<< " created in " << type << " constructor"
 			<< RESET << std::endl;

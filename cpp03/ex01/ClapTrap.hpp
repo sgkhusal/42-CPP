@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:30:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:16:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ class ClapTrap {
 	public:
 		ClapTrap(void);
 		ClapTrap(ClapTrap const& ct);
-		ClapTrap(std::string const name);
+		ClapTrap(std::string const& name);
 		~ClapTrap(void);
 		ClapTrap& operator=(ClapTrap const& ct);
 
-		void		attack(const std::string& target);
+		void		attack(std::string const& target);
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
 
@@ -48,7 +48,7 @@ class ClapTrap {
 		int			getHitPoints(void) const;
 		int			getEnergyPoints(void) const;
 		int			getAttackDamage(void) const;
-		void		setName(std::string const name);
+		void		setName(std::string const& name);
 		void		setHitPoints(int const hitPoints);
 		void		setEnergyPoints(int const energyPoints);
 		void		setAttackDamage(int const attackDamage);
@@ -58,12 +58,12 @@ class ClapTrap {
 		int         _hitPoints;
 		int         _energyPoints;
 		int         _attackDamage;
-		void		_constructorMsg(std::string type);
-		void		attack_type(const std::string& target,
-								const std::string& type);
+		void		attack_type(std::string const& target,
+								std::string const& type);
 
 	private:
 		static int 	_robotNb;
+		void		_constructorMsg(std::string const& type);
 
 };
 

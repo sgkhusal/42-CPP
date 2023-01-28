@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:23:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:30:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:08:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ScavTrap::ScavTrap(void): ClapTrap() {
 	_constructorMsg("Default");
 }
 
-ScavTrap::ScavTrap(std::string const name): ClapTrap(name) {
+ScavTrap::ScavTrap(std::string const& name): ClapTrap(name) {
 	this->setHitPoints(SCAV_INIT_HP);
 	this->setEnergyPoints(SCAV_INIT_EP);
 	this->setAttackDamage(SCAV_INIT_AD);
@@ -71,11 +71,11 @@ void	ScavTrap::guardGate(void) {
 				<< " is in gate keeper mode" << std::endl;
 }
 
-void ScavTrap::attack(const std::string& target) {
+void ScavTrap::attack(std::string const& target) {
 	attack_type(target, SCAV);
 }
 
-void ScavTrap::_constructorMsg(std::string type) {
+void ScavTrap::_constructorMsg(std::string const& type) {
 	std::cout << CYAN << SCAV << this->getName()
 			<< " created in " << type << " constructor"
 			<< RESET << std::endl;

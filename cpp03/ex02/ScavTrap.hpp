@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:24:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:30:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:15:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ class ScavTrap: public ClapTrap {
 	public:
 		ScavTrap(void);
 		ScavTrap(ScavTrap const& st);
-		ScavTrap(std::string const name);
+		ScavTrap(std::string const& name);
 		~ScavTrap(void);
 		ScavTrap& operator=(ScavTrap const& st);
 
 		void	guardGate(void);
-		void	attack(const std::string& target);
-
-	protected:
-		void	_constructorMsg(std::string type);
+		void	attack(std::string const& target);
 
 	private:
 		static int 	_sentinelNb;
+		void	_constructorMsg(std::string const& type);
 };
 
 #endif

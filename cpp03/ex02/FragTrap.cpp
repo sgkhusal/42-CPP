@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 09:32:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/01/28 10:03:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ FragTrap::FragTrap(void): ClapTrap() {
 	_constructorMsg("Default");
 }
 
-FragTrap::FragTrap(std::string const name): ClapTrap(name) {
+FragTrap::FragTrap(std::string const& name): ClapTrap(name) {
 	this->setHitPoints(FRAG_INIT_HP);
 	this->setEnergyPoints(FRAG_INIT_EP);
 	this->setAttackDamage(FRAG_INIT_AD);
@@ -70,7 +70,7 @@ void	FragTrap::highFiveGuys(void) {
 	std::cout << YELLOW << this->getName() << ": High five guys!!!" << std::endl;
 }
 
-void FragTrap::_constructorMsg(std::string type) {
+void FragTrap::_constructorMsg(std::string const& type) {
 	std::cout << CYAN << FRAG << this->getName()
 			<< " created in " << type << " constructor"
 			<< RESET << std::endl;
