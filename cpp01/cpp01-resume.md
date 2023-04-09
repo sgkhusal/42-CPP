@@ -47,6 +47,8 @@ references:
 
 A C++ stream is a flow of data into or out of a program, such as the data written to `cout` or read from `cin`
 
+<img width="1024" alt="image" src="https://user-images.githubusercontent.com/75377067/230795460-834cf81c-b0d2-477f-a803-e9157b36061e.png">
+
 
 ### \<fstream> library
 Streams to interact with files:
