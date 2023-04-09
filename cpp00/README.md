@@ -166,7 +166,7 @@ int main(void){
 }
 ```
 
-## Exercises
+# Exercises
 
 - [std::string](https://legacy.cplusplus.com/reference/cctype/toupper/?kw=toupper)
 - [std::getline](https://legacy.cplusplus.com/reference/string/string/getline/?kw=getline)
