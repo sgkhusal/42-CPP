@@ -51,8 +51,11 @@ int	main(void) {
 	std::cout << YELLOW << "a = " << a << " and d = " << d << std::endl;
 	std::cout << GREY << "a + d = " << a + d << std::endl;
 	std::cout << GREY << "a - d = " << a - d << std::endl;
-	std::cout << GREY << "a * d = " << a * d << std::endl;
 	std::cout << GREY << "a / d = " << a / d << RESET << std::endl;
+	Fixed e = Fixed(0);
+	std::cout << YELLOW << "a = " << a << " and e = " << 0 << std::endl;
+	std::cout << GREY << "a * d = " << a * e << std::endl;
+	std::cout << GREY << "a / d = " << a / e << RESET << std::endl;
 	std::cout << std::endl;
 	return (0);
 }
