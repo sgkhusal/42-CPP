@@ -62,6 +62,21 @@ A class includes a default constructor and a copy constructor even if they are n
     - creates a copy of `a`
     - increments the value of `a`
     - returns the copy
+
+```c++
+// ++a
+Fixed& Fixed::operator++(void) {
+	this->_rawBits += 1;
+	return (*this); // returns itself
+}
+
+// a++
+Fixed Fixed::operator++(int) {
+	Fixed tmp(*this);
+	this->_rawBits++;
+	return (tmp); // returns the copy with the older value
+}
+```
  
 ### Reference
 - For more information: [Overloading operators](https://legacy.cplusplus.com/doc/tutorial/templates/)
