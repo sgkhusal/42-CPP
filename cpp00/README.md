@@ -66,7 +66,7 @@ std::cin >> var // redirects the content in std input into the variable
 - <b>private:</b> the attribute/method can be only accessed inside the class
 - <b>protected:</b> (next chapters)
 
-<b>Best practice 1:</b> Leave as public only what is necessary for the user. It helps to isolate parts of the code - encapsulation. <b>*** Always make sure when designing a class to think about what you should keep internal and what you should expose outside ***</b>
+<b>Best practice 1:</b> Leave as public only what is necessary for the user. It helps to isolate parts of the code - encapsulation. <b>*Always make sure when designing a class to think about what you should keep internal and what you should expose outside*</b>
 <br><b>Best practice 2:</b> name private attributes and methods beggining with an underscore indicates that it is a private variable/function. 
 ```c++
 class Sample {
@@ -109,7 +109,7 @@ Sample::Sample(char p1, int p2, float p3) {
 - const variables needs to be initialized in the beggining of the code. For const class attributes, we use the initialization list (its not an attribution, but an initialization of the variable, which is different)
 - const functions in class: it tells the compiler that the function will not going to alter some value of the instance (there is no attributions inside it). They are read-only
 
-<b>Best Practice:</b> try to use as much `const` variables and functions as possible. As the programs get bigger, it helps to ensure the consistency of the program. <b>*** The more your code is const and read-only, the more it will be robust in the long term ***</b>
+<b>Best Practice:</b> try to use as much `const` variables and functions as possible. As the programs get bigger, it helps to ensure the consistency of the program. <b>*The more your code is const and read-only, the more it will be robust in the long term*</b>
 
 ## accessors - getters and setters
 In practice, all attributes from a class should be private. To access it, we use getters (read) and setters (write) which are interfaces between the user and the private attribute
