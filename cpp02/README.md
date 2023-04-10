@@ -13,7 +13,9 @@ Functions with the same name, but receiving different parameters
 
 A notation works similar to a member function
 
-image.png
+<div align="center">
+<img width="519" alt="image" src="https://user-images.githubusercontent.com/75377067/230820281-f2795ae5-59c4-408d-a79f-729a08636e77.png">
+</div>
 
 C++ incorporates the option to use standard operators to perform operations with classes in addition to with fundamental types
 
@@ -36,7 +38,7 @@ return_type operator<sign>(parameters);
 | + | - | * | / | = | < | > | += | -= | *= | /= | >> | << |
 |<<=|>>=|== |!= |<= |>= | ++| -- |  % |  & | ^  | !  |\|  |
 | ~ |&= |^= |\|=|&& |\|\||%=| [] | () | ,  |->* | -> |    |
-|new|delete|new[]|delete[]|
+|new|delete|new[ ]|delete[ ]|
 
 The overload operator can be called either implicity using the operator, or explicity using the function name:
 ```c++
@@ -55,14 +57,14 @@ A class includes a default constructor and a copy constructor even if they are n
 <br>
 
 ### The operations `a++` and `++a`
-- `++a`: increments the value and returns `a``
+- `++a`: increments the value and returns `a`
 - `a++`:
     - creates a copy of `a`
     - increments the value of `a`
     - returns the copy
  
 ### Reference
-- [Overloading operators](https://legacy.cplusplus.com/doc/tutorial/templates/)
+- For more information: [Overloading operators](https://legacy.cplusplus.com/doc/tutorial/templates/)
 
 <br>
 
@@ -95,11 +97,11 @@ Integer arithmetic have the property of complety accuracy:
 - We have the integer "2", it is exactly 2. If we add 1 to it, we know we get exactly 3
 - Whatever operations we do with integers, provided there is no overflow, we will always get a number that matches the correct answer bit-for-bit
 
-<br>But integers lack precision: `5 ÷ 2 = 2` and `4 ÷ 2 = 2` when we work with integers. They are unable to keep track of the fractional part
+But integers lack precision: `5 ÷ 2 = 2` and `4 ÷ 2 = 2` when we work with integers. They are unable to keep track of the fractional part
 
-<br>
 Floating point numbers are the exact opposite of integers with respect to accuracy and precision: they never deliberately discard information representing the numbers, but they have poor accuracy. In many cases, there is literally no hope of a floating point number answer's matching the correct answer bit for bit.
-<br>Not every fraction can be represented exactly in binary, whereas any integer can. It is more than likely that the computed result you need cannot be represented accurately by a finite floating point variable - you are going to be wrong by at least a little bit no matter what you do.
+
+Not every fraction can be represented exactly in binary, whereas any integer can. It is more than likely that the computed result you need cannot be represented accurately by a finite floating point variable - you are going to be wrong by at least a little bit no matter what you do.
 
 <br>
 
@@ -120,6 +122,14 @@ Floating point representation vary from machine to machine. The most common is t
 - binary point: the decimal point in a decimal system. It is a divider between the integer and the fractional parte of a number. It is equivalent to 10ˆ0 in the decimal system
 - All digits (bits) to left and itself:  `2ˆ0, 2ˆ1, 2ˆ2, ...`
 - All digits (bits) to right: `2ˆ-1, 2ˆ-2, 2ˆ-3, ...`
+
+<div align="center">
+
+<img width="767" alt="image" src="https://user-images.githubusercontent.com/75377067/230820365-987e1095-d60f-4ff9-8d60-c36bff5150ee.png">
+
+<img width="629" alt="image" src="https://user-images.githubusercontent.com/75377067/230820418-a4916377-554d-4327-9a66-361a88f921c0.png">
+
+</div>
 
 The sequence of bits for 53 and 26.5 is the same; the difference is the position of the binary point:
 
