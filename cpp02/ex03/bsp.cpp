@@ -23,13 +23,6 @@ static Fixed triangle_area(Point const a, Point const b, Point const c) {
 	return (area);
 }
 
-/* static bool compare_fixed(Fixed const a, Fixed const b)
-{
-	if (a > b)
-		return ((a - b) < EPSILON);
-	return ((b - a) < EPSILON);
-} */
-
 bool bsp(Point const a, Point const b, Point const c, Point const point) {
 	Fixed	area;
 	Fixed	sum_areas;
