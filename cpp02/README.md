@@ -103,6 +103,11 @@ Using `const` in the copy constructor declaration and in the `=`operator overloa
 
 Additionally, the parameter in the copy constructor is passed by reference as a necessity: if this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.
 
+<div align="center">
+	<img width="851" alt="image" src="https://user-images.githubusercontent.com/75377067/232259742-b265ea75-fca8-4d8e-8912-8401a9d63f95.png">
+	<h6>source: Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017</h6>
+</div>
+
 <br>
 
 # Exercises
