@@ -77,7 +77,7 @@ Fixed Fixed::operator++(int) {
 	return (tmp); // returns the copy with the older value
 }
 ```
- 
+
 ### Reference
 - For more information: [Overloading operators](https://legacy.cplusplus.com/doc/tutorial/templates/)
 
@@ -100,6 +100,8 @@ class Sample {
 };
 ```
 Using `const` in the copy constructor declaration and in the `=`operator overload declaration ensures that they do not modify the source object being referred to
+
+Additionally, the parameter in the copy constructor is passed by reference as a necessity: if this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.
 
 <br>
 
