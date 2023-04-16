@@ -11,6 +11,13 @@ Inheritance allows classes that are similar to derive from a base class that con
   <h6>source: Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017</h6>
 </div>
 
+In principle, a publicly derived class inherits access to every member of a base class except:
+
+- its constructors and its destructor
+- its assignment operator members (operator=)
+- its friends
+- its private members
+
 ### Example
 
 ```c++
@@ -50,6 +57,13 @@ Cat::Cat(std::string const& type): Animal(type) {...};
 - protected: base class members that can be accessed by base class and derived classes (and friends)
 - public: base class members that can be accessed by derived class and users
 
+|Access                   |public|protected|private|
+|:-----------------------:|:----:|:-------:|:-----:|
+|members of the same class|yes   |yes      |yes    |
+|members of derived class |yes   |yes      |no     |
+|not members              |yes   |no       |no     |
+
+
 **Best Practice:** *To ensure maximum security, if the derived classes don’t need to access a base class attribute, remember to mark the attribute private*
 
 #### In class inheritance declaration
@@ -77,9 +91,17 @@ class RaceCar: protected Car {...};
 Cars have evolved, and hybrid cars, for instance, have a gas motor in addition to an electric one. Our inheritance hierarchy for class Car would prove to be a bottleneck in being compatible to such developments.*
 
 ### Initialization and destruction
+Even though access to the constructors and destructor of the base class is not inherited, they are automatically called by the constructors and destructor of the derived class.
+
 - Base class objects are instantiated before the derived class so that member attributes contained in base class are ready for consumption when the derived class is instantiated and ensuring that member attributes are ready before the constructor works with them.
 - The sequence of destruction is the opposite to that of construction: first de derived class destructor is called, and then the base class destructor.
 - You can't have a derived class if the base class is not instantiated
+
+Unless otherwise specified, the constructors of a derived class calls the default constructor of its base classes (i.e., the constructor taking no arguments). Calling a different constructor of a base class is possible, using the same syntax used to initialize member variables in the initialization list:
+
+```c++
+Cat::Cat(parameters): Animal(parameters) {...};
+```
 
 ### Derived Class Overriding Base Class’s Methods
 When a class Derived implements the same functions with the same return values and signatures as in a class Base it inherits from
@@ -103,3 +125,4 @@ class Platypus: public Mammal, public Bird, public Reptile {...};
 
 ## References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
+- [Inheritance between classes](https://legacy.cplusplus.com/doc/tutorial/inheritance/)
