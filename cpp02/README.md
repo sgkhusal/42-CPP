@@ -99,6 +99,21 @@ class Sample {
 		Sample& operator=(Sample const& rhs); // = operator overload
 };
 ```
+### Shallow copy
+When you don't implement the copy constructor or the copy operator, the compiler performs a shallow copy (a binary copy): it copies only the object pointer value - that is, you end up with two objects pointing to the same place in memory. If the destructor is called for one of them, you lost the data and also will have a compilation error when the destructor is called for the last object.
+<div align="center">
+	<img width="676" alt="image" src="https://user-images.githubusercontent.com/75377067/232259973-54777b86-ff64-4423-ae6a-cc1b3cdc0394.png">
+	<h6>source: Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017</h6>
+</div>
+
+### Deep copy
+The copy constructor is invoked by the compiler every time an object of the class is copied ensuring a deep copy.
+In a deep copy the content being pointed to is copied to a newly allocated buffer: two objects don’t point to the same dynamically allocated memory address
+<div align="center">
+	<img width="697" alt="image" src="https://user-images.githubusercontent.com/75377067/232259992-5a825eb2-1196-4c4a-857d-3315674cca0f.png">
+	<h6>source: Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017</h6>
+</div>
+
 Using `const` in the copy constructor declaration and in the `=`operator overload declaration ensures that they do not modify the source object being referred to
 
 Additionally, the parameter in the copy constructor is passed by reference as a necessity: if this weren’t a reference, the copy constructor would itself invoke a copy, thus invoking itself again and so on till the system runs out of memory.
