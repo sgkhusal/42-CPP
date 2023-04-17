@@ -123,6 +123,33 @@ johnny.Animal::overridenMethod(); // invokes Animal::overridenMethod() using ins
 class Platypus: public Mammal, public Bird, public Reptile {...};
 ```
 
+### Virtual inheritance
+The Diamond Problem:
+
+<div align="center">
+    <img width="665" alt="image" src="https://user-images.githubusercontent.com/75377067/232354523-79ca8659-00d9-49c9-a4bd-450ecdec4f65.png">
+</div>
+
+The compiler will be confused because there is two paths to the `display()` function. 
+
+Also, how many instances of class A are instantiated for one instance of D? 2 in this case
+
+Solution:
+
+<div align="center">
+    <img width="774" alt="image" src="https://user-images.githubusercontent.com/75377067/232355059-f4c10315-1430-45a4-af9c-8a627ddf22f1.png">
+</div>
+
+By adding `virtual` keyword complier will decide the path automatically and only one instance of class A will be created. The keyword is only necessary where there is an ambiguous path.
+
+**Best Practice:** *If you expect a derived class to be used as a base class, it possibly is a good idea to define its relationship to the base using the keyword virtual*
+
+Virtual inheritance is about ensuring that the common base in a diamond hierarchy has only one instance
+
+## Virtual function, late binding and early binding
+*Needed for exercise 03 - See resume for CPP04*
+
 ## References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
 - [Inheritance between classes](https://legacy.cplusplus.com/doc/tutorial/inheritance/)
+- [Virtual Base Class in C++](https://www.youtube.com/watch?v=acEkaZvnjCg)
