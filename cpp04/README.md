@@ -7,7 +7,8 @@ It allows objects of different types to be treated similarly.
 
 ### Sub-typing polymorphism
 
-A polymorphic behavior that can be implemented in C++ via the inheritance hierarchy
+- A polymorphic behavior that can be implemented in C++ via the inheritance hierarchy
+- a pointer to a derived class is type-compatible with a pointer to its base class:
 
 ```c++
 class Character {};
@@ -30,7 +31,7 @@ b.overridedFunction();
 ```
 the `overridedFunction()` used will be the implementation from Character. It doesn’t care if the object sent was a Warrior, handles it as a Character, and invokes Character::overridedFunction().
 
-A similar behavior happens in this other example:
+You can see another example of such case bellow:
 
 ```c++
 class Fish {
@@ -89,12 +90,62 @@ Use of keyword virtual means that the compiler ensures that any overriding varia
 
 This is usefull when you will know the sub-type of the object only during compilation time. Example: a user will choose it's character during the game: it could be a warrior, a witch, ...
 
-This is polymorphism: treating different characters as a common type Character, yet ensuring that the right implementation of `overridingFunction()` supplied by the derived types is executed.
+- This is polymorphism: treating different characters as a common type Character, yet ensuring that the right implementation of `overridingFunction()` supplied by the derived types is executed.
+- A class that declares or inherits a virtual function is called a polymorphic class.
 
+### Virtual Destructor
+
+```c++
+class Character {};
+class Warrior: public Character {};
+
+int main(void){
+    Character*  b = new Warrior();
+    ...
+    delete b
+}
+```
+```
+// output:
+Constructed Character
+Constructed Warrior
+...
+Destroyed Character
+```
+The destructor also needs to be set as virtual in the base class. Otherwise we end up not destroying the derived class when we work with pointers as in the example above. 
+
+The virtual destructor on the base class will tell the compiler that it needs to call the destructor of the derived class (which calls the destructor of the base class afterwards)
+
+**BEST PRACTICE:** *Always declare the base class destructor as virtual*
 
 ## Abstract classes
+
+- Classes that can only be used as base classes
+- Have at least a virtual member function without definition (known as pure virtual function)
+- The syntax of a function without definition: replace their definition by `= 0`
+
+```c++
+// Abstract class ACharacter
+class ACharacter {
+    private:
+        std::sting      _name;
+    public:
+        // a pure virtual function
+        virtual void    sayHello(std::string const& target) = 0;
+}
+```
+
+Since it don't implements some methods, it can't be instanciated:
+
+```c++
+ACharacter* a = new Warrior(); // A Warrior is a Character
+ACharacter* b = new ACharacter(); // results in compilation error
+```
+
+An abstract base class can be used to create pointers to it, and take advantage of all its polymorphic abilities
 
 ## Interfaces
 
 ## References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
+- [Polymorphism](https://legacy.cplusplus.com/doc/tutorial/polymorphism/)
