@@ -144,7 +144,10 @@ ACharacter* b = new ACharacter(); // results in compilation error
 
 An abstract base class can be used to create pointers to it, and take advantage of all its polymorphic abilities
 
-## Interfaces
+## Interface
+- Doesn't implement methods (it has only pure virtual functions)
+- Doesn't have attributes
+- It is a way of establishing contracts with derived classes, indicating the behaviors needed to be implemented by them
 
 ## References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
