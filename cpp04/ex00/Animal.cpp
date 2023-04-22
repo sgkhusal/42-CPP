@@ -12,33 +12,54 @@
 
 #include "Animal.hpp"
 
-Animal::Animal(void){
-	this->_type = "animal";
-	std::cout << BLUE << "Animal class constructor called" << RESET << std::endl;
+Animal::Animal(void): _type("Undefined") {
+	genericDescriptionPrint("constructor", BLUE);
+}
+
+Animal::Animal(std::string type): _type(type) {
+	genericDescriptionPrint("constructor", BLUE);
 }
 
 Animal::~Animal(void){
-	std::cout << BLUE << "Animal class destructor called" << RESET << std::endl;
+	genericDescriptionPrint("destructor", BLUE);
 }
 
 Animal::Animal(Animal const& animal){
 	*this = animal;
-	std::cout << GREY << "Animal copy constructor called" << RESET << std::endl;
+	genericDescriptionPrint("copy constructor", GREY);
 }
 
 Animal& Animal::operator=(Animal const& animal){
 	if (this != &animal) {
 		this->_type = animal._type;
+		std::cout << "Entramos aqui. Type: " << this->_type << std::endl;
 	}
-	std::cout << GREY << "Animal operator= called" << RESET << std::endl;
+	genericDescriptionPrint("operator=", GREY);
 	return (*this);
 }
 
-std::string	Animal::getType(void){
+std::string	Animal::getType(void) const {
 	return this->_type;
 }
 
 // precisa implementar a makeSound nesses exercícios para a Animal?
-void	Animal::makeSound(void){
+void	Animal::makeSound(void) const {
 	std::cout << ORANGE << "Some undefined strange noise" << RESET << std::endl;
+}
+
+void	Animal::genericDescriptionPrint(
+	std::string description,
+	std::string color
+	) {
+	std::cout << color << "Animal class " << description
+			<< " called for type " << this->getType() << RESET << std::endl;
+}
+
+void	Animal::specificDescriptionPrint(
+	std::string class_name,
+	std::string description,
+	std::string color
+	) {
+	std::cout << color << class_name << " class " << description
+			<< " called" << RESET << std::endl;
 }

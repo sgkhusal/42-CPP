@@ -12,28 +12,27 @@
 
 #include "Dog.hpp"
 
-Dog::Dog(void): Animal(){
-	this->_type = "Dog";
-	std::cout << GREEN << "Dog class constructor called" << RESET << std::endl;
+Dog::Dog(void): Animal("Dog"){
+	specificDescriptionPrint("Dog", "constructor", YELLOW);
 }
 
 Dog::~Dog(void){
-	std::cout << GREEN << "Dog class destructor called" << RESET << std::endl;
+	specificDescriptionPrint("Dog", "destructor", YELLOW);
 }
 
 Dog::Dog(Dog const& dog){
+	specificDescriptionPrint("Dog", "copy constructor", GREY);
 	*this = dog;
-	std::cout << GREY << "Dog copy constructor called" << RESET << std::endl;
 }
 
 Dog& Dog::operator=(Dog const& dog){
+	specificDescriptionPrint("Dog", "operator=", GREY);
 	if (this != &dog) {
 		this->_type = dog._type;
 	}
-	std::cout << GREY << "Dog operator= called" << RESET << std::endl;
 	return (*this);
 }
 
-void	Dog::makeSound(void){
-	std::cout << ORANGE << "Miaw miaw" << RESET << std::endl;
+void	Dog::makeSound(void) const{
+	std::cout << ORANGE << "Woof woof" << RESET << std::endl;
 }

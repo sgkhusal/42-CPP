@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANINAL_H
+#ifndef ANIMAL_H
 # define ANIMAL_H
 
 # include <string>
@@ -29,17 +29,26 @@
 class Animal{
 	public:
 		Animal(void);
-		~Animal(void);
+		Animal(std::string type);
 		Animal(Animal const& animal);
+		virtual ~Animal(void);
 		Animal& operator=(Animal const& animal);
 
-		std::string		getType(void);
-		// void			setType(void);
-		virtual void	makeSound(void);
+		std::string		getType(void) const;
+		virtual void	makeSound(void) const;
 
 	protected:
 		std::string _type;
-
+		void	specificDescriptionPrint(
+					std::string class_name,
+					std::string description,
+					std::string color
+		);
+	private:
+		void	genericDescriptionPrint(
+					std::string description,
+					std::string color
+		);
 };
 
 #endif

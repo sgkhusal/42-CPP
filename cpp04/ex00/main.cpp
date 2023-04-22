@@ -16,14 +16,40 @@
 
 int main()
 {
+	std::cout << std::endl
+			<< "-------------------------- PDF tests --------------------------"
+			<< std::endl;
 	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
+	const Animal* dog = new Dog();
+	const Animal* cat = new Cat();
+
+	std::cout << meta->getType() << " " << std::endl;
 	meta->makeSound();
-	...
+	std::cout << dog->getType() << " " << std::endl;
+	dog->makeSound();
+	std::cout << cat->getType() << " " << std::endl;
+	cat->makeSound();
+
+	delete meta;
+	delete dog;
+	delete cat;
+
+	std::cout << std::endl
+			<< "--------------------- Wrong classes tests ---------------------"
+			<< std::endl;
+
+	
+	std::cout << std::endl
+			<< "----------------------- Testing copies -----------------------"
+			<< std::endl;
+	Dog dog2;
+	Dog dog_copy(dog2);
+	// Dog dog3(*dog);
+	Cat cat2;
+	Cat cat3 = cat2;
+	// cat3 = *cat;
+	Animal animal1 = *dog;
+	Animal animal2(*cat);
+
 	return 0;
 }
