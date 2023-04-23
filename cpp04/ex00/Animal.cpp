@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/20 11:15:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:24:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,14 @@ Animal::~Animal(void){
 
 Animal::Animal(Animal const& animal){
 	*this = animal;
-	genericDescriptionPrint("copy constructor", GREY);
+	genericDescriptionPrint("copy constructor", BLUE);
 }
 
 Animal& Animal::operator=(Animal const& animal){
 	if (this != &animal) {
 		this->_type = animal._type;
-		std::cout << "Entramos aqui. Type: " << this->_type << std::endl;
 	}
-	genericDescriptionPrint("operator=", GREY);
+	// genericDescriptionPrint("operator=", GREY);
 	return (*this);
 }
 
@@ -42,7 +41,6 @@ std::string	Animal::getType(void) const {
 	return this->_type;
 }
 
-// precisa implementar a makeSound nesses exercícios para a Animal?
 void	Animal::makeSound(void) const {
 	std::cout << ORANGE << "Some undefined strange noise" << RESET << std::endl;
 }

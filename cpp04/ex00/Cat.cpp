@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/20 11:50:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:12:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ Cat::~Cat(void){
 }
 
 Cat::Cat(Cat const& cat){
-	specificDescriptionPrint("Cat", "copy constructor", GREY);
+	specificDescriptionPrint("Cat", "copy constructor", GREEN);
 	*this = cat;
 }
 
 Cat& Cat::operator=(Cat const& cat){
-	specificDescriptionPrint("Cat", "operator=", GREY);
+	// specificDescriptionPrint("Cat", "operator=", GREY);
 	if (this != &cat) {
 		this->_type = cat._type;
 	}

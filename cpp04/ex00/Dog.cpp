@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/20 11:51:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:12:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ Dog::~Dog(void){
 }
 
 Dog::Dog(Dog const& dog){
-	specificDescriptionPrint("Dog", "copy constructor", GREY);
+	specificDescriptionPrint("Dog", "copy constructor", YELLOW);
 	*this = dog;
 }
 
 Dog& Dog::operator=(Dog const& dog){
-	specificDescriptionPrint("Dog", "operator=", GREY);
+	// specificDescriptionPrint("Dog", "operator=", GREY);
 	if (this != &dog) {
 		this->_type = dog._type;
 	}
