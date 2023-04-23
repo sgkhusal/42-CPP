@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 11:11:17 by sguilher          #+#    #+#              #
-#    Updated: 2023/04/20 11:17:46 by sguilher         ###   ########.fr        #
+#    Updated: 2023/04/23 18:44:02 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME =		tests
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
-SRC =		main.cpp Animal.cpp Dog.cpp Cat.cpp
-HEADERS =	Animal.hpp Dog.hpp Cat.hpp
+SRC =		main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+HEADERS =	Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
 INCLUDE =	-I ./
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)

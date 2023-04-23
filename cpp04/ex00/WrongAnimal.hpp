@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 11:11:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:29:18 by sguilher         ###   ########.fr       */
+/*   Created: 2023/04/22 17:50:03 by sguilher          #+#    #+#             */
+/*   Updated: 2023/04/23 18:45:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_H
-# define ANIMAL_H
+#ifndef WRONGANIMAL_H
+# define WRONGANIMAL_H
 
 # include <string>
 # include <iostream>
 
 # define ORANGE	"\033[0;38;5;166m"
-# define BLUE	"\033[38;5;75m"
-# define GREEN	"\033[1;32m"
-# define YELLOW	"\033[1;33m"
+# define CYAN "\033[0;36m"
+# define LIGHT_PURPLE "\033[1;35m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
 
-class Animal{
+class WrongAnimal{
 	public:
-		Animal(void);
-		Animal(std::string type);
-		Animal(Animal const& animal);
-		virtual ~Animal(void);
-		Animal& operator=(Animal const& animal);
+		WrongAnimal(void);
+		WrongAnimal(std::string type);
+		WrongAnimal(WrongAnimal const& wrongAnimal);
+		virtual ~WrongAnimal(void);
+		WrongAnimal& operator=(WrongAnimal const& wrongAnimal);
 
 		std::string		getType(void) const;
-		virtual void	makeSound(void) const;
+		void			makeSound(void) const;
 
 	protected:
 		std::string _type;
