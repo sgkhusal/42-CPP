@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 22:42:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 23:26:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,43 @@
 
 int main()
 {
-	int i;
-	int n = 10;
-	Animal* animals[n];
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
 
-	for (i = 0; i < n / 2; i++)
-		animals[i] = new Dog();
-	for (i = 5; i < n; i++)
-		animals[i] = new Cat();
+	delete j;//should not create a leak
+	delete i;
 
 	std::cout << std::endl
-			<< "----------------------- Checking animals -----------------------"
+			<< "---------------------- Array of animals ----------------------"
 			<< std::endl;
-	for (i = 0; i < n; i++){
+
+	int n = 10;
+	int m = n / 2;
+	Animal* animals[n];
+
+	for (int i = 0; i < m; i++)
+		animals[i] = new Dog();
+	for (int i = m; i < n; i++) {
+		animals[i] = new Cat();
+	}
+
+	std::cout << std::endl
+			<< "---------------------- Checking animals ----------------------"
+			<< std::endl;
+	for (int i = 0; i < n; i++){
 		std::cout << animals[i]->getType() << ": ";
 		animals[i]->makeSound();
 	}
 	// animals[0]->getBrain()->ideas[0]; an instance of Animal doesn't have a brain
 
 	std::cout << std::endl
-			<< "----------------------- Deleting animals -----------------------"
+			<< "---------------------- Deleting animals ----------------------"
 			<< std::endl;
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		delete animals[i];
 
 	std::cout << std::endl
-			<< "----------------------- Other tests -----------------------"
+			<< "------------------------- Other tests -------------------------"
 			<< std::endl;
 	Cat* cat = new Cat;
 	std::cout << "1----------------------------------" << std::endl;
