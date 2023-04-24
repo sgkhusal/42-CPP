@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:18:26 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 20:31:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:48:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ class Cat: public Animal{
 		Cat& operator=(Cat const& cat);
 
 		void	makeSound(void) const;
+		Brain*	getBrain(void) const;
 	private:
-		Brain* brain; // = NULL;
+		Brain* _brain;
 };
 
 #endif

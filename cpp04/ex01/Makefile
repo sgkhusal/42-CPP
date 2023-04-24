@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 11:11:17 by sguilher          #+#    #+#              #
-#    Updated: 2023/04/23 20:58:25 by sguilher         ###   ########.fr        #
+#    Updated: 2023/04/23 21:11:39 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		tests
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g #-fsanitize=address
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
 SRC =		main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp
 HEADERS =	Animal.hpp Dog.hpp Cat.hpp Brain.hpp

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:32:07 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 20:43:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 22:14:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Brain::~Brain(void) {
 }
 
 Brain& Brain::operator=(Brain const& brain) {
+    brainDescriptionPrint("operator=");
     if (this != &brain) {
         for (int i = 0; i < 100; i++)
             this->ideas[i] = brain.ideas[i];

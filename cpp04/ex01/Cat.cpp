@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 20:43:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 22:32:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,37 @@
 
 Cat::Cat(void): Animal("Cat"){
 	specificDescriptionPrint("Cat", "constructor", GREEN);
-	this->brain = new Brain();
+	this->_brain = new Brain();
+	for (int i = 0; i < 100; i++)
+		this->_brain->ideas[i] = "Cats are gods";
 }
 
 Cat::~Cat(void){
 	specificDescriptionPrint("Cat", "destructor", GREEN);
-	delete this->brain;
+	delete this->_brain;
 }
 
 Cat::Cat(Cat const& cat){
 	specificDescriptionPrint("Cat", "copy constructor", GREEN);
+	this->_brain = new Brain();
 	*this = cat;
 }
 
 Cat& Cat::operator=(Cat const& cat){
-	// specificDescriptionPrint("Cat", "operator=", GREY);
-	if (!this->brain)
-		this->brain = new Brain(); ////////////
+	specificDescriptionPrint("Cat", "operator=", GREY);
+	// if (!this->_brain)
+	// 	this->_brain = new Brain();
 	if (this != &cat) {
 		this->_type = cat._type;
-		// *(this->brain) = *(cat.brain);
-		for(int i = 0; i < 100; i++)
-			this->brain[i] = cat.brain[i];
+		*(this->_brain) = *(cat.getBrain());
 	}
 	return (*this);
 }
 
 void	Cat::makeSound(void) const {
 	std::cout << ORANGE << "Miaw miaw" << RESET << std::endl;
+}
+
+Brain*	Cat::getBrain(void) const {
+	return this->_brain;
 }

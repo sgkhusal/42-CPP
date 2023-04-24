@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:24:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 22:17:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ Animal::Animal(Animal const& animal){
 }
 
 Animal& Animal::operator=(Animal const& animal){
+	genericDescriptionPrint("operator=", GREY);
 	if (this != &animal) {
 		this->_type = animal._type;
 	}
-	// genericDescriptionPrint("operator=", GREY);
 	return (*this);
 }
 
