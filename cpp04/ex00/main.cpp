@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:47:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:14:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,12 @@ int main()
 	std::cout << std::endl
 			<< "--------------------- Wrong classes tests ---------------------"
 			<< std::endl;
-	const WrongAnimal* k = new WrongCat();
+	const WrongCat* k = new WrongCat();
 	std::cout << k->getType() << ":" << std::endl;
-	k->makeSound(); //will output the wrong cat sound!
+	k->makeSound();
+	const WrongAnimal* l = new WrongCat();
+	std::cout << l->getType() << ":" << std::endl;
+	l->makeSound(); //will output the wrong cat sound!
 
 	std::cout << std::endl
 			<< "----------------------- Testing copies -----------------------"
@@ -97,6 +100,7 @@ int main()
 	delete j;
 	delete i;
 	delete k;
+	delete l;
 
 	delete dog2;
 	delete cat2;
