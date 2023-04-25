@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 23:26:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 04:59:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ int main()
 {
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
+	Animal animal;
 
-	delete j;//should not create a leak
+	delete j; //should not create a leak
 	delete i;
+
+	// compilation error: an instance of Animal doesn't have a brain
+	// i->getBrain()->ideas[0];
 
 	std::cout << std::endl
 			<< "---------------------- Array of animals ----------------------"
@@ -43,7 +47,6 @@ int main()
 		std::cout << animals[i]->getType() << ": ";
 		animals[i]->makeSound();
 	}
-	// animals[0]->getBrain()->ideas[0]; an instance of Animal doesn't have a brain
 
 	std::cout << std::endl
 			<< "---------------------- Deleting animals ----------------------"

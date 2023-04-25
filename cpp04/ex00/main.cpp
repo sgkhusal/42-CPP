@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 20:14:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/25 02:10:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int main()
 	// Dog dog3(*j); // doesn't work because not every animal is a dog
 
 	Cat cat;
-	Cat cat_copy = cat;
+	Cat cat_copy;
+	cat_copy = cat;
 	std::cout << cat_copy.getType() << ":" << std::endl;
 	cat_copy.makeSound();
 
@@ -68,6 +69,11 @@ int main()
 	cat2_copy.makeSound();
 	// Cat cat3 = *i; // doesn't work because not every animal is a cat
 
+	std::cout << std::endl
+			<< "----------------------- Other tests -----------------------"
+			<< std::endl;
+
+	// slice
 	Animal animal1 = *j;
 	std::cout << animal1.getType() << ":" << std::endl;
 	animal1.makeSound();

@@ -20,13 +20,13 @@ Cat::~Cat(void){
 	specificDescriptionPrint("Cat", "destructor", GREEN);
 }
 
-Cat::Cat(Cat const& cat){
+Cat::Cat(Cat const& cat): Animal("Cat") {
 	specificDescriptionPrint("Cat", "copy constructor", GREEN);
 	*this = cat;
 }
 
 Cat& Cat::operator=(Cat const& cat){
-	// specificDescriptionPrint("Cat", "operator=", GREY);
+	specificDescriptionPrint("Cat", "operator=", GREY);
 	if (this != &cat) {
 		this->_type = cat._type;
 	}

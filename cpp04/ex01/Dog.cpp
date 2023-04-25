@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 22:16:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/25 02:44:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Dog::Dog(void): Animal("Dog"){
 	specificDescriptionPrint("Dog", "constructor", YELLOW);
 	this->_brain = new Brain();
 	for (int i = 0; i < 100; i++)
-		this->_brain->ideas[i] = "Dog is man's best friend";
+		this->_brain->ideas[i] = "Play with me";
 }
 
 Dog::~Dog(void){
@@ -24,7 +24,7 @@ Dog::~Dog(void){
 	delete this->_brain;
 }
 
-Dog::Dog(Dog const& dog){
+Dog::Dog(Dog const& dog): Animal(dog) {
 	specificDescriptionPrint("Dog", "copy constructor", YELLOW);
 	this->_brain = new Brain();
 	*this = dog;
@@ -32,8 +32,6 @@ Dog::Dog(Dog const& dog){
 
 Dog& Dog::operator=(Dog const& dog){
 	specificDescriptionPrint("Dog", "operator=", GREY);
-	// if (!this->_brain)
-	// 	this->_brain = new Brain(); ////////////
 	if (this != &dog) {
 		this->_type = dog._type;
 		*(this->_brain) = *(dog.getBrain());
