@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/25 02:33:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:47:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Dog::~Dog(void){
 	delete this->_brain;
 }
 
-Dog::Dog(Dog const& dog): Animal(dog) {
+Dog::Dog(Dog const& dog): AAnimal(dog) {
 	specificDescriptionPrint("Dog", "copy constructor", YELLOW);
 	this->_brain = new Brain();
 	*this = dog;

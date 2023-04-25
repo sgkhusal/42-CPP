@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/25 02:17:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:47:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Cat::~Cat(void){
 	delete this->_brain;
 }
 
-Cat::Cat(Cat const& cat): Animal("Cat") {
+Cat::Cat(Cat const& cat): AAnimal("Cat") {
 	specificDescriptionPrint("Cat", "copy constructor", GREEN);
 	this->_brain = new Brain();
 	*this = cat;
