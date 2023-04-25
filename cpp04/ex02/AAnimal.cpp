@@ -12,11 +12,11 @@
 
 #include "AAnimal.hpp"
 
-AAnimal::AAnimal(void): _type("Undefined") {
+AAnimal::AAnimal(void): type("Undefined") {
 	genericDescriptionPrint("constructor", BLUE);
 }
 
-AAnimal::AAnimal(std::string type): _type(type) {
+AAnimal::AAnimal(std::string const& type): type(type) {
 	genericDescriptionPrint("constructor", BLUE);
 }
 
@@ -32,13 +32,13 @@ AAnimal::AAnimal(AAnimal const& animal){
 AAnimal& AAnimal::operator=(AAnimal const& animal){
 	genericDescriptionPrint("operator=", GREY);
 	if (this != &animal) {
-		this->_type = animal._type;
+		this->type = animal.type;
 	}
 	return (*this);
 }
 
-std::string	AAnimal::getType(void) const {
-	return this->_type;
+std::string	const& AAnimal::getType(void) const {
+	return this->type;
 }
 
 void	AAnimal::genericDescriptionPrint(

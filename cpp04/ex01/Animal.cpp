@@ -6,17 +6,17 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 22:17:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal(void): _type("Undefined") {
+Animal::Animal(void): type("Undefined") {
 	genericDescriptionPrint("constructor", BLUE);
 }
 
-Animal::Animal(std::string type): _type(type) {
+Animal::Animal(std::string const& type): type(type) {
 	genericDescriptionPrint("constructor", BLUE);
 }
 
@@ -32,13 +32,13 @@ Animal::Animal(Animal const& animal){
 Animal& Animal::operator=(Animal const& animal){
 	genericDescriptionPrint("operator=", GREY);
 	if (this != &animal) {
-		this->_type = animal._type;
+		this->type = animal.type;
 	}
 	return (*this);
 }
 
-std::string	Animal::getType(void) const {
-	return this->_type;
+std::string	const& Animal::getType(void) const {
+	return this->type;
 }
 
 void	Animal::makeSound(void) const {

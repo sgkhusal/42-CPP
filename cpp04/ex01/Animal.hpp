@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:29:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@
 class Animal{
 	public:
 		Animal(void);
-		Animal(std::string type);
+		Animal(std::string const& type);
 		Animal(Animal const& animal);
 		virtual ~Animal(void);
 		Animal& operator=(Animal const& animal);
 
-		std::string		getType(void) const;
-		virtual void	makeSound(void) const;
+		std::string	const&	getType(void) const;
+		virtual void		makeSound(void) const;
 
 	protected:
-		std::string _type;
+		std::string type;
 		void	specificDescriptionPrint(
 					std::string class_name,
 					std::string description,

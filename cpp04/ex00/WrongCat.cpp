@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:39:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ WrongCat::WrongCat(WrongCat const& wrongCat){
 WrongCat& WrongCat::operator=(WrongCat const& wrongCat){
 	// specificDescriptionPrint("WrongCat", "operator=", GREY);
 	if (this != &wrongCat) {
-		this->_type = wrongCat._type;
+		this->type = wrongCat.type;
 	}
 	return (*this);
 }

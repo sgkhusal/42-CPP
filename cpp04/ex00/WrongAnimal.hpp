@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 17:50:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:45:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@
 class WrongAnimal{
 	public:
 		WrongAnimal(void);
-		WrongAnimal(std::string type);
+		WrongAnimal(std::string const& type);
 		WrongAnimal(WrongAnimal const& wrongAnimal);
 		virtual ~WrongAnimal(void);
 		WrongAnimal& operator=(WrongAnimal const& wrongAnimal);
 
-		std::string		getType(void) const;
-		void			makeSound(void) const;
+		std::string	const&	getType(void) const;
+		void				makeSound(void) const;
 
 	protected:
-		std::string _type;
+		std::string type;
 		void	specificDescriptionPrint(
 					std::string class_name,
 					std::string description,

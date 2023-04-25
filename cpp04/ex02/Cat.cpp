@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 21:47:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Cat::Cat(Cat const& cat): AAnimal("Cat") {
 Cat& Cat::operator=(Cat const& cat){
 	specificDescriptionPrint("Cat", "operator=", GREY);
 	if (this != &cat) {
-		this->_type = cat._type;
+		this->type = cat.type;
 		*(this->_brain) = *(cat.getBrain());
 	}
 	return (*this);

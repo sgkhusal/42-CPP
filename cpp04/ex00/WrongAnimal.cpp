@@ -6,17 +6,17 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/23 18:35:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(void): _type("Undefined") {
+WrongAnimal::WrongAnimal(void): type("Undefined") {
 	genericDescriptionPrint("constructor", CYAN);
 }
 
-WrongAnimal::WrongAnimal(std::string type): _type(type) {
+WrongAnimal::WrongAnimal(std::string const& type): type(type) {
 	genericDescriptionPrint("constructor", CYAN);
 }
 
@@ -31,14 +31,14 @@ WrongAnimal::WrongAnimal(WrongAnimal const& wrongAnimal){
 
 WrongAnimal& WrongAnimal::operator=(WrongAnimal const& wrongAnimal){
 	if (this != &wrongAnimal) {
-		this->_type = wrongAnimal._type;
+		this->type = wrongAnimal.type;
 	}
 	// genericDescriptionPrint("operator=", GREY);
 	return (*this);
 }
 
-std::string	WrongAnimal::getType(void) const {
-	return this->_type;
+std::string	const& WrongAnimal::getType(void) const {
+	return this->type;
 }
 
 void	WrongAnimal::makeSound(void) const {
