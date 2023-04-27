@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/26 23:48:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:15:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,16 @@ Ice::Ice(Ice const& ice) {
 Ice::~Ice(void) {}
 
 Ice& Ice::operator=(Ice const& ice) { /////////////
-	// if (this != &Ice) {
-	// 	this->type = Ice.type;
-	// }
+	(void)ice;
 	return (*this);
 }
 
-AMateria* Ice::clone() const {
+AMateria* Ice::clone(void) const {
     AMateria* ice = new Ice();
     return ice;
 }
 
 void Ice::use(ICharacter& target) {
-    std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
+    std::cout << "* shoots an ice bolt at "<< target.getName() << " *"
+            << std::endl;
 }

@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:20 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/26 23:34:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:42:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 
-AMateria::AMateria(void): type("Undefined") {}
+AMateria::AMateria(void): type("undefined") {}
 
 AMateria::AMateria(std::string const & type): type(type) {}
 
@@ -23,12 +23,7 @@ AMateria::AMateria(AMateria const& materia){
 AMateria::~AMateria(void){}
 
 AMateria& AMateria::operator=(AMateria const& materia){
-	if (this != &materia) {
-		// if (materia.type == "cure") ////////////////////////////////
-		// 	this = new Cure;
-		this->type = materia.type;
-		// como setar as ins
-	}
+	(void)materia;
 	return (*this);
 }
 
@@ -36,7 +31,6 @@ std::string	const & AMateria::getType(void) const {
 	return this->type;
 }
 
-/////////////////
 void AMateria::use(ICharacter& target) {
 	std::cout << "Do something with " << target.getName() << std::endl;
 }

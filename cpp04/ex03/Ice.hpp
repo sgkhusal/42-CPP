@@ -6,15 +6,16 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:25:07 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:37:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:52:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICE_H
 # define ICE_H
 
-# include "AMateria.hpp"
 # include <iostream>
+# include "AMateria.hpp"
+# include "ICharacter.hpp"
 
 class Ice: public AMateria {
     public:
@@ -23,7 +24,7 @@ class Ice: public AMateria {
 		~Ice(void);
 		Ice& operator=(Ice const& ice);
 
-        AMateria* clone() const;
+        AMateria* clone(void) const;
         void use(ICharacter& target);
 };
 
