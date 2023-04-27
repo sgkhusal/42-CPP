@@ -6,21 +6,42 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 11:56:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:14:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "AMateria.hpp"
-// #include "Cure.hpp"
-// #include "Ice.hpp"
+#include "AMateria.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "ICharacter.hpp"
+#include "Character.hpp"
+#include "IMateriaSource.hpp"
+#include "MateriaSource.hpp"
 #include "tests.hpp"
 
 
-void	pdf_test(void) {
+void	pdfTest(void) {
 	testDescription("---------------------- PDF tests ----------------------");
+
+	IMateriaSource* src = new MateriaSource();
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
+	tmp = src->createMateria("ice");
+	me->equip(tmp);
+	tmp = src->createMateria("cure");
+	me->equip(tmp);
+	ICharacter* bob = new Character("bob");
+	me->use(0, *bob);
+	me->use(1, *bob);
+	
+	delete bob;
+	delete me;
+	delete src;
 }
 
-// void	materia_tests(void) {
+// void	materiaTests(void) {
 // 	testDescription("---------------------- Amateria tests ----------------------");
 	
 // 	AMateria*	cure = new Cure();
@@ -47,9 +68,21 @@ void	pdf_test(void) {
 // 	delete clone2;
 // }
 
+void characterTests(void) {
+	testDescription("---------------------- ICharacter tests ----------------------");
+	ICharacter* vader = new Character("Darth Vader");
+	ICharacter* i = new Character();
+
+	std::cout << BLUE << "Name: " << GREY << vader->getName() << std::endl;
+	std::cout << BLUE << "Name: " << GREY << i->getName() << std::endl;
+}
+
+void materiaSourceTests(void) {
+	
+}
 
 int	main(void) {
-	// materia_tests();
+	// materiaTests();
 	std::cout << "test" << std::endl;
 	return 0;
 }
