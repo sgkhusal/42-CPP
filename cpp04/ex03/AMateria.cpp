@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:20 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:35:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/26 23:34:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ AMateria::~AMateria(void){}
 
 AMateria& AMateria::operator=(AMateria const& materia){
 	if (this != &materia) {
+		// if (materia.type == "cure") ////////////////////////////////
+		// 	this = new Cure;
 		this->type = materia.type;
+		// como setar as ins
 	}
 	return (*this);
 }
@@ -35,5 +38,5 @@ std::string	const & AMateria::getType(void) const {
 
 /////////////////
 void AMateria::use(ICharacter& target) {
-
+	std::cout << "Do something with " << target.getName() << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:47:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/26 23:48:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 Ice::Ice(void): AMateria("ice") {}
 
-Ice::Ice(Ice const& ice){
+Ice::Ice(Ice const& ice) {
 	*this = ice;
 }
 
-Ice::~Ice(void){}
+Ice::~Ice(void) {}
 
-Ice& Ice::operator=(Ice const& ice){ /////////////
+Ice& Ice::operator=(Ice const& ice) { /////////////
 	// if (this != &Ice) {
 	// 	this->type = Ice.type;
 	// }

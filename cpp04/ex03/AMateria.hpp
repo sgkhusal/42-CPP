@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:10:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:35:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/26 23:23:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define AMATERIA_H
 
 # include <string>
+# include <iostream>
 # include "ICharacter.hpp"
 
 class AMateria

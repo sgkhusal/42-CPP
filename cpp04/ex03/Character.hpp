@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:22:45 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:43:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/26 22:57:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include "ICharacter.hpp"
 # include <string>
+# include <iostream>
 
 class Character: public ICharacter {
     public:
         Character(void);
+        Character(std::string const& name);
         Character(Character const& character);
 		~Character(void);
 		Character& operator=(Character const& character);
@@ -28,8 +30,11 @@ class Character: public ICharacter {
         void unequip(int idx);
         void use(int idx, ICharacter& target);
 
+        AMateria* inventory[4];
+
     private:
         std::string _name;
+        static std::string _charactersSample[30];
 };
 
 #endif

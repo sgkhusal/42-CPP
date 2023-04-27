@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:05 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:47:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/26 23:47:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 Cure::Cure(void): AMateria("cure") {}
 
-Cure::Cure(Cure const& cure){
+Cure::Cure(Cure const& cure) {
 	*this = cure;
 }
 
-Cure::~Cure(void){}
+Cure::~Cure(void) {}
 
-Cure& Cure::operator=(Cure const& cure){ /////////////
+Cure& Cure::operator=(Cure const& cure) { /////////////
 	// if (this != &cure) {
 	// 	this->type = cure.type;
 	// }
