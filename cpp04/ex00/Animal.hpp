@@ -6,12 +6,12 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:11:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_H
-# define ANIMAL_H
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 # include <string>
 # include <iostream>

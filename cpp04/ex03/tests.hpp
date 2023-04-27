@@ -6,12 +6,12 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:52:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 11:22:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-# define GENERAL_H
+#ifndef GENERAL_HPP
+# define GENERAL_HPP
 
 #include <iostream>
 #include <string>

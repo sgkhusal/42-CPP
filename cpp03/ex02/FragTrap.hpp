@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:13:29 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:15:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_H
-# define FRAGTRAP_H
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
 
 # include "ClapTrap.hpp"
 
@@ -19,7 +19,7 @@
 # include <iostream>
 # include <sstream>
 
-# define FRAG_INIT_HP	100
+# define FRAG_INIT_HPPP	100
 # define FRAG_INIT_EP	100
 # define FRAG_INIT_AD	30
 

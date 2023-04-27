@@ -6,14 +6,14 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:18:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 12:00:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:00:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICHARACTER_H
-# define ICHARACTER_H
+#ifndef ICHARACTER_HPP
+# define ICHARACTER_HPP
 
-# include "AMateria.hpp"
+// # include "AMateria.hpp"
 
 class AMateria; ////////////////////////////
 

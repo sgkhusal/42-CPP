@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Sample2.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 20:42:02 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/07 22:00:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE2_CLASS_HPP
-# define SAMPLE2_CLASS_HPP
+#ifndef SAMPLE2_CLASS_HPPPP
+# define SAMPLE2_CLASS_HPPPP
 
 class	Sample2
 {

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Sample5.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 17:19:46 by sguilher          #+#    #+#             */
-/*   Updated: 2022/12/10 17:57:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SAMPLE5_CLASS_H
-# define SAMPLE5_CLASS_H
+#ifndef SAMPLE5_CLASS_HPP
+# define SAMPLE5_CLASS_HPP
 
 class	Sample5
 {

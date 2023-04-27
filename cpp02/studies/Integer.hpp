@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Integer.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 12:44:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/17 00:27:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTEGER_H
-# define INTEGER_H
+#ifndef INTEGER_HPP
+# define INTEGER_HPP
 
 #include <iostream>
 

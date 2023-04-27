@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 19:09:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:38:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ FragTrap::FragTrap(void): ClapTrap() {
 
 	index << ++FragTrap::_droidNb;
 	this->setName("Droid " + index.str());
-	this->setHitPoints(FRAG_INIT_HP);
+	this->setHitPoints(FRAG_INIT_HPPP);
 	this->setEnergyPoints(FRAG_INIT_EP);
 	this->setAttackDamage(FRAG_INIT_AD);
 	this->setType(FRAG);
@@ -27,7 +27,7 @@ FragTrap::FragTrap(void): ClapTrap() {
 }
 
 FragTrap::FragTrap(std::string const& name): ClapTrap(name) {
-	this->setHitPoints(FRAG_INIT_HP);
+	this->setHitPoints(FRAG_INIT_HPPP);
 	this->setEnergyPoints(FRAG_INIT_EP);
 	this->setAttackDamage(FRAG_INIT_AD);
 	this->setType(FRAG);
@@ -47,7 +47,7 @@ FragTrap::~FragTrap(void) {
 FragTrap& FragTrap::operator=(FragTrap const& ft) {
 	if (this != &ft) {
 		this->_name = ft.getName();
-		this->_hitPoints = ft.getHitPoints();
+		this->_HPPitPoints = ft.getHitPoints();
 		this->_energyPoints = ft.getEnergyPoints();
 		this->_attackDamage = ft.getAttackDamage();
 		this->_type = ft.getType();

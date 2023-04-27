@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:44:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:16:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_H
-# define CLAPTRAP_H
+#ifndef CLAPTRAP_HPP
+# define CLAPTRAP_HPP
 
 # include <string>
 # include <iostream>
@@ -26,7 +26,7 @@
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
 
-# define CLAP_INIT_HP	10
+# define CLAP_INIT_HPPP	10
 # define CLAP_INIT_EP	10
 # define CLAP_INIT_AD	0
 
@@ -55,7 +55,7 @@ class ClapTrap {
 
 	protected:
 		std::string _name;
-		int         _hitPoints;
+		int         _HPPitPoints;
 		int         _energyPoints;
 		int         _attackDamage;
 		void		attack_type(std::string const& target,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:23:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 10:08:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ ScavTrap::ScavTrap(void): ClapTrap() {
 
 	index << ++ScavTrap::_sentinelNb;
 	this->setName("Sentinel " + index.str());
-	this->setHitPoints(SCAV_INIT_HP);
+	this->setHitPoints(SCAV_INIT_HPPP);
 	this->setEnergyPoints(SCAV_INIT_EP);
 	this->setAttackDamage(SCAV_INIT_AD);
 	_constructorMsg("Default");
 }
 
 ScavTrap::ScavTrap(std::string const& name): ClapTrap(name) {
-	this->setHitPoints(SCAV_INIT_HP);
+	this->setHitPoints(SCAV_INIT_HPPP);
 	this->setEnergyPoints(SCAV_INIT_EP);
 	this->setAttackDamage(SCAV_INIT_AD);
 	_constructorMsg("Named");
@@ -45,7 +45,7 @@ ScavTrap::~ScavTrap(void) {
 ScavTrap& ScavTrap::operator=(ScavTrap const& st) {
 	if (this != &st) {
 		this->_name = st.getName();
-		this->_hitPoints = st.getHitPoints();
+		this->_HPPitPoints = st.getHitPoints();
 		this->_energyPoints = st.getEnergyPoints();
 		this->_attackDamage = st.getAttackDamage();
 	}

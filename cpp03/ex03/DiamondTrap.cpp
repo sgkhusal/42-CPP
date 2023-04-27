@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 00:56:16 by sguilher          #+#    #+#             */
-/*   Updated: 2023/01/28 18:49:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ DiamondTrap::DiamondTrap(void): ScavTrap(), FragTrap() {
 	index << ++DiamondTrap::_diamondNb;
 	this->setName("Destroyer_" + index.str());
 	ClapTrap::setName(this->_name + "_clap_name");
-	this->setHitPoints(FRAG_INIT_HP);
+	this->setHitPoints(FRAG_INIT_HPPP);
 	this->setEnergyPoints(SCAV_INIT_EP);
 	this->setAttackDamage(FRAG_INIT_AD);
 	this->setType(DIAMOND);
@@ -29,7 +29,7 @@ DiamondTrap::DiamondTrap(void): ScavTrap(), FragTrap() {
 
 DiamondTrap::DiamondTrap(std::string const& name): ScavTrap(), FragTrap(), _name(name) {
 	ClapTrap::_name = name + "_clap_name";
-	FragTrap::_hitPoints = FRAG_INIT_HP;
+	FragTrap::_HPPitPoints = FRAG_INIT_HPPP;
 	ScavTrap::_energyPoints = SCAV_INIT_EP;
 	FragTrap::_attackDamage = FRAG_INIT_AD;
 	this->setType(DIAMOND);
@@ -50,7 +50,7 @@ DiamondTrap& DiamondTrap::operator=(DiamondTrap const& d) {
 	if (this != &d) {
 		this->_name = d.getName();
 		ClapTrap::_name = d.ClapTrap::getName();
-		this->_hitPoints = d.getHitPoints();
+		this->_HPPitPoints = d.getHitPoints();
 		this->_energyPoints = d.getEnergyPoints();
 		this->_attackDamage = d.getAttackDamage();
 		this->_type = d.getType();
