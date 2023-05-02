@@ -18,11 +18,11 @@ class Warrior: public Character {};
 int main(void){
 
     Warrior*    a = new Warrior();
-    
+
     // A Character* can point to a 'Character' or 'Warrior'
     // i.e. anything that 'is-a' Character
     Character*  b = new Warrior(); // ok: Warrior is a Character
-    
+
     // not ok: Warrior*    c = new Character();
     // A Warrior is a Character, but not all Character is necessarily a Warrior
 }
@@ -34,7 +34,7 @@ If Warrior (derived class) overrides a member function from Character (base clas
 Character*  b = new Warrior();
 b.overridedFunction();
 ```
-the `overridedFunction()` used will be the implementation from Character. The compiler doesn’t care if the object sent was a Warrior, handles it as a Character, and invokes Character::overridedFunction(). Compiler doesn't care about the address pointer is holding. 
+the `overridedFunction()` used will be the implementation from Character. The compiler doesn’t care if the object sent was a Warrior, handles it as a Character, and invokes Character::overridedFunction(). Compiler doesn't care about the address pointer is holding.
 
 This is called **early binding**: it assumes the type is Character and so will invokes `overridedFunction()` from it.
 
@@ -71,7 +71,7 @@ int main()
 
     // sending Tuna as Fish
     MakeFishSwim(myDinner);
-    
+
     return 0;
 }
 ```
@@ -84,7 +84,7 @@ Fish swims!
 
 `MakeFishSwim(Fish&)` doesn’t care if the object sent was a Tuna, handles it as a Fish, and invokes `Fish::Swim()`. The same object Tuna produced the output of a Fish not indicating any specialization thereof
 
-What the user would ideally expect is that an object of type Tuna behaves like a tuna even if the method invoked is `Fish::Swim()`. 
+What the user would ideally expect is that an object of type Tuna behaves like a tuna even if the method invoked is `Fish::Swim()`.
 
 When an object of known type class Base can behave as its actual type Derived we have a polymorphic behavior that can be implemented by making `Fish::Swim()` a virtual function
 
@@ -122,7 +122,7 @@ Constructed Warrior
 ...
 Destroyed Character
 ```
-The destructor also needs to be set as virtual in the base class. Otherwise we end up not destroying the derived class when we work with pointers as in the example above. 
+The destructor also needs to be set as virtual in the base class. Otherwise we end up not destroying the derived class when we work with pointers as in the example above.
 
 The virtual destructor on the base class will tell the compiler that it needs to call the destructor of the derived class (which calls the destructor of the base class afterwards)
 
@@ -171,4 +171,5 @@ An abstract base class can be used to create pointers to it, and take advantage 
 - [Polymorphism](https://legacy.cplusplus.com/doc/tutorial/polymorphism/)
 - [Virtual Function in C++](https://www.youtube.com/watch?v=SF8HbxDbNr0)
 - [VTable & VPointers - Virtual functions, Runtime Polymorphism](https://www.youtube.com/watch?v=47ZP-0iBicI)
-- [Understanding the vtable](https://www.youtube.com/watch?v=hS7kPtVB1vI) 
+- [Understanding the vtable](https://www.youtube.com/watch?v=hS7kPtVB1vI)
+- [Circular Dependencies in C++](https://pvigier.github.io/2018/02/09/dependency-graph.html)
