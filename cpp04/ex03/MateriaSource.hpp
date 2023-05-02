@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:41:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/02 00:17:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class MateriaSource: public IMateriaSource {
         ~MateriaSource(void);
 		MateriaSource& operator=(MateriaSource const& materiaSource);
 
-        void learnMateria(AMateria*);
+        void learnMateria(AMateria* materia);
         AMateria* createMateria(std::string const & type);
 
         AMateria* storage[4];

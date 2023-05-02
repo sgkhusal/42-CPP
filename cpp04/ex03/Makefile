@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 11:42:13 by sguilher          #+#    #+#              #
-#    Updated: 2023/05/01 22:58:27 by sguilher         ###   ########.fr        #
+#    Updated: 2023/05/02 00:15:27 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,10 @@ NAME =		tests
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98
 
-SRC =		main.cpp utils.cpp AMateria.cpp Cure.cpp Ice.cpp Character.cpp
-HEADERS =	utils.hpp AMateria.hpp Cure.hpp Ice.hpp ICharacter.hpp Character.hpp
+SRC =		main.cpp utils.cpp AMateria.cpp Cure.cpp Ice.cpp Character.cpp \
+			MateriaSource.cpp
+HEADERS =	utils.hpp AMateria.hpp Cure.hpp Ice.hpp ICharacter.hpp \
+			Character.hpp IMateriaSource.hpp MateriaSource.hpp
 
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
