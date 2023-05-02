@@ -6,16 +6,16 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:22:45 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 20:55:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:34:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-# include "ICharacter.hpp"
 # include <string>
 # include <iostream>
+# include "ICharacter.hpp"
 
 class Character: public ICharacter {
     public:
@@ -30,7 +30,7 @@ class Character: public ICharacter {
         void unequip(int idx);
         void use(int idx, ICharacter& target);
 
-        AMateria* inventory[4];
+        // AMateria* inventory[4];
 
     private:
         std::string _name;

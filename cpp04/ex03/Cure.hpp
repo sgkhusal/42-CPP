@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:26:10 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 20:52:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:32:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Cure: public AMateria {
 		Cure& operator=(Cure const& cure);
 
         AMateria* clone(void) const;
-        // void use(ICharacter& target);
+        void use(ICharacter& target);
 
 };
 

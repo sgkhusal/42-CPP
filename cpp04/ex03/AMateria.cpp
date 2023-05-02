@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:20 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 20:59:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:31:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ std::string	const & AMateria::getType(void) const {
 	return this->type;
 }
 
-// void AMateria::use(ICharacter& target) {
-// 	std::cout << "Do something with " << target.getName() << std::endl;
-// }
+void AMateria::use(ICharacter& target) {
+	std::cout << "Do something with " << target.getName() << std::endl;
+}

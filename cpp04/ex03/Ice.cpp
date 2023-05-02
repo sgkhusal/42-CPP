@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 20:51:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:32:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ AMateria* Ice::clone(void) const {
     return ice;
 }
 
-// void Ice::use(ICharacter& target) {
-//     std::cout << "* shoots an ice bolt at "<< target.getName() << " *"
-//             << std::endl;
-// }
+void Ice::use(ICharacter& target) {
+    std::cout << "* shoots an ice bolt at "<< target.getName() << " *"
+            << std::endl;
+}

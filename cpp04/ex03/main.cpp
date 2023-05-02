@@ -6,15 +6,15 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:04:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:41:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
 #include "Cure.hpp"
 #include "Ice.hpp"
-// #include "ICharacter.hpp"
-// #include "Character.hpp"
+#include "ICharacter.hpp"
+#include "Character.hpp"
 // #include "IMateriaSource.hpp"
 // #include "MateriaSource.hpp"
 #include "tests.hpp"
@@ -46,36 +46,38 @@ void	materiaTests(void) {
 
 	AMateria*	cure = new Cure();
 	AMateria*	ice = new Ice();
+	ICharacter* character = new Character();
 
 	std::cout << BLUE << "Type: " << GREY << cure->getType() << std::endl;
-	// cure->use();
+	cure->use(*character);
 	std::cout << BLUE << "Type: " << GREY << ice->getType() << std::endl;
-	// ice->use();
+	ice->use(*character);
 
 	testDescription("testing clones:");
 	AMateria* clone1;
 	clone1 = cure->clone();
 	std::cout << BLUE << "Clone1 type: " << GREY << clone1->getType() << std::endl;
-	// clone1->use();
+	clone1->use(*character);
 	AMateria* clone2;
 	clone2 = ice->clone();
 	std::cout << BLUE << "Clone2 type: " << GREY << clone2->getType() << std::endl;
-	// clone2->use();
+	clone2->use(*character);
 
 	delete cure;
 	delete ice;
 	delete clone1;
 	delete clone2;
+	delete character;
 }
 
-// void characterTests(void) {
-// 	testDescription("---------------------- ICharacter tests ----------------------");
-// 	ICharacter* vader = new Character("Darth Vader");
-// 	ICharacter* i = new Character();
+void characterTests(void) {
+	testDescription("---------------------- ICharacter tests ----------------------");
+	ICharacter* vader = new Character("Darth Vader");
+	ICharacter* i = new Character();
 
-// 	std::cout << BLUE << "Name: " << GREY << vader->getName() << std::endl;
-// 	std::cout << BLUE << "Name: " << GREY << i->getName() << std::endl;
-// }
+	std::cout << BLUE << "Name: " << GREY << vader->getName() << std::endl;
+	std::cout << BLUE << "Name: " << GREY << i->getName() << std::endl;
+}
 
 // void materiaSourceTests(void) {
 
@@ -83,5 +85,6 @@ void	materiaTests(void) {
 
 int	main(void) {
 	materiaTests();
+	characterTests();
 	return 0;
 }
