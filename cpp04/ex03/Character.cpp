@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/02 00:06:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/02 00:10:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void Character::equip(AMateria* m) {
 }
 
 void Character::unequip(int idx) {
-	if (0 <= idx < SLOTS)
+	if (0 <= idx && idx < SLOTS)
 		this->inventory[idx] = NULL; /// tem que dar delete
 	// The unequip() member function must NOT delete the Materia
 }
 
 void Character::use(int idx, ICharacter& target) {
-	if (0 <= idx < SLOTS && this->inventory[idx])
+	if (0 <= idx && idx < SLOTS && this->inventory[idx])
 		(*this->inventory[idx]).use(target);
 }
