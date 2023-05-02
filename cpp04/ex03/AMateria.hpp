@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:10:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:05:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:18:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <iostream>
 # include "ICharacter.hpp"
 
-// class ICharacter; ///////////////////////////////////////////
+class ICharacter;
 
 class AMateria
 {

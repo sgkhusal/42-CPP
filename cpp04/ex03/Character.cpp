@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:37:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:50:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ std::string Character::_charactersSample[30] = {
 
 Character::Character(void): ICharacter() {
     this->_name = Character::_charactersSample[rand() % 30];
-    // for (int i = 0; i < 4; i++)
-        // this->inventory[i] = NULL;
+    for (int i = 0; i < 4; i++)
+        this->inventory[i] = NULL;
 }
 
 Character::Character(std::string const& name): ICharacter() {
     this->_name = name;
-    // for (int i = 0; i < 4; i++)
-    //     this->inventory[i] = NULL;
+    for (int i = 0; i < 4; i++)
+        this->inventory[i] = NULL;
 }
 
 Character::Character(Character const& character) {
@@ -62,17 +62,17 @@ Character::Character(Character const& character) {
 }
 
 Character::~Character(void) {
-    // for (int i = 0; i < 4; i++)
-    //     delete this->inventory[i];
+    for (int i = 0; i < 4; i++)
+        delete this->inventory[i];
 }
 
 Character& Character::operator=(Character const& character) { ///////////
 	if (this != &character) {
 		this->_name = character.getName();
-        // for (int i = 0; i < 4; i++) {
-        //     delete this->inventory[i];
-        //     this->inventory[i] = character.inventory[i];
-        // }
+        for (int i = 0; i < 4; i++) {
+            delete this->inventory[i];
+            this->inventory[i] = character.inventory[i];
+        }
 	}
 	return (*this);
 }
@@ -81,28 +81,28 @@ std::string const & Character::getName() const {
     return this->_name;
 }
 
-// void Character::equip(AMateria* m) {
-//     int i = 0;
-//     while (i < 4) {
-//         if (this->inventory[i])
-//             i++;
-//         else
-//             break;
-//     }
-//     if (i == 4)
-//         return ;
-//     this->inventory[i] = m; // tá certo isso?? acho que não
-// }
+void Character::equip(AMateria* m) {
+    int i = 0;
+    while (i < 4) {
+        if (this->inventory[i])
+            i++;
+        else
+            break;
+    }
+    if (i == 4)
+        return ;
+    this->inventory[i] = m; // tá certo isso?? acho que não
+}
 
 void Character::unequip(int idx) {
     (void)idx;
-    // this->inventory[idx] = NULL; ///
+    this->inventory[idx] = NULL; ///
 }
 
 void Character::use(int idx, ICharacter& target) {
     (void)idx;
     std::cout << target.getName() << std::endl;
-    // if (this->inventory[idx])
-    //     (*this->inventory[idx]).use(target);
+    if (this->inventory[idx])
+        (*this->inventory[idx]).use(target);
         // (*this->inventory[idx]).AMateria::use(target);
 }

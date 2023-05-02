@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:25:07 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:32:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:56:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <iostream>
 # include "AMateria.hpp"
-// # include "ICharacter.hpp"
 
 class Ice: public AMateria {
     public:

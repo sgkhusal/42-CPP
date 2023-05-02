@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:41:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:58:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "Character.hpp"
 // #include "IMateriaSource.hpp"
 // #include "MateriaSource.hpp"
-#include "tests.hpp"
+#include "utils.hpp"
 
 
 // void	pdfTest(void) {

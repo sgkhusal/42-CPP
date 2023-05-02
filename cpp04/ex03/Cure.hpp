@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:26:10 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:32:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 22:57:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include <iostream>
 # include "AMateria.hpp"
-// # include "ICharacter.hpp"
-# include "tests.hpp"
+# include "utils.hpp"
 
 class Cure: public AMateria {
     public:
