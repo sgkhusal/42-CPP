@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 12:56:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:04:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 // 	ICharacter* bob = new Character("bob");
 // 	me->use(0, *bob);
 // 	me->use(1, *bob);
-	
+
 // 	delete bob;
 // 	delete me;
 // 	delete src;
@@ -43,7 +43,7 @@
 
 void	materiaTests(void) {
 	testDescription("---------------------- Amateria tests ----------------------");
-	
+
 	AMateria*	cure = new Cure();
 	AMateria*	ice = new Ice();
 
@@ -53,11 +53,11 @@ void	materiaTests(void) {
 	// ice->use();
 
 	testDescription("testing clones:");
-	AMateria* clone1; 
+	AMateria* clone1;
 	clone1 = cure->clone();
 	std::cout << BLUE << "Clone1 type: " << GREY << clone1->getType() << std::endl;
 	// clone1->use();
-	AMateria* clone2; 
+	AMateria* clone2;
 	clone2 = ice->clone();
 	std::cout << BLUE << "Clone2 type: " << GREY << clone2->getType() << std::endl;
 	// clone2->use();
@@ -78,11 +78,10 @@ void	materiaTests(void) {
 // }
 
 // void materiaSourceTests(void) {
-	
+
 // }
 
 int	main(void) {
-	// materiaTests();
-	std::cout << "test" << std::endl;
+	materiaTests();
 	return 0;
 }

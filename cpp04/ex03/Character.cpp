@@ -6,12 +6,11 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 13:00:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:55:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
-#include "AMateria.hpp"
 
 std::string Character::_charactersSample[30] = {
     "Harry Potter",
@@ -82,18 +81,18 @@ std::string const & Character::getName() const {
     return this->_name;
 }
 
-void Character::equip(AMateria* m) {
-    int i = 0;
-    while (i < 4) {
-        if (this->inventory[i])
-            i++;
-        else
-            break;
-    }
-    if (i == 4)
-        return ;
-    this->inventory[i] = m; // tá certo isso?? acho que não
-}
+// void Character::equip(AMateria* m) {
+//     int i = 0;
+//     while (i < 4) {
+//         if (this->inventory[i])
+//             i++;
+//         else
+//             break;
+//     }
+//     if (i == 4)
+//         return ;
+//     this->inventory[i] = m; // tá certo isso?? acho que não
+// }
 
 void Character::unequip(int idx) {
     this->inventory[idx] = NULL; ///

@@ -6,12 +6,12 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:52:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:56:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_HPP
-# define GENERAL_HPP
+#ifndef TESTS_HPP
+# define TESTS_HPP
 
 #include <iostream>
 #include <string>

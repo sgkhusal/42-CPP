@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:05 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 11:15:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:51:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ AMateria* Cure::clone(void) const {
     return cure;
 }
 
-void Cure::use(ICharacter& target) {
-	std::cout << GREEN << "* heals " << target.getName() << "’s wounds *" 
-			<< RESET << std::endl;
-}
+// void Cure::use(ICharacter& target) {
+// 	std::cout << GREEN << "* heals " << target.getName() << "’s wounds *"
+// 			<< RESET << std::endl;
+// }
