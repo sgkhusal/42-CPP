@@ -6,21 +6,27 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:05 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/02 00:29:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/08 23:34:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure(void): AMateria("cure") {}
+Cure::Cure(void): AMateria("cure") {
+	classDescription("Cure", "constructor");
+}
 
-Cure::Cure(Cure const& cure) {
+Cure::Cure(Cure const& cure): AMateria(cure) {
+	classDescription("Cure", "copy constructor");
 	*this = cure;
 }
 
-Cure::~Cure(void) {}
+Cure::~Cure(void) {
+	classDescription("Cure", "destructor");
+}
 
-Cure& Cure::operator=(Cure const& cure) { /////////////
+Cure& Cure::operator=(Cure const& cure) {
+	classDescription("Cure", "assign operator");
 	(void)cure;
 	return (*this);
 }
@@ -31,6 +37,5 @@ AMateria* Cure::clone(void) const {
 }
 
 void Cure::use(ICharacter& target) {
-	std::cout << GREEN << "* heals " << target.getName() << "'s wounds *"
-			<< RESET << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

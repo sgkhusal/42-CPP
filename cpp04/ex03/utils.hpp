@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:52:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 23:14:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/08 23:25:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 
 void	testDescription(std::string description);
 void	subTestDescription(std::string description);
-void	stepDescription(
-	std::string class_name,
-	std::string description,
-	std::string color
-	);
+void	classDescription(std::string class_name, std::string description);
 
 #endif

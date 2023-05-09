@@ -6,21 +6,27 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 21:32:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/08 23:34:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice(void): AMateria("ice") {}
+Ice::Ice(void): AMateria("ice") {
+    classDescription("Ice", "constructor");
+}
 
-Ice::Ice(Ice const& ice) {
+Ice::Ice(Ice const& ice): AMateria(ice) {
+    classDescription("Ice", "copy constructor");
 	*this = ice;
 }
 
-Ice::~Ice(void) {}
+Ice::~Ice(void) {
+    classDescription("Ice", "destructor");
+}
 
-Ice& Ice::operator=(Ice const& ice) { /////////////
+Ice& Ice::operator=(Ice const& ice) {
+    classDescription("Ice", "assign operator");
 	(void)ice;
 	return (*this);
 }
