@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/02 00:21:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/08 23:50:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,28 @@ void	pdfTest(void) {
 void	materiaTests(void) {
 	testDescription("---------------------- Amateria tests ----------------------");
 
+	// AMateria	materia; // error compilation: can't instanciate an abstract class
+	subTestDescription("AMateria pointers with cure and ice types");
 	AMateria*	cure = new Cure();
+	AMateria*	materia1 = cure; // doesn't call constructor (pointer!)
 	AMateria*	ice = new Ice();
+	AMateria*	materia2 = ice;
 	ICharacter* character1 = new Character();
 	ICharacter* character2 = new Character();
+	ICharacter* character3 = new Character();
 
 	std::cout << BLUE << "Type: " << GREY << cure->getType() << RESET
 			<< std::endl;
 	cure->use(*character1);
+	std::cout << BLUE << "Type: " << GREY << materia1->getType() << RESET
+			<< std::endl;
+	materia1->use(*character2);
 	std::cout << BLUE << "Type: " << GREY << ice->getType() << RESET
 			<< std::endl;
-	ice->use(*character2);
+	ice->use(*character1);
+	std::cout << BLUE << "Type: " << GREY << materia2->getType() << RESET
+			<< std::endl;
+	materia2->use(*character2);
 
 	testDescription("testing clones:");
 	AMateria* clone1;
@@ -68,12 +79,45 @@ void	materiaTests(void) {
 			<< std::endl;
 	clone2->use(*character2);
 
+	subTestDescription("testing copy constructor and assign operator for Cure");
+	Cure cure2;
+	Cure cure3 = Cure(cure2);
+	Cure cure4;
+	cure4 = cure2;
+	std::cout << BLUE << "Type: " << GREY << cure2.getType() << RESET
+			<< std::endl;
+	cure2.use(*character1);
+	std::cout << BLUE << "Type: " << GREY << cure3.getType() << RESET
+			<< std::endl;
+	cure3.use(*character2);
+	std::cout << BLUE << "Type: " << GREY << cure4.getType() << RESET
+			<< std::endl;
+	cure4.use(*character3);
+
+	subTestDescription("testing copy constructor and assign operator for Ice");
+	Ice ice2;
+	Ice ice4 = Ice(ice2);
+	Ice ice5 = ice2;
+	std::cout << BLUE << "Type: " << GREY << ice2.getType() << RESET
+			<< std::endl;
+	ice2.use(*character1);
+	std::cout << BLUE << "Type: " << GREY << ice4.getType() << RESET
+			<< std::endl;
+	ice4.use(*character2);
+	std::cout << BLUE << "Type: " << GREY << ice5.getType() << RESET
+			<< std::endl;
+	ice5.use(*character3);
+
+	subTestDescription("deleting heap memory");
 	delete cure;
 	delete ice;
 	delete clone1;
 	delete clone2;
 	delete character1;
 	delete character2;
+	delete character3;
+
+	subTestDescription("calling destructors for stack memory");
 }
 
 void characterTests(void) {
