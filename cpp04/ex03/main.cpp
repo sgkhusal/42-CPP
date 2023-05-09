@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/08 23:50:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/09 01:29:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	materiaTests(void) {
 
 void characterTests(void) {
 	testDescription("---------------------- ICharacter tests ----------------------");
+	// ICharacter icharacter; // error compilation: can't instanciate an interface
 	subTestDescription("Instanciate an random character:");
 	ICharacter* i = new Character();
 	std::cout << BLUE << "Name: " << GREY << i->getName() << std::endl;
@@ -132,13 +133,15 @@ void characterTests(void) {
 	subTestDescription("Equip and use AMateria Cure:");
 	yoda->equip(new Cure());
 	yoda->use(0, *i);
+	subTestDescription("Use an empty slot");
+	yoda->use(1, *i);
 	subTestDescription("Unequip an empty slot");
 	yoda->unequip(2);
 	subTestDescription("Equip all slots");
 	yoda->equip(new Cure());
 	yoda->equip(new Cure());
 	yoda->equip(new Cure());
-	subTestDescription("Equip with full slots and use all slots:");
+	subTestDescription("Equip half full slots and use all slots:");
 	yoda->equip(new Ice());
 	yoda->equip(new Ice());
 	yoda->use(0, *i);
@@ -156,9 +159,53 @@ void characterTests(void) {
 	yoda->unequip(0);
 	yoda->use(0, *i);
 
+	subTestDescription("* testing copy constructor Character - ensure deep copy: *");
+	subTestDescription("- Instantiate one Character and equip 2 slots");
+	Character j;
+	std::cout << BLUE << "Name: " << GREY << j.getName() << std::endl;
+	j.equip(new Ice()); // TODO: testar passando o endereço de uma instância - dá problema nos deletes??
+	j.equip(new Ice());
+	subTestDescription("Use copy constructor and assign operator");
+	Character k = Character(j);
+	std::cout << BLUE << "Name: " << GREY << k.getName() << std::endl;
+	subTestDescription("- Instantiate one Character and equip all slots and equip one more time");
+	Character l;
+	std::cout << BLUE << "Name: " << GREY << l.getName() << std::endl;
+	l.equip(new Cure());
+	l.equip(new Cure());
+	l.equip(new Cure());
+	l.equip(new Cure());
+	l.equip(new Ice());
+	subTestDescription("Use assign operator - must delete all AMaterias in l");
+	l = j;
+	std::cout << BLUE << "Name: " << GREY << l.getName() << std::endl;
+	subTestDescription("Use AMateria in the copied Characters");
+	k.use(0, *i);
+	l.use(1, j);
+	k.use(2, *i); // empty slot
+	l.use(3, *yoda); // empty slot
+	subTestDescription("Equip one slot and use it - in copy from copy constructor");
+	k.equip(new Cure());
+	k.use(2, *yoda);
+	subTestDescription("Try to use the slot in the original Character and in the copy from assign copy");
+	j.use(2, *yoda);
+	l.use(2, *yoda);
+	subTestDescription("Unequip one slot and try to use it - in copy from copy constructor");
+	k.unequip(0);
+	k.use(0, *i);
+	subTestDescription("Unequip another slot and try to use it - in copy from assign operator");
+	l.unequip(1);
+	l.use(1, *i);
+	subTestDescription("In the copied Character the slots numbers still should work:");
+	j.use(0, *i);
+	j.use(1, *i);
+
+	subTestDescription("deleting heap memory");
 	delete i;
 	delete yoda;
-	// check leaks for unused materias
+	// TODO: check leaks for unused materias
+
+	subTestDescription("calling destructors for stack memory");
 }
 
 // void materiaSourceTests(void) {
@@ -168,8 +215,7 @@ void characterTests(void) {
 int	main(void) {
 	materiaTests();
 	characterTests();
-	// falta testar o operator= e o copy constructor dessas classes
-	// materiaSourceTests();
+	// TODO: materiaSourceTests();
 	pdfTest();
 	return 0;
 }
