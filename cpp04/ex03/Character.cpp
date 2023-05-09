@@ -99,19 +99,35 @@ void Character::equip(AMateria* m) {
 		else
 			break;
 	}
-	if (i == SLOTS)
+	if (i == SLOTS) {
+		std::cout << "All magic slots are full" << std::endl;
 		return ;
+	}
 	this->inventory[i] = m;
-	// problema: qdo se passa uma materia que já está no inventário...
+	std::cout << "Equiped " << this->getName() << " with "
+			<< this->inventory[i]->getType() << std::endl;
+	// TODO: problema: qdo se passa uma materia que já está no inventário...
 }
 
 void Character::unequip(int idx) {
-	if (0 <= idx && idx < SLOTS)
-		this->inventory[idx] = NULL; /// tem que dar delete
-	// The unequip() member function must NOT delete the Materia
+	if (0 <= idx && idx < SLOTS && this->inventory[idx]) {
+			std::cout << "Unequiped " << this->inventory[idx]->getType()
+					<< " from " << this->getName() << std::endl;
+			this->inventory[idx] = NULL; /// TODO: tem que dar delete de alguma forma
+			// The unequip() member function must NOT delete the Materia
+	}
+	else if (idx < 0 || idx >= SLOTS)
+		std::cout << "Invalid slot number" << std::endl;
+	else
+		std::cout << this->getName() << " slot " << idx
+				<< " already empty" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target) {
 	if (0 <= idx && idx < SLOTS && this->inventory[idx])
 		(*this->inventory[idx]).use(target);
+	else if (idx < 0 || idx >= SLOTS)
+		std::cout << "Invalid slot number" << std::endl;
+	else
+		std::cout << "Empty magic slot..." << std::endl;
 }
