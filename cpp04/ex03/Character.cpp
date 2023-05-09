@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/02 00:10:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/09 01:30:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,34 @@ std::string Character::_charactersSample[30] = {
 	"Boromir"
 };
 
-Character::Character(void): ICharacter() {
+Character::Character(void) {
+	classDescription("Character", "constructor");
 	this->_name = Character::_charactersSample[rand() % 30];
 	for (int i = 0; i < SLOTS; i++)
 		this->inventory[i] = NULL;
 }
 
-Character::Character(std::string const& name): ICharacter() {
-	this->_name = name;
+Character::Character(std::string const& name): _name(name) {
+	classDescription("Character", "constructor");
 	for (int i = 0; i < SLOTS; i++)
 		this->inventory[i] = NULL;
 }
 
 Character::Character(Character const& character) {
+	classDescription("Character", "copy constructor");
 	for (int i = 0; i < SLOTS; i++)
 		this->inventory[i] = NULL;
 	*this = character;
 }
 
 Character::~Character(void) {
+	classDescription("Character", "destructor");
 	for (int i = 0; i < SLOTS; i++)
 		delete this->inventory[i];
 }
 
 Character& Character::operator=(Character const& character) { ///////////
+	classDescription("Character", "assign operator");
 	if (this != &character) {
 		this->_name = character.getName();
 		for (int i = 0; i < SLOTS; i++) {
