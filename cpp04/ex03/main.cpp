@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/09 01:29:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:36:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	pdfTest(void) {
 	testDescription("---------------------- PDF tests ----------------------");
 
 	IMateriaSource* src = new MateriaSource();
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
+	src->learnMateria(new Ice()); // leak
+	src->learnMateria(new Cure()); // leak
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
 	tmp = src->createMateria("ice");
@@ -131,15 +131,18 @@ void characterTests(void) {
 	ICharacter* yoda = new Character("Yoda");
 	std::cout << BLUE << "Name: " << GREY << yoda->getName() << std::endl;
 	subTestDescription("Equip and use AMateria Cure:");
-	yoda->equip(new Cure());
+	AMateria *materia = new Cure();
+	yoda->equip(materia); // leak - idx=0
 	yoda->use(0, *i);
+	subTestDescription("Try to equip the same AMateria again");
+	yoda->equip(materia);
 	subTestDescription("Use an empty slot");
 	yoda->use(1, *i);
 	subTestDescription("Unequip an empty slot");
 	yoda->unequip(2);
 	subTestDescription("Equip all slots");
 	yoda->equip(new Cure());
-	yoda->equip(new Cure());
+	yoda->equip(new Cure()); // leak - idx=2
 	yoda->equip(new Cure());
 	subTestDescription("Equip half full slots and use all slots:");
 	yoda->equip(new Ice());
@@ -166,7 +169,7 @@ void characterTests(void) {
 	j.equip(new Ice()); // TODO: testar passando o endereço de uma instância - dá problema nos deletes??
 	j.equip(new Ice());
 	subTestDescription("Use copy constructor and assign operator");
-	Character k = Character(j);
+	Character k = Character(j); // leak from Ice::clone() const (Ice.cpp:35)
 	std::cout << BLUE << "Name: " << GREY << k.getName() << std::endl;
 	subTestDescription("- Instantiate one Character and equip all slots and equip one more time");
 	Character l;
@@ -175,9 +178,9 @@ void characterTests(void) {
 	l.equip(new Cure());
 	l.equip(new Cure());
 	l.equip(new Cure());
-	l.equip(new Ice());
+	l.equip(new Ice()); // leak - slots full
 	subTestDescription("Use assign operator - must delete all AMaterias in l");
-	l = j;
+	l = j; // leak from Ice::clone() const (Ice.cpp:35)
 	std::cout << BLUE << "Name: " << GREY << l.getName() << std::endl;
 	subTestDescription("Use AMateria in the copied Characters");
 	k.use(0, *i);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/09 01:30:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:35:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ Character::Character(Character const& character) {
 
 Character::~Character(void) {
 	classDescription("Character", "destructor");
-	for (int i = 0; i < SLOTS; i++)
-		delete this->inventory[i];
+	for (int i = 0; i < SLOTS; i++) {
+		if (this->inventory[i])
+			delete this->inventory[i];
+	}
 }
 
-Character& Character::operator=(Character const& character) { ///////////
+Character& Character::operator=(Character const& character) {
 	classDescription("Character", "assign operator");
 	if (this != &character) {
 		this->_name = character.getName();
@@ -94,19 +96,25 @@ std::string const & Character::getName() const {
 void Character::equip(AMateria* m) {
 	int i = 0;
 	while (i < SLOTS) {
-		if (this->inventory[i])
+		if (this->inventory[i]) {
+			if (this->inventory[i] == m) {
+				std::cout << "Magic already in the inventory" << std::endl;
+				return ;
+			}
 			i++;
+		}
 		else
 			break;
 	}
 	if (i == SLOTS) {
-		std::cout << "All magic slots are full" << std::endl;
+		std::cout << "Magic " << m->getType() << " lost... All magic slots in "
+				<< this->getName() << "'s inventory are full" << std::endl;
+		delete m; // posso fazer isso aqui?? ou mando uma mensagem para limpar um slot!
 		return ;
 	}
 	this->inventory[i] = m;
 	std::cout << "Equiped " << this->getName() << " with "
 			<< this->inventory[i]->getType() << std::endl;
-	// TODO: problema: qdo se passa uma materia que já está no inventário...
 }
 
 void Character::unequip(int idx) {
@@ -117,9 +125,9 @@ void Character::unequip(int idx) {
 			// The unequip() member function must NOT delete the Materia
 	}
 	else if (idx < 0 || idx >= SLOTS)
-		std::cout << "Invalid slot number" << std::endl;
+		std::cout << "Invalid magic slot number" << std::endl;
 	else
-		std::cout << this->getName() << " slot " << idx
+		std::cout << this->getName() << " magic slot " << idx
 				<< " already empty" << std::endl;
 }
 

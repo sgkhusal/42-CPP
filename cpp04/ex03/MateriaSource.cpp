@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:45:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/09 00:08:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:28:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,64 @@
 # include "Cure.hpp" /////////
 
 MateriaSource::MateriaSource(void) {
-	classDescription("Character", "constructor");
-    for (int i = 0; i < 4; i++)
-        this->storage[i] = NULL;
+	classDescription("MateriaSource", "constructor");
+	for (int i = 0; i < STORAGE_SIZE; i++)
+		this->storage[i] = NULL;
 }
 
 MateriaSource::MateriaSource(MateriaSource const& materiaSource) {
-	classDescription("Character", "copy constructor");
+	classDescription("MateriaSource", "copy constructor");
+	for (int i = 0; i < STORAGE_SIZE; i++)
+		this->storage[i] = NULL;
 	*this = materiaSource;
 }
 
 MateriaSource::~MateriaSource(void) {
-	classDescription("Character", "destructor");
+	classDescription("MateriaSource", "destructor");
+	for (int i = 0; i < STORAGE_SIZE; i++) {
+		if (this->storage[i])
+			delete this->storage[i];
+	}
 }
 
 MateriaSource& MateriaSource::operator=(MateriaSource const& materiaSource) {
-	classDescription("Character", "assign operator");
-	(void)materiaSource;
-	// if (this != &MateriaSource) {
-	// 	this->type = MateriaSource.type;
-	// }
+	classDescription("MateriaSource", "assign operator");
+	if (this != &materiaSource) {
+		for (int i = 0; i < STORAGE_SIZE; i++) {
+			if (this->storage[i])
+				delete this->storage[i];
+			if (materiaSource.storage[i])
+				this->storage[i] = materiaSource.storage[i]->clone();
+			else
+				this->storage[i] = NULL;
+		}
+	}
 	return (*this);
 }
 
 void MateriaSource::learnMateria(AMateria* materia) {
-	(void)materia;
+	int i = 0;
+	while (i < STORAGE_SIZE) {
+		if (this->storage[i])
+			i++;
+		else
+			break;
+	}
+	if (i == STORAGE_SIZE) {
+		std::cout << "All magic slots in the storage are full" << std::endl;
+		return ;
+	}
+	this->storage[i] = materia;
+	std::cout << "Learned " << this->storage[i]->getType() << " magic" 
+			<< std::endl;
+	// the MateriaSource 4 Materias are not necessarily unique
+	// verificar se dá pau de double free quando aprende a mesma mágica (o msm ponteiro)
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
-	(void)type;
-	return new Cure();
+	for (int i = 0; i < STORAGE_SIZE; i++) {
+		if (this->storage[i]->getType() == type)
+			return this->storage[i]->clone();
+	}
+	return 0;
 }
