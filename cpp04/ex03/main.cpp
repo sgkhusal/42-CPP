@@ -224,7 +224,7 @@ void materiaSourceTests(void) {
 	subTestDescription("Fill all slots and one more");
 	src->learnMateria(new Cure());
 	AMateria* magic = new Ice();
-	src->learnMateria(new Ice());
+	src->learnMateria(magic);
 	delete magic;
 
 	subTestDescription("Create and use cure");
