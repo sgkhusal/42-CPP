@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:22:45 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/12 23:18:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/13 19:24:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ class Character: public ICharacter {
         void equip(AMateria* m);
         void unequip(int idx);
         void use(int idx, ICharacter& target);
+
+        AMateria* getMagic(int idx);
 
     private:
         std::string         _name;

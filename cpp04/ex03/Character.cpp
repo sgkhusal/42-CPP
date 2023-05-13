@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/13 00:19:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/13 19:25:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,7 @@ void Character::unequip(int idx) {
 	}
 	else if (idx < 0 || idx >= SLOTS)
 		std::cout << "Invalid magic slot number" << std::endl;
-	else
-		std::cout << "Magic slot " << idx << " already empty" << std::endl;
+	std::cout << "Magic slot " << idx << " already empty" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target) {
@@ -136,6 +135,14 @@ void Character::use(int idx, ICharacter& target) {
 		(*this->inventory[idx]).use(target);
 	else if (idx < 0 || idx >= SLOTS)
 		std::cout << "Invalid slot number" << std::endl;
-	else
-		std::cout << "Empty magic slot..." << std::endl;
+	std::cout << "Empty magic slot..." << std::endl;
+}
+
+AMateria* Character::getMagic(int idx) {
+	if (0 <= idx && idx < SLOTS && this->inventory[idx])
+		return this->inventory[idx];
+	else if (idx < 0 || idx >= SLOTS)
+		std::cout << "Invalid slot number" << std::endl;
+	std::cout << "Empty magic slot..." << std::endl;
+	return NULL;
 }

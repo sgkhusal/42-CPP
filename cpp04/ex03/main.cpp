@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/13 00:36:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/13 19:24:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ void characterTests(void) {
 	j.equip(new Ice());
 	j.equip(new Ice());
 	subTestDescription("Use copy constructor and assign operator");
-	Character k = Character(j); // leak from Ice::clone() const (Ice.cpp:35)
+	Character k = Character(j);
 	std::cout << BLUE << "Name: " << GREY << k.getName() << RESET << std::endl;
 	subTestDescription(
 		"Instantiate one Character and equip all slots and equip one more time"
@@ -184,7 +184,8 @@ void characterTests(void) {
 		"Use assign operator - must delete all magics in " + l.getName()
 	);
 	l = j; // leak from Ice::clone() const (Ice.cpp:35)
-	std::cout << BLUE << "New name: " << GREY << l.getName() << RESET << std::endl;
+	std::cout << BLUE << "New name: " << GREY << l.getName() << RESET
+			<< std::endl;
 	subTestDescription("Use magics in the copied Characters");
 	k.use(0, *i);
 	l.use(1, j);
@@ -203,13 +204,17 @@ void characterTests(void) {
 	subTestDescription(
 		"Unequip one slot and try to use it - in copy from copy constructor"
 	);
+	AMateria* trash = k.getMagic(0);
 	k.unequip(0);
 	k.use(0, *i);
+	delete trash;
 	subTestDescription(
 		"Unequip another slot and try to use it - in copy from assign operator"
 	);
+	trash = l.getMagic(1);
 	l.unequip(1);
 	l.use(1, *i);
+	delete trash;
 	subTestDescription(
 		"In the copied Character the slots numbers still should work:"
 	);
