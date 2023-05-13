@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:52:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/08 23:25:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:59:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # define YELLOW	"\033[1;33m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
+
+# ifndef DEBUG
+    #define DEBUG false
+# endif
 
 void	testDescription(std::string description);
 void	subTestDescription(std::string description);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:06:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/08 23:25:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:58:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	subTestDescription(std::string description) {
 }
 
 void	classDescription(std::string class_name, std::string description) {
-	std::cout << GREY << class_name << " class " << description
-			<< " called" << RESET << std::endl;
+	if (DEBUG)
+		std::cout << GREY << class_name << " class " << description
+				<< " called" << RESET << std::endl;
 }

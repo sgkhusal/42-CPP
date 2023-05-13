@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/12 22:07:07 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:19:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,9 @@ void Character::equip(AMateria* m) {
 		return ;
 	}
 	this->inventory[i] = m;
-	std::cout << "Equiped " << this->getName() << "'s inventory with "
-			<< this->inventory[i]->getType() << std::endl;
+	if (DEBUG)
+		std::cout << "Equiped " << this->getName() << "'s inventory with "
+				<< this->inventory[i]->getType() << std::endl;
 }
 
 void Character::unequip(int idx) {

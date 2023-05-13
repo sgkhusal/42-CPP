@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/27 11:42:13 by sguilher          #+#    #+#              #
-#    Updated: 2023/05/11 12:31:45 by sguilher         ###   ########.fr        #
+#    Updated: 2023/05/13 00:37:18 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		tests
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -g -std=c++98
+CFLAGS =	-Wall -Wextra -Werror -g -std=c++98 #-D DEBUG=true
 
 SRC =		main.cpp utils.cpp AMateria.cpp Cure.cpp Ice.cpp Character.cpp \
 			MateriaSource.cpp

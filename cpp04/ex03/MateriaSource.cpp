@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:45:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/12 23:26:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/13 00:19:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void MateriaSource::learnMateria(AMateria* materia) {
 		return ;
 	}
 	this->storage[i] = materia;
-	std::cout << "Learned " << this->storage[i]->getType() << " magic"
+	if (DEBUG)
+		std::cout << "Learned " << this->storage[i]->getType() << " magic"
 			<< std::endl;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
 	for (int i = 0; i < STORAGE_SIZE; i++) {
 		if (this->storage[i] && this->storage[i]->getType() == type) {
-			std::cout << "Magic " << type << " created" << std::endl;
+			if (DEBUG)
+				std::cout << "Magic " << type << " created" << std::endl;
 			return this->storage[i]->clone();
 		}
 	}
