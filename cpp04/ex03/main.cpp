@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 10:45:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/12 23:13:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:52:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,9 @@ void characterTests(void) {
 	yoda->unequip(0);
 	yoda->use(0, *i);
 
-	subTestDescription("* testing copy constructor Character - ensure deep copy: *");
+	subTestDescription(
+		"* testing copy constructor Character - ensure deep copy: *"
+	);
 	subTestDescription("- Instantiate one Character and equip 2 slots");
 	Character j;
 	std::cout << BLUE << "Name: " << GREY << j.getName() << std::endl;
@@ -166,7 +168,10 @@ void characterTests(void) {
 	subTestDescription("Use copy constructor and assign operator");
 	Character k = Character(j); // leak from Ice::clone() const (Ice.cpp:35)
 	std::cout << BLUE << "Name: " << GREY << k.getName() << std::endl;
-	subTestDescription("- Instantiate one Character and equip all slots and equip one more time");
+	subTestDescription(
+		"- Instantiate one Character and equip all slots and equip one more \
+		time"
+	);
 	Character l;
 	std::cout << BLUE << "Name: " << GREY << l.getName() << std::endl;
 	l.equip(new Cure());
@@ -182,19 +187,30 @@ void characterTests(void) {
 	l.use(1, j);
 	k.use(2, *i); // empty slot
 	l.use(3, *yoda); // empty slot
-	subTestDescription("Equip one slot and use it - in copy from copy constructor");
+	subTestDescription(
+		"Equip one slot and use it - in copy from copy constructor"
+	);
 	k.equip(new Cure());
 	k.use(2, *yoda);
-	subTestDescription("Try to use the slot in the original Character and in the copy from assign copy");
+	subTestDescription(
+		"Try to use the slot in the original Character and in the copy from \
+		assign copy"
+	);
 	j.use(2, *yoda);
 	l.use(2, *yoda);
-	subTestDescription("Unequip one slot and try to use it - in copy from copy constructor");
+	subTestDescription(
+		"Unequip one slot and try to use it - in copy from copy constructor"
+	);
 	k.unequip(0);
 	k.use(0, *i);
-	subTestDescription("Unequip another slot and try to use it - in copy from assign operator");
+	subTestDescription(
+		"Unequip another slot and try to use it - in copy from assign operator"
+	);
 	l.unequip(1);
 	l.use(1, *i);
-	subTestDescription("In the copied Character the slots numbers still should work:");
+	subTestDescription(
+		"In the copied Character the slots numbers still should work:"
+	);
 	j.use(0, *i);
 	j.use(1, *i);
 
@@ -243,7 +259,9 @@ void materiaSourceTests(void) {
 	magic = src->createMateria("magic");
 	delete src;
 
-	subTestDescription("* testing copy constructor MateriaSource - ensure deep copy: *");
+	subTestDescription(
+		"* testing copy constructor MateriaSource - ensure deep copy: *"
+	);
 	subTestDescription("- Instantiate one MateriaSource and learn cure");
 	MateriaSource s1;
 	s1.learnMateria(new Cure());
@@ -252,7 +270,9 @@ void materiaSourceTests(void) {
 	subTestDescription("- Instantiate one MateriaSource and learn ice");
 	MateriaSource s2;
 	s2.learnMateria(new Ice());
-	subTestDescription("Use assign operator - must delete all AMaterias learned in s2");
+	subTestDescription(
+		"Use assign operator - must delete all AMaterias learned in s2"
+	);
 	s2 = s1;
 	subTestDescription("Create cure in the original and copied MateriaSources");
 	AMateria* magic1;
