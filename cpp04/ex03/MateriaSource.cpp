@@ -6,12 +6,11 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:45:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/11 12:28:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 22:49:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
-# include "Cure.hpp" /////////
 
 MateriaSource::MateriaSource(void) {
 	classDescription("MateriaSource", "constructor");
@@ -62,16 +61,16 @@ void MateriaSource::learnMateria(AMateria* materia) {
 		return ;
 	}
 	this->storage[i] = materia;
-	std::cout << "Learned " << this->storage[i]->getType() << " magic" 
+	std::cout << "Learned " << this->storage[i]->getType() << " magic"
 			<< std::endl;
-	// the MateriaSource 4 Materias are not necessarily unique
-	// verificar se dá pau de double free quando aprende a mesma mágica (o msm ponteiro)
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
 	for (int i = 0; i < STORAGE_SIZE; i++) {
 		if (this->storage[i]->getType() == type)
+			std::cout << "Magic " << type << " created" << std::endl;
 			return this->storage[i]->clone();
 	}
+	std::cout << "Can't create "<< type << ": magic unknown" << std::endl;
 	return 0;
 }

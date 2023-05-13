@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:22:45 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/01 23:45:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:18:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ class Character: public ICharacter {
         void unequip(int idx);
         void use(int idx, ICharacter& target);
 
-        AMateria* inventory[SLOTS];
-
     private:
-        std::string _name;
-        static std::string _charactersSample[30];
+        std::string         _name;
+        AMateria*           inventory[SLOTS];
+        static std::string  _charactersSample[30];
 };
 
 #endif

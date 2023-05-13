@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:28:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/11 12:35:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 22:07:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void Character::equip(AMateria* m) {
 	while (i < SLOTS) {
 		if (this->inventory[i]) {
 			if (this->inventory[i] == m) {
-				std::cout << "Magic already in the inventory" << std::endl;
+				std::cout << "This magic is already in " << this->getName()
+						<< "'s inventory" << std::endl;
 				return ;
 			}
 			i++;
@@ -107,28 +108,26 @@ void Character::equip(AMateria* m) {
 			break;
 	}
 	if (i == SLOTS) {
-		std::cout << "Magic " << m->getType() << " lost... All magic slots in "
-				<< this->getName() << "'s inventory are full" << std::endl;
-		delete m; // posso fazer isso aqui?? ou mando uma mensagem para limpar um slot!
+		std::cout << this->getName() << "'s inventory is full. "
+				<< "Unequip a slot to add a new magic." << std::endl;
 		return ;
 	}
 	this->inventory[i] = m;
-	std::cout << "Equiped " << this->getName() << " with "
+	std::cout << "Equiped " << this->getName() << "'s inventory with "
 			<< this->inventory[i]->getType() << std::endl;
 }
 
 void Character::unequip(int idx) {
 	if (0 <= idx && idx < SLOTS && this->inventory[idx]) {
-			std::cout << "Unequiped " << this->inventory[idx]->getType()
-					<< " from " << this->getName() << std::endl;
-			this->inventory[idx] = NULL; /// TODO: tem que dar delete de alguma forma
-			// The unequip() member function must NOT delete the Materia
+			std::cout << "Remove " << this->inventory[idx]->getType()
+					<< " from " << this->getName() << "'s inventory"
+					<< std::endl;
+			this->inventory[idx] = NULL;
 	}
 	else if (idx < 0 || idx >= SLOTS)
 		std::cout << "Invalid magic slot number" << std::endl;
 	else
-		std::cout << this->getName() << " magic slot " << idx
-				<< " already empty" << std::endl;
+		std::cout << "Magic slot " << idx << " already empty" << std::endl;
 }
 
 void Character::use(int idx, ICharacter& target) {
