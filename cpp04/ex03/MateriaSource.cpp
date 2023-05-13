@@ -67,7 +67,7 @@ void MateriaSource::learnMateria(AMateria* materia) {
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
 	for (int i = 0; i < STORAGE_SIZE; i++) {
-		if (this->storage[i]->getType() == type) {
+		if (this->storage[i] && this->storage[i]->getType() == type) {
 			std::cout << "Magic " << type << " created" << std::endl;
 			return this->storage[i]->clone();
 		}
