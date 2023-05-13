@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 23:45:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/12 22:49:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/12 23:26:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ void MateriaSource::learnMateria(AMateria* materia) {
 
 AMateria* MateriaSource::createMateria(std::string const & type) {
 	for (int i = 0; i < STORAGE_SIZE; i++) {
-		if (this->storage[i]->getType() == type)
+		if (this->storage[i]->getType() == type) {
 			std::cout << "Magic " << type << " created" << std::endl;
 			return this->storage[i]->clone();
+		}
 	}
 	std::cout << "Can't create "<< type << ": magic unknown" << std::endl;
 	return 0;
