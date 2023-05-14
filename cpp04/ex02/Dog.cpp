@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/14 13:08:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:21:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Dog::Dog(void): AAnimal("Dog"){
 	specificDescriptionPrint("Dog", "constructor", YELLOW);
 	this->_brain = new Brain();
 	for (int i = 0; i < 100; i++)
-		this->_brain->ideas[i] = "Dog is man's best friend";
+		this->_brain->ideas[i] = "Play with me";
 }
 
 Dog::~Dog(void){
