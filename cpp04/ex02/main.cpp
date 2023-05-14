@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 00:01:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:11:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,27 @@ int main()
 	dog = dog2;
 	std::cout << dog.getType() << " is thinking: "
 			<< dog.getBrain()->ideas[0] << std::endl;
+
+	std::cout << std::endl
+			<< "--------------------- Ensuring deep copy ----------------------"
+			<< std::endl;
+	for (int i = 0; i < 100; i++) {
+		cat2.getBrain()->ideas[i] = "Leave me alone, human!";
+		dog2.getBrain()->ideas[i] = "I'm your best friend!";
+	}
+	bool error_copy = false;
+	for (int i = 0; i < 100; i++) {
+		if (cat3.getBrain()->ideas[i] == "Leave me alone, human!"
+			|| dog.getBrain()->ideas[i] == "I'm your best friend!"
+		) {
+			error_copy = true;
+			break;
+		}
+	}
+	if (error_copy)
+		std::cout << ORANGE << "KO: Deep copy not working" << RESET << std::endl;
+	else
+		std::cout << GREEN << "OK" << RESET << std::endl;
 
 	std::cout << std::endl
 			<< "----------------------- Deleting stack -----------------------"

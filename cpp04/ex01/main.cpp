@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/14 13:02:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:11:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int main()
 	dog = dog2;
 	std::cout << dog.getType() << " is thinking: "
 			<< dog.getBrain()->ideas[0] << std::endl;
+
 	std::cout << std::endl
 			<< "--------------------- Ensuring deep copy ----------------------"
 			<< std::endl;

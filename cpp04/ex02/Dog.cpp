@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:50:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:08:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Dog::~Dog(void){
 	delete this->_brain;
 }
 
-Dog::Dog(Dog const& dog): AAnimal(dog) {
+Dog::Dog(Dog const& dog): AAnimal("Dog") {
 	specificDescriptionPrint("Dog", "copy constructor", YELLOW);
 	this->_brain = new Brain();
 	*this = dog;
