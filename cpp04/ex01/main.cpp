@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:12:43 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 04:59:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/14 13:02:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main()
 	// i->getBrain()->ideas[0];
 
 	std::cout << std::endl
-			<< "---------------------- Array of animals ----------------------"
+			<< "---------------------- Array of animals -----------------------"
 			<< std::endl;
 
 	int n = 10;
@@ -41,7 +41,7 @@ int main()
 	}
 
 	std::cout << std::endl
-			<< "---------------------- Checking animals ----------------------"
+			<< "---------------------- Checking animals -----------------------"
 			<< std::endl;
 	for (int i = 0; i < n; i++){
 		std::cout << animals[i]->getType() << ": ";
@@ -49,7 +49,7 @@ int main()
 	}
 
 	std::cout << std::endl
-			<< "---------------------- Deleting animals ----------------------"
+			<< "---------------------- Deleting animals -----------------------"
 			<< std::endl;
 	for (int i = 0; i < n; i++)
 		delete animals[i];
@@ -74,9 +74,29 @@ int main()
 	dog = dog2;
 	std::cout << dog.getType() << " is thinking: "
 			<< dog.getBrain()->ideas[0] << std::endl;
+	std::cout << std::endl
+			<< "--------------------- Ensuring deep copy ----------------------"
+			<< std::endl;
+	for (int i = 0; i < 100; i++) {
+		cat2.getBrain()->ideas[i] = "Leave me alone, human!";
+		dog2.getBrain()->ideas[i] = "I'm your best friend!";
+	}
+	bool error_copy = false;
+	for (int i = 0; i < 100; i++) {
+		if (cat3.getBrain()->ideas[i] == "Leave me alone, human!"
+			|| dog.getBrain()->ideas[i] == "I'm your best friend!"
+		) {
+			error_copy = true;
+			break;
+		}
+	}
+	if (error_copy)
+		std::cout << ORANGE << "KO: Deep copy not working" << RESET << std::endl;
+	else
+		std::cout << GREEN << "OK" << RESET << std::endl;
 
 	std::cout << std::endl
-			<< "----------------------- Deleting stack -----------------------"
+			<< "----------------------- Deleting stack ------------------------"
 			<< std::endl;
 
 	return 0;
