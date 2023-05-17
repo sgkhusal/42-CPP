@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/15 00:10:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/17 20:38:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	testDescription(std::string const& description) {
 	std::cout << std::endl << BLUE << description << RESET << std::endl;
 }
 
-void	printException(std::exception& e, std::string const& description) {
-	std::cout << ORANGE << description << e.what() << RESET << std::endl;
+void	printException(std::exception& e) {
+	std::cout << ORANGE << "Exception: " << e.what() << RESET << std::endl;
 }
 
 int main(void) {
@@ -35,7 +35,7 @@ int main(void) {
         delete b2;
     }
     catch (std::exception& e) {
-        printException(e, "Exception: ");
+        printException(e);
         if (b2)
             delete b2;
     }
@@ -48,7 +48,7 @@ int main(void) {
         std::cout << b << std::endl;
     }
     catch (std::exception& e) {
-        printException(e, "Exception: ");
+        printException(e);
     }
 
     testDescription(
@@ -61,7 +61,7 @@ int main(void) {
         delete bptr;
     }
     catch (std::exception& e) {
-        printException(e, "Exception: ");
+        printException(e);
         if (bptr)
             delete bptr;
     }
@@ -73,7 +73,7 @@ int main(void) {
         Bureaucrat b3 = Bureaucrat(Bureaucrat("político", -1000));
     }
     catch (std::exception& e) {
-        printException(e, "Exception: ");
+        printException(e);
     }
 
     testDescription("Incrementing a grade 3 should give a grade 2 to the bureaucrat");
@@ -108,11 +108,8 @@ int main(void) {
                 copy1.decrementGrade();
             }
         }
-        catch (Bureaucrat::GradeTooLowException& e) {
-            printException(e, "GradeTooLowException: ");
-        }
         catch (std::exception& e) {
-            printException(e, "Exception: ");
+            printException(e);
         }
         std::cout << copy1 << std::endl;
 
@@ -123,11 +120,8 @@ int main(void) {
                 copy2.incrementGrade();
             }
         }
-        catch (Bureaucrat::GradeTooHighException& e) {
-            printException(e, "GradeTooHighException: ");
-        }
         catch (std::exception& e) {
-            printException(e, "Exception: ");
+            printException(e);
         }
         std::cout << copy2 << std::endl;
 
