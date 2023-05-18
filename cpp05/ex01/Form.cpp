@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:42:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 23:18:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:45:22 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ Form::Form(Form const& form):
 	_execute_grade(_checkGrade(form.getExecuteGrade()))
 {
 	_description("copy constructor");
-	// *this = form;
 }
 
 Form& Form::operator=(Form const& form) {
@@ -97,10 +96,10 @@ const char* Form::GradeTooLowException::what() const throw() {
 	return "Form: GradeTooLowException";
 }
 
-void	Form::_description(std::string description) {
+void	Form::_description(const std::string description) {
 	if (DEBUG)
 		std::cout << GREY << this->getName() << " " << description
-		<< " called" << RESET << std::endl;
+			<< " called" << RESET << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& o, Form const& form) {

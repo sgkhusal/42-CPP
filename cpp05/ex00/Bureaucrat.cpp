@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 23:01:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:44:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 	return "Bureaucrat grade too low. Min grade is 150";
 }
 
-void	Bureaucrat::_description(std::string description) {
+void	Bureaucrat::_description(const std::string description) {
 	if (DEBUG)
 		std::cout << GREY << this->getName() << " " << description << " called"
 			<< RESET << std::endl;

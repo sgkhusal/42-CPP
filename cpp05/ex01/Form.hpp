@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:13:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 23:17:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:44:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ class Form {
 		const int			_sign_grade;
 		const int			_execute_grade;
 
-		void	_description(std::string description);
+		void	_description(const std::string description);
 		int		_checkGrade(const int grade);
 
 		class GradeTooHighException: public std::exception {

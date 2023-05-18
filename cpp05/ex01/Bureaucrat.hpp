@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 21:41:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:44:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class Bureaucrat {
 		const std::string	_name;
 		int					_grade;
 
-		void	_description(std::string description);
+		void	_description(const std::string description);
 
 		class GradeTooHighException: public std::exception {
 			public:
