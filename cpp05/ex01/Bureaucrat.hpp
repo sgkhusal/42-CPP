@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 20:57:53 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/17 21:41:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <exception>
 # include <cstdlib>
 # include <iostream>
+
+# include "Form.hpp"
 
 # define ORANGE	"\033[0;38;5;166m"
 # define BLUE	"\033[38;5;75m"
@@ -31,6 +33,8 @@
 
 # define MAX_GRADE 1
 # define MIN_GRADE 150
+
+class Form;
 
 class Bureaucrat {
 	public:
@@ -47,6 +51,8 @@ class Bureaucrat {
 		void		incrementGrade(void);
 		void		decrementGrade(void);
 
+		void		signForm(Form &form);
+
 	private:
 		const std::string	_name;
 		int					_grade;
@@ -55,12 +61,12 @@ class Bureaucrat {
 
 		class GradeTooHighException: public std::exception {
 			public:
-				virtual const char* what() const throw(); // precisa do virtual? no vídeo da intra o cara coloca
+				virtual const char* what() const throw();
 		};
 
 		class GradeTooLowException: public std::exception {
 			public:
-				virtual const char* what() const throw(); //
+				virtual const char* what() const throw();
 		};
 
 };

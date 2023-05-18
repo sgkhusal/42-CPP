@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 20:38:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:34:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int main(void) {
     try {
         Bureaucrat b1 = Bureaucrat("Fulano", 1);
         std::cout << b1 << std::endl;
-        Bureaucrat* b2 = new Bureaucrat("Beltrano", 75);
-        std::cout << b2 << std::endl;
+        b2 = new Bureaucrat("Beltrano", 75);
+        std::cout << *b2 << std::endl;
         Bureaucrat b3 = Bureaucrat("Ciclano", 150);
         std::cout << b3 << std::endl;
         Bureaucrat b4;
@@ -132,9 +132,9 @@ int main(void) {
         std::cout << "copy1:    " << copy1 << std::endl;
         std::cout << "copy2:    " << copy2 << std::endl;
         if (b.getGrade() != copy1.getGrade() && b.getGrade() != copy2.getGrade())
-            std::cout << GREEN << "OK" << std::endl << std::endl;
+            std::cout << GREEN << "OK" << RESET << std::endl << std::endl;
         else
-            std::cout << ORANGE << "KO" << std::endl << std::endl;
+            std::cout << ORANGE << "KO" << RESET << std::endl << std::endl;
     }
 
     testDescription("Deep copy - original still must work:");

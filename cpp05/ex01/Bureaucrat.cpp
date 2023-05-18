@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 23:01:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/17 23:35:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,16 @@ void	Bureaucrat::_description(std::string description) {
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& b) {
 	o << b.getName() << " - bureaucrat grade " << b.getGrade();
 	return o;
+}
+
+void	Bureaucrat::signForm(Form &form) {
+	try {
+		form.beSigned(*this);
+		std::cout << *this << " signed " << form.getName() << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << ORANGE << e.what() << ": " << *this << " couldn’t sign "
+			<< form.getName() << " because it is necessary at least a grade "
+			<< form.getSignGrade() << " to sign it." << RESET << std::endl;
+	}
 }
