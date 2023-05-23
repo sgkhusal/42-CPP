@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:25:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 11:49:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:49:25 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,22 @@ int	AForm::_checkGrade(const int grade) {
 }
 
 const char* AForm::GradeTooHighException::what() const throw() {
-	return "AForm: GradeTooHighException";
+	return "Form: grade to high";
 }
 
 const char* AForm::GradeTooLowException::what() const throw() {
-	return "AForm: GradeTooLowException";
+	return "Form: grade to low";
+}
+
+const char* AForm::FormNotSignException::what() const throw() {
+	return "This form can not be executed because it is not signed!";
 }
 
 void	AForm::_description(
 	const std::string description, const std::string class_name
 ) {
 	if (DEBUG)
-		std::cout << "Class " << class_name << " " << description << " called" 
+		std::cout << "Class " << class_name << " " << description << " called"
 		<< " for " << this->getName() << RESET << std::endl;
 }
 
@@ -110,4 +114,12 @@ std::ostream& operator<<(std::ostream& o, AForm const& Aform) {
 		<< " | Sign grade: " << Aform.getSignGrade()
 		<< " | Execute grade: " << Aform.getExecuteGrade();
 	return o;
+}
+
+void	AForm::execute(Bureaucrat const & executor) {
+	if (this->getIsSigned() == false)
+		throw FormNotSignException();
+	if (executor.getGrade() > this->getExecuteGrade())
+		throw AForm::GradeTooLowException();
+	this->formAction();
 }

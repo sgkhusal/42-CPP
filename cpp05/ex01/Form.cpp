@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:42:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 11:45:22 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:50:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ int	Form::_checkGrade(const int grade) {
 }
 
 const char* Form::GradeTooHighException::what() const throw() {
-	return "Form: GradeTooHighException";
+	return "Form: grade to high";
 }
 
 const char* Form::GradeTooLowException::what() const throw() {
-	return "Form: GradeTooLowException";
+	return "Form: grade to low";
 }
 
 void	Form::_description(const std::string description) {

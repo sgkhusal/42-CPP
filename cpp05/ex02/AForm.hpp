@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:13:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 11:58:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:57:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ class AForm {
 		int				getExecuteGrade(void) const;
 
 		void			beSigned(Bureaucrat const& b);
-		virtual void	execute(Bureaucrat const & executor) = 0;
-	
+		void			execute(Bureaucrat const & executor);
+
 	protected:
-		void	_description(
+		virtual void	formAction(void) = 0; // será que eu deixo protected?
+		void			_description(
 			const std::string description, const std::string class_name
 		);
-	
+
 	private:
 		const std::string	_name;
 		bool				_is_signed;
@@ -61,6 +62,11 @@ class AForm {
 		};
 
 		class GradeTooLowException: public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class FormNotSignException: public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};

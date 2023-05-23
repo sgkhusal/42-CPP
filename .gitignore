@@ -30,3 +30,4 @@ diamondtrap
 .vscode
 *log
 vgcore.*
+.DS_Store

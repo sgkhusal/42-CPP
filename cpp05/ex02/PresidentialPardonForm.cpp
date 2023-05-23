@@ -6,13 +6,13 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 12:30:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/05/22 10:40:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(void): 
+PresidentialPardonForm::PresidentialPardonForm(void):
 	AForm("Shrubbery Creation Form", PPF_SIGN, PPF_EXEC) {
 	_description("canonical constructor", "PresidentialPardonForm");
 	this->_target = "undefined";
@@ -48,7 +48,7 @@ std::string	PresidentialPardonForm::getTarget(void) const {
 	return this->_target;
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const & executor) {
-	// Informs that <target> has been pardoned by Zaphod Beeblebrox
-	(void)executor;
+void	PresidentialPardonForm::formAction(void) {
+	std::cout << BLUE << this->getTarget()
+			<< " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }
