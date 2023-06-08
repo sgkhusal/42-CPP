@@ -6,12 +6,15 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 12:26:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:59:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 void	testDescription(std::string const& description) {
 	std::cout << std::endl << BLUE << description << RESET << std::endl;
@@ -142,7 +145,7 @@ void	bureaucratTests(void) {
 		testDescription(
 			"Ensure deep copy: grade b must be different from copy1 and copy2"
 		);
-		std::cout << "original: "<< b << std::endl;
+		std::cout << "original: " << b << std::endl;
 		std::cout << "copy1:    " << copy1 << std::endl;
 		std::cout << "copy2:    " << copy2 << std::endl;
 		if (b.getGrade() != copy1.getGrade() && b.getGrade() != copy2.getGrade())
@@ -153,97 +156,139 @@ void	bureaucratTests(void) {
 
 	testDescription("Deep copy - original still must work:");
 	b.decrementGrade();
-	std::cout << "original: "<< b << std::endl;
+	std::cout << "original: " << b << std::endl;
 }
 
-// void	formTestCase0(const std::string name, const int sign, const int execute) {
-// 	try {
-// 		Form b = Form(name, sign, execute);
-// 		std::cout << b << std::endl;
-// 	}
-// 	catch (std::exception& e) {
-// 		printException(e);
-// 	}
-// }
+void	formTestCase1(AForm* form) {
+	Bureaucrat b1 = Bureaucrat("Bureaucrat 1", 146);
+	Bureaucrat b2 = Bureaucrat("Bureaucrat 2", 25);
+	Bureaucrat b3 = Bureaucrat("Bureaucrat 3", 5);
 
-// void	formTestCase1(const std::string name, const int sign, const int execute) {
-// 	Form* bptr = NULL;
-// 	try {
-// 		bptr = new Form(name, sign, execute);
-// 		std::cout << bptr << std::endl;
-// 		delete bptr;
-// 	}
-// 	catch (std::exception& e) {
-// 		printException(e);
-// 		if (bptr)
-// 			delete bptr;
-// 	}
-// }
+	try {
+		testDescription("The form can't be executed if it is not signed");
+		form->execute(b2);
+	}
+	catch (std::exception& e) {
+		printException(e);
+	}
 
-// void	formTests(void) {
-// 	printGeneralClass("Form");
+	testDescription("The form can't be signed by a lower sign grade");
+	b1.signForm(*form);
 
-// 	testDescription("Creating forms with valids grades");
-// 	Form f1 = Form("Form 1", 1, 150);
-// 	std::cout << f1 << std::endl;
-// 	Form* f2 = NULL;
-// 	f2 = new Form("Form 2", 150, 1);
-// 	std::cout << *f2 << std::endl;
-// 	Form f3;
-// 	std::cout << f3 << std::endl;
-// 	delete f2;
+	testDescription("The form is signed");
+	b2.signForm(*form);
 
-// 	testDescription(
-// 		"Create a form with invalid sign grade greater than max grade - 0"
-// 	);
-// 	formTestCase0("Form A", 0, 130);
+	try {
+		testDescription("The form can't be executed by a lower execute grade");
+		form->execute(b1);
+	}
+	catch (std::exception& e) {
+		std::cout << ORANGE << e.what() << ": " << b1 << " couldn’t execute "
+			<< form->getName() << " because it is necessary at least a grade "
+			<< form->getExecuteGrade() << " to execute it." << RESET << std::endl;
+	}
 
-// 	testDescription(
-// 		"Create a form with invalid sign grade smaller than min grade - 151"
-// 	);
-// 	formTestCase0("Form B", 151, 100);
+	testDescription("The form is executed several times... Because bureaucrats are not very smart");
+	form->execute(b3);
+	form->execute(b3);
+	form->execute(b3);
+	form->execute(b3);
+	form->execute(b3);
+	form->execute(b3);
 
-// 	testDescription(
-// 		"Create a form pointer with invalid execute grade greater than max grade - 0"
-// 	);
-// 	formTestCase1("Form C", 10, 0);
+	delete form;
+}
 
-// 	testDescription(
-// 		"Create a form pointer with invalid execute grade smaller than min grade - 151"
-// 	);
-// 	formTestCase1("Form D", 50, 151);
+void	formTestCase0(AForm& form, AForm& copy1, AForm& copy2) {
+	std::cout << copy2 << std::endl;
 
-// 	testDescription("Using copy constructor and assign operator");
-// 	Form copy1 = Form(f1);
-// 	Form copy2;
-// 	copy2 = copy1;
-// 	std::cout << copy2 << std::endl;
+	Bureaucrat b1 = Bureaucrat("Umbridge", 146);
+	Bureaucrat b2 = Bureaucrat("Leopold", 25);
 
-// 	Bureaucrat b1 = Bureaucrat("Umbridge", 2);
-// 	Bureaucrat b2 = Bureaucrat("Leopold", 1);
+	testDescription(
+			"Ensure deep copy: form and copy1 must not be signed, copy2 must be signed"
+		);
+	b1.signForm(copy1);
+	b2.signForm(copy2);
 
-// 	testDescription(
-// 			"Ensure deep copy: form f1 and copy1 must not be signed, copy2 must be signed"
-// 		);
-// 	b1.signForm(copy1);
-// 	b2.signForm(copy2);
+	if (!form.getIsSigned() && !copy1.getIsSigned() && copy2.getIsSigned())
+		std::cout << GREEN << "OK" << RESET << std::endl;
+	else
+		std::cout << ORANGE << "KO" << RESET << std::endl;
+	std::cout << form << std::endl;
+	std::cout << copy1 << std::endl;
+	std::cout << copy2 << std::endl;
 
-// 	// bureaucrats sometimes sign the same form more than once...
-// 	b2.signForm(copy2);
-// 	b1.setGrade(1);
-// 	b1.signForm(copy2);
+	testDescription(
+			"bureaucrats sometimes sign the same form more than once..."
+		);
+	b2.signForm(copy2);
+	b1.setGrade(25);
+	b1.signForm(copy2);
+}
 
-// 	if (!f1.getIsSigned() && !copy1.getIsSigned() && copy2.getIsSigned())
-// 		std::cout << GREEN << "OK" << RESET << std::endl << std::endl;
-// 	else
-// 		std::cout << ORANGE << "KO" << RESET << std::endl << std::endl;
-// 	std::cout << f1 << std::endl;
-// 	std::cout << copy1 << std::endl;
-// 	std::cout << copy2 << std::endl;
-// }
+void	shrubberyTests(void) {
+	printGeneralClass("ShrubberyCreationForm");
+
+	testDescription("Creating a ShrubberyCreationForm");
+	ShrubberyCreationForm s("garden");
+	std::cout << s << std::endl;
+	AForm* sptr = new ShrubberyCreationForm("home");
+	std::cout << *sptr << std::endl;
+
+	// deep copy tests
+	testDescription("Using copy constructor and assign operator");
+	ShrubberyCreationForm copy1 = ShrubberyCreationForm(s);
+	ShrubberyCreationForm copy2;
+	copy2 = copy1;
+	formTestCase0(s, copy1, copy2);
+
+	formTestCase1(sptr);
+
+	testDescription("Let's execute another shrubbery create form...");
+	copy2.execute(Bureaucrat("Intern", 100));
+}
+
+void	robotomyTests(void) {
+	printGeneralClass("RobotomyRequestForm");
+
+	testDescription("Creating a RobotomyRequestForm");
+	RobotomyRequestForm r("Tim Man");
+	std::cout << r << std::endl;
+	AForm* rptr = new RobotomyRequestForm("Tim Man");
+
+	// deep copy tests
+	testDescription("Using copy constructor and assign operator");
+	RobotomyRequestForm copy1 = RobotomyRequestForm(r);
+	RobotomyRequestForm copy2;
+	copy1 = copy2;
+	formTestCase0(r, copy1, copy2);
+
+	formTestCase1(rptr);
+}
+
+void	presidentialTests(void) {
+	printGeneralClass("PresidentialPardonForm");
+
+	testDescription("Creating a PresidentialPardonForm");
+	PresidentialPardonForm p("Severo Snape");
+	std::cout << p << std::endl;
+	AForm* pptr = new PresidentialPardonForm("Severo Snape");
+
+	// deep copy tests
+	testDescription("Using copy constructor and assign operator");
+	PresidentialPardonForm copy1 = PresidentialPardonForm(p);
+	PresidentialPardonForm copy2;
+	copy2 = copy1;
+	formTestCase0(p, copy1, copy2);
+
+	formTestCase1(pptr);
+}
 
 int main(void) {
 	bureaucratTests();
-	// formTests();
+	shrubberyTests();
+	robotomyTests();
+	presidentialTests();
 	return 0;
 }

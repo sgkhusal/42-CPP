@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 17:20:08 by sguilher          #+#    #+#              #
-#    Updated: 2023/05/18 12:25:31 by sguilher         ###   ########.fr        #
+#    Updated: 2023/06/08 18:04:36 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		tests
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -D DEBUG=true
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 #-D DEBUG=true
 
 SRC =		main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
 			RobotomyRequestForm.cpp PresidentialPardonForm.cpp

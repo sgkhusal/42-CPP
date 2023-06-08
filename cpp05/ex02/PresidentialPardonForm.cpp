@@ -6,21 +6,21 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/22 10:40:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:04:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(void):
-	AForm("Shrubbery Creation Form", PPF_SIGN, PPF_EXEC) {
+	AForm("Presidential Pardon Form", PPF_SIGN, PPF_EXEC) {
 	_description("canonical constructor", "PresidentialPardonForm");
 	this->_target = "undefined";
 }
 
 PresidentialPardonForm::PresidentialPardonForm(
 	std::string const& target
-): AForm("Shrubbery Creation Form", PPF_SIGN, PPF_EXEC) {
+): AForm("Presidential Pardon Form", PPF_SIGN, PPF_EXEC) {
 	_description("grade constructor", "PresidentialPardonForm");
 	this->_target = target;
 }
@@ -31,7 +31,7 @@ PresidentialPardonForm::~PresidentialPardonForm(void) {
 
 PresidentialPardonForm::PresidentialPardonForm(
 	PresidentialPardonForm const& form):
-		AForm("Shrubbery Creation Form", PPF_SIGN, PPF_EXEC) {
+		AForm("Presidential Pardon Form", PPF_SIGN, PPF_EXEC) {
 	_description("copy constructor", "PresidentialPardonForm");
 	*this = form;
 }
@@ -49,6 +49,6 @@ std::string	PresidentialPardonForm::getTarget(void) const {
 }
 
 void	PresidentialPardonForm::formAction(void) {
-	std::cout << BLUE << this->getTarget()
+	std::cout << GREEN << this->getTarget()
 			<< " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }

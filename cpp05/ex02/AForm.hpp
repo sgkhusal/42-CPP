@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:13:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/22 21:57:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:03:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class AForm {
 		int				getExecuteGrade(void) const;
 
 		void			beSigned(Bureaucrat const& b);
-		void			execute(Bureaucrat const & executor);
+		void			execute(Bureaucrat const& executor);
 
 	protected:
 		virtual void	formAction(void) = 0; // será que eu deixo protected?

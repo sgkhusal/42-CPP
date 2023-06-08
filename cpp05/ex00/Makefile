@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 17:20:08 by sguilher          #+#    #+#              #
-#    Updated: 2023/05/14 23:07:24 by sguilher         ###   ########.fr        #
+#    Updated: 2023/06/08 20:01:14 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		tests
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -D DEBUG=true
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 #-D DEBUG=true
 
 SRC =		main.cpp Bureaucrat.cpp
 HEADERS =	Bureaucrat.hpp

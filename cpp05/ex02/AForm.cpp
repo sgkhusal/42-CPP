@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:25:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/22 21:49:25 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:00:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ AForm::AForm(AForm const& Aform):
 AForm& AForm::operator=(AForm const& Aform) {
 	_description("assign operator", "AForm");
 	if (this != &Aform) {
-		const_cast<std::string &>(this->_name) = Aform.getName();
+		const_cast<std::string&>(this->_name) = Aform.getName();
 		this->_is_signed = Aform.getIsSigned();
-		const_cast<int &>(this->_sign_grade) = Aform.getSignGrade();
-		const_cast<int &>(this->_execute_grade) = Aform.getExecuteGrade();
+		const_cast<int&>(this->_sign_grade) = Aform.getSignGrade();
+		const_cast<int&>(this->_execute_grade) = Aform.getExecuteGrade();
 	}
 	return *this;
 }
@@ -104,19 +104,19 @@ void	AForm::_description(
 	const std::string description, const std::string class_name
 ) {
 	if (DEBUG)
-		std::cout << "Class " << class_name << " " << description << " called"
-		<< " for " << this->getName() << RESET << std::endl;
+		std::cout << GREY << "Class " << class_name << " " << description
+		<< " called for " << this->getName() << RESET << std::endl;
 }
 
-std::ostream& operator<<(std::ostream& o, AForm const& Aform) {
-	o << Aform.getName()
-		<< " | AForm is signed: " << (Aform.getIsSigned() ? "yes" : "no")
-		<< " | Sign grade: " << Aform.getSignGrade()
-		<< " | Execute grade: " << Aform.getExecuteGrade();
+std::ostream& operator<<(std::ostream& o, AForm const& form) {
+	o << form.getName() << ":"
+		<< "| Form is signed: " << (form.getIsSigned() ? "yes" : "no")
+		<< "| Sign grade: " << form.getSignGrade()
+		<< "| Execute grade: " << form.getExecuteGrade();
 	return o;
 }
 
-void	AForm::execute(Bureaucrat const & executor) {
+void	AForm::execute(Bureaucrat const& executor) {
 	if (this->getIsSigned() == false)
 		throw FormNotSignException();
 	if (executor.getGrade() > this->getExecuteGrade())
