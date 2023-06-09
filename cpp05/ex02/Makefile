@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 17:20:08 by sguilher          #+#    #+#              #
-#    Updated: 2023/06/08 18:04:36 by sguilher         ###   ########.fr        #
+#    Updated: 2023/06/08 23:59:17 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ clean:
 
 fclean:		clean
 		$(RM) $(NAME)
+		rm *_shrubbery
 
 re:			fclean all
 
