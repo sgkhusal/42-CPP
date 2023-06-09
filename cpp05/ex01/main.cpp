@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:21:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:42:10 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	bureaucratTests(void) {
 		Bureaucrat copy2;
 		copy2 = b;
 
-		testDescription("decrementGrade throw exception");
+		testDescription("decrementGrade until exception");
 		std::cout << copy1 << std::endl;
 		try {
 			while (true) {
@@ -127,7 +127,7 @@ void	bureaucratTests(void) {
 		}
 		std::cout << copy1 << std::endl;
 
-		testDescription("incrementGrade throw exception");
+		testDescription("incrementGrade until exception");
 		std::cout << copy2 << std::endl;
 		try {
 			while (true) {
@@ -227,12 +227,6 @@ void	formTests(void) {
 		);
 	b1.signForm(copy1);
 	b2.signForm(copy2);
-
-	// bureaucrats sometimes sign the same form more than once...
-	b2.signForm(copy2);
-	b1.setGrade(1);
-	b1.signForm(copy2);
-
 	if (!f1.getIsSigned() && !copy1.getIsSigned() && copy2.getIsSigned())
 		std::cout << GREEN << "OK" << RESET << std::endl << std::endl;
 	else
@@ -240,6 +234,13 @@ void	formTests(void) {
 	std::cout << f1 << std::endl;
 	std::cout << copy1 << std::endl;
 	std::cout << copy2 << std::endl;
+
+	testDescription(
+			"bureaucrats sometimes sign the same form more than once..."
+		);
+	b2.signForm(copy2);
+	b1.setGrade(1);
+	b1.signForm(copy2);
 }
 
 int main(void) {

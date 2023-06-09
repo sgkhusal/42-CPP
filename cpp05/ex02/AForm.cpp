@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:25:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 19:00:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:40:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ void	AForm::_description(
 }
 
 std::ostream& operator<<(std::ostream& o, AForm const& form) {
-	o << form.getName() << ":"
-		<< "| Form is signed: " << (form.getIsSigned() ? "yes" : "no")
-		<< "| Sign grade: " << form.getSignGrade()
-		<< "| Execute grade: " << form.getExecuteGrade();
+	o << form.getName()
+		<< " | Form is signed: " << (form.getIsSigned() ? "yes" : "no")
+		<< " | Sign grade: " << form.getSignGrade()
+		<< " | Execute grade: " << form.getExecuteGrade();
 	return o;
 }
 

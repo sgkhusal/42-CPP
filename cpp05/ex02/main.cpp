@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:20:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:55:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	bureaucratTests(void) {
 		Bureaucrat copy2;
 		copy2 = b;
 
-		testDescription("decrementGrade throw exception");
+		testDescription("decrementGrade until exception");
 		std::cout << copy1 << std::endl;
 		try {
 			while (true) {
@@ -130,7 +130,7 @@ void	bureaucratTests(void) {
 		}
 		std::cout << copy1 << std::endl;
 
-		testDescription("incrementGrade throw exception");
+		testDescription("incrementGrade until exception");
 		std::cout << copy2 << std::endl;
 		try {
 			while (true) {
@@ -231,9 +231,9 @@ void	shrubberyTests(void) {
 	printGeneralClass("ShrubberyCreationForm");
 
 	testDescription("Creating a ShrubberyCreationForm");
-	ShrubberyCreationForm s("garden");
+	ShrubberyCreationForm s("home");
 	std::cout << s << std::endl;
-	AForm* sptr = new ShrubberyCreationForm("home");
+	AForm* sptr = new ShrubberyCreationForm("garden");
 	std::cout << *sptr << std::endl;
 
 	// deep copy tests

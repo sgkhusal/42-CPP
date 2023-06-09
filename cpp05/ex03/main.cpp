@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:22:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:34:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	bureaucratTests(void) {
 		Bureaucrat copy2;
 		copy2 = b;
 
-		testDescription("decrementGrade throw exception");
+		testDescription("decrementGrade until exception");
 		std::cout << copy1 << std::endl;
 		try {
 			while (true) {
@@ -131,7 +131,7 @@ void	bureaucratTests(void) {
 		}
 		std::cout << copy1 << std::endl;
 
-		testDescription("incrementGrade throw exception");
+		testDescription("incrementGrade until exception");
 		std::cout << copy2 << std::endl;
 		try {
 			while (true) {

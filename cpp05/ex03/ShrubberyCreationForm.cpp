@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:30 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:18:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:49:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ShrubberyCreationForm::formAction(void) {
 	std::string		fileName;
 
 	fileName = this->getTarget() + "_shrubbery";
-	ofs.open((fileName).c_str());
+	ofs.open((fileName).c_str(), std::ofstream::out | std::ofstream::app);
 	if (ofs.fail())
 		throw CreateFileException();
 
