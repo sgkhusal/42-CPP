@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/17 23:37:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:21:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,7 +243,7 @@ void	formTests(void) {
 }
 
 int main(void) {
-	bureaucratTests();
+	// bureaucratTests();
 	formTests();
 	return 0;
 }

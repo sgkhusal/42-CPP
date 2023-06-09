@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:20:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:22:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 void	testDescription(std::string const& description) {
 	std::cout << std::endl << BLUE << description << RESET << std::endl;
@@ -287,8 +288,39 @@ void	presidentialTests(void) {
 
 int main(void) {
 	// bureaucratTests();
-	shrubberyTests();
-	robotomyTests();
-	presidentialTests();
+	// shrubberyTests();
+	// robotomyTests();
+	// presidentialTests();
+
+	printGeneralClass("Intern");
+	Bureaucrat b("Some Bureaucrat", 2);
+	Intern someRandomIntern;
+	AForm* form;
+
+	testDescription("Creating a shrubbery creation form");
+	form = someRandomIntern.makeForm("shrubbery creation", "beach");
+	std::cout << *form << std::endl;
+	b.signForm(*form);
+	form->execute(b);
+	delete form;
+
+	testDescription("Creating a robotomy request form");
+	form = someRandomIntern.makeForm("robotomy request", "Bender");
+	std::cout << *form << std::endl;
+	b.signForm(*form);
+	form->execute(b);
+	form->execute(b);
+	delete form;
+
+	testDescription("Creating a presidential pardon form");
+	form = someRandomIntern.makeForm("presidential pardon", "Arthur Dent");
+	std::cout << *form << std::endl;
+	b.signForm(*form);
+	form->execute(b);
+	delete form;
+
+	testDescription("Creating an invalid form");
+	form = someRandomIntern.makeForm("clean earth", "Arthur Dent");
+
 	return 0;
 }
