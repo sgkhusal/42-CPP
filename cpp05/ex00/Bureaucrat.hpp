@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 11:44:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,28 @@ class Bureaucrat {
 		~Bureaucrat(void);
 		Bureaucrat& operator=(Bureaucrat const& b);
 
-		Bureaucrat(const std::string name, const int grade);
+		Bureaucrat(std::string const name, int const grade);
 
 		std::string	getName(void) const;
 		int			getGrade(void) const;
-		void		setGrade(const int grade);
+		void		setGrade(int const grade);
 		void		incrementGrade(void);
 		void		decrementGrade(void);
 
 	private:
-		const std::string	_name;
+		std::string const	_name;
 		int					_grade;
 
-		void	_description(const std::string description);
+		void	_description(std::string const description);
 
 		class GradeTooHighException: public std::exception {
 			public:
-				virtual const char* what() const throw(); // precisa do virtual? no vídeo da intra o cara coloca
+				virtual const char* what() const throw();
 		};
 
 		class GradeTooLowException: public std::exception {
 			public:
-				virtual const char* what() const throw(); //
+				virtual const char* what() const throw();
 		};
 
 };

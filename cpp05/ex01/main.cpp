@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:42:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:58:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	testDescription(std::string const& description) {
 	std::cout << std::endl << BLUE << description << RESET << std::endl;
 }
 
-void	printGeneralClass(const std::string class_name) {
+void	printGeneralClass(std::string const& class_name) {
 	std::cout << std::endl << std::endl;
 	std::cout << YELLOW;
 	for (int i = 0; i < 50; i++)
@@ -156,7 +156,7 @@ void	bureaucratTests(void) {
 	std::cout << "original: "<< b << std::endl;
 }
 
-void	formTestCase0(const std::string name, const int sign, const int execute) {
+void	formTestCase0(std::string const name, int const sign, int const execute) {
 	try {
 		Form b = Form(name, sign, execute);
 		std::cout << b << std::endl;
@@ -166,7 +166,7 @@ void	formTestCase0(const std::string name, const int sign, const int execute) {
 	}
 }
 
-void	formTestCase1(const std::string name, const int sign, const int execute) {
+void	formTestCase1(std::string const name, int const sign, int const execute) {
 	Form* bptr = NULL;
 	try {
 		bptr = new Form(name, sign, execute);

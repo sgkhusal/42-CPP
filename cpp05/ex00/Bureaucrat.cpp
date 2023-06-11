@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/18 11:44:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Bureaucrat::Bureaucrat(void):
 	_description("canonical constructor");
 }
 
-Bureaucrat::Bureaucrat(const std::string name, const int grade): _name(name) {
+Bureaucrat::Bureaucrat(std::string const name, int const grade): _name(name) {
 	_description("grade constructor");
 	setGrade(grade);
 }
@@ -48,7 +48,7 @@ int	Bureaucrat::getGrade(void) const {
 	return this->_grade;
 }
 
-void	Bureaucrat::setGrade(const int grade) {
+void	Bureaucrat::setGrade(int const grade) {
 	if (grade < MAX_GRADE)
 		throw Bureaucrat::GradeTooHighException();
 	if (grade > MIN_GRADE)
@@ -78,7 +78,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 	return "Bureaucrat grade too low. Min grade is 150";
 }
 
-void	Bureaucrat::_description(const std::string description) {
+void	Bureaucrat::_description(std::string const description) {
 	if (DEBUG)
 		std::cout << GREY << this->getName() << " " << description << " called"
 			<< RESET << std::endl;

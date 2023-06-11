@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:13:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 20:03:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ class AForm {
 		AForm& operator=(AForm const& form);
 
 		AForm(
-			const std::string name,
-			const int sign_grade,
-			const int execute_grade
+			std::string const name,
+			int const sign_grade,
+			int const execute_grade
 		);
 
 		std::string		getName(void) const;
@@ -43,18 +43,18 @@ class AForm {
 		void			execute(Bureaucrat const& executor);
 
 	protected:
-		virtual void	formAction(void) = 0; // será que eu deixo protected?
+		virtual void	formAction(void) = 0;
 		void			_description(
-			const std::string description, const std::string class_name
+			std::string const description, std::string const class_name
 		);
 
 	private:
-		const std::string	_name;
+		std::string const	_name;
 		bool				_is_signed;
-		const int			_sign_grade;
-		const int			_execute_grade;
+		int const			_sign_grade;
+		int const			_execute_grade;
 
-		int		_checkGrade(const int grade);
+		int		_checkGrade(int const grade);
 
 		class GradeTooHighException: public std::exception {
 			public:

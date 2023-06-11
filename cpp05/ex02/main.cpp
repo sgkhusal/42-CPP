@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:55:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:58:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	testDescription(std::string const& description) {
 	std::cout << std::endl << BLUE << description << RESET << std::endl;
 }
 
-void	printGeneralClass(const std::string class_name) {
+void	printGeneralClass(std::string const& class_name) {
 	std::cout << std::endl << std::endl;
 	std::cout << YELLOW;
 	for (int i = 0; i < 50; i++)

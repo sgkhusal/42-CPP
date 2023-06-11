@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:25:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:40:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ AForm::AForm(void):
 }
 
 AForm::AForm(
-	const std::string name, const int sign_grade, const int execute_grade
+	std::string const name, int const sign_grade, int const execute_grade
 ):
 	_name(name),
 	_is_signed(false),
@@ -80,7 +80,7 @@ void	AForm::beSigned(Bureaucrat const& b) {
 	this->_is_signed = true;
 }
 
-int	AForm::_checkGrade(const int grade) {
+int	AForm::_checkGrade(int const grade) {
 	if (grade < MAX_GRADE)
 		throw AForm::GradeTooHighException();
 	if (grade > MIN_GRADE)
@@ -101,7 +101,7 @@ const char* AForm::FormNotSignException::what() const throw() {
 }
 
 void	AForm::_description(
-	const std::string description, const std::string class_name
+	std::string const description, std::string const class_name
 ) {
 	if (DEBUG)
 		std::cout << GREY << "Class " << class_name << " " << description

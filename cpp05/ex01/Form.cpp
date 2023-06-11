@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:42:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:39:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Form::Form(void):
 }
 
 Form::Form(
-	const std::string name, const int sign_grade, const int execute_grade
+	std::string const name, int const sign_grade, int const execute_grade
 ):
 	_name(name),
 	_is_signed(false),
@@ -80,7 +80,7 @@ void	Form::beSigned(Bureaucrat const& b) {
 	this->_is_signed = true;
 }
 
-int	Form::_checkGrade(const int grade) {
+int	Form::_checkGrade(int const grade) {
 	if (grade < MAX_GRADE)
 		throw Form::GradeTooHighException();
 	if (grade > MIN_GRADE)
@@ -96,7 +96,7 @@ const char* Form::GradeTooLowException::what() const throw() {
 	return "Form: grade to low";
 }
 
-void	Form::_description(const std::string description) {
+void	Form::_description(std::string const description) {
 	if (DEBUG)
 		std::cout << GREY << this->getName() << " " << description
 			<< " called" << RESET << std::endl;
