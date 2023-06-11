@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:13:58 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:41:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ class AForm {
 		int				getExecuteGrade(void) const;
 
 		void			beSigned(Bureaucrat const& b);
-		void			execute(Bureaucrat const& executor);
+		virtual void	execute(Bureaucrat const& executor) const = 0;
 
 	protected:
-		virtual void	formAction(void) = 0;
-		void			_description(
+		void		_checkPermissionToExecute(Bureaucrat const& executor) const;
+		void		_description(
 			std::string const description, std::string const class_name
 		);
 
@@ -67,6 +67,11 @@ class AForm {
 		};
 
 		class FormNotSignException: public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class NoPermissionException: public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:06:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ class Bureaucrat {
 		void		decrementGrade(void);
 
 		void		signForm(AForm &form);
+		void		executeForm(AForm const & form);
 
 	private:
 		std::string const	_name;

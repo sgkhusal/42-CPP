@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:51:33 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/22 21:58:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:54:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ class RobotomyRequestForm: public AForm {
 		RobotomyRequestForm(std::string const& target);
 
 		std::string	getTarget(void) const;
-		int			getNbAction(void) const;
 
-	protected:
-		void	formAction(void);
+		void		execute(Bureaucrat const& executor) const;
 
 	private:
 		std::string	_target;
-		int			_nbAction;
 };
 
 #endif

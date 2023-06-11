@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:50:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/05/22 21:58:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:41:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ class PresidentialPardonForm: public AForm {
 		PresidentialPardonForm(std::string const& target);
 
 		std::string	getTarget(void) const;
-		
-	protected:
-		void	formAction(void);
+
+		void		execute(Bureaucrat const& executor) const;
 
 	private:
 		std::string	_target;

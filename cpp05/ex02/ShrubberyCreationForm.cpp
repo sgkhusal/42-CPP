@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:30 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 23:49:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:54:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(void):
 	AForm("Shrubbery Creation Form", SCF_SIGN, SCF_EXEC) {
 	_description("canonical constructor", "ShrubberyCreationForm");
 	this->_target = "undefined";
-	this->_nbAction = 0;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(
@@ -24,7 +23,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(
 ): AForm("Shrubbery Creation Form", SCF_SIGN, SCF_EXEC) {
 	_description("grade constructor", "ShrubberyCreationForm");
 	this->_target = target;
-	this->_nbAction = 0;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void) {
@@ -43,7 +41,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(
 	_description("assign operator", "ShrubberyCreationForm");
 	if (this != &form) {
 		this->_target = form.getTarget();
-		this->_nbAction = form.getNbAction();
 	}
 	return *this;
 }
@@ -52,11 +49,9 @@ std::string	ShrubberyCreationForm::getTarget(void) const {
 	return this->_target;
 }
 
-int	ShrubberyCreationForm::getNbAction(void) const {
-	return this->_nbAction;
-}
+void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
+	this->_checkPermissionToExecute(executor);
 
-void	ShrubberyCreationForm::formAction(void) {
 	std::ofstream	ofs;
 	std::string		fileName;
 
@@ -65,7 +60,7 @@ void	ShrubberyCreationForm::formAction(void) {
 	if (ofs.fail())
 		throw CreateFileException();
 
-	if (this->_nbAction % 2)
+	if ((rand() % 2) % 2)
 		ofs << "               ,@@@@@@@,\n"
 			<< "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
 			<< "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
@@ -109,7 +104,6 @@ void	ShrubberyCreationForm::formAction(void) {
 	if (ofs.bad())
 		throw CreateFileException();
 	ofs.close();
-	this->_nbAction += 1;
 	std::cout << GREEN << fileName << " was filled with beautifull ASCII trees"
 		<< std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:25:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:40:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,11 @@ const char* AForm::GradeTooLowException::what() const throw() {
 }
 
 const char* AForm::FormNotSignException::what() const throw() {
-	return "This form can not be executed because it is not signed!";
+	return "form is not signed";
+}
+
+const char* AForm::NoPermissionException::what() const throw() {
+	return "executor grade is to low!";
 }
 
 void	AForm::_description(
@@ -116,10 +120,9 @@ std::ostream& operator<<(std::ostream& o, AForm const& form) {
 	return o;
 }
 
-void	AForm::execute(Bureaucrat const& executor) {
+void	AForm::_checkPermissionToExecute(Bureaucrat const& executor) const {
 	if (this->getIsSigned() == false)
-		throw FormNotSignException();
+		throw AForm::FormNotSignException();
 	if (executor.getGrade() > this->getExecuteGrade())
-		throw AForm::GradeTooLowException();
-	this->formAction();
+		throw AForm::NoPermissionException();
 }

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 20:04:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 00:41:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ std::string	PresidentialPardonForm::getTarget(void) const {
 	return this->_target;
 }
 
-void	PresidentialPardonForm::formAction(void) {
+void	PresidentialPardonForm::execute(Bureaucrat const& executor) const {
+	this->_checkPermissionToExecute(executor);
 	std::cout << GREEN << this->getTarget()
 			<< " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 }
