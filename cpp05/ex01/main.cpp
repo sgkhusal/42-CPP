@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 23:17:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 01:27:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 void	testDescription(std::string const& description);
 void	printTitle(std::string const& title);
 void	printException(std::exception& e);
-void	ex00Tests(void);
+void	bureaucratTests(void);
 
 int main(void) {
-	// ex00Tests();
+	// bureaucratTests();
 
 	printTitle("Ex01");
 
@@ -130,7 +130,7 @@ int main(void) {
 	return 0;
 }
 
-void	ex00Tests(void) {
+void	bureaucratTests(void) {
 	printTitle("Ex00");
 
 	testDescription("Creating bureaucrats with valids grades");

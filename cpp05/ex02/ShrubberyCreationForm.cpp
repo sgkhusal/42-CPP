@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 11:54:30 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/11 00:54:39 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 01:44:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
 		throw CreateFileException();
 	ofs.close();
 	std::cout << GREEN << fileName << " was filled with beautifull ASCII trees"
-		<< std::endl;
+		<< RESET << std::endl;
 }
 
 const char* ShrubberyCreationForm::CreateFileException::what() const throw() {

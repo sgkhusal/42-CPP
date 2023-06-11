@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:50:21 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 22:45:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 01:35:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ AForm* Intern::_makePresidentialPardonForm(std::string const& target) const {
 	return new PresidentialPardonForm(target);
 }
 
-AForm* Intern::makeForm(std::string const& form_type, std::string const& target) {
+AForm* Intern::makeForm(std::string const& name, std::string const& target) {
 	int i = 0;
 	AForm* form = NULL;
 
 	while (i < TOTAL_FORMS_TYPES) {
-		if (form_type == Intern::formsList[i]) {
+		if (name == Intern::formsList[i]) {
 			form = (this->*formsReference[i])(target);
-			std::cout << GREEN << "Intern creates " << form->getName()
+			std::cout << "Intern creates " << form->getName()
 				<< RESET << std::endl;
 			return form;
 		}
 		i++;
 	}
-	std::cout << ORANGE << "Error: " << form_type
+	std::cout << ORANGE << "Error: " << name
 		<< " form does not exist in the forms list" << RESET << std::endl;
 	return NULL;
 }

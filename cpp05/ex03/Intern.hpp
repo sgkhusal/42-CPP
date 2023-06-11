@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:08:22 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/08 22:23:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/11 01:33:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	~Intern(void);
 	Intern& operator=(Intern const& intern);
 
-	AForm* makeForm(std::string const& form_type, std::string const& target);
+	AForm* makeForm(std::string const& name, std::string const& target);
 
 private:
 	typedef	AForm* (Intern::* fptr)(std::string const&) const;
