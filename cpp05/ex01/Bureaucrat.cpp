@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:25 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 21:48:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:59:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ void	Bureaucrat::signForm(Form &form) {
 			<< std::endl;
 	}
 	catch (std::exception& e) {
-		std::cout << ORANGE << e.what() << ": " << *this << " couldn’t sign "
-			<< form.getName() << " because it is necessary at least a grade "
+		std::cout << ORANGE << e.what() << ": " << this->getName()
+			<< " couldn't sign " << form.getName()
+			<< " because it is necessary at least a grade "
 			<< form.getSignGrade() << " to sign it." << RESET << std::endl;
 	}
 }

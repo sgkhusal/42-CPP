@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:20:17 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/10 22:06:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:02:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int main(void) {
     );
     try {
         Bureaucrat b = Bureaucrat("Too efficient for a Bureaucrat", 0);
-        std::cout << b << std::endl;
+        std::cout << ORANGE << "KO" << std::endl;
     }
     catch (std::exception& e) {
         printException(e);
+        std::cout << GREEN << "OK" << std::endl;
     }
 
     testDescription(
@@ -45,11 +46,12 @@ int main(void) {
     Bureaucrat* bptr = NULL;
     try {
         bptr = new Bureaucrat("Worse than a Bureaucrat", 151);
-        std::cout << bptr << std::endl;
+        std::cout << ORANGE << "KO" << std::endl;
         delete bptr;
     }
     catch (std::exception& e) {
         printException(e);
+        std::cout << GREEN << "OK" << std::endl;
         if (bptr)
             delete bptr;
     }
