@@ -91,6 +91,9 @@ void DoSomething() {
 
 ### How Exception Handling Works
 
+<img width="989" alt="image" src="https://github.com/sgkhusal/42-CPP/assets/75377067/da24ed92-306f-4cd0-92c3-b2395228ab95">
+
+
 At each step in the stack unwinding procedure, the variables local to that function are destroyed in reverse sequence of their construction.
 
 
