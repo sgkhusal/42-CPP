@@ -23,7 +23,8 @@ int main(void){
     // i.e. anything that 'is-a' Character
     Character*  b = new Warrior(); // ok: Warrior is a Character
 
-    // not ok: Warrior*    c = new Character();
+    // not ok:
+    // Warrior*    c = new Character();
     // A Warrior is a Character, but not all Character is necessarily a Warrior
 }
 ```

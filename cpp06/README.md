@@ -156,7 +156,7 @@ destination_type result = cast_operator<destination_type> (object_to_cast);
 ```
 
 
-### Static cast
+### static_cast
 
 It allows us to make simple conversions - type conversions for standard data types that would otherwise happen automatically or implicitly. It will convert between built-in types, even when there is a loss of precision.:
 ```c++
@@ -194,6 +194,202 @@ The `static_cast` operator can also:
 - Convert any type to `void`, evaluating and discarding the value.
 
 \* You would also need to use static_ cast when using conversion operators or constructors that have been declared using keyword `explicit`
+
+
+### dynamic_cast
+
+- `dynamic_cast` can only be used with pointers and references to classes (or with void*).
+- It only works with polymorphic classes (those with virtual members).
+- It includes pointer **upcast** (converting from pointer-to-derived to pointer-to-base), in the same way as allowed as an **implicit conversion**.
+- It can also **downcast** (convert from pointer-to-base to pointer-to-derived) polymorphic classes  if - and only if - the pointed object is a valid complete object of the target type
+- Its purpose is to ensure that the result of the type conversion points to a valid complete object of the destination pointer type.
+- Dynamic cast occurs at runtime. The other cast types happen during the compilation. For that reason, the program may compile and the dynamic cast can fail during runtime
+- So, the return value of a `dynamic_cast` operation should always be checked for validity  and handle the failure properly. It is NULL when the cast fails.
+- The `dynamic_cast` operator returns a valid address if the Base class pointer points to an instance of the Derived class for which you are making the downcast
+
+#### Example 1:
+```c++
+class Parent { public: virtual ~Parent(void) {} };
+class Child1: public Parent {};
+class Child2: public Parent {};
+
+int main(void) {
+  Child1 a;
+  Parent* b = &a; // Implicit upcast -> Ok
+
+  // Explicit downcast with pointer
+  Child1* c = dynamic_cast<Child1*>(b);
+  if (c == NULL) {
+    std::cout << "Conversion is NOT OK" << std::endl;
+  }
+  else {
+    std::cout << "Conversion is OK" << std::endl;
+  }
+
+  // Explicit downcast with reference
+  // a reference can't be NULL so we need to use a try-catch block
+  try {
+    Child2* d = dynamic_cast<Child2*>(b); // It will fail
+    std::cout << "Conversion is OK" << std::endl;
+  }
+  catch (std::bad_cast& bc){
+    std::cout << "Conversion is NOT OK: " << bc.what() << std::endl;
+  }
+
+  Parent* parentptr = new Parent;
+  Child1* childptr = dynamic_cast<Child1*>(parentptr);
+  if (childptr == NULL)
+  	std::cout << "Conversion is NOT OK" << std::endl;
+  // parentptr is pointing to an object of class Parent, which is an incomplete object of class Child1 and so the dynamic cast fails.
+
+
+  return 0;
+}
+```
+
+Result:
+```
+Conversion is OK
+Conversion is NOT OK: std::bad_cast
+Conversion is NOT OK
+```
+
+- We can use `dynamic_cast` given a base-class pointer type to detected the type and then perform operations specific to the types detected.
+- `dynamic_cast` helps determine the type at runtime and use a casted pointer when it is safe to do so.
+- The mechanism of identifying the type of the object at runtime is called **runtime type identification (RTTI)**
+- `dynamic_cast` requires **Run-Time Type Information (RTTI)** to keep track of dynamic types. Some compilers support this feature as an option which is disabled by default. This needs to be enabled for runtime type checking using `dynamic_cast` to work properly with these types.
+
+#### Example 2 (from Sams Teach Yourself C++ in one Hour a Day):
+```c++
+class Fish {
+public:
+  virtual ~Fish() {}
+  virtual void Swim() {
+    std::cout << "Fish swims in water" << std::endl;
+  }
+};
+
+class Tuna: public Fish 16: {
+public:
+  void Swim() { std::cout << "Tuna swims real fast in the sea" << std::endl; }
+  void BecomeDinner() { std::cout << "Tuna became dinner in Sushi" << std::endl; }
+};
+
+class Carp: public Fish 30: {
+public:
+  void Swim() { std::cout << "Carp swims real slow in the lake" << std::endl; };
+  void Talk() { std::cout << "Carp talked Carp!" << std::endl; }
+
+};
+
+void DetectFishType(Fish* objFish) 44: {
+  Tuna* objTuna = dynamic_cast <Tuna*>(objFish);
+  if (objTuna) {
+    std::cout << "Detected Tuna. Making Tuna dinner: " << std::endl;
+    objTuna->BecomeDinner(); }
+
+  Carp* objCarp = dynamic_cast <Carp*>(objFish);
+  if(objCarp) {
+    std::cout << "Detected Carp. Making carp talk: " << std::endl;
+    objCarp->Talk();
+  }
+
+  std::cout << "Verifying type using virtual Fish::Swim: " << std::endl; objFish->Swim(); // calling virtual function Swim
+}
+
+int main() 64: {
+  Carp myLunch;
+  Tuna myDinner;
+
+  DetectFishType(&myDinner);
+  std::cout << std::endl;
+  DetectFishType(&myLunch);
+
+  return 0;
+}
+```
+
+Result:
+```
+Detected Tuna. Making Tuna dinner:
+Tuna became dinner in Sushi
+Verifying type using virtual Fish::Swim: Tuna swims real fast in the sea
+
+Detected Carp. Making carp talk:
+Carp talked Carp!
+Verifying type using virtual Fish::Swim: Carp swims real slow in the lake
+```
+
+- `dynamic_cast` can also perform the other implicit casts allowed on pointers: casting null pointers between pointers types (even between unrelated classes), and casting any pointer of any type to a `void*` pointer.
+
+
+### reinterpret_cast
+
+- Allows to make reinterpretations and upcast and downcast as well
+- All pointer conversions are allowed: it converts any pointer type to any other pointer type, even of unrelated classes.
+- There is no semantic checks: neither the content pointed nor the pointer type itself is checked. The compiler trusts you and you are responsible for the consequences in runtime if mistakes were made.
+- The operation result is a simple binary copy of the value from one pointer to the other.
+- It is the closest a C++ casting operator gets to the C-style cast
+
+```c++
+float a = 420.042f;
+void* b = &a; // Implicit promotion -> Ok
+
+int* c = reinterpret_cast<int*>(b); // Explicit demotion -> Ok, I obey
+int& d = reinterpret_cast<int&>(b); // Explicit demotion -> Ok, I obey
+```
+
+- It forces the compiler to accept situations that `static_cast` would normally not permit:
+```c
+class A { /* ... */ };
+class B { /* ... */ };
+A * a = new A;
+B * b = reinterpret_cast<B*>(a);
+// This code compiles, although it does not make much sense
+```
+
+- It finds usage in certain low-level applications where data needs to be converted to a simple type that an API can accept.
+- Because no other C++ casting operator would allow such a conversion that compromises type safety, `reinterpret_cast` is a last resort in performing an otherwise **unsafe** (and nonportable) conversion.
+
+_**Best Practice:**_ You should refrain from using `reinterpret_cast` in your applications
+
+
+### const_cast
+
+- It enables you to turn off the const access modifier to an object: it manipulates the constness of the object pointed by a pointer, either to be set or to be removed.
+- Example: when you need to pass a const pointer to a function that expects a non-const argument to and the function is from a third-party library, and making changes to it is not possible
+- **Point of attention:** using `const_cast` to modify a `const` object can result in undefined behavior
+
+```c++
+int   a = 42;
+
+// const is a more "generic", higher type and int is a more "specific/accurate" one. Then, we can make a promotion with no problem
+int const* b = &a; // Implicit promotion: Ok
+int*  c = b; // Implicit demotion - Hell, no! - compilation error
+int*  d = const_cast<int*>(b); // Explicit demotion -> Ok, I obey
+```
+
+_**Best Practice:**_ Using `const_cast` in your code is a very bad sign. It usually means your design is wrong and you will be better off recoding your code to avoid using it. Remember that you should keep as many `const` variables as possible to make your program easier to maintain and more stable through time. If you need to make some `const_cast` at some point, make sure you have a good reason (**laziness isn't a good reason!!**). Be aware of what you are doing. Also, using `const_cast` to invoke `non-const` functions should be a last resort. The example below is not a best practice. The `DisplayMembers` should be a `const` member function.
+
+```c++
+class SomeClass {
+public:
+  // ...
+  void DisplayMembers(); //problem - display function isn't const
+  // void DisplayMembers() const; // the right to do
+};
+
+void DisplayAllData (const SomeClass& object) {
+	// object.DisplayMembers (); // Compile failure
+	SomeClass& refData = const_cast<SomeClass&>(object);
+	refData.DisplayMembers(); // Allowed but is not the best solution
+}
+```
+
+
+## Implementing cast operators in classes
+
+
 
 # References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
