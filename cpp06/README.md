@@ -12,6 +12,8 @@ In many situations, casts are legitimate requirements to solve important compati
 
 Today we have a split in the C++ programming community: a group that continued using C-style casts in their C++ applications, and another that religiously converted to casting keywords introduced by C++ compilers. It is important to know both types.
 
+**_Best Practice:_ You should avoid casting as far as possible, and when you do use it, you should know what happens behind the scenes!**
+
 
 ## Type conversions
 
@@ -257,7 +259,8 @@ Conversion is NOT OK
 - We can use `dynamic_cast` given a base-class pointer type to detected the type and then perform operations specific to the types detected.
 - `dynamic_cast` helps determine the type at runtime and use a casted pointer when it is safe to do so.
 - The mechanism of identifying the type of the object at runtime is called **runtime type identification (RTTI)**
-- `dynamic_cast` requires **Run-Time Type Information (RTTI)** to keep track of dynamic types. Some compilers support this feature as an option which is disabled by default. This needs to be enabled for runtime type checking using `dynamic_cast` to work properly with these types.
+- `dynamic_cast` requires **runtime type identification (RTTI)** to keep track of dynamic types. Some compilers support this feature as an option which is disabled by default. This needs to be enabled for runtime type checking using `dynamic_cast` to work properly with these types. DON’T design your application around RTTI using `dynamic_cast`.
+- When you are sure that the object being pointed to is Derived type that you are casting, you can save on runtime performance by using `static_cast` instead of `dynamic_cast`
 
 #### Example 2 (from Sams Teach Yourself C++ in one Hour a Day):
 ```c++
@@ -387,9 +390,50 @@ void DisplayAllData (const SomeClass& object) {
 ```
 
 
-## Implementing cast operators in classes
+## Type cast operators in classes
 
+- It allows you to define in your classes specific operators in order to make implicit conversions of your class to a type that you are interested in
 
+```c++
+class Foo {
+public:
+  Foo(float const v): _v(v) { }
+
+  float getV(void) { return this->_v; }
+
+  // cast operators
+  operator float() { return this->_v; }
+  operator int() { return static_cast<int>(this->_v); }
+
+private:
+  float _v;
+}
+
+int main(void) {
+  Foo a(420.042f);
+  float b = a; // the compiler checks if there is an cast operator for float in the Foo class
+  int c = a; // the compiler checks if there is an cast operator for int in the Foo class
+
+  std::cout << a.getV() << std::endl;
+  std::cout << b << std::endl;
+  std::cout << c << std::endl;
+
+  return 0;
+}
+```
+
+Result:
+```
+420.024
+420.024
+420
+```
+
+# explicit keyword
+
+- Constructors are similar to cast operators when we think about the written form and behavior (both return a new instance of the type specified). We may think about the constructor as a conversion from the input parameters to a specific type
+- We may think in a constructor receiving an integer - is like a conversion of an integer to the constructor class type
+- C++ allows systematic implicit cast of an expression, whatever it is
 
 # References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
