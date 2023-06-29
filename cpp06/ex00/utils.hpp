@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   utils.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 21:53:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/29 13:00:37 by sguilher         ###   ########.fr       */
+/*   Created: 2023/06/29 12:50:02 by sguilher          #+#    #+#             */
+/*   Updated: 2023/06/29 12:51:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALAR_CONVERTER_HPP
-# define SCALAR_CONVERTER_HPP
+#ifndef UTILS_HPP
+# define UTILS_HPP
 
-# include <string>
 # include <iostream>
 
-class ScalarConverter {
-    public:
-        static void convert(char const* type);
-
-    private:
-        ScalarConverter(void);
-        ~ScalarConverter(void);
-        ScalarConverter(ScalarConverter const& scalar);
-        ScalarConverter& operator=(ScalarConverter const& scalar);
-
-        
-};
+# define ORANGE	"\033[0;38;5;166m"
+# define BLUE	"\033[38;5;75m"
+# define GREEN	"\033[1;32m"
+# define YELLOW	"\033[1;33m"
+# define GREY	"\033[38;5;244m"
+# define RESET	"\033[0m"
 
 #endif
