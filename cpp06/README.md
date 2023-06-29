@@ -431,9 +431,82 @@ Result:
 
 # explicit keyword
 
+- the casting operators have a sintaxe similar to functions
 - Constructors are similar to cast operators when we think about the written form and behavior (both return a new instance of the type specified). We may think about the constructor as a conversion from the input parameters to a specific type
 - We may think in a constructor receiving an integer - is like a conversion of an integer to the constructor class type
-- C++ allows systematic implicit cast of an expression, whatever it is
+- C++ allows systematic implicit cast of an expression, whatever it is in the code. So, implicit conversion is performed by calling a constructor with only one argument compatible with converted value
+
+```c++
+class A {};
+class B {};
+
+class C {
+public:
+           C((A const& _)) { return; }
+  explicit C((B const& _)) { return; }
+};
+
+void f((C const& _)) {
+  return;
+}
+
+int main(void) {
+  f(A());  // Implicit conversion, OK
+  f(B());  // Implicit conversion, NOT OK, constructor is explicit
+
+  return 0;
+}
+```
+
+_**Best Practice:**_ Use **explicit** keyword in constructors to prevent unwanted implicit casting when creating an object.
+- The implicit conversion doesn't happen if the constructor has more then one parameter, so the **explicit** keyword has no effect in this constructors
+- Allowing implicit casting can lead to behavior that the programmer might not expect to happen. Passing a 5 into a function that expects something other an an int can be confusing (example below)
+
+```c++
+class Bar {
+  public:
+    /*explicit*/ Bar(int a) {  }
+};
+
+void foo(Bar b) {}
+
+int main(void) {
+  foo(5); // error if constructor is explicit
+  foo(Bar(5)); // works either way
+
+  return 0;
+}
+```
+
+Another example (from reference #5):
+```c++
+class String {
+  public:
+    String(const char* c_str): str(c_str) {}
+    String(int n)
+    {
+        str.reserve(n);
+    }
+    
+  private:
+    std::string str;
+    
+    friend std::ostream& operator<<(std::ostream&, const String&);
+};
+
+// Operator overload to allow printing with cout << operator
+std::ostream& operator<<(std::ostream& os, const String& str) {
+    return os << str.str;
+}
+
+void writeLine(String str) {
+    std::cout << str << "\n";
+}
+
+int main() {
+    writeLine(3); // it will make an implicit conversion and print nothing (3 in ASCII table is a non-printable character)
+}
+```
 
 # C++ static class
 
@@ -444,7 +517,8 @@ The closest approximation is a class **with private constructors and destructors
 # C++ literal
 
 # References
-- Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
-- [Type conversions](https://cplusplus.com/doc/tutorial/typecasting/)
-- [C++ casting](https://cplusplus.com/articles/iG3hAqkS/)
-- [C++ variables and types](https://cplusplus.com/doc/tutorial/variables/)
+1. Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
+2. [Type conversions](https://cplusplus.com/doc/tutorial/typecasting/)
+3. [C++ casting](https://cplusplus.com/articles/iG3hAqkS/)
+4. [C++ variables and types](https://cplusplus.com/doc/tutorial/variables/)
+5. [when and why use explicit?](https://cplusplus.com/forum/general/234487/)
