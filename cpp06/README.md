@@ -435,6 +435,14 @@ Result:
 - We may think in a constructor receiving an integer - is like a conversion of an integer to the constructor class type
 - C++ allows systematic implicit cast of an expression, whatever it is
 
+# C++ static class
+
+A static class cannot be instantiated or inherited and all of the members of the class are static in nature. In C++ there is no such thing.
+
+The closest approximation is a class **with private constructors and destructors** and that **only contains static data members and static methods**.
+
+# C++ literal
+
 # References
 - Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
 - [Type conversions](https://cplusplus.com/doc/tutorial/typecasting/)
