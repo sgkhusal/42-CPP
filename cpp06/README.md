@@ -1,6 +1,6 @@
 # Casting
 
-- Casting is a conversion process wherein data can be changed from one type to another temporarily or permanently. It is a mechanism by which we can change the interpretation of an object by the compiler.
+- Casting is a conversion process where data can be changed from one type to another temporarily or permanently. It is a mechanism by which we can change the interpretation of an object by the compiler.
 - It does not imply that the object itself changes — It simply changes the interpretation.
 - All cast actions are conversions. Some of this conversions have different properties
 
@@ -487,10 +487,10 @@ class String {
     {
         str.reserve(n);
     }
-    
+
   private:
     std::string str;
-    
+
     friend std::ostream& operator<<(std::ostream&, const String&);
 };
 

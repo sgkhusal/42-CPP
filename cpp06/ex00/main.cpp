@@ -6,26 +6,37 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:47:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/29 12:57:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:27:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include "utils.hpp"
 
+void	printErrorMessage(std::string const& exec, std::string const& msg) {
+	std::cout << ORANGE << msg << std::endl
+		<< "usage: " << exec << " [literal value to be converted]"
+		<< RESET << std::endl;
+}
+
 int	main(int argc, char*argv[]) {
 	if (argc == 1) {
-		std::cout << ORANGE << "Missing parameter" << std::endl
-			<< "usage: " << argv[0] << " [value to be converted]" 
-			<< RESET << std::endl;
+		printErrorMessage(argv[0], "Missing parameter");
 		return 1;
 	}
 	if (argc > 2) {
-		std::cout << ORANGE << "To many arguments" << std::endl
-			<< "usage: " << argv[0] << " [value to be converted]" 
-			<< RESET << std::endl;
+		printErrorMessage(argv[0], "To many arguments");
 		return 1;
 	}
-	ScalarConverter::convert(argv[1]);
+	try {
+		ScalarConverter::convert(argv[1]);
+    }
+    catch (std::exception& e) {
+        std::cout << ORANGE << "Exception: " << e.what() << std::endl
+			<< RESET << std::endl;
+		return 1;
+    }
 	return 0;
 }
+
+// type conversions for standard data types
