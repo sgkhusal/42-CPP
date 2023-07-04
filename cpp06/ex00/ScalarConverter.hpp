@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:53:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/03 09:44:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/04 01:16:14 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class ScalarConverter {
         ScalarConverter(ScalarConverter const& scalar);
         ScalarConverter& operator=(ScalarConverter const& scalar);
 
+        static std::string _str;
         static std::string _specialDoubles[3];
         static std::string _specialFloats[3];
         typedef enum e_type {
@@ -40,12 +41,7 @@ class ScalarConverter {
             INVALID
         }           t_type;
 
-        static t_type _getType(char const* value);
-        static bool _isChar(std::string const& str);
-        static bool _isInt(std::string const& str);
-        static bool _isFloat(std::string const& str);
-        static bool _isDouble(std::string const& str);
-        static bool _isSpecial(std::string const& str);
+        static t_type _getType();
 
         static void _convertChar(char const* value);
         static void _convertInt(char const* value);
@@ -54,6 +50,10 @@ class ScalarConverter {
 
         static void _printConversions(char c, int i, float f, double d);
         static void _printSpecial(char const* value);
+        static void _printChar(char c);
+        static void _printInt(int i);
+        static void _printFloat(float f);
+        static void _printDouble(double d);
 
         class NotSupportedTypeException: public std::exception {
 			public:
