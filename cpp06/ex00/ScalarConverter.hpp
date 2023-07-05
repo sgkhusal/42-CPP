@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:53:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/04 23:34:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/05 00:43:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <iostream>
 # include <sstream>
 # include <limits>
+# include <iomanip>
 
 # define INT_CHARS "0123456789"
 # define PRECISION 1

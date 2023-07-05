@@ -6,8 +6,8 @@ BLUE="\033[0;36m"
 RED="\e[0;31m"
 END="\033[0m"
 
-# test_file="tests_list"
-test_file="special_cases"
+test_file="tests_list"
+# test_file="special_cases"
 # test_file="errors"
 exec="./convert"
 i=1
