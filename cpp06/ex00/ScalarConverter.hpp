@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:53:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/04 01:16:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:34:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <string>
 # include <iostream>
 # include <sstream>
+# include <limits>
 
 # define INT_CHARS "0123456789"
+# define PRECISION 1
 
 class ScalarConverter {
     public:
@@ -30,8 +32,8 @@ class ScalarConverter {
         ScalarConverter& operator=(ScalarConverter const& scalar);
 
         static std::string _str;
-        static std::string _specialDoubles[3];
-        static std::string _specialFloats[3];
+        // static std::string _specialDoubles[3];
+        // static std::string _specialFloats[3];
         typedef enum e_type {
             CHAR,
             INT,
@@ -41,15 +43,15 @@ class ScalarConverter {
             INVALID
         }           t_type;
 
-        static t_type _getType();
+        static t_type _getType(void);
+        static int    _getPrecision(t_type const type);
 
-        static void _convertChar(char const* value);
-        static void _convertInt(char const* value);
-        static void _convertFloat(char const* value);
-        static void _convertDouble(char const* value);
+        static void _convertChar(void);
+        static void _convertInt(void);
+        static void _convertFloat(void);
+        static void _convertDouble(void);
 
-        static void _printConversions(char c, int i, float f, double d);
-        static void _printSpecial(char const* value);
+        static void _printSpecial(void);
         static void _printChar(char c);
         static void _printInt(int i);
         static void _printFloat(float f);
