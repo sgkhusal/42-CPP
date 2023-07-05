@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 22:10:11 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/04 23:30:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/05 00:28:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,19 +219,21 @@ void ScalarConverter::_printSpecial(void) {
     float f;
     double d;
 
-    ss << ScalarConverter::_str;
     if (_str == "-inff" || _str == "+inff" || _str == "nanf") {
+        _str.erase(_str.length() - 1, 1);
+        ss << ScalarConverter::_str;
         ss >> f;
         d = static_cast<double>(f);
     }
     else {
+        ss << ScalarConverter::_str;
         ss >> d;
         f = static_cast<float>(d);
     }
 
     std::cout << "char: " << "impossible" << std::endl;
     std::cout << "int: " << "impossible" << std::endl;
-    std::cout << "float: " << f << std::endl;
+    std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << d << std::endl;
 
     // if (_str == "-inff" || _str == "+inff" || _str == "nanf")
