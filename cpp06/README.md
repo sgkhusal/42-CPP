@@ -514,11 +514,11 @@ A static class cannot be instantiated or inherited and all of the members of the
 
 The closest approximation is a class **with private constructors and destructors** and that **only contains static data members and static methods**.
 
-# C++ literal
-
 # References
 1. Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
 2. [Type conversions](https://cplusplus.com/doc/tutorial/typecasting/)
 3. [C++ casting](https://cplusplus.com/articles/iG3hAqkS/)
 4. [C++ variables and types](https://cplusplus.com/doc/tutorial/variables/)
 5. [when and why use explicit?](https://cplusplus.com/forum/general/234487/)
+6. [std::numeric_limits](https://legacy.cplusplus.com/reference/limits/numeric_limits/)
+7. [about infinit](https://stackoverflow.com/questions/20016600/negative-infinity)

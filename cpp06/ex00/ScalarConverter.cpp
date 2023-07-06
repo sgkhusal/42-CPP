@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 22:10:11 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/05 03:14:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/06 12:23:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,17 +109,18 @@ void ScalarConverter::_validateInteger(void) {
 
     ss << ScalarConverter::_str;
     ss >> check;
-    if (check > (double)(INT_MAX) || check < (double)(INT_MIN))
+    if (check > (double)(std::numeric_limits<int>::max())
+        || check < (double)(std::numeric_limits<int>::min()))
         throw IntOverflowException();
 }
 
-void ScalarConverter::_validateFloat(void) {  // é válido?? quais são os limites de float?
+void ScalarConverter::_validateFloat(void) {
     std::stringstream ss;
     double check;
 
     ss << ScalarConverter::_str;
     ss >> check;
-    if (check > (double)(std::numeric_limits<float>::max()) // esses limites estão certos??
+    if (check > (double)(std::numeric_limits<float>::max())
         || check < (double)(std::numeric_limits<float>::min()))
             std::cout << "float: impossible" << std::endl;
 }
@@ -207,7 +208,8 @@ void ScalarConverter::_printConversions(char c, int i, float f, double d, int pr
 
     ss << ScalarConverter::_str;
     ss >> check;
-    if (check > (double)(INT_MAX) || check < (double)(INT_MIN)) {
+    if (check > (double)(std::numeric_limits<int>::max())
+        || check < (double)(std::numeric_limits<float>::min())) {
             std::cout << "char: impossible" << std::endl;
             std::cout << "int: impossible" << std::endl;
         }
