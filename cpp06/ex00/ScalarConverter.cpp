@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 22:10:11 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/06 12:23:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:18:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ ScalarConverter::t_type ScalarConverter::_getType() {
         || _str == "-inf" || _str == "+inf" || _str == "nan")
         return SPECIAL_CASE;
     if (_str.empty())
-        return CHAR;  ///////////// INVALID?
+        return INVALID;
     if (len == 1 && !std::isdigit(*it))
         return CHAR;
 
@@ -79,7 +79,7 @@ ScalarConverter::t_type ScalarConverter::_getType() {
     if (*it == '+' || *it == '-') {
         it++;
         len--;
-        if (*it == '\0') // +f -f
+        if (*it == '\0')  // +f -f
             return INVALID;
     }
 
@@ -95,11 +95,11 @@ ScalarConverter::t_type ScalarConverter::_getType() {
 
     if (has_dot) {
         if (ends_with_f)
-            return FLOAT; // 12.f -12.f 42.42f
-        return DOUBLE;  //  +12. 12. -78.90008
+            return FLOAT;
+        return DOUBLE;
     }
     if (ends_with_f)
-        return INVALID;  //  +12f -12f 12f
+        return INVALID;  //  +42f -42f 42f
     return INT;
 }
 
@@ -107,7 +107,7 @@ void ScalarConverter::_validateInteger(void) {
     std::stringstream ss;
     double check;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> check;
     if (check > (double)(std::numeric_limits<int>::max())
         || check < (double)(std::numeric_limits<int>::min()))
@@ -118,11 +118,11 @@ void ScalarConverter::_validateFloat(void) {
     std::stringstream ss;
     double check;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> check;
     if (check > (double)(std::numeric_limits<float>::max())
         || check < (double)(std::numeric_limits<float>::min()))
-            std::cout << "float: impossible" << std::endl;
+            throw FloatOverflowException();
 }
 
 int ScalarConverter::_getPrecision(t_type const type) {
@@ -138,34 +138,28 @@ void ScalarConverter::_convertChar(void) {
     std::stringstream ss;
     char c;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> c;
 
     int i = static_cast<int>(c);
     float f = static_cast<float>(c);
     double d = static_cast<double>(c);
 
-    _printChar(c);
-    _printInt(i);
-    _printFloat(f, PRECISION);
-    _printDouble(d, PRECISION);
+    _printConversions(c, i, f, d, PRECISION);
 }
 
 void ScalarConverter::_convertInt(void) {
     std::stringstream ss;
     int i;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> i;
 
     char c = static_cast<char>(i);
     float f = static_cast<float>(i);
     double d = static_cast<double>(i);
 
-    _printChar(c);
-    _printInt(i);
-    _printFloat(f, PRECISION);
-    _printDouble(d, PRECISION);
+    _printConversions(c, i, f, d, PRECISION);
 }
 
 void ScalarConverter::_convertFloat(void) {
@@ -173,7 +167,7 @@ void ScalarConverter::_convertFloat(void) {
     int precision;
     float f;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> f;
 
     int i = static_cast<int>(f);
@@ -190,7 +184,7 @@ void ScalarConverter::_convertDouble(void) {
     int precision;
     double d;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> d;
 
     char c = static_cast<char>(d);
@@ -206,26 +200,52 @@ void ScalarConverter::_printConversions(char c, int i, float f, double d, int pr
     std::stringstream ss;
     double check;
 
-    ss << ScalarConverter::_str;
+    ss << _str;
     ss >> check;
-    if (check > (double)(std::numeric_limits<int>::max())
-        || check < (double)(std::numeric_limits<float>::min())) {
-            std::cout << "char: impossible" << std::endl;
-            std::cout << "int: impossible" << std::endl;
-        }
-    else {
-        _printChar(c);
-        _printInt(i);
-    }
 
-    // if (((check > (double)(std::numeric_limits<float>::max()) // esses limites estão certos??
-    //     || check < (double)(std::numeric_limits<float>::min())) && check != INFINITY)) {
-    //         std::cout << "float: impossible" << std::endl;
-    // }
-    // else
-    _printFloat(f, precision);
-
+    _printChar(c, check);
+    _printInt(i, check);
+    _printFloat(f, check, precision);
     _printDouble(d, precision);
+}
+
+void ScalarConverter::_printChar(char c, double check) {
+    if (check > (double)(std::numeric_limits<char>::max())
+        || check < (double)(std::numeric_limits<char>::min()))
+        std::cout << "char: overflow - impossible" << std::endl;
+    else if (isprint(c) && !isspace(c)) // isgraph
+        std::cout << "char: '" << c << "'" << std::endl;
+    else
+        std::cout << "char: Non displayable" << std::endl << int(c) << std::endl;
+}
+
+void ScalarConverter::_printInt(int i, double check) {
+    if (check > (double)(std::numeric_limits<int>::max())
+        || check < (double)(std::numeric_limits<int>::min()))
+            std::cout << "int: overflow - impossible" << std::endl;
+    else
+        std::cout << "int: " << i << std::endl;
+}
+
+void ScalarConverter::_printFloat(float f, double check, int precision) {
+    if (((check > (double)(std::numeric_limits<float>::max())
+        || check < (double)(std::numeric_limits<float>::min())) && check != INFINITY)) { // verificar esse INFINITY
+            std::cout << "float: overflow - impossible" << std::endl;
+    }
+    else {
+        if (precision > FLOAT_PRECISION)
+            precision = FLOAT_PRECISION;
+        std::cout << std::fixed;
+        std::cout.precision(precision);
+        std::cout << "float: " << f << "f" << std::endl;
+    }
+}
+
+void ScalarConverter::_printDouble(double d, int precision) {
+    if (precision > DOUBLE_PRECISION)
+        precision = DOUBLE_PRECISION;
+    std::cout << std::fixed << std::setprecision(precision);
+    std::cout << "double: " << d << std::endl;
 }
 
 void ScalarConverter::_printSpecial(void) {
@@ -235,12 +255,12 @@ void ScalarConverter::_printSpecial(void) {
 
     if (_str == "-inff" || _str == "+inff" || _str == "nanf") {
         _str.erase(_str.length() - 1, 1);
-        ss << ScalarConverter::_str;
+        ss << _str;
         ss >> f;
         d = static_cast<double>(f);
     }
     else {
-        ss << ScalarConverter::_str;
+        ss << _str;
         ss >> d;
         f = static_cast<float>(d);
     }
@@ -250,32 +270,6 @@ void ScalarConverter::_printSpecial(void) {
     std::cout << "float: " << f << "f" << std::endl;
     std::cout << "double: " << d << std::endl;
 }
-
-void ScalarConverter::_printChar(char c) {
-    // checar overflow - ex: 123456789 - impossible: overflow
-    if (isprint(c) && !isspace(c))
-        std::cout << "char: '" << c << "'" << std::endl;
-    else if ((c < 0) || c > 127)
-        std::cout << "char: impossible - not an ascii char" << std::endl;
-    else
-        std::cout << "char: Non displayable" << std::endl;
-}
-
-void ScalarConverter::_printInt(int i) {
-    std::cout << "int: " << i << std::endl;
-}
-
-void ScalarConverter::_printFloat(float f, int precision) {
-    std::cout << std::fixed;
-    std::cout.precision(precision);
-    std::cout << "float: " << f << "f" << std::endl;
-}
-
-void ScalarConverter::_printDouble(double d, int precision) {
-    std::cout << std::fixed << std::setprecision(precision);
-    std::cout << "double: " << d << std::endl;
-}
-
 
 const char* ScalarConverter::NotSupportedTypeException::what() const throw() {
 	return "Type not supported";

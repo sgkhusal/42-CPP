@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:53:03 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/06 12:25:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:11:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 # define INT_CHARS "0123456789"
 # define PRECISION 1
+# define FLOAT_PRECISION 7
+# define DOUBLE_PRECISION 15
 
 class ScalarConverter {
     public:
@@ -54,9 +56,9 @@ class ScalarConverter {
 
         static void _printConversions(char c, int i, float f, double d, int precision);
         static void _printSpecial(void);
-        static void _printChar(char c);
-        static void _printInt(int i);
-        static void _printFloat(float f, int precision);
+        static void _printChar(char c, double check);
+        static void _printInt(int i, double check);
+        static void _printFloat(float f, double check, int precision);
         static void _printDouble(double d, int precision);
 
         class NotSupportedTypeException: public std::exception {

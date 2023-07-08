@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 10:56:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/06 12:04:18 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/08 17:33:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 #define RESET	"\033[0m"
 
 int main(void) {
+	std::cout << std::endl << BLUE << "Char:" << std::endl << GREY;
+    std::cout << "Minimum value: " << (int)std::numeric_limits<char>::min() << std::endl;
+	std::cout << "Maximum value: " << (int)std::numeric_limits<char>::max() << std::endl;
+
 	std::cout << std::endl << BLUE << "Integer:" << std::endl << GREY;
     std::cout << "Minimum value: " << std::numeric_limits<int>::min() << std::endl;
 	std::cout << "Maximum value: " << std::numeric_limits<int>::max() << std::endl;
 	std::cout << std::numeric_limits<int>::has_infinity << std::endl;
 	std::cout << std::numeric_limits<int>::has_quiet_NaN << std::endl;
-	
+
     std::cout << std::endl << BLUE << "Float:" << std::endl << GREY;
 	std::cout << "Minimum value: " << std::numeric_limits<float>::min() << std::endl;
     std::cout << "Maximum value: " << std::numeric_limits<float>::max() << std::endl;
@@ -54,7 +58,7 @@ int main(void) {
     std::cout << std::isinf(negative_infinity3) << negative_infinity3 << std::endl;
     std::cout << std::isinf(negative_infinity4) << negative_infinity4 << std::endl;
 
-	std::cout << static_cast<std::string>(negative_infinity1) << std::endl;
+	// std::cout << static_cast<std::string>(negative_infinity1) << std::endl;
 
     return EXIT_SUCCESS;
 }
