@@ -26,4 +26,10 @@
     #define DEBUG false
 # endif
 
+# ifdef __MACH__
+	#define MAC true
+# else
+    #define MAC false
+# endif
+
 #endif

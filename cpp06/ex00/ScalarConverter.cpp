@@ -211,11 +211,11 @@ void ScalarConverter::_convertDouble(void) {
 	precision = _getPrecision(DOUBLE);
 	max = std::numeric_limits<double>::max();
 
-	if (d == INFINITY || d == -INFINITY || d == max || d == -max) {
-		if (d == INFINITY || d == max)
+	if (d == INFINITY || d == -INFINITY || ((d == max || d == -max ) && !MAC)) {
+		if (d == max)
 			d = INFINITY;
-		else
-			d = - INFINITY;
+		else if (d == -max)
+			d = -INFINITY;
 		std::cout << std::setw(18) << "char: impossible" << std::endl;
 		std::cout << std::setw(18) << "int: impossible" << std::endl;
 		std::cout << std::setw(8) << "float: " << f << "f" << std::endl;
@@ -282,8 +282,14 @@ void ScalarConverter::_printSpecial(void) {
 
 	std::cout << std::setw(8) << "char: " << "impossible" << std::endl;
 	std::cout << std::setw(8) << "int: " << "impossible" << std::endl;
-	std::cout << std::setw(8) << "float: " << f << "f" << std::endl;
-	std::cout << std::setw(8) << "double: " << d << std::endl;
+	if (MAC) {
+		std::cout << std::setw(8) << "float: " << f << "f" << std::endl;
+		std::cout << std::setw(8) << "double: " << d << std::endl;
+	}
+	else {
+		std::cout << std::setw(8) << "float: " << _str << "f" << std::endl;
+		std::cout << std::setw(8) << "double: " << _str << std::endl;
+	}
 }
 
 bool ScalarConverter::_charOverflow() {
