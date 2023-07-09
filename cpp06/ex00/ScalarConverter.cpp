@@ -183,6 +183,7 @@ void ScalarConverter::_convertFloat(void) {
 	double d = static_cast<double>(f);
 
 	precision = _getPrecision(FLOAT);
+	_check = d;
 
 	if (f == INFINITY || f == -INFINITY) {
 		std::cout << std::setw(18) << "char: impossible" << std::endl;
@@ -197,6 +198,7 @@ void ScalarConverter::_convertFloat(void) {
 void ScalarConverter::_convertDouble(void) {
 	std::stringstream ss;
 	int precision;
+	double max;
 	double d;
 
 	ss << _str;
@@ -207,8 +209,13 @@ void ScalarConverter::_convertDouble(void) {
 	float f = static_cast<float>(d);
 
 	precision = _getPrecision(DOUBLE);
+	max = std::numeric_limits<double>::max();
 
-	if (d == INFINITY || d == -INFINITY) {
+	if (d == INFINITY || d == -INFINITY || d == max || d == -max) {
+		if (d == INFINITY || d == max)
+			d = INFINITY;
+		else
+			d = - INFINITY;
 		std::cout << std::setw(18) << "char: impossible" << std::endl;
 		std::cout << std::setw(18) << "int: impossible" << std::endl;
 		std::cout << std::setw(8) << "float: " << f << "f" << std::endl;
@@ -292,7 +299,7 @@ bool ScalarConverter::_intOverflow() {
 bool ScalarConverter::_floatOverflow() {
 	float max = std::numeric_limits<float>::max();
 
-	return (_check > (double)(max) || _check < -(double)(max) + 1.0);
+	return (_check > (double)(max) || _check < -(double)(max) - 1.0);
 }
 
 const char* ScalarConverter::NotSupportedTypeException::what() const throw() {
