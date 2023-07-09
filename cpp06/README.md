@@ -520,5 +520,10 @@ The closest approximation is a class **with private constructors and destructors
 3. [C++ casting](https://cplusplus.com/articles/iG3hAqkS/)
 4. [C++ variables and types](https://cplusplus.com/doc/tutorial/variables/)
 5. [when and why use explicit?](https://cplusplus.com/forum/general/234487/)
+
+## Exercises references
 6. [std::numeric_limits](https://legacy.cplusplus.com/reference/limits/numeric_limits/)
 7. [about infinit](https://stackoverflow.com/questions/20016600/negative-infinity)
+8. [Difference between float and double in C/C++](https://www.geeksforgeeks.org/difference-float-double-c-cpp/)
+9. [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
+10. [Convert String to int in C++](https://www.geeksforgeeks.org/convert-string-to-int-in-cpp/)
