@@ -6,9 +6,13 @@ BLUE="\033[0;36m"
 RED="\e[0;31m"
 END="\033[0m"
 
-test_file="tests_list"
-# test_file="special_cases"
-# test_file="errors"
+# test_file="conversion_tests/tests_list"
+# test_file="conversion_tests/special_cases"
+# test_file="conversion_tests/char" # manual: space and enter
+# test_file="conversion_tests/int"
+# test_file="conversion_tests/float"
+test_file="conversion_tests/double"
+# test_file="conversion_tests/errors"
 exec="./convert"
 i=1
 
@@ -19,7 +23,7 @@ printf $RED
 
 while read test; do
     printf $BLUE
-	echo $i. $test
+	echo "$i.     $test"
     printf $GREY
     $exec $test
     echo

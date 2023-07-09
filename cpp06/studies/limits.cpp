@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 10:56:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/08 17:33:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/08 23:10:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <limits>
 #include <cmath>
 #include <cassert>
+# include <iomanip>
 
 #define BLUE	"\033[38;5;75m"
 #define GREY	"\033[38;5;244m"
@@ -42,6 +43,17 @@ int main(void) {
     std::cout << std::numeric_limits<double>::has_infinity << std::endl;
 	std::cout << std::numeric_limits<double>::has_quiet_NaN << std::endl << RESET;
 
+    std::cout << std::endl << BLUE << "Float:" << std::endl << GREY;
+    std::cout << std::fixed << std::setprecision(43);
+	std::cout << "Minimum value: " << std::numeric_limits<float>::min() << std::endl;
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "Maximum value: " << std::numeric_limits<float>::max() << std::endl;
+
+	std::cout << std::endl << BLUE << "Double:" << std::endl << GREY;
+    std::cout << std::fixed << std::setprecision(313);
+	std::cout << "Minimum value: " << std::numeric_limits<double>::min() << std::endl;
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "Maximum value: " << std::numeric_limits<double>::max() << std::endl;
 
 	//Asserts floating point compatibility at compile time
     //static_assert(std::numeric_limits<float>::is_iec559, "IEEE 754 required");
