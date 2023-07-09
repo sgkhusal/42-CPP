@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:50:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/06/29 12:51:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:18:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,9 @@
 # define YELLOW	"\033[1;33m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
+
+# ifndef DEBUG
+    #define DEBUG false
+# endif
 
 #endif

@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/14 17:20:08 by sguilher          #+#    #+#              #
-#    Updated: 2023/06/28 20:56:41 by sguilher         ###   ########.fr        #
+#    Updated: 2023/07/08 23:07:02 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 #-D DEBUG=true
 
 SRC =		main.cpp ScalarConverter.cpp
-HEADERS =	ScalarConverter.hpp
+HEADERS =	ScalarConverter.hpp utils.hpp
 INCLUDE =	-I ./
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
