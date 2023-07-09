@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:47:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/01 20:27:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/09 01:10:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ int	main(int argc, char*argv[]) {
     }
 	return 0;
 }
-
-// type conversions for standard data types

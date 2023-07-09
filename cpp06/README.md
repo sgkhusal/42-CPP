@@ -358,6 +358,8 @@ B * b = reinterpret_cast<B*>(a);
 - Because no other C++ casting operator would allow such a conversion that compromises type safety, `reinterpret_cast` is a last resort in performing an otherwise **unsafe** (and nonportable) conversion.
 
 _**Best Practice:**_ You should refrain from using `reinterpret_cast` in your applications
+_**uintptr_t:**_ Unsigned integer type capable of holding a value converted from a void pointer and then be converted back to that type with a value that compares equal to the original pointer. Any data pointer can be put in a `uintptr_t` and then retrieved without loss of information
+
 
 
 ### const_cast
@@ -530,3 +532,4 @@ The closest approximation is a class **with private constructors and destructors
 8. [Difference between float and double in C/C++](https://www.geeksforgeeks.org/difference-float-double-c-cpp/)
 9. [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
 10. [Convert String to int in C++](https://www.geeksforgeeks.org/convert-string-to-int-in-cpp/)
+11. [uintptr_t](https://cplusplus.com/reference/cstdint/)
