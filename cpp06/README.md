@@ -110,6 +110,9 @@ _**Best practice**_: If the function doesn't modifies the variable, write it as 
 - **upcast:** ascending reinterpretation - from pointer-to-derived to pointer-to-base
 - **downcast:** descending reinterpretation - from pointer-to-base to pointer-to-derived
 
+<img width="806" alt="image" src="https://github.com/sgkhusal/42-CPP/assets/75377067/114d5c1f-dfac-4b6e-81c6-aa572c4c60c3">
+
+
 Note: examples using C syntax for learning purposes
 ```c++
 class Parent {};
