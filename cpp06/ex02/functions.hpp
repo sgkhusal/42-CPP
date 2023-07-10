@@ -14,6 +14,8 @@
 # define FUNCTIONS_HPP
 
 # include <iostream>
+# include <exception>
+# include <cmath>
 
 # include "Base.hpp"
 # include "A.hpp"

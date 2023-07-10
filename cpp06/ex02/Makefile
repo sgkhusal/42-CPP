@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		dynamic
+NAME =		dynamic_cast
 
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 #-D DEBUG=true
@@ -35,7 +35,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
-	@echo "          dynamic created"
+	@echo "        dynamic_cast created"
 	@echo "************************************"
 	@echo "$(RESET)"
 

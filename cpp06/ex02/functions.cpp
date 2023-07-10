@@ -21,7 +21,7 @@ Base* generate(void) {
 	int n;
 
 	if (!seed) {
-		std::srand(time(NULL));
+		srand(time(NULL));
 		seed = true;
 	}
 	n = rand() % 3;
@@ -59,7 +59,7 @@ void identify(Base& p) {
 		std::cout << "Reference to class type 'A'" << std::endl;
 		return ;
 	}
-	catch (std::bad_cast &e) {
+	catch (std::exception &e) {
 		if (DEBUG)
 			std::cerr << ORANGE << "Exception - A: " << e.what() << RESET << std::endl;
 	}
@@ -69,7 +69,7 @@ void identify(Base& p) {
 		std::cout << "Reference to class type 'B'" << std::endl;
 		return ;
 	}
-	catch (std::bad_cast &e) {
+	catch (std::exception &e) {
 		if (DEBUG)
 			std::cerr << ORANGE << "Exception - B: " << e.what() << RESET << std::endl;
 	}
@@ -78,7 +78,7 @@ void identify(Base& p) {
 		(void)c;
 		std::cout << "Reference to class type 'C'" << std::endl;
 	}
-	catch (std::bad_cast &e) {
+	catch (std::exception &e) {
 		if (DEBUG)
 			std::cerr << ORANGE << "Exception - C: " << e.what() << std::endl;
 		std::cerr << ORANGE
