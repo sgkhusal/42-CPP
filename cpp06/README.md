@@ -289,12 +289,12 @@ public:
 };
 
 void DetectFishType(Fish* objFish) 44: {
-  Tuna* objTuna = dynamic_cast <Tuna*>(objFish);
+  Tuna* objTuna = dynamic_cast<Tuna*>(objFish);
   if (objTuna) {
     std::cout << "Detected Tuna. Making Tuna dinner: " << std::endl;
     objTuna->BecomeDinner(); }
 
-  Carp* objCarp = dynamic_cast <Carp*>(objFish);
+  Carp* objCarp = dynamic_cast<Carp*>(objFish);
   if(objCarp) {
     std::cout << "Detected Carp. Making carp talk: " << std::endl;
     objCarp->Talk();

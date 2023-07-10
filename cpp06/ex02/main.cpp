@@ -6,35 +6,31 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:47:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/09 17:55:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/09 21:37:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-#include "utils.hpp"
+#include "functions.hpp"
+#include <unistd.h>
 
-void	printErrorMessage(std::string const& exec, std::string const& msg) {
-	std::cout << ORANGE << msg << std::endl
-		<< "usage: " << exec << " [literal value to be converted]"
-		<< RESET << std::endl;
-}
+int	main(void) {
+	Base *ptr;
 
-int	main(int argc, char*argv[]) {
-	if (argc == 1) {
-		printErrorMessage(argv[0], "Missing parameter");
-		return 1;
+	for (int i = 0; i < 10; i++) {
+		std::cout << BLUE << "Random test " << i + 1 << GREY << std::endl;
+		ptr = generate();
+		identify(ptr);
+		identify(*ptr);
+		delete ptr;
+		std::cout << RESET << std::endl;
+		sleep(1);
 	}
-	if (argc > 2) {
-		printErrorMessage(argv[0], "To many arguments");
-		return 1;
-	}
-	try {
-		ScalarConverter::convert(argv[1]);
-    }
-    catch (std::exception& e) {
-        std::cerr << ORANGE << "Exception: " << e.what() << std::endl
-			<< RESET << std::endl;
-		return 1;
-    }
+
+	std::cout << BLUE << "Testing an invalid pointer" << GREY << std::endl;
+	ptr = new Base();
+	identify(ptr);
+	identify(*ptr);
+
+	delete ptr;
 	return 0;
 }

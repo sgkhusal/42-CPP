@@ -32,6 +32,7 @@ diamondtrap
 # cpp06
 convert
 serialize
+dynamic
 
 # Others
 .vscode
