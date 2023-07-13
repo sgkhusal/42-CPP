@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:15:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/16 00:05:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:01:35 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,6 @@ int main( void ) {
 	::test(c, d);
 	c = d;
 	::test(c, d);
-
-	float e = 3.14f, f = 4.2f;
-	::test(e, f);
-	e = f;
-	::test(e, f);
 
 	return 0;
 }
