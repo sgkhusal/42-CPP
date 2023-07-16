@@ -6,11 +6,11 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 11:58:51 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/13 12:03:09 by sguilher         ###   ########.fr        #
+#    Updated: 2023/07/15 22:37:08 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		whatever
+NAME =		iter
 
 CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98
@@ -35,7 +35,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
-	@echo "          whatever created"
+	@echo "          iter created"
 	@echo "************************************"
 	@echo "$(RESET)"
 
