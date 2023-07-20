@@ -37,6 +37,7 @@ dynamic_cast
 # cpp07
 whatever
 iter
+array
 
 # Others
 .vscode

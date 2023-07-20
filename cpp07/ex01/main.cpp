@@ -6,11 +6,12 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:15:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/16 01:22:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:32:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstring>
 #include "iter.hpp"
 
 void printTitle(std::string const& title) {
