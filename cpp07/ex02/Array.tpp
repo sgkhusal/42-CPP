@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/20 12:23:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/24 23:59:15 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,76 @@
 
 template< typename T >
 Array<T>::Array(void): _array(NULL), _size(0) {
-	if (DEBUG)
-		std::cout << GREY << "Default constructor called" << RESET << std::endl;
-	this->_array = new T[0];  // precisa disso?
+	_printDescription("Default constructor called");
+	this->_array = new T[0];
+}
+
+template< typename T >
+Array<T>::Array(size_t n): _array(NULL), _size(n) {
+	_printDescription("Unsigned int constructor called");
+	this->_array = new T[n](); // verificar se o () é válido para qualquer tipo
+}
+
+template< typename T >
+Array<T>::Array(Array<T> const& array): _array(NULL) {
+	_printDescription("Copy constructor called");
+	*this = array;
 }
 
 template< typename T >
 Array<T>::~Array(void) {
-	if (DEBUG)
-		std::cout << GREY << "Destructor called" << RESET << std::endl;
+	_printDescription("Destructor called");
+	if (this->_array)
+		delete[] this->_array;
+}
+
+template< typename T >
+Array<T>& Array<T>::operator=(Array<T> const& array) {
+	_printDescription("Assigned operator called");
+	if (this != &array) {
+		if (this->_array)
+			delete[] this->_array;
+		this->_size = array.size();
+		this->_array = new T[this->_size];
+		for (size_t i = 0; i < this->_size; i++)
+			this->_array[i] = array.getElement(i);
+	}
+	return *this;
+}
+
+template< typename T >
+T& Array<T>::operator[](size_t idx) {
+	_printDescription("[] operator called");
+	if (idx > this->_size - 1) // verificar se funciona para size = 0 e valores negativos
+		throw Array<T>::IndexOutOfBounds();
+	return this->_array[idx];
 }
 
 // template< typename T >
-// Array(Array const& array) {
-	
-// }
-
-// template< typename T >
-// Array& operator=(Array const& array) {}
-
-// template< typename T >
-// Array(size_t n) {}
-// template< typename T >
-// T& operator[](size_t idx);
-
-// template< typename T >
 // T*      array(void) const;
-// template< typename T >
-// T       getElement(size_t idx) const;
+template< typename T >
+T Array<T>::getElement(size_t idx) const {
+	return this->_array[idx];
+}
 // template< typename T >
 // void    setArray();  // ver se vou precisar
 // template< typename T >
 // void    setElementArray(size_t const idx, T value);
 
-// template< typename T >
-// size_t  size(void) const;
+template< typename T >
+size_t  Array<T>::size(void) const {
+	return this->_size;
+}
 
-// template< typename T >
-// const char* Array<T>::IndexOutOfBounds::what() const throw() {
+template< typename T >
+const char* Array<T>::IndexOutOfBounds::what() const throw() {
+	return "Index out of bounds";
+}
 
-// }
+template< typename T >
+void Array<T>::_printDescription(std::string& description) {
+	if (DEBUG)
+		std::cout << GREY << description << RESET << std::endl;
+}
 
 #endif
