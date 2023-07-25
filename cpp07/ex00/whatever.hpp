@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:14:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/16 00:08:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:54:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 template<typename T>
 void swap(T& a, T& b) {
 	T temp;
+
 	temp = a;
 	a = b;
 	b = temp;
@@ -36,12 +37,12 @@ T const& max(T const& a, T const& b) {
 }
 
 template<typename T>
-void test(T& a, T& b) {
+void test(T& a, T& b, std::string& type) {
 	static int n = 0;
 
 	n++;
-	std::cout << BLUE << "Test " << n << ": (" << a << ", " << b << ")"
-			<< GREY << std::endl;
+	std::cout << BLUE << "Test " << type << " - " << n
+			<< ": (" << a << ", " << b << ")" << GREY << std::endl;
 	std::cout << "a pointer: " << &a << std::endl;
 	std::cout << "b pointer: " << &b << std::endl;
 	::swap( a, b );

@@ -6,12 +6,14 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:02:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/16 00:54:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:02:45 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ITER_HPP
 # define ITER_HPP
+
+#include <iostream>
 
 # define BLUE	"\033[38;5;75m"
 # define GREY	"\033[38;5;244m"
