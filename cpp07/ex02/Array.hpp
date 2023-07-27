@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/27 00:27:59 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:05:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ template< typename T >
 class Array {
 	public:
 		Array<T>(void);
-		~Array(void);
-		Array(Array<T> const& array);
-		Array<T>& operator=(Array<T> const& array);
-
 		Array(size_t n);
+		Array(Array<T> const& array);
+		~Array(void);
+		
+		Array<T> const& operator=(Array<T> const& array);
+		T const& operator=(T const& value);
 		T& operator[](size_t idx);
+		// T const& operator[](size_t idx);
+		// Array<T>& operator[](size_t idx);
 
 		// T*		array(void) const;
 		// T		getElement(size_t idx) const;

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/27 00:46:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:05:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ Array<T>::~Array(void) {
 }
 
 template< typename T >
-Array<T>& Array<T>::operator=(Array<T> const& array) {
-	_printDescription("Assigned operator called");
+Array<T> const& Array<T>::operator=(Array<T> const& array) {
+	_printDescription("Array assigned operator called");
 	if (this != &array) {
 		if (this->_array)
 			delete[] this->_array;
@@ -54,6 +54,12 @@ Array<T>& Array<T>::operator=(Array<T> const& array) {
 	return *this;
 }
 
+template< typename T > //////////////////////////////////////////////////////////
+T const& Array<T>::operator=(T const& value) {
+	_printDescription("T assigned operator called");
+	return value;
+}
+
 template< typename T >
 T& Array<T>::operator[](size_t idx) {
 	_printDescription("[] operator called");
@@ -61,6 +67,22 @@ T& Array<T>::operator[](size_t idx) {
 		throw Array<T>::IndexOutOfBounds();
 	return this->_array[idx];
 }
+
+// template< typename T >
+// T const& Array<T>::operator[](size_t idx) {
+// 	_printDescription("[] operator called");
+// 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
+// 		throw Array<T>::IndexOutOfBounds();
+// 	return this->_array[idx];
+// }
+
+// template< typename T >
+// Array<T>& Array<T>::operator[](size_t idx) {
+// 	_printDescription("[] operator called");
+// 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
+// 		throw Array<T>::IndexOutOfBounds();
+// 	return this->_array[idx];
+// }
 
 // template< typename T >
 // T*      array(void) const;

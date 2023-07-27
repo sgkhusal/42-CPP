@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:27:01 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/27 01:07:50 by sguilher         ###   ########.fr        #
+#    Updated: 2023/07/27 11:46:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		array
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP -D DEBUG=true
 
 SRC =		main.cpp
 INCLUDE =	-I Array.hpp
