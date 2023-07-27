@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/24 23:59:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 00:46:30 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ Array<T>& Array<T>::operator=(Array<T> const& array) {
 		this->_size = array.size();
 		this->_array = new T[this->_size];
 		for (size_t i = 0; i < this->_size; i++)
-			this->_array[i] = array.getElement(i);
+			this->_array[i] = array[i];
 	}
 	return *this;
 }
@@ -57,17 +57,17 @@ Array<T>& Array<T>::operator=(Array<T> const& array) {
 template< typename T >
 T& Array<T>::operator[](size_t idx) {
 	_printDescription("[] operator called");
-	if (idx > this->_size - 1) // verificar se funciona para size = 0 e valores negativos
+	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
 		throw Array<T>::IndexOutOfBounds();
 	return this->_array[idx];
 }
 
 // template< typename T >
 // T*      array(void) const;
-template< typename T >
-T Array<T>::getElement(size_t idx) const {
-	return this->_array[idx];
-}
+// template< typename T >
+// T Array<T>::getElement(size_t idx) const {
+// 	return this->_array[idx];
+// }
 // template< typename T >
 // void    setArray();  // ver se vou precisar
 // template< typename T >
@@ -84,7 +84,7 @@ const char* Array<T>::IndexOutOfBounds::what() const throw() {
 }
 
 template< typename T >
-void Array<T>::_printDescription(std::string& description) {
+void Array<T>::_printDescription(std::string const& description) {
 	if (DEBUG)
 		std::cout << GREY << description << RESET << std::endl;
 }

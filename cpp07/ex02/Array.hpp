@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/24 23:48:35 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 00:27:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <iostream>
 
 # define BLUE	"\033[38;5;75m"
+# define ORANGE	"\033[0;38;5;166m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
 
@@ -35,14 +36,14 @@ class Array {
 		Array(size_t n);
 		T& operator[](size_t idx);
 
-		T*		array(void) const;
-		T		getElement(size_t idx) const;
-		void	setArray();  // ver se vou precisar
-		void	setElementArray(size_t const idx, T value);
+		// T*		array(void) const;
+		// T		getElement(size_t idx) const;
+		// void	setArray();  // ver se vou precisar
+		// void	setElementArray(size_t const idx, T value);
 
 		size_t  size(void) const;
 
-		static class IndexOutOfBounds: public std::exception {
+		class IndexOutOfBounds: public std::exception {
 			public:
 				virtual const char* what() const throw();
 		};
@@ -51,7 +52,7 @@ class Array {
 		T*   _array;
 		size_t _size;
 
-		static void _printDescription(std::string& description);
+		static void _printDescription(std::string const& description);
 };
 
 # include "Array.tpp"
