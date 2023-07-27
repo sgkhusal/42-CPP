@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:02:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/26 22:30:06 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 11:27:59 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 
 template<typename T>
 void iter(T* array, size_t len, void (*fptr)(T& elem)) {
+	if (!array || len <= 0)
+		return ;
 	for (size_t i = 0; i < len; i++)
 		fptr(array[i]);
 }
 
 template<typename T>
 void iter(T const* array, size_t len, void (*fptr)(T const& elem)) {
+	if (!array || len <= 0)
+		return ;
 	for (size_t i = 0; i < len; i++)
 		fptr(array[i]);
 }

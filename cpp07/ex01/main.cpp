@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:15:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/26 22:29:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/27 11:34:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "iter.hpp"
 
 void printTitle(std::string const& title) {
-	std::cout << std::endl << BLUE << title << RESET << std::endl;
+	std::cout << BLUE << title << RESET << std::endl;
 }
 
 int main( void ) {
@@ -24,6 +24,7 @@ int main( void ) {
 	for (int i = 0; i < size; i++)
 		numbers[i] = i;
 
+	std::cout << std::endl;
 	printTitle("Array of ints:");
 	std::cout << GREY << "Before:" << std::endl;
 	iter<int>(numbers, size, printElem);
@@ -33,7 +34,19 @@ int main( void ) {
 	iter<int>(numbers, size, reduceOne);
 	std::cout << std::endl << "After reduceOne: " << std::endl;
 	iter<int>(numbers, size, printElem);
-	std::cout << RESET << std::endl;
+	std::cout << RESET << std::endl << std::endl;
+
+	int* numbers2 = new int[10]();
+	printTitle("Pre initialized array of ints:");
+	std::cout << GREY << "Before:" << std::endl;
+	iter<int>(numbers2, size, printElem);
+	iter<int>(numbers2, size, addOne);
+	std::cout << std::endl << "After addOne: " << std::endl;
+	iter<int>(numbers2, size, printElem);
+	iter<int>(numbers2, size, reduceOne);
+	std::cout << std::endl << "After reduceOne: " << std::endl;
+	iter<int>(numbers2, size, printElem);
+	std::cout << RESET << std::endl << std::endl;
 
 	float* floats = new float[size];
 	for (int i = 0; i < size; i++)
@@ -48,7 +61,7 @@ int main( void ) {
 	iter(floats, size, addOne);
 	std::cout << std::endl << "After addOne: " << std::endl;
 	iter(floats, size, printElem);
-	std::cout << RESET << std::endl;
+	std::cout << RESET << std::endl << std::endl;
 
 	char str[] = "Hello World";
 	size = std::strlen(str);
@@ -61,7 +74,7 @@ int main( void ) {
 	iter(str, size, reduceOne);
 	std::cout << std::endl << "After reduceOne: " << std::endl;
 	iter(str, size, printElem);
-	std::cout << RESET << std::endl;
+	std::cout << RESET << std::endl << std::endl;
 
 	std::string strings[] = {
 		"Harry Potter",
@@ -85,8 +98,26 @@ int main( void ) {
 	iter(const_numbers, size, printElem2);
 	std::cout << RESET << std::endl;
 
+	size = 0;
+	int* empty = new int[0];
+	printTitle("Empty array:");
+	std::cout << GREY;
+	iter(empty, size, printElem);
+	std::cout << RESET << std::endl;
+	
+	printTitle("Null pointer:");
+	int* ptr = NULL;
+	std::cout << GREY;
+	iter(ptr, size, printElem);
+	printTitle("Null pointer with size > 0:");
+	std::cout << GREY;
+	iter(ptr, 2, printElem);
+	std::cout << RESET << std::endl;
+
 	delete [] numbers;
+	delete [] numbers2;
 	delete [] floats;
+	delete [] empty;
 
 	return 0;
 
