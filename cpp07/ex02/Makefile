@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:27:01 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/27 00:46:25 by sguilher         ###   ########.fr        #
+#    Updated: 2023/07/27 01:07:50 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC =		c++
 CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp
-INCLUDE =	-I ./
+INCLUDE =	-I Array.hpp
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
 DEPS =		$(SRC:%.cpp=$(OBJ_DIR)/%.d)
