@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:15:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/20 11:32:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:29:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,15 @@ int main( void ) {
 	iter(strings, size, printElem);
 	std::cout << std::endl;
 	iter(strings, size, printElem2);
+	std::cout << RESET << std::endl;
+
+	size = 10;
+	int const const_numbers[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	printTitle("const array");
+	std::cout << GREY;
+	iter(const_numbers, size, printElem);
+	std::cout << std::endl;
+	iter(const_numbers, size, printElem2);
 	std::cout << RESET << std::endl;
 
 	delete [] numbers;

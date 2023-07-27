@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 12:02:42 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/24 21:02:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:30:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 
 template<typename T>
 void iter(T* array, size_t len, void (*fptr)(T& elem)) {
+	for (size_t i = 0; i < len; i++)
+		fptr(array[i]);
+}
+
+template<typename T>
+void iter(T const* array, size_t len, void (*fptr)(T const& elem)) {
 	for (size_t i = 0; i < len; i++)
 		fptr(array[i]);
 }
@@ -41,7 +47,17 @@ void printElem(T& elem) {
 }
 
 template<typename T>
+void printElem(T const& elem) {
+	std::cout << elem << " ";
+}
+
+template<typename T>
 void printElem2(T& elem) {
+	std::cout << elem << std::endl;
+}
+
+template<typename T>
+void printElem2(T const& elem) {
 	std::cout << elem << std::endl;
 }
 
