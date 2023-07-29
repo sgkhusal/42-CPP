@@ -41,7 +41,7 @@ class Pair< int, U > {
         Pair< int, U >(void);
 };
 
-// fool specialization
+// bool specialization
 template <>
 class Pair< bool, bool > {
     public:
