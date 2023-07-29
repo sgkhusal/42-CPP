@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/27 13:05:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:52:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,11 @@ class Array {
 		Array(size_t n);
 		Array(Array<T> const& array);
 		~Array(void);
-		
+
 		Array<T> const& operator=(Array<T> const& array);
 		T const& operator=(T const& value);
 		T& operator[](size_t idx);
-		// T const& operator[](size_t idx);
-		// Array<T>& operator[](size_t idx);
-
-		// T*		array(void) const;
-		// T		getElement(size_t idx) const;
-		// void	setArray();  // ver se vou precisar
-		// void	setElementArray(size_t const idx, T value);
+		T const& operator[](size_t idx) const;
 
 		size_t  size(void) const;
 

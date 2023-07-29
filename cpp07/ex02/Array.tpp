@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/27 13:05:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:53:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,38 +62,19 @@ T const& Array<T>::operator=(T const& value) {
 
 template< typename T >
 T& Array<T>::operator[](size_t idx) {
-	_printDescription("[] operator called");
+	// _printDescription("[] operator called");
 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
 		throw Array<T>::IndexOutOfBounds();
 	return this->_array[idx];
 }
 
-// template< typename T >
-// T const& Array<T>::operator[](size_t idx) {
-// 	_printDescription("[] operator called");
-// 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
-// 		throw Array<T>::IndexOutOfBounds();
-// 	return this->_array[idx];
-// }
-
-// template< typename T >
-// Array<T>& Array<T>::operator[](size_t idx) {
-// 	_printDescription("[] operator called");
-// 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
-// 		throw Array<T>::IndexOutOfBounds();
-// 	return this->_array[idx];
-// }
-
-// template< typename T >
-// T*      array(void) const;
-// template< typename T >
-// T Array<T>::getElement(size_t idx) const {
-// 	return this->_array[idx];
-// }
-// template< typename T >
-// void    setArray();  // ver se vou precisar
-// template< typename T >
-// void    setElementArray(size_t const idx, T value);
+template< typename T >
+T const& Array<T>::operator[](size_t idx) const {
+	// _printDescription("const [] operator called");
+	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
+		throw Array<T>::IndexOutOfBounds();
+	return this->_array[idx];
+}
 
 template< typename T >
 size_t  Array<T>::size(void) const {
