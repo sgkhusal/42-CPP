@@ -196,7 +196,7 @@ char& operator[](int index); // use to write / change buffer at index
 char& operator[](int index) const; // used only for accessing char at index
 ```
 
-## Exercises references
+## References
 
 1. Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
 2. [42 School Piscine C++ videos](https://elearning.intra.42.fr/notions/piscine-c-d07-templates/subnotions)

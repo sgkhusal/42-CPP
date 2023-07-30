@@ -3,20 +3,20 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:27:01 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/27 11:46:40 by sguilher         ###   ########.fr        #
+#    Updated: 2023/07/29 22:03:29 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		array
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP -D DEBUG=true
+CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp
-INCLUDE =	-I Array.hpp
+INCLUDE =	-I ./ # Array.hpp
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
 DEPS =		$(SRC:%.cpp=$(OBJ_DIR)/%.d)
