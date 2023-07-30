@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/29 19:59:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/29 21:40:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ class Array {
 		~Array(void);
 
 		Array<T> const& operator=(Array<T> const& array);
-		T const& operator=(T const& value);
 		T& operator[](size_t idx);
 		T const& operator[](size_t idx) const;
 
