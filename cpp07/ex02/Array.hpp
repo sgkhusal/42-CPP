@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:56 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/29 18:52:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/29 19:59:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <iostream>
 
 # define BLUE	"\033[38;5;75m"
+# define GREEN	"\033[1;32m"
 # define ORANGE	"\033[0;38;5;166m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
@@ -51,6 +52,9 @@ class Array {
 
 		static void _printDescription(std::string const& description);
 };
+
+template< typename T >
+std::ostream& operator<<(std::ostream& o, Array<T> const& p);
 
 # include "Array.tpp"
 

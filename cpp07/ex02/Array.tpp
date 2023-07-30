@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 13:26:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/29 18:53:00 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/29 20:48:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ T const& Array<T>::operator=(T const& value) {
 
 template< typename T >
 T& Array<T>::operator[](size_t idx) {
-	// _printDescription("[] operator called");
+	_printDescription("[] operator called");
 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
 		throw Array<T>::IndexOutOfBounds();
 	return this->_array[idx];
@@ -70,7 +70,7 @@ T& Array<T>::operator[](size_t idx) {
 
 template< typename T >
 T const& Array<T>::operator[](size_t idx) const {
-	// _printDescription("const [] operator called");
+	_printDescription("const [] operator called");
 	if (idx >= this->_size) // verificar se funciona para size = 0 e valores negativos
 		throw Array<T>::IndexOutOfBounds();
 	return this->_array[idx];
@@ -90,6 +90,46 @@ template< typename T >
 void Array<T>::_printDescription(std::string const& description) {
 	if (DEBUG)
 		std::cout << GREY << description << RESET << std::endl;
+}
+
+template< typename T >
+std::ostream& operator<<(std::ostream& o, Array<T> const& p) {
+	o << "Array of size " << p.size() << ": ";
+	for (size_t i = 0; i < p.size(); i++)
+		o << p[i] << " ";
+	return o;
+}
+
+template< >
+std::ostream& operator<<(std::ostream& o, Array<char> const& c) {
+	o << "Array of size " << c.size() << ": ";
+	for (size_t i = 0; i < c.size(); i++) {
+		if(c[i])
+			o << c[i] << " ";
+		else
+			o << "|" << c[i] << "| ";
+	}
+	return o;
+}
+
+template< >
+std::ostream& operator<<(std::ostream& o, Array<std::string> const& s) {
+	o << "Array of size " << s.size() << ": ";
+	for (size_t i = 0; i < s.size(); i++)
+		o << "|" << s[i] << "| ";
+	return o;
+}
+
+template< >
+std::ostream& operator<<(std::ostream& o, Array<bool> const& b) {
+	o << "Array of size " << b.size() << ": ";
+	for (size_t i = 0; i < b.size(); i++) {
+		if(b[i])
+			o << "true  ";
+		else
+			o << "false ";
+	}
+	return o;
 }
 
 #endif
