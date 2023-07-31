@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:14:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/24 20:54:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:22:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WHATEVER_HPP
 # define WHATEVER_HPP
+
+#include <string>
+#include <iostream>
 
 # define BLUE	"\033[38;5;75m"
 # define GREY	"\033[38;5;244m"
@@ -45,12 +48,12 @@ void test(T& a, T& b, std::string& type) {
 			<< ": (" << a << ", " << b << ")" << GREY << std::endl;
 	std::cout << "a pointer: " << &a << std::endl;
 	std::cout << "b pointer: " << &b << std::endl;
-	::swap( a, b );
+	swap( a, b );
 	std::cout << "After swap: a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min( a, b )
-			<< " | pointer: " << &(::min( a, b )) << std::endl;
-	std::cout << "max( a, b ) = " << ::max( a, b )
-			<< " | pointer: " << &(::max( a, b )) << std::endl;
+	std::cout << "min( a, b ) = " << min( a, b )
+			<< " | pointer: " << &(min( a, b )) << std::endl;
+	std::cout << "max( a, b ) = " << max( a, b )
+			<< " | pointer: " << &(max( a, b )) << std::endl;
 	std::cout << RESET << std::endl;
 }
 
