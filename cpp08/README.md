@@ -7,49 +7,247 @@ A set of template classes and functions that supply the programmer with:
 - Algorithms for manipulating the content of the containers
 
 ## STL Containers
-Template classes that are used to store data.
+Template classes that are used to store data. They need to be instantiated specifying the type of object
+
+About containers complexity:
+- constant complexity: the performance of the container is unrelated to the number of elements contained by it. It would need as much time to perform on a thousand elements as it would on a million.
+- logarithmic complexity: the performance is proportional to the logarithm of the number of elements contained in it. It would take twice as long in processing a million elements (1,000,000 = 1,000 ^ 2) as it would in processing a thousand.
+- linear complexity: the performance is proportional to the number of elements. It would be a thousand times slower in processing a million elements than it would be in processing a thousand.
+
+For a given container, the complexities may be different for differing operations (for example, element insertion complexity may be constant but search complexity linear). **It is important to understand how a container may perform as also the functionality it will be used with to choose the right container**. Your application might have requirements that can be satisfied by more than one STL container. But the selection is important because a wrong choice could result in performance issues and scalability bottlenecks.
 
 ### Sequential containers
-- hold data in a sequential fashion, such as arrays and lists.
+- elements are stored and accessed in a sequencial order that they are inserted.
 - characterized by a fast insertion time
 - relatively slow in find operations.
 
 #### 1. std::vector
-- like a dynamic array - it can resize itself to suit the application’s runtime requirements
+- It is a dynamic array - it can resize itself to suit the application’s runtime requirements and manages the memory usage.
 - You can add or remove items at the end
+- elements are stored and accessed in the very order that they are inserted; it doesn't change the order of the elements stored in it
 - you can directly access or manipulate an element in the vector given its position (index) using the subscript operator ([]).
 - To keep the property of being able to randomly access an element in the array when given a position, most implementations of the STL vector keep all elements in contiguous locations. Therefore, a vector that needs to resize itself often can reduce the performance of the application, depending on the type of the object it contains.
+- The time required for the insertion or removal of elements at the middle is directly proportional to the number of elements behind the element being removed
+
+```c++
+std::vector<int> integares; // vector containing integers
+std::vector<float> floats; // vector containing floats
+std::vector<Tuna> tunas; // vector containing Tunas
+
+// vector constructors
+// vector with 10 elements with default value 0 (it can still grow)
+std::vector<int> tenElements(10);
+// vector with 10 elements, each initialized to 90
+std::vector<int> tenElemInit(10, 90);
+// copy constructor (only same types)
+std::vector<int> copy(tenElemInit);
+// vector initialized to 5 elements from another using iterators
+std::vector<int> partialCopy(tenElements.cbegin(), tenElements.cbegin() + 5);
+
+// accessing elements
+tenElements[3] = 2011;
+std::cout << integers.at(2);
+// using iterators: see section about iterators below
+
+// Insertion of elements
+// Insert element into the end
+integers.push_back(50);
+// insert an element at the beginning
+integers.insert(integers.begin(), 25);
+// Insert 2 elements of value 45 at the end
+integers.insert(integers.end(), 2, 45);
+// Insert two elements from another container in position [1]
+std::vector<int> another(2, 30);
+integers.insert(integers.begin() + 1, another.begin(), another.end());
+// integers = 25 30 30 50 45 45
+
+// removing elements
+integers.pop_back(); // erase one element at the end
+
+// delete all elements
+integers.clear();
+if (integers.empty())
+	std::cout << "The container is now empty" << std::endl;
+```
+
+- Prefer to use `push_back` instead of `insert` to add elements to a vector. `insert` is inefficient because adding elements in the beginning or the middle makes the vector class shift all subsequent elements backwards (after making space for the last ones at the end) and, depending on the type of the objects contained in the sequence, the cost of this shift operation can be significant in terms of the copy constructor or copy assignment operator invoked.
+**If your container needs to have very frequent insertions in the middle, you should ideally choose the `std::list`**
+- If you use the subscript operator ([]) to access elements in a vector at a position that is beyond its bounds, the result will be undefined.
+- `at()` performs a runtime check against the size of the container and throws an exception if you cross the boundaries
+
+**Size and Capacity of a vector**
+- The size of a vector is the number of elements stored in a vector.
+```c++
+std::cout << "Size: " << integers.size() << std::endl;
+```
+- The capacity of a vector is the total number of elements that can potentially be stored in the vector before it reallocates memory to accommodate more elements
+```c++
+std::cout "Capacity: " << integers.capacity() << std::endl;
+```
+
+**Reallocation and performance issues - using reserve function**
+- It increases the amount of memory allocated for the vector’s internal
+array without needing to reallocate when adding more elements.
+- A vector can cause some amount of performance problems when it needs to frequently reallocate memory.
+- Reducing the number of reallocations also reduces the number of times the objects are copied and saves on performance.
+
+**Advantages:**
+- Quick (constant time) insertion at the end (the time needed to insert at the end is not dependent on the size of the array). The same for
+removal of an element at the end.
+- Array-like access
+
+**Disadvantages:**
+- Resizing can result in performance loss.
+- Search time is proportional to the number of elements in the container.
+- Insertion only at the end.
+
+**Note:** the vector methods shown in this section also apply to other STL containers
 
 #### 2. std::deque
 - Similar to std::vector
-- it allows for new elements to be inserted or removed at the beginning, too
+- it allows for new elements to be inserted or removed at the beginning, too, with `push_front` and `pop_front` methods.
+
+**Advantages:**
+- All advantages of the vector.
+- Offers constant time insertion at the beginning of the container too.
+
+**Disadvantages:**
+- Resizing can result in performance loss.
+- Search time is proportional to the number of elements in the container.
+- By specification does not need to feature the reserve() function that allows to reserve memory space to be used like the vector - a feature that avoids frequent resizing to improve performance.
 
 #### 3. std::list
 - Operates like a doubly linked list.
 - You can add or remove objects at any position
 - a list can organize elements in noncontiguous sections of memory. Therefore, it does not have the performance issues that are applicable to a vector when the vector needs to reallocate its internal array
 
-#### 4. std::forward_list
-- Similar to a std::list
-- it is a singly linked list of elements that allows you to iterate only in one direction
+**Advantages:**
+- Constant time insertion at the front, middle, or end of the list.
+- Removal of elements from a list is a constant time activity regardless of the position of the element.
+- Insertion or removal of elements does not invalidate iterators that point to other elements in the list.
+
+**Disadvantages:**
+- Elements cannot be accessed randomly given an index as in an array.
+- Accessing elements can be slower than the vector because elements are not stored in adjacent memory locations.
+- Search time is proportional to the number of elements in the container.
+
+**Reversing and Sorting Elements**
+- iterators pointing to the elements in a list remain valid in spite of rearrangement of the elements or insertion of new elements and so on.
+- To ensure this property, list has it's own `sort` and `reverse` member methods even though the STL supplies these as algorithms that will and do work on the list class
+
+```c++
+lst.reverse(); // reverse order of elements
+lst.sort(); // sort in ascending order
+
+bool yourSortingRule(const int& lhs, const int& rhs) {
+	// define criteria for list::sort: return true for desired order
+	return (lhs > rhs);
+}
+lst.sort(yourSortingRule);
+```
+
+**Important:** you need to implement `operator<` and `operator==` in a class that will be collected in a STL container such as list to supply the default sort or remove predicate.
+
+**Best Practice:** DON’T use a list when you have infrequent insertions or deletions at the ends and no insertions or deletions in the middle; vector or deque can be significantly faster in these cases.
 
 ### Associative containers
 - store data in a sorted fashion - like a dictionary.
 - slower insertion times
-- significant advantages when it comes to searching
 
 #### 1. std::set
 - Stores unique values sorted on insertion in a container featuring logarithmic complexity
 
+**Advantages:**
+- Search performance proportional to the logarithm of number of elements. Often significantly faster than sequential containers.
+
+**Disadvantages:**
+- Insertion of elements is slower than in sequential containerss, as elements are sorted at insertion.
+
 #### 2. std::map
 - Stores key-value pairs sorted by their unique keys in a container with logarithmic complexity
+
+**Advantages:**
+- Search performance proportional to the logarithm of number of elements. Often significantly faster than sequential containers.
+
+**Disadvantages:**
+- Elements (pairs) are sorted on insertion, hence it will be slower than in a sequential container of pairs.
 
 #### 3. std::multiset and std::multimap
 - Akin to a set/map
 - Supports the ability to store multiple items having the same value/key; that is, the values/keys don’t need to be unique.
 
 ### Containers adapters
+- variants of sequential and associative containers that have limited
+functionality and are intended to fulfill a particular purpose
 
+#### 1. std::stack
+- LIFO (last-in-first-out) storage of elements
+- elements can be inserted (pushed) and removed (popped) at the top
+
+#### 2. std::queue
+- FIFO (first-in-first-out) storage of elements
+- first element can be removed in the order they’re inserted
+
+#### 3. std::priority_queue
+- Stores elements in a sorted order, such that the one whose value is evaluated to be the highest is always first in the queue
+
+## STL Iterators
+- template classes that in some ways are a generalization of pointers
+- it helps to manipulate STL containers and perform operations on them
+
+```c++
+// iterator that points to an element in the list and doesn't modifying it
+std::vector<int>::const_iterator it1;
+// iterator to modify values or invoke non-const functions
+std::vector<int>::iterator it2;
+
+std::list<int> lst1;
+lst1.push_back(1);
+lst1.push_back(17);
+lst1.push_back(42);
+std::list<int>::const_iterator it;
+std::list<int>::const_iterator ite = lst1.end();
+for(it = lst1.begin(); it != ite; it++)
+	std::cout << *it << std::endl;
+```
+
+##### Classification:
+- InputIterator: guarantee read access. An Iterator that can be used in sequential input operations, where each value pointed by the iterator is read only once and then the iterator is incremented.
+- OutputIterator: guarantee write access. It can be used in sequential output operations, where each element pointed by the iterator is written a value only once and then the iterator is incremented. Once dereferenced, its iterator value may no longer be dereferenceable.
+
+##### Types:
+- Forward iterator: it may allow read-only access or allow both read and write operations.
+- Bidirectional iterator: A refinement of the forward iterator. It can be decremented to move backward as well.
+- Random access iterators: iterators that can be used to access elements at an arbitrary offset position relative to the element they point to. They are the most complete iterators in terms of functionality. All pointer types are also valid random-access iterators.
+
+All forward, bidirectional and random-access iterators are also valid input iterators.
+All forward, bidirectional and random-access iterators that are not constant iterators are also valid output iterators.
+
+## STL Algorithms
+- template functions
+- header <algorithm>
+
+Some STL algorithms:
+- std::find
+- std::find_if
+- std::reverse
+- std::remove_if
+- std::transform
+
+## STL String Classes
+STL supplies a template class that has been specially designed for string operations: `std::basic_string<T>` which have two template specializations:
+- std::string
+- std::wstring
+
+Why use them:
+- Reduces the effort of string creation and manipulation
+- Increases the stability of the application being programmed by internally managing memory allocation details
+- Features copy constructor and assignment operators that automatically ensure that member strings get correctly copied
+- Supplies useful utility functions
+- Lets you focus efforts on your application’s primary requirements rather than on string manipulation details
 ## References
 
 1. Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
+2. [STL Containers](https://cplusplus.com/reference/stl/)
+3. [STL Iterators](https://cplusplus.com/reference/iterator/)
+4. [algorithm library](https://cplusplus.com/reference/algorithm/)
