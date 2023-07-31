@@ -9,10 +9,10 @@ A set of template classes and functions that supply the programmer with:
 ## STL Containers
 Template classes that are used to store data. They need to be instantiated specifying the type of object
 
-About containers complexity:
+**About containers complexity:**
 - constant complexity: the performance of the container is unrelated to the number of elements contained by it. It would need as much time to perform on a thousand elements as it would on a million.
 - logarithmic complexity: the performance is proportional to the logarithm of the number of elements contained in it. It would take twice as long in processing a million elements (1,000,000 = 1,000 ^ 2) as it would in processing a thousand.
-- linear complexity: the performance is proportional to the number of elements. It would be a thousand times slower in processing a million elements than it would be in processing a thousand.
+- linear complexity: the performance is proportional to the number of elements. It would be a thousand times slower in processing a million elements than it would be in processing a thousand (1,000,000 = 1,000 * 1,000)
 
 For a given container, the complexities may be different for differing operations (for example, element insertion complexity may be constant but search complexity linear). **It is important to understand how a container may perform as also the functionality it will be used with to choose the right container**. Your application might have requirements that can be satisfied by more than one STL container. But the selection is important because a wrong choice could result in performance issues and scalability bottlenecks.
 
@@ -22,10 +22,10 @@ For a given container, the complexities may be different for differing operation
 - relatively slow in find operations.
 
 #### 1. std::vector
+- `<vector>` library
 - It is a dynamic array - it can resize itself to suit the application’s runtime requirements and manages the memory usage.
 - You can add or remove items at the end
 - elements are stored and accessed in the very order that they are inserted; it doesn't change the order of the elements stored in it
-- you can directly access or manipulate an element in the vector given its position (index) using the subscript operator ([]).
 - To keep the property of being able to randomly access an element in the array when given a position, most implementations of the STL vector keep all elements in contiguous locations. Therefore, a vector that needs to resize itself often can reduce the performance of the application, depending on the type of the object it contains.
 - The time required for the insertion or removal of elements at the middle is directly proportional to the number of elements behind the element being removed
 
@@ -37,31 +37,46 @@ std::vector<Tuna> tunas; // vector containing Tunas
 // vector constructors
 // vector with 10 elements with default value 0 (it can still grow)
 std::vector<int> tenElements(10);
+
 // vector with 10 elements, each initialized to 90
 std::vector<int> tenElemInit(10, 90);
+
 // copy constructor (only same types)
 std::vector<int> copy(tenElemInit);
+
 // vector initialized to 5 elements from another using iterators
 std::vector<int> partialCopy(tenElements.cbegin(), tenElements.cbegin() + 5);
+```
 
-// accessing elements
+Access to elements:
+- you can directly access or manipulate an element using the subscript operator ([])
+- If you use it to access elements in a vector at a position that is beyond its bounds, the result will be undefined.
+- `at()` performs a runtime check against the size of the container and throws an exception if you cross the boundaries
+```c++
 tenElements[3] = 2011;
 std::cout << integers.at(2);
-// using iterators: see section about iterators below
 
-// Insertion of elements
+// accessing using iterators: see section about iterators below
+```
+
+- Insert, remove elements and delete all elements:
+```c++
 // Insert element into the end
 integers.push_back(50);
+
 // insert an element at the beginning
 integers.insert(integers.begin(), 25);
+
 // Insert 2 elements of value 45 at the end
 integers.insert(integers.end(), 2, 45);
+
 // Insert two elements from another container in position [1]
 std::vector<int> another(2, 30);
 integers.insert(integers.begin() + 1, another.begin(), another.end());
+
 // integers = 25 30 30 50 45 45
 
-// removing elements
+// remove elements
 integers.pop_back(); // erase one element at the end
 
 // delete all elements
@@ -72,8 +87,7 @@ if (integers.empty())
 
 - Prefer to use `push_back` instead of `insert` to add elements to a vector. `insert` is inefficient because adding elements in the beginning or the middle makes the vector class shift all subsequent elements backwards (after making space for the last ones at the end) and, depending on the type of the objects contained in the sequence, the cost of this shift operation can be significant in terms of the copy constructor or copy assignment operator invoked.
 **If your container needs to have very frequent insertions in the middle, you should ideally choose the `std::list`**
-- If you use the subscript operator ([]) to access elements in a vector at a position that is beyond its bounds, the result will be undefined.
-- `at()` performs a runtime check against the size of the container and throws an exception if you cross the boundaries
+
 
 **Size and Capacity of a vector**
 - The size of a vector is the number of elements stored in a vector.
@@ -104,6 +118,7 @@ removal of an element at the end.
 **Note:** the vector methods shown in this section also apply to other STL containers
 
 #### 2. std::deque
+- `<deque>` library
 - Similar to std::vector
 - it allows for new elements to be inserted or removed at the beginning, too, with `push_front` and `pop_front` methods.
 
@@ -117,6 +132,7 @@ removal of an element at the end.
 - By specification does not need to feature the reserve() function that allows to reserve memory space to be used like the vector - a feature that avoids frequent resizing to improve performance.
 
 #### 3. std::list
+- `<list>` library
 - Operates like a doubly linked list.
 - You can add or remove objects at any position
 - a list can organize elements in noncontiguous sections of memory. Therefore, it does not have the performance issues that are applicable to a vector when the vector needs to reallocate its internal array
@@ -152,19 +168,115 @@ lst.sort(yourSortingRule);
 
 ### Associative containers
 - store data in a sorted fashion - like a dictionary.
-- slower insertion times
+- slower insertion times but quick searches
 
-#### 1. std::set
+#### 1. std::set and std::multiset
+- `<set>` library
 - Stores unique values sorted on insertion in a container featuring logarithmic complexity
+- multiset is akin to a set with the difference that values don’t need to be unique.
+- To facilitate quick searching, STL implementations of the set and multiset internally look like a binary tree
+- An element at a given position in a set cannot be replaced by a new element of a different value. The set place the new element in a possible different location in accordance with its value relative to those in the internal tree.
+- It uses a default predicate `std::less` when you don’t supply a sort criteria. This ensures that your set contains elements sorted in ascending order
+- You need to program `operator<` and `operator==` for classes that can be collected in containers such as set or multiset. The former becomes the sort predicate, whereas the latter is used for functions such as `set::find()`.
+- You create a binary sort predicate by defining a class with `operator()` that takes two values of the type contained in the set and returns a bool value. Example:
+
+```c++
+template <typename T>
+struct SortDescending {
+	bool operator()(const T& lhs, const T& rhs) const {
+		return (lhs > rhs);
+	}
+};
+
+// use this predicate in the set or multiset instantiation:
+std::set<int, SortDescending<int>> setInts;
+```
+
+**Finding Elements:**
+```c++
+std::set<int>::const_iterator elementFound = setInts.find(-1);
+// Check if found...
+if (elementFound != setInts.end ())
+	cout << "Element " << *elementFound << " found!" << endl;
+else
+	cout << "Element not found in set!" << endl;
+```
+- `find()` makes use of the internal binary tree structure
 
 **Advantages:**
 - Search performance proportional to the logarithm of number of elements. Often significantly faster than sequential containers.
+- Optimized for situations that involve frequent search. Their contents are sorted and therefore quicker to locate
 
 **Disadvantages:**
-- Insertion of elements is slower than in sequential containerss, as elements are sorted at insertion.
+- Insertion of elements is slower than in sequential containers, as elements are sorted at insertion.
+- In a vector, the element pointed to by an iterator can be overwritten by a new value. In case of a set, however, elements are sorted by the set class according to their respective values. **Overwriting an element
+using an iterator should never be done, even if that were programmatically possible*.
 
-#### 2. std::map
-- Stores key-value pairs sorted by their unique keys in a container with logarithmic complexity
+#### 2. std::map and std::multimap
+- `<map>` library
+- map stores key-value pairs sorted on insertion by their unique keys in a container with logarithmic complexity
+- multimap is akin to a map with the difference that the keys don’t need to be unique.
+- To facilitate quick searching, STL implementations of the map and multimap internally look like binary trees
+- elements in a map at a given position cannot be replaced by a new element of a different value
+- The template instantiation needs that you specify the key type, the value type, and optionally a predicate that helps the map class to sort the elements on insertion. If you don't specify a predicate, the key type must have `operator<` implemented: it will use the default sort criterion provided by `std::less<>`, which essentially compares two objects using `operator<`
+
+```c++
+// instantiation - the third parameter is optional
+std::map<keyType, valueType, Predicate=std::less<keyType>> mapObj;
+std::multimap<keyType, valueType, Predicate=std::less<keyType>> mmapObj;
+```
+
+- inserting elements:
+```c++
+std::map<int, std::string> map1;
+
+// with make_pair function
+map1.insert(make_pair(-1, "Minus One"));
+
+// with std::pair
+map1.insert(pair<int, std::string>(1000, "One Thousand"));
+
+// with array-like syntax
+map1[1000000] = "One Million";
+
+// with map<K, V>::value_type
+map1.insert(map<int, string>::value_type(3, "Three"));
+```
+
+- the key is accessed through the attribute `first` and value through `second`:
+```c++
+std::map<int, std::string>::iterator it;
+for (it = map1.begin(); it != map1.end(); ++it) {
+	std::cout << it->first << ': ' << it->second << '\n';
+}
+```
+
+- find a value given a key:
+```c++
+int key = 1000;
+map<int, string>::const_iterator pairFound = map1.find(key);
+if (pairFound != map1.end())
+{
+	std::cout << "Key " << pairFound->first << " points to Val" << pairFound->second << std::endl;
+}
+else
+	std::cout << "Pair with key " << key << " not in map" << endl;
+```
+
+**Best practice:** Never use the result of a `find` operation directly without checking the iterator returned for success!!
+
+- Erasing elements:
+```c++
+// with the key (for multimaps it returns the number of objects erased)
+mapObject.erase(key);
+
+// with an iterator that points to the element:
+mapObject.erase(iterator);
+
+// with a range of elements from a map or a multimap using iterators
+mapObject.erase (lowerBoundIterator, upperBoundIterator);
+```
+
 
 **Advantages:**
 - Search performance proportional to the logarithm of number of elements. Often significantly faster than sequential containers.
@@ -172,10 +284,17 @@ lst.sort(yourSortingRule);
 **Disadvantages:**
 - Elements (pairs) are sorted on insertion, hence it will be slower than in a sequential container of pairs.
 
-#### 3. std::multiset and std::multimap
-- Akin to a set/map
-- Supports the ability to store multiple items having the same value/key; that is, the values/keys don’t need to be unique.
+-----------------------------
+##### Note about function objects
+Generically, function objects are instances of a class with member function `operator()` defined. This member function allows the object to be used with the same syntax as a function call.
 
+**std::less**
+Binary function object class whose call returns whether the its first argument compares less than the second (as returned by operator <).
+'
+**std::greater**
+Binary function object class whose call returns whether the its first argument compares greater than the second (as returned by operator >).
+
+-----------------------------
 ### Containers adapters
 - variants of sequential and associative containers that have limited
 functionality and are intended to fulfill a particular purpose
