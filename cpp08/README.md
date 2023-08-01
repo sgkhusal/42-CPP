@@ -290,19 +290,56 @@ mapObject.erase (lowerBoundIterator, upperBoundIterator);
 
 -----------------------------
 ### Containers adapters
-- variants of sequential and associative containers that have limited
-functionality and are intended to fulfill a particular purpose
+- variants of sequential and associative containers that adapts another container and implements restriction on how elements are inserted, accessed or removed. They are intended to fulfill a particular purpose.
 
 #### 1. std::stack
+- `<stack>`
 - LIFO (last-in-first-out) storage of elements
-- elements can be inserted (pushed) and removed (popped) at the top
+- elements can be inserted (pushed) and removed (popped) at the top of the container.
+- You can visualized it as a stack of plates: the last plate added is going to be the first one taken off. Plates in the middle and at the bottom cannot be inspected.
+- `std::deque` is the default container for the stack’s internal data storage and can be replaced by `std::vector` or the `std::list`
+
+```c++
+// Instantiation with default container std::deque
+std::stack<int> numsInStack;
+
+// Instantiation with a container other than the default
+std::stack<double, vector<double>> doublesStackedInVec;
+
+// Instantiation with copy constructor
+std::stack<int> stackCopy(numsInStack);
+
+// add an element in the top of the stack
+numsInStack.push(25);
+
+// access elements at the top
+std::cout << numsInStack.top() << std::endl;
+
+// remove topmost element
+numsInStack.pop();
+
+// check if stack is empty
+numsInStack.empty();
+
+// get stack size
+numsInStack.size();
+```
+
+- `push_back` and `insert`, which are available with all STL sequential containers, used as underlying containers by the stack class, are not available as public member functions of the stack, as also iterators that help you peek at elements that are not at the top of the container. All that the stack exposes is the element at the top, nothing else.
 
 #### 2. std::queue
+- `<queue>`
 - FIFO (first-in-first-out) storage of elements
-- first element can be removed in the order they’re inserted
+- addition at the back but removal at the front: elements are inserted behind the previous one, and the one inserted first gets removed first
+- You can think it as a queue of people waiting for something: those who join the queue earlier, leave earlier.
+- A queue does not permit any access or inspection of elements at the middle; only elements at the beginning and the end can be accessed
+- `std::deque` is the default container for the queue’s internal data storage and can be replaced by `std::vector` or the `std::list`
+- Instantiation works the same as in stacks. Member functions are: `push`, `pop`, `front`, `back`, `empty` and `size`.
 
 #### 3. std::priority_queue
-- Stores elements in a sorted order, such that the one whose value is evaluated to be the highest is always first in the queue
+- `<queue>`
+- It stores elements in a sorted order, such that the one whose value is evaluated to be the highest is always first in the queue
+- Member functions are: `push`, `pop`, `top`, `empty` and `size`.
 
 -----------------------------
 ## STL String Classes
@@ -382,15 +419,19 @@ Function objects that return a boolean type are naturally suited for use in algo
 A function object that combines two function objects is called an *adaptive function object*.
 
 **std::less**
+
 Binary function object class whose call returns whether the its first argument compares less than the second (as returned by operator <).
 '
 **std::greater**
+
 Binary function object class whose call returns whether the its first argument compares greater than the second (as returned by operator >).
 
 -----------------------------
 ## STL Algorithms
 - template functions
 - header `<algorithm>`
+
+**STL algorithms work using iterators. Because neither the stack nor the queue class supplies iterators that mark the end of the ranges, the use of STL algorithms with these containers would not be possible.**
 
 A reference to all STL algorithms: [<algorithm>](https://cplusplus.com/reference/algorithm/)
 
