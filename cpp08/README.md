@@ -6,6 +6,7 @@ A set of template classes and functions that supply the programmer with:
 - Iterators for accessing the information stored
 - Algorithms for manipulating the content of the containers
 
+-----------------------------
 ## STL Containers
 Template classes that are used to store data. They need to be instantiated specifying the type of object
 
@@ -16,6 +17,7 @@ Template classes that are used to store data. They need to be instantiated speci
 
 For a given container, the complexities may be different for differing operations (for example, element insertion complexity may be constant but search complexity linear). **It is important to understand how a container may perform as also the functionality it will be used with to choose the right container**. Your application might have requirements that can be satisfied by more than one STL container. But the selection is important because a wrong choice could result in performance issues and scalability bottlenecks.
 
+-----------------------------
 ### Sequential containers
 - elements are stored and accessed in a sequencial order that they are inserted.
 - characterized by a fast insertion time
@@ -104,6 +106,7 @@ std::cout "Capacity: " << integers.capacity() << std::endl;
 array without needing to reallocate when adding more elements.
 - A vector can cause some amount of performance problems when it needs to frequently reallocate memory.
 - Reducing the number of reallocations also reduces the number of times the objects are copied and saves on performance.
+- There is also member function `resize`
 
 **Advantages:**
 - Quick (constant time) insertion at the end (the time needed to insert at the end is not dependent on the size of the array). The same for
@@ -166,6 +169,7 @@ lst.sort(yourSortingRule);
 
 **Best Practice:** DON’T use a list when you have infrequent insertions or deletions at the ends and no insertions or deletions in the middle; vector or deque can be significantly faster in these cases.
 
+-----------------------------
 ### Associative containers
 - store data in a sorted fashion - like a dictionary.
 - slower insertion times but quick searches
@@ -285,16 +289,6 @@ mapObject.erase (lowerBoundIterator, upperBoundIterator);
 - Elements (pairs) are sorted on insertion, hence it will be slower than in a sequential container of pairs.
 
 -----------------------------
-##### Note about function objects
-Generically, function objects are instances of a class with member function `operator()` defined. This member function allows the object to be used with the same syntax as a function call.
-
-**std::less**
-Binary function object class whose call returns whether the its first argument compares less than the second (as returned by operator <).
-'
-**std::greater**
-Binary function object class whose call returns whether the its first argument compares greater than the second (as returned by operator >).
-
------------------------------
 ### Containers adapters
 - variants of sequential and associative containers that have limited
 functionality and are intended to fulfill a particular purpose
@@ -310,6 +304,20 @@ functionality and are intended to fulfill a particular purpose
 #### 3. std::priority_queue
 - Stores elements in a sorted order, such that the one whose value is evaluated to be the highest is always first in the queue
 
+-----------------------------
+## STL String Classes
+STL supplies a template class that has been specially designed for string operations: `std::basic_string<T>` which have two template specializations:
+- std::string
+- std::wstring
+
+Why use them:
+- Reduces the effort of string creation and manipulation
+- Increases the stability of the application being programmed by internally managing memory allocation details
+- Features copy constructor and assignment operators that automatically ensure that member strings get correctly copied
+- Supplies useful utility functions
+- Lets you focus efforts on your application’s primary requirements rather than on string manipulation details
+
+-----------------------------
 ## STL Iterators
 - template classes that in some ways are a generalization of pointers
 - it helps to manipulate STL containers and perform operations on them
@@ -330,6 +338,8 @@ for(it = lst1.begin(); it != ite; it++)
 	std::cout << *it << std::endl;
 ```
 
+**Best Practice:** use constant iterators as much as you can. You may deviate from it when you are certain about the need to modify the elements they point to.
+
 ##### Classification:
 - InputIterator: guarantee read access. An Iterator that can be used in sequential input operations, where each value pointed by the iterator is read only once and then the iterator is incremented.
 - OutputIterator: guarantee write access. It can be used in sequential output operations, where each element pointed by the iterator is written a value only once and then the iterator is incremented. Once dereferenced, its iterator value may no longer be dereferenceable.
@@ -342,28 +352,59 @@ for(it = lst1.begin(); it != ite; it++)
 All forward, bidirectional and random-access iterators are also valid input iterators.
 All forward, bidirectional and random-access iterators that are not constant iterators are also valid output iterators.
 
+-----------------------------
+## Functors or Function objects
+Function objects are instances of a class with member function `operator()` defined. This member function allows the object to be used with the same syntax as a function call.
+
+**Types:**
+- unary function: called with one argument. When it returns a `bool`, it is called a predicate.
+```c++
+// A unary function
+template <typename T>
+void FuncDisplayElement (const T& element) {
+	std::cout << element << ' ';
+};
+
+// Struct that can behave as a unary function
+// Remember that struct is akin to a class where members are public by default
+template <typename T>
+struct DisplayElement {
+	void operator()(const T& element) const {
+		std::cout << element << ' ';
+	}
+};
+```
+Either of these implementations can be used with the STL algorithm `for_each()`, for example. The real advantage of using a function object implemented in a struct is to be able to use the object of the struct to store information.
+
+- binary function: called with two arguments. When it returns a `bool`, it is called a binary predicate.
+
+Function objects that return a boolean type are naturally suited for use in algorithms that help in decision making, like `find()` and `sort()`.
+A function object that combines two function objects is called an *adaptive function object*.
+
+**std::less**
+Binary function object class whose call returns whether the its first argument compares less than the second (as returned by operator <).
+'
+**std::greater**
+Binary function object class whose call returns whether the its first argument compares greater than the second (as returned by operator >).
+
+-----------------------------
 ## STL Algorithms
 - template functions
-- header <algorithm>
+- header `<algorithm>`
 
-Some STL algorithms:
-- std::find
-- std::find_if
-- std::reverse
-- std::remove_if
-- std::transform
+A reference to all STL algorithms: [<algorithm>](https://cplusplus.com/reference/algorithm/)
 
-## STL String Classes
-STL supplies a template class that has been specially designed for string operations: `std::basic_string<T>` which have two template specializations:
-- std::string
-- std::wstring
+**Best Practices:**
+- Use the container’s `erase` member method after using algorithms `remove`, `remove_if`, or `unique` to resize the container.
+- Check the iterator returned by `find`, `find_if`, `search`, or `search_n` functions for validity before using it by comparing against the `end` of the container.
+- Choose `stable_partition` over `partition` and `stable_sort` over `sort` only when the relative ordering of sorted elements is important as the stable_* versions can reduce the performance of the application.
+- Sort a container using `sort` before calling `unique` to remove repeating adjacent values. It will ensure that all elements of a value are aligned adjacent to each other, making `unique` effective.
+- Insert elements into a sorted container using positions returned by `lower_bound` or `upper_bound` to ensure that the sorted order of elements remains undisturbed instead of using randomly chosen positions.
+- Use algorithms such as `binary_search` only in sorted containers. The use of this algorithm on an unsorted vector can have undesirable consequences
+- The contents of an associative container should be treated as constants because they sort their elements on insertion, and the relative positions of the elements play an important role in functions such as `find` and also in the efficiency of the container. For this reason, mutating algorithms, such as `transform`, should not be used on STL sets and maps.
 
-Why use them:
-- Reduces the effort of string creation and manipulation
-- Increases the stability of the application being programmed by internally managing memory allocation details
-- Features copy constructor and assignment operators that automatically ensure that member strings get correctly copied
-- Supplies useful utility functions
-- Lets you focus efforts on your application’s primary requirements rather than on string manipulation details
+
+-----------------------------
 ## References
 
 1. Sams Teach Yourself C++ in one Hour a Day - Siddhartha Rao - 2017
