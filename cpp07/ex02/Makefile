@@ -6,17 +6,18 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 13:27:01 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/29 22:03:29 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 20:54:57 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		array
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp
-INCLUDE =	-I ./ # Array.hpp
+# VPATH =		./
+# INCLUDE =	-I ./ # Array.hpp
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
 DEPS =		$(SRC:%.cpp=$(OBJ_DIR)/%.d)
@@ -42,7 +43,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 $(OBJ_DIR)/%.o:	%.cpp
 	echo $<
 	echo $@
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 print:
 	@echo $(OBJ)

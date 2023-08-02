@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/17 01:04:26 by sguilher          #+#    #+#              #
-#    Updated: 2023/01/28 23:09:51 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 19:42:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		scavtrap
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
 SRC =		main.cpp ClapTrap.cpp ScavTrap.cpp
 HEADERS =	ClapTrap.hpp ScavTrap.hpp
@@ -32,7 +32,7 @@ RESET	=	\033[0m
 all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CXXFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "           scavtrap created"
@@ -40,7 +40,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(RESET)"
 
 $(OBJ_DIR)/%.o:	%.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

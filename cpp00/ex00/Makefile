@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/13 00:24:52 by sguilher          #+#    #+#              #
-#    Updated: 2022/12/13 18:42:37 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 19:42:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		megaphone
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -g
 
 SRC =		megaphone.cpp
 OBJ_DIR =	./obj
@@ -30,7 +30,7 @@ RESET	=	\033[0m
 all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CXXFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "          megaphone created"
@@ -38,7 +38,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(RESET)"
 
 $(OBJ_DIR)/%.o:	%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CXXFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

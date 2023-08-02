@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 16:12:38 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/27 12:59:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:28:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ void	Account::_displayTimestamp(void) {
 	std::time(&timetoday);
 	timestamp = std::localtime(&timetoday);
 	std::cout << "[" << 1900 + timestamp->tm_year << 1 + timestamp->tm_mon \
-			<< timestamp->tm_mday << "_" << timestamp->tm_HPPour \
+			<< timestamp->tm_mday << "_" << timestamp->tm_hour \
 			<< timestamp->tm_min << timestamp->tm_sec << "] ";
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:45:50 by sguilher          #+#    #+#             */
-/*   Updated: 2023/04/24 23:21:14 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 19:32:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ WrongCat::~WrongCat(void){
 	specificDescriptionPrint("WrongCat", "destructor", LIGHT_PURPLE);
 }
 
-WrongCat::WrongCat(WrongCat const& wrongCat){
+WrongCat::WrongCat(WrongCat const& wrongCat): WrongAnimal("WrongCat"){
 	specificDescriptionPrint("WrongCat", "copy constructor", LIGHT_PURPLE);
 	*this = wrongCat;
 }

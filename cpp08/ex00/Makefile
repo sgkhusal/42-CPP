@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 11:09:58 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/02 18:20:01 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 19:42:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		easyfind
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP
 
 SRC =		main.cpp
 INCLUDE =	-I ./
@@ -42,7 +42,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 $(OBJ_DIR)/%.o:	%.cpp
 	echo $<
 	echo $@
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 print:
 	@echo $(OBJ)

@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 11:11:17 by sguilher          #+#    #+#              #
-#    Updated: 2023/04/24 05:03:52 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 19:42:40 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		tests
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98
 
 SRC =		main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 HEADERS =	Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
@@ -32,7 +32,7 @@ RESET	=	\033[0m
 all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CXXFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "          tests created"
@@ -40,7 +40,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(RESET)"
 
 $(OBJ_DIR)/%.o:	%.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

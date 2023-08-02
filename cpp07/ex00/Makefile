@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+         #
+#    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 11:58:51 by sguilher          #+#    #+#              #
-#    Updated: 2023/07/13 11:58:59 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 20:55:26 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		whatever
 
 CC =		c++
-CFLAGS =	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS =	-Wall -Wextra -Werror -MMD -MP -std=c++98
 
 SRC =		main.cpp
 HEADERS =	whatever.hpp
@@ -32,7 +32,7 @@ RESET	=	\033[0m
 all:	$(NAME)
 
 $(NAME):	$(OBJ_DIR) $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $@
+	$(CC) $(CXXFLAGS) $(OBJ) -o $@
 	@echo "$(GREEN)"
 	@echo "************************************"
 	@echo "          whatever created"
@@ -40,7 +40,7 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(RESET)"
 
 $(OBJ_DIR)/%.o:	%.cpp $(HEADERS)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
