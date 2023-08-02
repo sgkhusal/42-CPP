@@ -452,3 +452,4 @@ A reference to all STL algorithms: [<algorithm>](https://cplusplus.com/reference
 2. [STL Containers](https://cplusplus.com/reference/stl/)
 3. [STL Iterators](https://cplusplus.com/reference/iterator/)
 4. [algorithm library](https://cplusplus.com/reference/algorithm/)
+5. [typename iterator in templates](https://stackoverflow.com/questions/11275444/c-template-typename-iterator)
