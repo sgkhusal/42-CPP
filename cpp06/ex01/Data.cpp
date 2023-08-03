@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   Data.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 15:38:31 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/09 17:06:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:10:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Data.hpp"
 
 void Data::setBirthDate(int year, int month, int day) {
-    time_t t = time(NULL);
-
-    this->birth_date = *localtime(&t);
     this->birth_date.tm_year = year - 1900;
     this->birth_date.tm_mon = month - 1;
     this->birth_date.tm_mday = day;

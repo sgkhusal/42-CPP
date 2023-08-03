@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 12:47:39 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/09 17:06:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:11:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 int	main(void) {
 	std::cout << std::endl << ORANGE << "CPP06 - ex01\n" << RESET << std::endl;
 
+	time_t t = time(NULL);
 	Data user = {
 		.first_name = "Harry",
 		.last_name = "Potter",
 		.email = "harry.potter@hogwarts.com",
+		.birth_date = *localtime(&t),
 	};
 	user.setBirthDate(1980, 7, 31);
 	std::cout << BLUE << "Initial user data:" << RESET << std::endl;
