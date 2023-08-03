@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:14:47 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/30 17:22:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 20:50:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void test(T& a, T& b, std::string& type) {
 	std::cout << "b pointer: " << &b << std::endl;
 	swap( a, b );
 	std::cout << "After swap: a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << min( a, b )
-			<< " | pointer: " << &(min( a, b )) << std::endl;
-	std::cout << "max( a, b ) = " << max( a, b )
-			<< " | pointer: " << &(max( a, b )) << std::endl;
+	std::cout << "min( a, b ) = " << ::min( a, b )
+			<< " | pointer: " << &(::min( a, b )) << std::endl;
+	std::cout << "max( a, b ) = " << ::max( a, b )
+			<< " | pointer: " << &(::max( a, b )) << std::endl;
 	std::cout << RESET << std::endl;
 }
 
