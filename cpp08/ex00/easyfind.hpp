@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 11:09:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/02 17:40:45 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:08:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <iostream>
 
 # define BLUE	"\033[38;5;75m"
-# define GREEN	"\033[1;32m"
 # define ORANGE	"\033[0;38;5;166m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"

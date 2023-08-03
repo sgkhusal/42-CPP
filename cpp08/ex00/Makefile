@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/01 11:09:58 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/02 19:42:40 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/02 23:45:32 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,6 @@ $(NAME):	$(OBJ_DIR) $(OBJ)
 	@echo "$(RESET)"
 
 $(OBJ_DIR)/%.o:	%.cpp
-	echo $<
-	echo $@
 	$(CC) $(CXXFLAGS) -c $< -o $@ $(INCLUDE)
 
 print:
