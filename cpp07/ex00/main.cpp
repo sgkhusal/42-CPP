@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sguilher <sguilher@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 23:15:13 by sguilher          #+#    #+#             */
-/*   Updated: 2023/07/24 20:56:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:04:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ int main( void ) {
 	test(e, f, type);
 	e = f;
 	test(e, f, type);
+
+	int const g = 42;
+	int const h = 21;
+	std::cout << BLUE << "Test const - 1: (" << g << ", " << h << ")"
+			<< GREY << std::endl;
+	std::cout << "min( g, h ) = " << ::min( g, h ) << std::endl;
+	std::cout << "max( g, h ) = " << ::max( g, h ) << std::endl;
+	std::cout << RESET << std::endl;
 
 	return 0;
 }
