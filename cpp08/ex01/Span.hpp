@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 01:59:33 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 02:23:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ public:
 	Span(size_t n);
 	Span(Span const& span);
 	~Span(void);
-
 	Span const& operator=(Span const& span);
 
 	multiset_itr		backIterator(void) const;
@@ -47,7 +46,6 @@ public:
 	void	addNumber(T first, T last) {
 		for (T it = first; it != last; it++)
 			this->addNumber(*it);
-		this->addNumber(*last);
 	}
 
 	size_t	shortestSpan(void) const;

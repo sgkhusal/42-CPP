@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 02:13:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 02:22:43 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ int main(void) {
 		printException(e);
 	}
 
-	printTitle("addNumber - negative integer: -10");
-	span.addNumber(-10);
+	printTitle("addNumber - positive integer: 42");
+	span.addNumber(42);
 	// std::cout << span << std::endl;
 	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
 	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
@@ -83,7 +83,7 @@ int main(void) {
 	srand(time(NULL));
 	for (int i = 10; i > 0; i--)
 		v.push_back(rand() % 100);
-	span.addNumber(v.begin(), --(v.end()));
+	span.addNumber(v.begin(), v.end());
 	// std::cout << span << std::endl;
 	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
 	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
