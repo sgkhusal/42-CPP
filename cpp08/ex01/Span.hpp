@@ -6,14 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/02 23:56:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:00:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
-# include <vector>
+# include <set>
 # include <iostream>
 # include <exception>
 # include <algorithm>
@@ -27,6 +27,8 @@
     #define DEBUG false
 # endif
 
+typedef std::multiset<int>::const_iterator multiset_itr;
+
 class Span {
 public:
 	Span(size_t n);
@@ -35,19 +37,23 @@ public:
 
 	Span const& operator=(Span const& span);
 
-	std::vector<int> getSpan(void) const;
+	multiset_itr		backIterator(void) const;
+	std::multiset<int>	getSpan(void) const;
+	size_t				getCapacity(void) const;
 
-	void addNumber(int number);
+	void	addNumber(int number);
 	// void addNumber(
-	// 	std::vector<int>::iterator init, std::vector<int>::iterator final
+	// 	std::multiset<int>::iterator init, std::multiset<int>::iterator final
 	// ); // check if can be const_iterator, const&, check if Span has enough empty elements
-	size_t shortestSpan(void) const;
-	size_t longestSpan(void) const;
+	size_t	shortestSpan(void) const;
+	size_t	longestSpan(void) const;
+
 
 private:
 	Span(void);
 
-	std::vector<int> _numbers;
+	std::multiset<int>	_numbers;
+	size_t				_capacity;
 
 	class FullSpanException: public std::exception {
 		public:
@@ -63,7 +69,8 @@ private:
 		public:
 			virtual const char* what() const throw();
 	};
-
 };
+
+std::ostream& operator<<(std::ostream& o, Span const& s);
 
 #endif
