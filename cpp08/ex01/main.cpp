@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 16:36:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 17:38:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,21 @@ int main(void) {
 	catch (std::exception const& e) {
 		printException(e);
 	}
+
+	printTitle("Construction by copy and assignment operator");
+	Span copy1(sp);
+	Span copy2 = sp;
+	std::cout << GREY << "original: " << sp << std::endl;
+	std::cout << "copy1:    " << copy1 << std::endl;
+	std::cout << "copy2:    " << copy2 << RESET << std::endl;
+	bool ok = true;
+	for(multiset_itr it = sp.begin(), it1 = copy1.begin(), it2 = copy2.begin(); it != sp.end(); it++, it1++, it2++)
+		if (*it != *it1 && *it != *it2)
+			ok = false;
+	if (ok)
+		std::cout << GREEN << "OK" << RESET << std::endl;
+	else
+		std::cout << ORANGE << "KO" << RESET << std::endl;
 
 	return 0;
 }

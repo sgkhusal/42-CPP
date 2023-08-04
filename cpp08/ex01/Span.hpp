@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 16:01:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 18:15:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <algorithm>
 
 # define BLUE	"\033[38;5;75m"
+# define GREEN	"\033[1;32m"
 # define ORANGE	"\033[0;38;5;166m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
