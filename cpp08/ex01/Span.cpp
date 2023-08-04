@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:46 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 00:41:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:59:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,6 @@ void Span::addNumber(int number) {
 	if (DEBUG)
 		std::cout << GREY << *it << " added - span size: "
 				<< this->_span.size() << RESET << std::endl;
-}
-
-void Span::addNumber(multiset_itr first, multiset_itr last) {
-	multiset_itr it;
-	
-	for (it = first; it != last; it++)
-		this->addNumber(*it);
-	this->addNumber(*it);
 }
 
 size_t Span::shortestSpan(void) const {

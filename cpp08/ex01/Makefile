@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/02 19:17:50 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/02 23:45:01 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/04 01:25:58 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		span
 
 CC =		c++
-CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP -D DEBUG=true
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp Span.cpp
 INCLUDE =	-I ./

@@ -6,12 +6,13 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 01:32:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:58:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
+#include <vector>
 
 #define SIZE 10000
 
@@ -35,72 +36,71 @@ int main(void) {
 	std::cout << "shortestSpan: " << sp.shortestSpan() << std::endl;
 	std::cout << "longestSpan: " << sp.longestSpan() << std::endl;
 
-	Span isToMuch = Span(SIZE);
-	// std::cout << isToMuch << std::endl;
+	Span span = Span(SIZE);
+	// std::cout << span << std::endl;
 
 	printTitle("shortestSpan test - empty span");
 	try {
-		std::cout << isToMuch.shortestSpan() << std::endl;
+		std::cout << span.shortestSpan() << std::endl;
 	}
 	catch (std::exception const& e) {
 		printException(e);
 	}
 	printTitle("longestSpan test - empty span");
 	try {
-		std::cout << isToMuch.longestSpan() << std::endl;
+		std::cout << span.longestSpan() << std::endl;
 	}
 	catch (std::exception const& e) {
 		printException(e);
 	}
 
 	printTitle("addNumber - negative integer: -1");
-	isToMuch.addNumber(-1);
-	// std::cout << isToMuch << std::endl;
+	span.addNumber(-1);
+	// std::cout << span << std::endl;
 
 	printTitle("shortestSpan test - span size = 1");
 	try {
-		std::cout << isToMuch.shortestSpan() << std::endl;
+		std::cout << span.shortestSpan() << std::endl;
 	}
 	catch (std::exception const& e) {
 		printException(e);
 	}
 	printTitle("longestSpan test - span size = 1");
 	try {
-		std::cout << isToMuch.longestSpan() << std::endl;
+		std::cout << span.longestSpan() << std::endl;
 	}
 	catch (std::exception const& e) {
 		printException(e);
 	}
 
 	printTitle("addNumber - negative integer: -1000");
-	isToMuch.addNumber(-1000);
-	// std::cout << isToMuch << std::endl;
-	std::cout << "shortestSpan: " << isToMuch.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << isToMuch.longestSpan() << std::endl;
+	span.addNumber(-1000);
+	// std::cout << span << std::endl;
+	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
+	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
 
-	// printTitle("addNumber - list of iterators");
-	// std::multiset<int> multiSet = std::multiset<int>(10, -3);
-	// isToMuch.addNumber(multiSet.begin(), --(multiSet.end()));
-	// // std::cout << isToMuch << std::endl;
-	// std::cout << "shortestSpan: " << isToMuch.shortestSpan() << std::endl;
-	// std::cout << "longestSpan: " << isToMuch.longestSpan() << std::endl;
+	printTitle("addNumber - list of iterators");
+	std::vector<int> v(10, -3);
+	span.addNumber(v.begin(), --(v.end()));
+	// std::cout << span << std::endl;
+	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
+	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
 
 	printTitle("Fill all span - size = 10.000"); //
-	for (size_t i = 2; i < SIZE; i++) {
-		isToMuch.addNumber(i);
+	for (size_t i = 12; i < SIZE; i++) {
+		span.addNumber(i);
 	}
-	// std::cout << isToMuch << std::endl;
-	std::cout << "shortestSpan: " << isToMuch.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << isToMuch.longestSpan() << std::endl;
+	// std::cout << span << std::endl;
+	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
+	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
 
 	printTitle("addNumber with Span full");
 	try {
-		isToMuch.addNumber(1);
+		span.addNumber(1);
 	}
 	catch (std::exception const& e) {
 		printException(e);
 	}
-
 
 	return 0;
 }

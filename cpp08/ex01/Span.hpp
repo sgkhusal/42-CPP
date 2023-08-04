@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 00:29:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:59:33 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ public:
 	size_t				capacity(void) const;
 
 	void	addNumber(int number);
-	void	addNumber(multiset_itr first, multiset_itr last); // check if can be const_iterator, const&, check if Span has enough empty elements
+
+	template <typename T>
+	void	addNumber(T first, T last) {
+		for (T it = first; it != last; it++)
+			this->addNumber(*it);
+		this->addNumber(*last);
+	}
+
 	size_t	shortestSpan(void) const;
 	size_t	longestSpan(void) const;
 
