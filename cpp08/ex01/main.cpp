@@ -6,15 +6,16 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 02:22:43 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:36:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
 #include <vector>
+#include <list>
 
-#define SIZE 10000
+#define SIZE 1000000
 
 void printTitle(std::string const& title) {
 	std::cout << std::endl << BLUE << title << RESET << std::endl;
@@ -22,6 +23,12 @@ void printTitle(std::string const& title) {
 
 void	printException(std::exception const& e) {
 	std::cout << ORANGE << "Exception: " << e.what() << RESET << std::endl;
+}
+
+void	printSpan(Span const& s) {
+	std::cout << GREY << s << std::endl;
+	std::cout << "shortestSpan: " << s.shortestSpan() << std::endl;
+	std::cout << "longestSpan: " << s.longestSpan() << RESET << std::endl;
 }
 
 int main(void) {
@@ -32,12 +39,11 @@ int main(void) {
 	sp.addNumber(17);
 	sp.addNumber(9);
 	sp.addNumber(11);
-	// std::cout << sp << std::endl;
-	std::cout << "shortestSpan: " << sp.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << sp.longestSpan() << std::endl;
+	printSpan(sp);
 
+	printTitle("Test: print empty span");
 	Span span = Span(SIZE);
-	// std::cout << span << std::endl;
+	std::cout << GREY << span << std::endl;
 
 	printTitle("shortestSpan test - empty span");
 	try {
@@ -56,7 +62,7 @@ int main(void) {
 
 	printTitle("addNumber - negative integer: -100");
 	span.addNumber(-100);
-	// std::cout << span << std::endl;
+	std::cout << GREY << span << std::endl;
 
 	printTitle("shortestSpan test - span size = 1");
 	try {
@@ -75,26 +81,28 @@ int main(void) {
 
 	printTitle("addNumber - positive integer: 42");
 	span.addNumber(42);
-	// std::cout << span << std::endl;
-	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
+	printSpan(span);
 
+	printTitle("addNumber - range of std::vector<int> iterators");
 	std::vector<int> v;
-	srand(time(NULL));
 	for (int i = 10; i > 0; i--)
-		v.push_back(rand() % 100);
+		v.push_back(i * i);
 	span.addNumber(v.begin(), v.end());
-	// std::cout << span << std::endl;
-	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
+	printSpan(span);
 
-	printTitle("Fill all span - size = 10.000"); //
-	for (size_t i = 12; i < SIZE; i++) {
-		span.addNumber(i);
-	}
-	// std::cout << span << std::endl;
-	std::cout << "shortestSpan: " << span.shortestSpan() << std::endl;
-	std::cout << "longestSpan: " << span.longestSpan() << std::endl;
+	printTitle("addNumber - range of std::list<int> iterators");
+	std::list<int> l;
+	for (int i = 10; i > 0; i--)
+		l.push_front(i * 10);
+	span.addNumber(l.begin(), l.end());
+	printSpan(span);
+
+	printTitle("Fill all span - size = 1.000.000");
+	srand(time(NULL));
+	for (size_t i = 22; i < SIZE; i++)
+		span.addNumber(rand() % 1000000);
+	std::cout << GREY "shortestSpan: " << span.shortestSpan() << std::endl;
+	std::cout << "longestSpan: " << span.longestSpan() << RESET << std::endl;
 
 	printTitle("addNumber with Span full");
 	try {

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 02:23:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:01:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ public:
 	~Span(void);
 	Span const& operator=(Span const& span);
 
-	multiset_itr		backIterator(void) const;
-	std::multiset<int>	getSpan(void) const;
+	size_t				size(void) const;
 	size_t				capacity(void) const;
+	multiset_itr		begin(void) const;
+	multiset_itr		end(void) const;
+	multiset_itr		backIterator(void) const;
+
+	std::multiset<int>	getSpan(void) const;
 
 	void	addNumber(int number);
 
