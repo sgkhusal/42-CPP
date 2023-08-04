@@ -6,7 +6,7 @@ make
 valgrind ./easyfind
 make fclean
 
-cd ../ex01
+cd ../ex01_vector
 make
 valgrind ./span
 make fclean
