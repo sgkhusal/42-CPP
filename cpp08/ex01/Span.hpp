@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:55 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 00:00:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:29:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,20 @@ public:
 
 	multiset_itr		backIterator(void) const;
 	std::multiset<int>	getSpan(void) const;
-	size_t				getCapacity(void) const;
+	size_t				capacity(void) const;
 
 	void	addNumber(int number);
-	// void addNumber(
-	// 	std::multiset<int>::iterator init, std::multiset<int>::iterator final
-	// ); // check if can be const_iterator, const&, check if Span has enough empty elements
+	void	addNumber(multiset_itr first, multiset_itr last); // check if can be const_iterator, const&, check if Span has enough empty elements
 	size_t	shortestSpan(void) const;
 	size_t	longestSpan(void) const;
-
 
 private:
 	Span(void);
 
-	std::multiset<int>	_numbers;
+	std::multiset<int>	_span;
 	size_t				_capacity;
 
 	class FullSpanException: public std::exception {
-		public:
-			virtual const char* what() const throw();
-	};
-
-	class EmptySpanException: public std::exception {
 		public:
 			virtual const char* what() const throw();
 	};
