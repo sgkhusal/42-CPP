@@ -42,6 +42,7 @@ array
 # cpp08
 easyfind
 span
+mutant_stack
 
 # Others
 .vscode
