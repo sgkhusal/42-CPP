@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 17:48:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:07:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ static void testString(void) {
 		*it = "Hermione";
 		it1 = copy1.begin();
 		*it1 = "Rony";
+		it2 = copy2.begin();
 
 		std::cout << GREY << "original: " << mstack << std::endl;
 		std::cout << "copy1:    " << copy1 << std::endl;
