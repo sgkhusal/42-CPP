@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 12:38:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 14:55:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ public:
 	iterator				end(void) { return this->c.end(); };
 	const_iterator			end(void) const { return this->c.end(); };
 
-	reverse_iterator		rbegin(void) { return this->c.begin(); };
-	const_reverse_iterator	rbegin(void) const { return this->c.begin(); };
+	reverse_iterator		rbegin(void) { return this->c.rbegin(); };
+	const_reverse_iterator	rbegin(void) const { return this->c.rbegin(); };
 
-	reverse_iterator		rend(void) { return this->c.begin(); };
-	const_reverse_iterator	rend(void) const { return this->c.begin(); };
+	reverse_iterator		rend(void) { return this->c.rend(); };
+	const_reverse_iterator	rend(void) const { return this->c.rend(); };
 
 	/* canonical form */
 	MutantStack(void): std::stack<T, _Container>() { };
