@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 19:17:53 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/04 18:40:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:52:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ int main(void) {
 	printTitle("Construction by copy and assignment operator");
 	{
 		Span copy1(sp);
-		Span copy2 = sp;
+		Span copy2(2);
+		copy2 = sp;
 		std::cout << GREY << "original: " << sp << std::endl;
 		std::cout << "copy1:    " << copy1 << std::endl;
 		std::cout << "copy2:    " << copy2 << RESET << std::endl;

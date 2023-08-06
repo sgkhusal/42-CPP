@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 17:09:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:48:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,10 @@ static void testString(void) {
 
 	{
 		printDescription("Construction by copy and assignment operator");
-		mstack_string copy1(mstack);
-		mstack_string copy2 = mstack;
 		mstack_string::iterator it1, it2;
+		mstack_string copy1(mstack);
+		mstack_string copy2;
+		copy2 = mstack;
 
 		std::cout << GREY << "original: " << mstack << std::endl;
 		std::cout << "copy1:    " << copy1 << std::endl;

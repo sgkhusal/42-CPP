@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 12:03:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 17:05:57 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:45:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,8 @@ void myTests(MutantStack<T, _Container> mstack) {
 	{
 		printDescription("Construction by copy and assignment operator");
 		MutantStack<T, _Container> copy1(mstack);
-		MutantStack<T, _Container> copy2 = mstack;
+		MutantStack<T, _Container> copy2;
+		copy2 = mstack;
 		typename MutantStack<T, _Container>::iterator it1, it2;
 
 		std::cout << GREY << "original: " << mstack << std::endl;
