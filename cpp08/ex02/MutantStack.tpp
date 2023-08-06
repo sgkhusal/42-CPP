@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 12:03:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 16:09:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:05:57 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,6 @@
 # define MUTANT_STACK_TPP
 
 # include "MutantStack.hpp"
-# include <typeinfo>
-# include <cstdlib>
-
-# ifndef DEBUG
-    #define DEBUG false
-# endif
-
-# define BLUE	"\033[38;5;75m"
-# define GREEN	"\033[1;32m"
-# define ORANGE	"\033[0;38;5;166m"
-# define PURPLE	"\033[38;5;200m"
-# define GREY	"\033[38;5;244m"
-# define RESET	"\033[0m"
-
-static void printDescription(std::string const& description);
-static void printSubDescription(std::string const& description);
-static void printResult(bool ok);
 
 template<typename T, typename _Container>
 void testPdf(MutantStack<T, _Container> mstack) {
@@ -131,7 +114,7 @@ void myTests(MutantStack<T, _Container> mstack) {
 		printDescription("Construction by copy and assignment operator");
 		MutantStack<T, _Container> copy1(mstack);
 		MutantStack<T, _Container> copy2 = mstack;
-		typename MutantStack<T, _Container>::iterator it, it1, it2;
+		typename MutantStack<T, _Container>::iterator it1, it2;
 
 		std::cout << GREY << "original: " << mstack << std::endl;
 		std::cout << "copy1:    " << copy1 << std::endl;
@@ -187,21 +170,6 @@ std::ostream& operator<<(std::ostream& o, MutantStack<T, _Container> mstack) {
 		o << *it << " ";
 
 	return o;
-}
-
-static void printDescription(std::string const& description) {
-	std::cout << PURPLE << description << std::endl << GREY;
-}
-
-static void printSubDescription(std::string const& description) {
-	std::cout << GREY << description << std::endl;
-}
-
-static void printResult(bool ok) {
-	if (ok)
-		std::cout << GREEN << "OK" << RESET << std::endl << std::endl;
-	else
-		std::cout << ORANGE << "KO" << RESET << std::endl << std::endl;
 }
 
 #endif

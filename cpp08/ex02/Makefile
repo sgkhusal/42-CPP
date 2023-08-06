@@ -6,7 +6,7 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/04 18:48:26 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/04 18:50:00 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/06 17:14:44 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME =		mutant_stack
 CC =		c++
 CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
-SRC =		main.cpp
+SRC =		main.cpp tests_utils.cpp
 INCLUDE =	-I ./
 OBJ_DIR =	./obj
 OBJ =		$(SRC:%.cpp=$(OBJ_DIR)/%.o)
