@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 14:55:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:08:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stack>
 # include <deque>
+# include <iostream>
 
 template <typename T, typename _Container = std::deque<T> >
 class MutantStack: public std::stack<T, _Container> {
@@ -52,7 +53,7 @@ public:
 		MutantStack<T, _Container> const& stack
 	) {
 		if (*this != &stack)
-			*this = stack;  // verify: this->c = stack.c ?
+			*this = stack;
 	};
 };
 
@@ -61,6 +62,9 @@ void testPdf(MutantStack<T, _Container> mstack);
 
 template<typename T, typename _Container>
 void myTests(MutantStack<T, _Container> mstack);
+
+template<typename T, typename _Container>
+std::ostream& operator<<(std::ostream& o, MutantStack<T, _Container> mstack);
 
 # include "MutantStack.tpp"
 

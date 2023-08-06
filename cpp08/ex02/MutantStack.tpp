@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 12:03:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 15:40:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:09:58 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "MutantStack.hpp"
 # include <typeinfo>
-# include <iostream>
 # include <cstdlib>
 
 # ifndef DEBUG
@@ -28,6 +27,10 @@
 # define PURPLE	"\033[38;5;200m"
 # define GREY	"\033[38;5;244m"
 # define RESET	"\033[0m"
+
+static void printDescription(std::string const& description);
+static void printSubDescription(std::string const& description);
+static void printResult(bool ok);
 
 template<typename T, typename _Container>
 void testPdf(MutantStack<T, _Container> mstack) {
@@ -60,14 +63,6 @@ void testPdf(MutantStack<T, _Container> mstack) {
 		++it;
 	}
 	std::stack<T, _Container> s(mstack);
-}
-
-static void printDescription(std::string const& description) {
-	std::cout << PURPLE << description << std::endl << GREY;
-}
-
-static void printSubDescription(std::string const& description) {
-	std::cout << GREY << description << std::endl;
 }
 
 template<typename T, typename _Container>
@@ -132,9 +127,81 @@ void myTests(MutantStack<T, _Container> mstack) {
 	const_rit--;
 	const_rit++;
 
-	std::stack<T, _Container> s(mstack);
+	{
+		printDescription("Construction by copy and assignment operator");
+		MutantStack<T, _Container> copy1(mstack);
+		MutantStack<T, _Container> copy2 = mstack;
+		typename MutantStack<T, _Container>::iterator it, it1, it2;
+
+		std::cout << GREY << "original: " << mstack << std::endl;
+		std::cout << "copy1:    " << copy1 << std::endl;
+		std::cout << "copy2:    " << copy2 << RESET << std::endl;
+
+		bool ok = true;
+		for(
+			it = mstack.begin(), it1 = copy1.begin(), it2 = copy2.begin();
+			it != mstack.end();
+			it++, it1++, it2++
+		)
+			if (*it != *it1 && *it != *it2)
+				ok = false;
+		printResult(ok);
+
+		printDescription("Deep copy:");
+		for (it = mstack.begin(), it1 = copy1.begin(); it != mstack.end(); it++, it1++) {
+			(*it)++;
+			(*it1)--;
+		}
+
+		std::cout << GREY << "original: " << mstack << std::endl;
+		std::cout << "copy1:    " << copy1 << std::endl;
+		std::cout << "copy2:    " << copy2 << RESET << std::endl;
+
+		ok = true;
+		for(
+			it = mstack.begin(), it1 = copy1.begin(), it2 = copy2.begin();
+			it != mstack.end();
+			it++, it1++, it2++
+		)
+			if (*it == *it1 || *it == *it2)
+				ok = false;
+		printResult(ok);
+	}
+
+	printDescription("Original still working after end of scope:");
+	std::cout << GREY << "original: " << mstack << RESET << std::endl;
 
 	std::cout << RESET << std::endl;
+}
+
+template<typename T, typename _Container>
+std::ostream& operator<<(std::ostream& o, MutantStack<T, _Container> mstack) {
+	typename MutantStack<T, _Container>::const_iterator it;
+
+	if (mstack.empty()) {
+		o << "Empty MutantStack";
+		return o;
+	}
+
+	for (it = mstack.begin(); it != mstack.end(); it++)
+		o << *it << " ";
+
+	return o;
+}
+
+static void printDescription(std::string const& description) {
+	std::cout << PURPLE << description << std::endl << GREY;
+}
+
+static void printSubDescription(std::string const& description) {
+	std::cout << GREY << description << std::endl;
+}
+
+static void printResult(bool ok) {
+	if (ok)
+		std::cout << GREEN << "OK" << RESET << std::endl << std::endl;
+	else
+		std::cout << ORANGE << "KO" << RESET << std::endl << std::endl;
 }
 
 #endif

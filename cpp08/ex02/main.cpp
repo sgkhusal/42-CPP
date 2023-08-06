@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:23 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/06 14:45:10 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:07:04 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int main()
 	MutantStack<int, std::vector<int> > mstack_vector;
 	testPdf(mstack_vector);
 
-	printTitle("*************************************************************");
+	printTitle("************************* MY TESTS **************************");
 	printTitle("Testing MutantStack<float> with default stack container");
 	MutantStack<float> mstack_float;
 	myTests(mstack_float);
