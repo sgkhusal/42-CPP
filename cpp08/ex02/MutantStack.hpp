@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 18:48:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/05 00:32:12 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/06 12:38:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,13 @@ public:
 			*this = stack;  // verify: this->c = stack.c ?
 	};
 };
+
+template<typename T, typename _Container>
+void testPdf(MutantStack<T, _Container> mstack);
+
+template<typename T, typename _Container>
+void myTests(MutantStack<T, _Container> mstack);
+
+# include "MutantStack.tpp"
 
 #endif
