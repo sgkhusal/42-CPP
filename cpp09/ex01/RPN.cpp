@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/14 11:54:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/15 10:35:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,34 +76,23 @@ int RPN::_makeOperation(int a, int b, char op) {
 
 void RPN::_checkInput(std::string const input) {
 	std::string::const_iterator it, end;
-	bool new_parameter = false;
 
 	// primeiro e segundo argumentos não podem ser operacões!!
 	if (input.size() < 1)
 		throw InvalidInput();
 	end = input.end();
 	for (it = input.begin(); it != end; it++) {
-		if (*it == ' ')
-			new_parameter = false;
-		else if (new_parameter == true)
-			throw InvalidInput();
-		else if (
+		if (
 			!std::isdigit(input[0])
 			&& _validOperations.find(input[0]) == std::string::npos
 		)
 			throw InvalidInput();
-		else
-			new_parameter = true;
 	}
 }
 
 std::string RPN::getExpression(void) const {
 	return this->_input;
 }
-
-
-// The numbers used in this operation and passed as arguments will always be less
-// than 10. The calculation itself but also the result do not take into account this rule
 
 const char *RPN::InvalidInput::what() const throw() {
 	return "Error: invalid input. RPN only accepts numbers 0 to 9"
