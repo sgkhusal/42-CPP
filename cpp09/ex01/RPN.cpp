@@ -44,7 +44,7 @@ int RPN::executeRPN(void) {
 		if (*it == ' ')
 			continue;
 		else if (std::isdigit(*it))
-			stackOperation.push(static_cast<int>(*it));
+			stackOperation.push(static_cast<int>(*it) - '0');
 		else {
 			if (stackOperation.size() < 2)
 				throw ImpossibleOperation();
