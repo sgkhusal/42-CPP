@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:04 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/14 11:27:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:14:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ int main(int argc, char* argv[]) {
 	}
 	try {
 		RPN rpn = RPN(argv[1]);
-		std::cout << "Result for operation: " << rpn.getExpression() << std::endl;
+		if (DEBUG)
+			std::cout << GREY << "Result for operation: " << rpn.getExpression()
+					<< std::endl;
 		result = rpn.executeRPN();
-		std::cout << result << std::endl;
+		std::cout << RESET << result << std::endl;
 	} catch (std::exception const& e) {
 		std::cout << e.what() << std::endl;
 		return 1;

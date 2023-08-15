@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:00 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/14 11:45:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:28:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include <stack>
 # include <iostream>
+# include <sstream>
+
+# ifndef DEBUG
+    #define DEBUG false
+# endif
+
+# define GREY	"\033[38;5;244m"
+# define RESET	"\033[0m"
 
 class RPN {
 public:

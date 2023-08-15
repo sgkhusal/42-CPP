@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 09:39:07 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/14 11:19:12 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/15 11:26:34 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		RPN
 
 CC =		c++
-CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp RPN.cpp
 INCLUDE =	-I ./

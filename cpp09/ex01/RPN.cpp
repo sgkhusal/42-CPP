@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/15 10:35:17 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:16:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int RPN::executeRPN(void) {
 
 	end = _input.end();
 	for (it = _input.begin(); it != end; it++) {
-		std::cout << *it << " ";
 		if (*it == ' ')
 			continue;
 		else if (std::isdigit(*it))
@@ -51,9 +50,12 @@ int RPN::executeRPN(void) {
 			b = stackOperation.top();
 			stackOperation.pop();
 			a = stackOperation.top();
+			if (DEBUG)
+				std::cout << GREY << a << " " << b << " " << *it;
 			stackOperation.pop();
 			stackOperation.push(_makeOperation(a, b, *it));
-			std::cout << " = " << stackOperation.top() << std::endl;
+			if (DEBUG)
+				std::cout << GREY << " = " << stackOperation.top() << std::endl;
 		}
 	}
 	if (stackOperation.size() > 1 || stackOperation.size() == 0)
@@ -62,7 +64,6 @@ int RPN::executeRPN(void) {
 }
 
 int RPN::_makeOperation(int a, int b, char op) {
-	// verificar a ordem de a e b
 	if (op == '+')
 		return a + b;
 	if (op == '-')
@@ -77,9 +78,6 @@ int RPN::_makeOperation(int a, int b, char op) {
 void RPN::_checkInput(std::string const input) {
 	std::string::const_iterator it, end;
 
-	// primeiro e segundo argumentos não podem ser operacões!!
-	if (input.size() < 1)
-		throw InvalidInput();
 	end = input.end();
 	for (it = input.begin(); it != end; it++) {
 		if (
@@ -95,7 +93,7 @@ std::string RPN::getExpression(void) const {
 }
 
 const char *RPN::InvalidInput::what() const throw() {
-	return "Error: invalid input. RPN only accepts numbers 0 to 9"
+	return "Error: invalid input: only accepts numbers 0 to 9"
 		" and operators '+ - / *'";
 }
 
