@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/15 11:16:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:24:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ RPN const& RPN::operator=(RPN const& rpn) {
 int RPN::executeRPN(void) {
 	std::string::const_iterator it, end;
 	std::stack<int>	stackOperation;
-	int a, b;
+	int a, b, result;
 
 	end = _input.end();
 	for (it = _input.begin(); it != end; it++) {
@@ -50,12 +50,12 @@ int RPN::executeRPN(void) {
 			b = stackOperation.top();
 			stackOperation.pop();
 			a = stackOperation.top();
-			if (DEBUG)
-				std::cout << GREY << a << " " << b << " " << *it;
 			stackOperation.pop();
-			stackOperation.push(_makeOperation(a, b, *it));
+			result = _makeOperation(a, b, *it);
+			stackOperation.push(result);
 			if (DEBUG)
-				std::cout << GREY << " = " << stackOperation.top() << std::endl;
+				std::cout << GREY << a << " " << b << " " << *it << " = "
+						<< result << std::endl;
 		}
 	}
 	if (stackOperation.size() > 1 || stackOperation.size() == 0)
@@ -81,8 +81,8 @@ void RPN::_checkInput(std::string const input) {
 	end = input.end();
 	for (it = input.begin(); it != end; it++) {
 		if (
-			!std::isdigit(input[0])
-			&& _validOperations.find(input[0]) == std::string::npos
+			!std::isdigit(*it)
+			&& _validOperations.find(*it) == std::string::npos
 		)
 			throw InvalidInput();
 	}

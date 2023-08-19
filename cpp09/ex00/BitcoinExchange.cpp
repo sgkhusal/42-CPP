@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 20:30:32 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/14 09:58:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:11:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ int BitcoinExchange::run(std::string const inputFile) {
 	_openFile(inputFile, ifs);
 	std::getline(ifs, line);
 	while (std::getline(ifs, line)) {
-		if (!_checkInputLine(line))
-			continue ;
-		_getPrice(line);
+		if (_checkInputLine(line))
+			_getPrice(line);
 	}
 	ifs.close();
 	return 0;
@@ -117,16 +116,16 @@ bool BitcoinExchange::_checkDate(std::string& date) {
 bool	BitcoinExchange::_checkDateLimits(Date d) {
 	if (
 		d.year < _min_date.year
-		|| (d.year <= _min_date.year && d.month < _min_date.month)
-		|| (d.year <= _min_date.year && d.month <= _min_date.month && d.day < _min_date.day)
+		|| (d.year == _min_date.year && d.month < _min_date.month)
+		|| (d.year == _min_date.year && d.month == _min_date.month && d.day < _min_date.day)
 	) {
-		std::cout << "Error: date below from lower database date "
+		std::cout << "Error: date smaller than lower database date "
 			<< _min_date.year << "-" << _min_date.month << "-" << _min_date.day
 			<< std::endl;
 		return false;
 	}
 	if (d.year > _max_date.year + 5) {
-		std::cout << "Error: date to high from upper database date "
+		std::cout << "Error: date much greater than the largest date in database "
 			<< _max_date.year << "-" << _max_date.month << "-" << _max_date.day
 			<< std::endl;
 		return false;
@@ -221,7 +220,7 @@ db_pair BitcoinExchange::_parseDBLine(std::string const line) {
 
 bool BitcoinExchange::_checkDBLine(std::string const line) {
 	size_t	comma;
-	int		i = 0;
+	int		i = 0, dash = 0, point = 0;
 
 	comma = line.find(',');
 	if (line.size() < 12 || comma != COMMA_DB_POS)
@@ -229,16 +228,21 @@ bool BitcoinExchange::_checkDBLine(std::string const line) {
 
 	for (std::string::const_iterator it = line.begin(); it != line.end(); it++) {
 		if (i < COMMA_DB_POS) {
+			if (*it == '-')
+				dash++;
 			if (!std::isdigit(*it) && *it != '-')
 				return false;
 		}
 		else if (i > COMMA_DB_POS) {
+			if (*it == '.')
+				point++;
 			if (!std::isdigit(*it) && *it != '.')
 				return false;
 		}
 		i++;
 	}
-
+	if (dash != 2 || point > 1)
+		return false;
 	return true;
 }
 
