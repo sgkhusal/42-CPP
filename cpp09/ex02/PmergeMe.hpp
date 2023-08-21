@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/20 23:36:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/21 11:47:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <ctime>
 # include <exception>
 # include <vector>
+# include <cmath>
 
 # ifndef DEBUG
     #define DEBUG false
@@ -37,14 +38,16 @@ public:
 	std::vector<int> getVSequence(void) const;
 	void run(void);
 
+	typedef std::vector<int>::iterator iterator;
+
 private:
 	PmergeMe(void);
 
 	std::vector<int> _vSequence;
-	std::vector<std::pair<int, int> > _vPairs;
+
+	void _mergeInsertion(iterator first, iterator last, int iteration);
 
 	void _sortV(void);
-	void _mergeInsertion(void);
 	void _fillVector(char *input[]);
 	void _printVector(void) const;
 

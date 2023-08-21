@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/20 23:42:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:07:29 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ PmergeMe::PmergeMe(void) { }
 PmergeMe::PmergeMe(char *input[]) {
 	_checkInput(input);
 	_fillVector(input);
-	_vPairs = std::vector<std::pair<int, int> >();
 }
 
 PmergeMe::~PmergeMe(void) { }
@@ -44,7 +43,7 @@ void PmergeMe::_sortV(void) {
 	clock_t t;
 
 	t = std::clock();
-	_mergeInsertion();
+	_mergeInsertion(_vSequence.begin(), _vSequence.end(), 0);
 	t = std::clock() - t;
 	if (DEBUG)
 		std::cout << GREY << "vector: sorting time: "
@@ -52,45 +51,63 @@ void PmergeMe::_sortV(void) {
 				<< RESET << std::endl;
 }
 
-void PmergeMe::_mergeInsertion(void) {
+void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	size_t	size;
-	std::pair<bool, int> odd;
+	int		pair_size;
+	int		element_size;
+	std::pair<bool, iterator> odd;
 
 	// ver resultado do algoritmo com números pequenos: 2, 3, 4, 5...
-	size = _vSequence.size();
+	element_size = std::pow(2, iteration);
+	size = std::distance(first, last) / element_size;
+	if (DEBUG)
+		std::cout << GREY << "\n------------------------------------------\n"
+			<< "iteration " << iteration
+			<<  ":\n- element size: " << element_size
+			<<  "\n- size: " << size << RESET << std::endl;
 	if (size <= 1)
-		return ; // ver o que fazer, assim como a conta de tempo
+		return ;
 
-	// verificar se é número ímpar, retirar o último número
+	// If size is odd, leave one element out
 	if (size % 2 == 1) {
-		odd = std::pair<bool, int>(true, _vSequence.back());
-		_vSequence.pop_back();
+		last = last - element_size;
+		odd = std::pair<bool, iterator>(true, last);
+		if (DEBUG) {
+			std::cout << GREY << "odd size - remove element: ";
+			for (int i = 0; i < element_size; i++) {
+				std::cout << *(odd.second + i) << " ";
+			}
+			std::cout << "\nnow last references to: " << *last << std::endl;
+		}
 	}
 	else
-		odd = std::pair<bool, int>(false, -1);
+		odd = std::pair<bool, iterator>(false, last);
 
-	// separar em pares
-	std::vector<int>::const_iterator it, end = _vSequence.end();
-	for (it = _vSequence.begin(); it != end; it += 2)
-		_vPairs.push_back(std::pair<int, int>(*it, *(it + 1)));
-	std::vector<std::pair<int, int> >::iterator itp, endp = _vPairs.end();
+	// (i) Make pairwise comparisons of [size/2] disjoint pairs of elements.
+	// sort them in descending order
+	pair_size = std::pow(2, iteration + 1);
+	if (DEBUG)
+		std::cout << GREY <<  "- pair size: " << pair_size << std::endl;
+	for (iterator it = first; it != last; it += pair_size) {
+		if (*it < *(it + element_size)) {
+			for (int i = 0; i < element_size; i++)
+				std::swap(*(it + i), *(it + element_size + i));
+		}
+	}
 	if (DEBUG) {
-		std::cout << GREY << "Pairs sequence: ";
-		for (itp = _vPairs.begin(); itp != endp; itp++)
-			std::cout << "(" << (*itp).first << ", " << (*itp).second << ") ";
+		std::cout << "Pairs ordered: | ";
+		for (iterator it = first; it != last; it += pair_size) {
+			for (int i = 0; i < pair_size; i++) {
+				std::cout << *(it + i) << " ";
+			}
+			std::cout << "| ";
+		}
 		std::cout << RESET << std::endl;
 	}
 
-	// ordenar cada em forma descendente
-	for (itp = _vPairs.begin(); itp != endp; itp++) {
-		if ((*itp).first < (*itp).second)
-			std::cout << "fazer swap" << std::endl;
-			// swap
-	}
-
-	// ordenar os pares em forma ascendente (com relação aos maiores números)
-	// recursão
-	// _mergeInsertion();
+	// Sort the [size/2] larger numbers, found in step (i), by merge insertion
+	// recursion: sort pairs vector in ascending order
+	_mergeInsertion(first, last, iteration + 1);
 
 	// separar em dois vetores
 	// passar o primeiro para o ordenado
