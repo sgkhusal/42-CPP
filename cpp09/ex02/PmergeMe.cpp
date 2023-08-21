@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/21 12:07:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:51:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	// ver resultado do algoritmo com números pequenos: 2, 3, 4, 5...
 	element_size = std::pow(2, iteration);
 	size = std::distance(first, last) / element_size;
+	pair_size = std::pow(2, iteration + 1);
 	if (DEBUG)
 		std::cout << GREY << "\n------------------------------------------\n"
 			<< "iteration " << iteration
@@ -67,6 +68,17 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 			<<  "\n- size: " << size << RESET << std::endl;
 	if (size <= 1)
 		return ;
+	if (DEBUG)
+		std::cout << GREY <<  "- pair size: " << pair_size << std::endl;
+	if (size == 2) {
+		for (iterator it = first; it != last; it += pair_size) {
+		if (*it > *(it + element_size)) {
+			for (int i = 0; i < element_size; i++)
+				std::swap(*(it + i), *(it + element_size + i));
+			}
+		}
+		return ;
+	}
 
 	// If size is odd, leave one element out
 	if (size % 2 == 1) {
@@ -85,9 +97,6 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 
 	// (i) Make pairwise comparisons of [size/2] disjoint pairs of elements.
 	// sort them in descending order
-	pair_size = std::pow(2, iteration + 1);
-	if (DEBUG)
-		std::cout << GREY <<  "- pair size: " << pair_size << std::endl;
 	for (iterator it = first; it != last; it += pair_size) {
 		if (*it < *(it + element_size)) {
 			for (int i = 0; i < element_size; i++)
@@ -112,8 +121,41 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	// separar em dois vetores
 	// passar o primeiro para o ordenado
 	// inserir os números usando os números de Jacobsthal - entender essa lógica
+	_getInsertionOrder(size);
 	// dá pra saber que eles são menores do que os mesmos índices correspondentes...
 	// inserir último número (se for ímpar) com binary search
+}
+
+std::vector<int> PmergeMe::_jacobsthalSequence(size_t size) {
+	std::vector<int> jacob;
+	int last;
+	int last_but_one;
+
+	if (size == 1)
+		return std::vector<int>(1, 0);
+	jacob = _jacobsthalSequence(size - 1);
+	if ((size_t)jacob.back() > size)
+		return jacob; // verificar se precisa tirar o último
+	if (size == 2)
+		jacob.push_back(1);
+	else {
+		last = jacob.back();
+		last_but_one = *(jacob.end() - 2);
+		jacob.push_back(last + 2 * last_but_one);
+	}
+	return jacob;
+}
+
+std::vector<int> PmergeMe::_getInsertionOrder(size_t size) {
+	std::vector<int> jacob = _jacobsthalSequence(size);
+
+	if (DEBUG)
+		std::cout << GREY << "Jacobsthal sequence: ";
+	for (iterator it = jacob.begin(); it != jacob.end(); it++)
+		std::cout << *it << " ";
+	std::cout << RESET << std::endl;
+
+	return jacob;
 }
 
 void PmergeMe::_printVector(void) const {

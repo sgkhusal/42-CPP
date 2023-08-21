@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/21 11:47:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:41:55 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ private:
 	std::vector<int> _vSequence;
 
 	void _mergeInsertion(iterator first, iterator last, int iteration);
+	std::vector<int> _jacobsthalSequence(size_t size);
+	// 0 1 1 3 5 11 21
+	// a partir do terceiro número, é a soma do anterior com 2 * o penúltimo
+	std::vector<int> _getInsertionOrder(size_t size);
 
 	void _sortV(void);
 	void _fillVector(char *input[]);
