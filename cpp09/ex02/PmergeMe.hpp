@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/19 18:32:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:36:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ public:
 	PmergeMe const& operator=(PmergeMe const& p);
 
 	std::vector<int> getVSequence(void) const;
-	void sortV(void);
+	void run(void);
 
 private:
 	PmergeMe(void);
 
 	std::vector<int> _vSequence;
+	std::vector<std::pair<int, int> > _vPairs;
 
-	std::pair<bool, int> _odd;
-
+	void _sortV(void);
+	void _mergeInsertion(void);
 	void _fillVector(char *input[]);
 	void _printVector(void) const;
 

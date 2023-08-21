@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:21 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/19 18:36:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:15:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
 	}
 	try {
 		PmergeMe p = PmergeMe(&argv[1]);
-		p.sortV();
+		p.run();
 	} catch (std::exception const& e) {
 		std::cout << ORANGE << e.what() << RESET << std::endl;
 		return 1;

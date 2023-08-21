@@ -124,6 +124,8 @@ removal of an element at the end.
 - `<deque>` library
 - Similar to std::vector
 - it allows for new elements to be inserted or removed at the beginning, too, with `push_front` and `pop_front` methods.
+- unlike vectors, deques are not guaranteed to store all its elements in contiguous storage locations: accessing elements in a deque by offsetting a pointer to another element causes undefined behavior
+- While vectors use a single array that needs to be occasionally reallocated for growth, the elements of a deque can be scattered in different chunks of storage, with the container keeping the necessary information internally to provide direct access to any of its elements in constant time and with a uniform sequential interface (through iterators). This allows them to grow more efficiently, especially with very long sequences, where reallocations become more expensive.
 
 **Advantages:**
 - All advantages of the vector.

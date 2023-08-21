@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/19 18:37:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/20 23:42:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ PmergeMe::PmergeMe(void) { }
 PmergeMe::PmergeMe(char *input[]) {
 	_checkInput(input);
 	_fillVector(input);
+	_vPairs = std::vector<std::pair<int, int> >();
 }
 
 PmergeMe::~PmergeMe(void) { }
@@ -32,26 +33,70 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {
 	return *this;
 }
 
-void PmergeMe::sortV(void) {
+void PmergeMe::run(void) {
+	std::cout << "Before:	";
+	_printVector();
+	std::cout << std::endl;
+	_sortV();
+}
+
+void PmergeMe::_sortV(void) {
 	clock_t t;
 
 	t = std::clock();
+	_mergeInsertion();
+	t = std::clock() - t;
+	if (DEBUG)
+		std::cout << GREY << "vector: sorting time: "
+				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
+				<< RESET << std::endl;
+}
+
+void PmergeMe::_mergeInsertion(void) {
+	size_t	size;
+	std::pair<bool, int> odd;
+
+	// ver resultado do algoritmo com números pequenos: 2, 3, 4, 5...
+	size = _vSequence.size();
+	if (size <= 1)
+		return ; // ver o que fazer, assim como a conta de tempo
+
 	// verificar se é número ímpar, retirar o último número
+	if (size % 2 == 1) {
+		odd = std::pair<bool, int>(true, _vSequence.back());
+		_vSequence.pop_back();
+	}
+	else
+		odd = std::pair<bool, int>(false, -1);
+
 	// separar em pares
+	std::vector<int>::const_iterator it, end = _vSequence.end();
+	for (it = _vSequence.begin(); it != end; it += 2)
+		_vPairs.push_back(std::pair<int, int>(*it, *(it + 1)));
+	std::vector<std::pair<int, int> >::iterator itp, endp = _vPairs.end();
+	if (DEBUG) {
+		std::cout << GREY << "Pairs sequence: ";
+		for (itp = _vPairs.begin(); itp != endp; itp++)
+			std::cout << "(" << (*itp).first << ", " << (*itp).second << ") ";
+		std::cout << RESET << std::endl;
+	}
+
 	// ordenar cada em forma descendente
+	for (itp = _vPairs.begin(); itp != endp; itp++) {
+		if ((*itp).first < (*itp).second)
+			std::cout << "fazer swap" << std::endl;
+			// swap
+	}
+
 	// ordenar os pares em forma ascendente (com relação aos maiores números)
+	// recursão
+	// _mergeInsertion();
+
 	// separar em dois vetores
 	// passar o primeiro para o ordenado
 	// inserir os números usando os números de Jacobsthal - entender essa lógica
 	// dá pra saber que eles são menores do que os mesmos índices correspondentes...
 	// inserir último número (se for ímpar) com binary search
-
-	t = std::clock() - t;
-	if (DEBUG)
-		std::cout << GREY << "vector: input insertion time: "
-				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
-				<< RESET << std::endl;
-
 }
 
 void PmergeMe::_printVector(void) const {
