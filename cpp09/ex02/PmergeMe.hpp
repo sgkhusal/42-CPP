@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/21 12:41:55 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:19:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ public:
 	void run(void);
 
 	typedef std::vector<int>::iterator iterator;
+	typedef std::vector<int>::const_iterator const_iterator;
 
 private:
 	PmergeMe(void);
@@ -46,14 +47,15 @@ private:
 	std::vector<int> _vSequence;
 
 	void _mergeInsertion(iterator first, iterator last, int iteration);
-	std::vector<int> _jacobsthalSequence(size_t size);
+	std::vector<int> _jacobsthalSequence(const int& size);
 	// 0 1 1 3 5 11 21
 	// a partir do terceiro número, é a soma do anterior com 2 * o penúltimo
-	std::vector<int> _getInsertionOrder(size_t size);
+	std::vector<int> _getInsertionOrder(const int& size);
+	const_iterator _binarySearch(const_iterator begin, const_iterator end, int value);
 
 	void _sortV(void);
 	void _fillVector(char *input[]);
-	void _printVector(void) const;
+	void _printVector(const_iterator begin, const_iterator end) const;
 
 	void _checkInput(char *input[]);
 	unsigned int _getNumber(std::string const str_nb);

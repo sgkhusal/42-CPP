@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/21 12:51:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/25 21:20:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {
 
 void PmergeMe::run(void) {
 	std::cout << "Before:	";
-	_printVector();
+	_printVector(_vSequence.begin(), _vSequence.end());
 	std::cout << std::endl;
 	_sortV();
 }
@@ -121,47 +121,55 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	// separar em dois vetores
 	// passar o primeiro para o ordenado
 	// inserir os números usando os números de Jacobsthal - entender essa lógica
-	_getInsertionOrder(size);
+	std::vector<int> order = _getInsertionOrder(size / 2);
+	if (DEBUG) {
+		std::cout << GREY << "Insertion sequence: ";
+		_printVector(order.begin(), order.end());
+		std::cout << RESET << std::endl;
+	}
 	// dá pra saber que eles são menores do que os mesmos índices correspondentes...
 	// inserir último número (se for ímpar) com binary search
 }
+std::vector<int> PmergeMe::_getInsertionOrder(const int& size) {
+	std::vector<int> jacob, sequence;
+	int j, last = 1;
 
-std::vector<int> PmergeMe::_jacobsthalSequence(size_t size) {
-	std::vector<int> jacob;
-	int last;
-	int last_but_one;
+	// nunca chega um size < 3 aqui
 
-	if (size == 1)
-		return std::vector<int>(1, 0);
-	jacob = _jacobsthalSequence(size - 1);
-	if ((size_t)jacob.back() > size)
-		return jacob; // verificar se precisa tirar o último
-	if (size == 2)
-		jacob.push_back(1);
-	else {
-		last = jacob.back();
-		last_but_one = *(jacob.end() - 2);
-		jacob.push_back(last + 2 * last_but_one);
+	jacob = _jacobsthalSequence(size);
+	sequence.reserve(size);
+	for (iterator it = jacob.begin() + 3; it != jacob.end(); it++) {
+		for (j = *it; j > last; j--)
+			sequence.push_back(j);
+		last = *it;
 	}
-	return jacob;
+
+	return sequence;
 }
 
-std::vector<int> PmergeMe::_getInsertionOrder(size_t size) {
-	std::vector<int> jacob = _jacobsthalSequence(size);
+std::vector<int> PmergeMe::_jacobsthalSequence(const int& size) {
+	std::vector<int> jacob(1, 0);
+	int last = 1, last_but_one = 0, tmp = 0;
 
-	if (DEBUG)
+	jacob.push_back(1);
+	while (tmp <= size) {
+		tmp = last + 2 * last_but_one;
+		jacob.push_back(tmp);
+		last_but_one = last;
+		last = tmp;
+	}
+
+	if (DEBUG) {
 		std::cout << GREY << "Jacobsthal sequence: ";
-	for (iterator it = jacob.begin(); it != jacob.end(); it++)
-		std::cout << *it << " ";
-	std::cout << RESET << std::endl;
+		_printVector(jacob.begin(), jacob.end());
+		std::cout << RESET << std::endl;
+	}
 
 	return jacob;
 }
 
-void PmergeMe::_printVector(void) const {
-	std::vector<int>::const_iterator it, end = _vSequence.end();
-
-	for (it = _vSequence.begin(); it != end; it++)
+void PmergeMe::_printVector(const_iterator begin, const_iterator end) const {
+	for (const_iterator it = begin; it != end; it++)
 		std::cout << *it << " ";
 }
 
