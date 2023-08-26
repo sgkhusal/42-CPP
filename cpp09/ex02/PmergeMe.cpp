@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/26 01:33:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:55:07 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,29 +131,10 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	}
 
 	// separar em dois vetores
-	// passar o primeiro para o ordenado
-	// inserir os números usando os números de Jacobsthal - entender essa lógica
 	int new_size = size / 2;
 	std::cout << "new_size: " << new_size << std::endl;
 	int pend_size = new_size + (odd.first ? 1 : 0);
 	std::cout << "pend_size: " << pend_size << std::endl;
-	std::vector<int> order = _getInsertionOrder(pend_size); ///////
-	if (DEBUG) {
-		std::cout << GREY << "Insertion sequence: ";
-		_printVector(order.begin(), order.end());
-		std::cout << RESET << std::endl;
-	}
-
-	std::vector<int> pairs_reference;
-	pairs_reference.reserve(new_size);
-	for (i = 1; i <= new_size; i++) {
-		pairs_reference.push_back(i);
-	}
-	if (DEBUG) {
-		std::cout << GREY << "Pairs reference: ";
-		_printVector(pairs_reference.begin(), pairs_reference.end());
-		std::cout << RESET << std::endl;
-	}
 
 	std::vector<int> pend;
 	iterator it;
@@ -187,10 +168,34 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 		std::cout << RESET << std::endl;
 	}
 
+	// inserir os números usando os números de Jacobsthal - entender essa lógica
+	std::vector<int> order = _getInsertionOrder(pend_size); ///////
+	if (DEBUG) {
+		std::cout << GREY << "Insertion sequence: ";
+		_printVector(order.begin(), order.end());
+		std::cout << RESET << std::endl;
+	}
+
+	std::vector<int> pairs_reference;
+	pairs_reference.reserve(new_size);
+	for (i = 1; i <= new_size; i++) {
+		pairs_reference.push_back(i);
+	}
+	if (DEBUG) {
+		std::cout << GREY << "Pairs reference: ";
+		_printVector(pairs_reference.begin(), pairs_reference.end());
+		std::cout << RESET << std::endl;
+	}
+
 	// colocar o primeiro na primeira posição
 	_vSequence.insert(first, pend.begin(), pend.begin() + element_size);
 	// pend.erase(pend.begin(), pend.begin() + element_size);
 	pairs_reference.insert(pairs_reference.begin(), 1);
+	if (DEBUG) {
+		std::cout << GREY << "Pairs reference: ";
+		_printVector(pairs_reference.begin(), pairs_reference.end());
+		std::cout << RESET << std::endl;
+	}
 
 	// arrumar!
 	// if (pend.size() / element_size == 1) {
@@ -207,7 +212,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 
 		while (it2 != pairs_reference.end() && *it2 != *it) {
 			it2++;
-			pos += element_size;
+			pos++;
 			std::cout << "*it2: " << *it2 << std::endl;
 			std::cout << "pos: " << pos << std::endl;
 		}
@@ -217,14 +222,16 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 		// std::cout << "pos: " << pos << std::endl;
 		if (it2 == pairs_reference.end()) {
 			// elemento ímpar que sobrou
-			std::cout << "*first: " << *first << std::endl;
-			std::cout << "*last: " << *last << std::endl;
-			p = _binarySearch(first, last, pend[*it - 1], element_size); // verificar se last - 1
+			std::cout << "*first: " << *_vSequence.begin() << std::endl;
+			std::cout << "*last: " << *(_vSequence.begin() + (pos) * element_size) << std::endl;
+			std::cout << "pend[*it - 1]: " << pend[*it - 1] << std::endl;
+			p = _binarySearch(_vSequence.begin(), _vSequence.begin() + (pos + 1) * element_size, pend[*it - 1], element_size); // verificar se last - 1
 		}
-		// else
-		p = _binarySearch(_vSequence.begin(), _vSequence.begin() + pos, pend[*it - 1], element_size);
-		_vSequence.insert(p, pend[*it - 1]);
-		pairs_reference.insert(pairs_reference.begin() + pos, *it);
+		else {
+			p = _binarySearch(_vSequence.begin(), _vSequence.begin() + pos, pend[*it - 1], element_size);
+			_vSequence.insert(p, pend[*it - 1]);
+			pairs_reference.insert(pairs_reference.begin() + pos, *it);
+		}
 	}
 	if (DEBUG) {
 		std::cout << GREY << "Pend: ";
