@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 13:15:24 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:13:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,162 +58,38 @@ void PmergeMe::_sortV(void) {
 }
 
 void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
-	size_t	size, distance;
-	int		pair_size, element_size, i;
-	std::pair<bool, iterator> odd;
+	int		size, element_size, pair_size, pend_size;
+	vector	pend, order, pairs_reference;
+	odd_t	odd;
 
-	// ver resultado do algoritmo com números pequenos: 2, 3, 4, 5...
 	element_size = std::pow(2, iteration);
-	distance = std::distance(first, last);
-	size = distance / element_size;
+	size = std::distance(first, last) / element_size;
 	pair_size = std::pow(2, iteration + 1);
-	if (DEBUG)
-		std::cout << GREY << "\n------------------------------------------\n"
-			<< "iteration " << iteration
-			<<  ":\n- element size: " << element_size
-			<<  "\n- size: " << size << RESET << std::endl;
+	printDetails(iteration, size, element_size, pair_size);
+
 	if (size <= 1)
 		return ;
-	if (DEBUG)
-		std::cout << GREY <<  "- pair size: " << pair_size << std::endl;
-	if (size == 2) {
-		for (iterator it = first; it != last; it += pair_size) {
-		if (*it > *(it + element_size)) {
-			for (int i = 0; i < element_size; i++)
-				std::swap(*(it + i), *(it + element_size + i));
-			}
-		}
-		return ;
-	}
-
-	// If size is odd, leave one element out
+	if (size == 2)
+		return _sortSize2(first, element_size);
 	if (size % 2 == 1) {
 		last = last - element_size;
-		odd = std::pair<bool, iterator>(true, last);
-		if (DEBUG) {
-			std::cout << GREY << "odd size - remove element: ";
-			for (int i = 0; i < element_size; i++) {
-				std::cout << *(odd.second + i) << " ";
-			}
-			std::cout << "\nnow last references to: " << *last << std::endl;
-		}
+		odd = _removeLastElement(last, element_size);
 	}
 	else
-		odd = std::pair<bool, iterator>(false, last);
+		odd = odd_t(false, vector());
 
-	// (i) Make pairwise comparisons of [size/2] disjoint pairs of elements.
-	// sort them in descending order
-	for (iterator it = first; it != last; it += pair_size) {
-		if (*it < *(it + element_size)) {
-			for (int i = 0; i < element_size; i++)
-				std::swap(*(it + i), *(it + element_size + i));
-		}
-	}
-	if (DEBUG) {
-		std::cout << "Pairs ordered: | ";
-		for (iterator it = first; it != last; it += pair_size) {
-			for (int i = 0; i < pair_size; i++) {
-				std::cout << *(it + i) << " ";
-			}
-			std::cout << "| ";
-		}
-		std::cout << RESET << std::endl;
-	}
+	/* Separate elements in pairs and sort each disjoint pair in descending order */
+	_sortPairs(first, last, element_size, pair_size);
 
-	// Sort the [size/2] larger numbers, found in step (i), by merge insertion
-	// recursion: sort pairs vector in ascending order
+	/* Sort the [size/2] larger numbers, found in last step, by merge insertion */
 	_mergeInsertion(first, last, iteration + 1);
-	if (DEBUG) {
-		std::cout << GREY << "\n------------------------------------------\n"
-			<< "iteration " << iteration
-			<< ":\nPairs after merge insertion with bigger numbers: | ";
-		for (iterator it = first; it != last; it += pair_size) {
-			for (int i = 0; i < pair_size; i++) {
-				std::cout << *(it + i) << " ";
-			}
-			std::cout << "| ";
-		}
-		std::cout << RESET << std::endl;
-	}
+	_printAfterRecursion(iteration, first, last, element_size);
 
-	// separar em dois vetores
-	int new_size = size / 2;
-	// std::cout << "new_size: " << new_size << std::endl;
-	int pend_size = new_size + (odd.first ? 1 : 0);
-	// std::cout << "pend_size: " << pend_size << std::endl;
-
-	std::vector<int> pend;
-	iterator it;
-	// std::cout << "first: " << *(first) << std::endl;
-	pend.reserve(pend_size * element_size);
-	// std::cout << pend.capacity() << std::endl;
-	// std::cout << pend.size() << std::endl;
-	for (i = 1; i <= new_size; i++) {
-		it = first + (i * 2 - 1) * element_size;
-		for (int j = 0; j < element_size; j++) {
-			// std::cout << *(it + j) << std::endl;
-			pend.push_back(*(it + j));
-		}
-	}
-	if (odd.first) {
-		for (int j = 0; j < element_size; j++) {
-			// std::cout << *(odd.second + j) << std::endl;
-			pend.push_back(*(odd.second + j));
-		}
-		_vSequence.erase(odd.second, odd.second + element_size);
-	}
-	if (DEBUG) {
-		std::cout << GREY << "Pend: ";
-		_printVector(pend.begin(), pend.end());
-		std::cout << RESET << std::endl;
-	}
-
-	// remove elements from _vSequence
-	// it = first + new_size * element_size;
-	// _vSequence.erase(it, it + pend_size * element_size);
-	for (i = new_size; i > 0; i--) {
-		it = first + (i * 2 - 1) * element_size;
-		// std::cout << "remove from _vSequence: " << *it << std::endl;
-		_vSequence.erase(it, it + element_size);
-	}
-
-	// std::cout << pend.size() << std::endl;
-	if (DEBUG) {
-		std::cout << GREY << "Pend: ";
-		_printVector(pend.begin(), pend.end());
-		std::cout << GREY << "_vSequence: ";
-		_printVector(_vSequence.begin(), _vSequence.end());
-		std::cout << RESET << std::endl;
-	}
-
-	// obter a ordem de inserção usando os números de Jacobsthal
-	std::vector<int> order = _getInsertionOrder(pend_size); ///////
-	if (DEBUG) {
-		std::cout << GREY << "Insertion sequence: ";
-		_printVector(order.begin(), order.end());
-		std::cout << RESET << std::endl;
-	}
-
-	// vetor que simula o link entre os pares
-	std::vector<int> pairs_reference;
-	pairs_reference.reserve(size);
-	pairs_reference.push_back(1);
-	for (i = 1; i <= new_size; i++) {
-		pairs_reference.push_back(i);
-	}
-	if (DEBUG) {
-		std::cout << GREY << "Pairs reference: ";
-		_printVector(pairs_reference.begin(), pairs_reference.end());
-		std::cout << RESET << std::endl;
-	}
-
-	// colocar o primeiro na primeira posição
-	_vSequence.insert(first, pend.begin(), pend.begin() + element_size);
-	if (DEBUG) {
-		std::cout << GREY << "_vSequence: ";
-		_printVector(_vSequence.begin(), _vSequence.end());
-		std::cout << RESET << std::endl;
-	}
+	pend_size = size / 2 + (odd.first ? 1 : 0);
+	pend = _createPend(first, pend_size, size / 2, element_size, odd);
+	_insertFirstElement(pend.begin(), pend.begin() + element_size);
+	order = _getInsertionOrder(pend_size); ///////
+	pairs_reference = _createPairsReference(size);
 
 	int pos;
 	iterator pairs_reference_it, p;
@@ -278,7 +154,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 		_printVector(_vSequence.begin(), _vSequence.end());
 		std::cout << RESET << std::endl;
 	}
-
+	// _isSorted(first, _vSequence.end(), element_size);
 	// dá pra saber que eles são menores do que os mesmos índices correspondentes...
 	// inserir último número (se for ímpar) com binary search
 }
@@ -306,32 +182,51 @@ PmergeMe::iterator PmergeMe::_binarySearch(
 		return _binarySearch(middle, last, value, element_size);
 }
 
-std::vector<int> PmergeMe::_getInsertionOrder(const int& size) {
-	std::vector<int> jacob, sequence(1, 1);
+PmergeMe::vector PmergeMe::_createPairsReference(int size) {
+	vector pairs_reference;
+	int half_size = size / 2;
+
+	pairs_reference.reserve(size);
+	pairs_reference.push_back(1);
+	for (int i = 1; i <= half_size; i++)
+		pairs_reference.push_back(i);
+	if (DEBUG) {
+		std::cout << GREY << "Pairs reference: ";
+		_printVector(pairs_reference.begin(), pairs_reference.end());
+		std::cout << RESET << std::endl;
+	}
+	return pairs_reference;
+}
+
+PmergeMe::vector PmergeMe::_getInsertionOrder(const int& size) {
+	vector jacob, order(1, 1);
 	int j, last = 1;
 	iterator it;
 
 	if (size < 3) {
 		if (size == 2)
-			sequence.push_back(2);
-		return sequence;
+			order.push_back(2);
+		return order;
 	}
-
-	sequence.reserve(size);
+	order.reserve(size);
 	jacob = _jacobsthalSequence(size);
 	for (it = jacob.begin() + 3; it != jacob.end(); it++) {
 		for (j = *it; j > last; j--) {
 			if (j <= size)
-				sequence.push_back(j);
+				order.push_back(j);
 		}
 		last = *it;
 	}
-
-	return sequence;
+	if (DEBUG) {
+		std::cout << GREY << "Insertion order: ";
+		_printVector(order.begin(), order.end());
+		std::cout << RESET << std::endl;
+	}
+	return order;
 }
 
-std::vector<int> PmergeMe::_jacobsthalSequence(const int& size) {
-	std::vector<int> jacob(1, 0);
+PmergeMe::vector PmergeMe::_jacobsthalSequence(const int& size) {
+	vector jacob(1, 0);
 	int last = 1, last_but_one = 0, tmp = 0;
 
 	jacob.push_back(1);
@@ -341,19 +236,133 @@ std::vector<int> PmergeMe::_jacobsthalSequence(const int& size) {
 		last_but_one = last;
 		last = tmp;
 	}
-
 	if (DEBUG) {
 		std::cout << GREY << "Jacobsthal sequence: ";
 		_printVector(jacob.begin(), jacob.end());
 		std::cout << RESET << std::endl;
 	}
-
 	return jacob;
+}
+
+void PmergeMe::_insertFirstElement(iterator first, iterator last) {
+	_vSequence.insert(_vSequence.begin(), first, last);
+	if (DEBUG) {
+		std::cout << GREY << "_vSequence: ";
+		_printVector(_vSequence.begin(), _vSequence.end());
+		std::cout << RESET << std::endl;
+	}
+}
+
+void PmergeMe::_removePendElements(iterator first, int half_size, int element_size) {
+	iterator it;
+
+	for (int i = half_size; i > 0; i--) {
+		it = first + (i * 2 - 1) * element_size;
+		// std::cout << "remove from _vSequence: " << *it << std::endl;
+		_vSequence.erase(it, it + element_size);
+	}
+}
+
+PmergeMe::vector PmergeMe::_createPend(
+	iterator first, int pend_size, int half_size, int element_size, odd_t odd
+) {
+	vector pend;
+	iterator it;
+
+	pend.reserve(pend_size * element_size);
+	for (int i = 1; i <= half_size; i++) {
+		it = first + (i * 2 - 1) * element_size;
+		for (int j = 0; j < element_size; j++) {
+			pend.push_back(*(it + j));
+		}
+	}
+	if (odd.first && element_size == 1)
+		pend.push_back(odd.second.at(0));
+	else if (odd.first)
+		pend.insert(pend.end(), odd.second.begin(), odd.second.end());
+	if (DEBUG) {
+		std::cout << GREY << "Pend: ";
+		_printVector(pend.begin(), pend.end());
+		std::cout << RESET << std::endl;
+	}
+	_removePendElements(first, half_size, element_size);
+	if (DEBUG) {
+		std::cout << GREY << "Pend: ";
+		_printVector(pend.begin(), pend.end());
+		std::cout << GREY << "_vSequence: ";
+		_printVector(_vSequence.begin(), _vSequence.end());
+		std::cout << RESET << std::endl;
+	}
+	return pend;
+}
+
+void PmergeMe::_sortPairs(iterator first, iterator last, int e_size, int p_size) {
+	for (iterator it = first; it != last; it += p_size) {
+		if (*it < *(it + e_size)) {
+			for (int i = 0; i < e_size; i++)
+				std::swap(*(it + i), *(it + e_size + i));
+		}
+	}
+	if (DEBUG) {
+		std::cout << "Pairs ordered: | ";
+		for (iterator it = first; it != last; it += p_size) {
+			for (int i = 0; i < p_size; i++) {
+				std::cout << *(it + i) << " ";
+			}
+			std::cout << "| ";
+		}
+		std::cout << RESET << std::endl;
+	}
+}
+
+PmergeMe::odd_t PmergeMe::_removeLastElement(iterator last, int element_size) {
+	std::pair<bool, vector > odd;
+	vector odd_vector;
+
+	for (int i = 0; i < element_size; i++) {
+		odd_vector.push_back(*(last + i));
+	}
+	odd = std::pair<bool, vector >(true, odd_vector);
+	_vSequence.erase(last, last + element_size);
+	if (DEBUG) {
+		std::cout << GREY << "odd size - removed element: ";
+		_printVector(odd.second.begin(), odd.second.end());
+		std::cout << GREY << "_vSequence: ";
+		_printVector(_vSequence.begin(), _vSequence.end());
+		std::cout << RESET << std::endl;
+	}
+	return odd;
+}
+
+void PmergeMe::_sortSize2(iterator first, int element_size) {
+	iterator it = first;
+
+	if (*it > *(it + element_size)) {
+		for (int i = 0; i < element_size; i++)
+			std::swap(*(it + i), *(it + element_size + i));
+	}
 }
 
 void PmergeMe::_printVector(const_iterator begin, const_iterator end) const {
 	for (const_iterator it = begin; it != end; it++)
 		std::cout << *it << " ";
+}
+
+void PmergeMe::_printAfterRecursion(
+	int iteration, iterator first, iterator last, int element_size
+) {
+	if (DEBUG) {
+		std::cout << GREY << "\n------------------------------------------\n"
+			<< "iteration " << iteration
+			<< ":\nPairs after merge insertion with bigger numbers: | ";
+		for (iterator it = first; it != last; it += element_size) {
+			for (int i = 0; i < element_size; i++) {
+				std::cout << *(it + i) << " ";
+			}
+			std::cout << "| ";
+		}
+		std::cout << RESET << std::endl;
+	}
 }
 
 void PmergeMe::_fillVector(char *input[]) {
@@ -384,6 +393,18 @@ bool PmergeMe::_isSorted(const_iterator begin, const_iterator end) const {
 	return true;
 }
 
+bool PmergeMe::_isSorted(
+	const_iterator begin, const_iterator end, int element_size
+) const {
+	for (const_iterator it = begin + element_size; it != end; it++) {
+		if (*(it - element_size) > *it) {
+			std::cout << ORANGE << *(it - element_size) << " and " << *it << std::endl;
+			exit(1);
+		}
+	}
+	return true;
+}
+
 unsigned int PmergeMe::_getNumber(std::string const str_nb) {
 	std::stringstream	ss;
 	unsigned int		nb;
@@ -394,7 +415,7 @@ unsigned int PmergeMe::_getNumber(std::string const str_nb) {
 	return nb;
 }
 
-std::vector<int> PmergeMe::getVSequence(void) const {
+PmergeMe::vector PmergeMe::getVSequence(void) const {
 	return this->_vSequence;
 }
 
