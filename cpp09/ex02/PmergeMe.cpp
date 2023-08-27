@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 00:13:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 00:45:48 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	}
 	if (odd.first) {
 		for (int j = 0; j < element_size; j++) {
-			std::cout << *(odd.second + j) << std::endl;
+			// std::cout << *(odd.second + j) << std::endl;
 			pend.push_back(*(odd.second + j));
 		}
 		_vSequence.erase(odd.second, odd.second + element_size);
@@ -167,7 +167,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	// _vSequence.erase(it, it + pend_size * element_size);
 	for (i = new_size; i > 0; i--) {
 		it = first + (i * 2 - 1) * element_size;
-		std::cout << "remove from _vSequence: " << *it << std::endl;
+		// std::cout << "remove from _vSequence: " << *it << std::endl;
 		_vSequence.erase(it, it + element_size);
 	}
 
@@ -215,21 +215,21 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 		pairs_reference_it = pairs_reference.begin();
 		pos = 0;
 		std::cout << "*order_it: " << *order_it << std::endl;
-		std::cout << "*pairs_reference_it: " << *pairs_reference_it << std::endl;
-		std::cout << "pos: " << pos << std::endl;
+		// std::cout << "*pairs_reference_it: " << *pairs_reference_it << std::endl;
+		// std::cout << "pos: " << pos << std::endl;
 
 		while (pairs_reference_it != pairs_reference.end() && *pairs_reference_it != *order_it) {
 			pairs_reference_it++;
 			pos++;
-			std::cout << "*pairs_reference_it: " << *pairs_reference_it << std::endl;
-			std::cout << "pos: " << pos << std::endl;
 		}
-		std::cout << "*first: " << *first << std::endl;
-		std::cout << "*(first + (pos - 1) * element_size) " << *(first + (pos - 1) * element_size) << std::endl;
+		std::cout << "*pairs_reference_it: " << *pairs_reference_it << std::endl;
+		std::cout << "pos: " << pos << std::endl;
+		// std::cout << "*first: " << *first << std::endl;
+		// std::cout << "*(first + (pos - 1) * element_size) " << *(first + (pos - 1) * element_size) << std::endl;
 		int value = pend.at((*order_it - 1) * element_size);
 		iterator elem_init = pend.begin() + (*order_it - 1) * element_size;
 		iterator elem_final = elem_init + element_size;
-		std::cout << "value: " << value << " - " << *elem_init << " - " << *elem_final << std::endl;
+		std::cout << "value: " << value << " - " << *elem_init << std::endl;
 		if (pairs_reference_it == pairs_reference.end()) {
 			// elemento ímpar que sobrou
 			p = _binarySearch(
@@ -238,12 +238,6 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 				value,
 				element_size
 			);
-			// precisa fazer um pop do elemento ímpar para ele não ser incluído
-			// for (i = 0; i < element_size; i++) {
-			// 	std::cout << "pend.at((*order_it - 1) * element_size - 1 + i): " << pend.at((*order_it - 1) * element_size - 1 + i) << std::endl;
-			// 	_vSequence.insert(p + i, pend.at((*order_it - 1) * element_size - 1 + i));
-			// } // wtf -1 ??
-			_vSequence.insert(p, elem_init, elem_final); // wtf??
 		}
 		else {
 			p = _binarySearch(
@@ -252,12 +246,13 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 				pend.at((*order_it - 1) * element_size),
 				element_size
 			);
-			std::cout << *(pairs_reference.begin()) << " " << std::distance(first, p) << std::endl;
-			std::cout << *(pairs_reference.begin() + std::distance(first, p)) << " " << *order_it << std::endl;
+			// std::cout << *(pairs_reference.begin()) << " " << std::distance(first, p) << std::endl;
+			// std::cout << *(pairs_reference.begin() + std::distance(first, p)) << " " << *order_it << std::endl;
 			pairs_reference.insert(pairs_reference.begin() + std::distance(first, p), *order_it);
-			std::cout << *(pairs_reference.begin()) << " " << *order_it << std::endl;
-			_vSequence.insert(p, elem_init, elem_final);
+			// std::cout << *(pairs_reference.begin()) << " " << *order_it << std::endl;
 		}
+		std::cout << "*p: " << *p << std::endl;
+		_vSequence.insert(p, elem_init, elem_final);
 		if (DEBUG) {
 			std::cout << GREY << "Pairs reference: ";
 			_printVector(pairs_reference.begin(), pairs_reference.end());
@@ -285,15 +280,16 @@ PmergeMe::iterator PmergeMe::_binarySearch(
 	iterator middle;
 
 	size = std::distance(first, last);
+	std::cout << "Binary Search: " << *first << " and " << *last << " - distance: " << size << std::endl;
 	if (size / element_size == 1) {
 		if (value < *first)
 			return first;
 		if (value < *last)
 			return last; // cuidado se o last for o final...
-		return last;
+		return last + element_size;
 	}
-	//  size ímpar
 	middle = first + (size / 2);
+	std::cout << "middle: " << *middle << std::endl;
 	if (value < *middle)
 		return _binarySearch(first, middle, value, element_size);
 	else
