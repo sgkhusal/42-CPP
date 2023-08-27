@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 00:45:48 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 01:09:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,12 +243,16 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 			p = _binarySearch(
 				first,
 				first + (pos - 1) * element_size,
-				pend.at((*order_it - 1) * element_size),
+				value,
 				element_size
 			);
-			// std::cout << *(pairs_reference.begin()) << " " << std::distance(first, p) << std::endl;
-			// std::cout << *(pairs_reference.begin() + std::distance(first, p)) << " " << *order_it << std::endl;
-			pairs_reference.insert(pairs_reference.begin() + std::distance(first, p), *order_it);
+			std::cout << *(pairs_reference.begin()) << " " << std::distance(first, p) << " " << pairs_reference.size() << std::endl;
+			std::cout << *(pairs_reference.begin() + std::distance(first, p)) << " " << *order_it << std::endl;
+			size_t d = std::distance(first, p);
+			if (d > pairs_reference.size())
+				pairs_reference.insert(pairs_reference.end(), *order_it);
+			else
+				pairs_reference.insert(pairs_reference.begin() + std::distance(first, p), *order_it);
 			// std::cout << *(pairs_reference.begin()) << " " << *order_it << std::endl;
 		}
 		std::cout << "*p: " << *p << std::endl;
@@ -288,7 +292,7 @@ PmergeMe::iterator PmergeMe::_binarySearch(
 			return last; // cuidado se o last for o final...
 		return last + element_size;
 	}
-	middle = first + (size / 2);
+	middle = first + (size / element_size / 2 * element_size);
 	std::cout << "middle: " << *middle << std::endl;
 	if (value < *middle)
 		return _binarySearch(first, middle, value, element_size);
