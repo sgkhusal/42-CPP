@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 01:29:29 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:15:24 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void PmergeMe::run(void) {
 	_printVector(_vSequence.begin(), _vSequence.end());
 	std::cout << std::endl;
 	_sortV();
-	// std::cout << "After:	";
-	// _printVector(_vSequence.begin(), _vSequence.end());
-	// std::cout << std::endl;
+	std::cout << "After:	";
+	_printVector(_vSequence.begin(), _vSequence.end());
+	std::cout << std::endl;
 }
 
 void PmergeMe::_sortV(void) {
@@ -51,6 +51,10 @@ void PmergeMe::_sortV(void) {
 	std::cout << GREY << "vector: sorting time: "
 			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
 			<< RESET << std::endl;
+	if (!_isSorted(_vSequence.begin(), _vSequence.end()))
+		std::cout << ORANGE << "KO: vector is not sorted" << RESET << std::endl;
+	else if (DEBUG)
+		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
 }
 
 void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
@@ -368,6 +372,16 @@ void PmergeMe::_fillVector(char *input[]) {
 		std::cout << GREY << "vector: input insertion time: "
 				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
 				<< RESET << std::endl;
+}
+
+bool PmergeMe::_isSorted(const_iterator begin, const_iterator end) const {
+	for (const_iterator it = begin + 1; it != end; it++) {
+		if (*(it - 1) > *it) {
+			std::cout << ORANGE << *(it - 1) << " and " << *it << std::endl;
+			return false;
+		}
+	}
+	return true;
 }
 
 unsigned int PmergeMe::_getNumber(std::string const str_nb) {
