@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 18:11:23 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 19:26:09 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,17 +56,22 @@ private:
 	vector		_jacobsthalSequence(const int& size);
 	vector		_getInsertionOrder(const int& size);
 	vector		_createPairsReference(int size);
+	void		_insertElements(
+		iterator first, int size, int element_size, vector order, vector pend
+	);
 	iterator	_binarySearch(
 		iterator first, iterator last, int value, int element_size
 	);
 
 	void	_fillVector(char *input[]);
-	void	_printVector(const_iterator begin, const_iterator end) const;
+	void	_printVector(
+		bool print, const_iterator begin, const_iterator end, std::string const& description
+	) const;
 	void	_printAfterRecursion(
 		int iteration, iterator first, iterator last, int element_size
 	);
-	bool	_isSorted(const_iterator begin, const_iterator end) const;
-	bool	_isSorted(
+	void	_checkIfIsSorted(const_iterator begin, const_iterator end) const;
+	void	_checkIfIsSorted(
 		const_iterator begin, const_iterator end, int element_size
 	) const;
 
