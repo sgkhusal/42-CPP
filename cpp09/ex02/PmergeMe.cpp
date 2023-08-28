@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 23:09:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 23:45:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {
 void PmergeMe::run(void) {
 	utils::printContainer(true, _vSequence.begin(), _vSequence.end(), "Before:	");
 	_sortV();
-	utils::printContainer(true, _vSequence.begin(), _vSequence.end(), "After:	");
+	// utils::printContainer(true, _vSequence.begin(), _vSequence.end(), "After:	");
 	std::cout << std::endl;
 }
 
@@ -114,13 +114,16 @@ void PmergeMe::_insertElements(
 		else
 			last = first + (pos - 1) * element_size;
 		p = _binarySearch(first, last, value, element_size);
-		_vSequence.insert(p, elem_init, elem_final);
 
-		d = std::distance(first, p);
+		d = std::distance(first, p) / element_size;
+		// std::cout << "*p: " << *p << std::endl;
+		// std::cout << "d: " << d << std::endl;
+		// std::cout << "pairs_reference.size(): " << pairs_reference.size() << std::endl;
 		if (d > pairs_reference.size())
 			pairs_reference.insert(pairs_reference.end(), *order_it);
 		else
-			pairs_reference.insert(pairs_reference.begin() + std::distance(first, p), *order_it);
+			pairs_reference.insert(pairs_reference.begin() + d, *order_it);
+		_vSequence.insert(p, elem_init, elem_final);
 
 		utils::printAfterInsert(
 			DEBUG,

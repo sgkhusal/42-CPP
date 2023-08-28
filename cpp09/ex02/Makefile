@@ -6,14 +6,14 @@
 #    By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/19 15:59:19 by sguilher          #+#    #+#              #
-#    Updated: 2023/08/27 16:56:28 by sguilher         ###   ########.fr        #
+#    Updated: 2023/08/27 23:43:56 by sguilher         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		PmergeMe
 
 CC =		c++
-CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP -D DEBUG=true
+CXXFLAGS =	-Wall -Wextra -Werror -std=c++98 -MMD -MP #-D DEBUG=true
 
 SRC =		main.cpp PmergeMe.cpp utils.cpp
 INCLUDE =	-I ./
