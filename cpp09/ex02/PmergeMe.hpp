@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 22:42:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:44:46 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ private:
 	vector		_createPairsReference(int size);
 	void		_insertElements(
 		iterator first, int size, int element_size, vector order, vector pend
+	);
+	iterator _findPosition(
+		iterator first, iterator order_it, int element_size, vector pend, vector& pairs_reference
 	);
 	iterator	_binarySearch(
 		iterator first, iterator last, int value, int element_size

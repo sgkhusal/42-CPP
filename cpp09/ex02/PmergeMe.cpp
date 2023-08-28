@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 01:22:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:51:05 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void PmergeMe::run(void) {
 	);
 	_sortV();
 	utils::printContainer(
-		true, _vSequence.begin(), _vSequence.end(), "After:		"
+		true, _vSequence.begin(), _vSequence.end(), "After:	"
 	);
 	std::cout << std::endl;
 }
@@ -95,40 +95,21 @@ void PmergeMe::_insertElements(
 	iterator first, int size, int element_size, vector order, vector pend
 ) { // é dispendioso passar o order e o pend dessa forma??
 	vector pairs_reference;
-	iterator order_it, elem_init, elem_final, last, pairs_reference_it, p;
-	int idx, value;
+	iterator order_it, p, elem_init, elem_final;
 	size_t d;
 
 	pairs_reference = _createPairsReference(size);
 	for (order_it = order.begin() + 1; order_it != order.end(); order_it++) {
-		pairs_reference_it = pairs_reference.begin();
-		idx = 0;
-
-		while (
-			pairs_reference_it != pairs_reference.end()
-			&& *pairs_reference_it != *order_it
-		) {
-			pairs_reference_it++;
-			idx++;
-		}
-
-		value = pend.at((*order_it - 1) * element_size);
+		p = _findPosition(first, order_it, element_size, pend, pairs_reference);
 		elem_init = pend.begin() + (*order_it - 1) * element_size;
 		elem_final = elem_init + element_size;
-
-		if (pairs_reference_it == pairs_reference.end()) {
-			last = first + (pairs_reference.size() - 1) * element_size;
-		}
-		else // não manda o par, porque já sabe que é menor; manda o elemento anterior
-			last = first + (idx - 1) * element_size;
-		p = _binarySearch(first, last, value, element_size);
+		_vSequence.insert(p, elem_init, elem_final);
 
 		d = std::distance(first, p) / element_size;
 		if (d > pairs_reference.size())
 			pairs_reference.insert(pairs_reference.end(), *order_it);
 		else
 			pairs_reference.insert(pairs_reference.begin() + d, *order_it);
-		_vSequence.insert(p, elem_init, elem_final);
 
 		utils::printAfterInsert(
 			DEBUG,
@@ -138,6 +119,30 @@ void PmergeMe::_insertElements(
 		);
 	}
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
+}
+
+PmergeMe::iterator PmergeMe::_findPosition(
+	iterator first, iterator order_it, int element_size, vector pend, vector& pairs_reference
+) {
+	iterator last, pairs_reference_it;
+	int idx = 0, value;
+
+	pairs_reference_it = pairs_reference.begin();
+	while (
+		pairs_reference_it != pairs_reference.end()
+		&& *pairs_reference_it != *order_it
+	) {
+		pairs_reference_it++;
+		idx++;
+	}
+
+	if (pairs_reference_it == pairs_reference.end()) {
+		last = first + (pairs_reference.size() - 1) * element_size;
+	}
+	else // não manda o par, porque já sabe que é menor; manda o elemento anterior
+		last = first + (idx - 1) * element_size;
+	value = pend.at((*order_it - 1) * element_size);
+	return _binarySearch(first, last, value, element_size);
 }
 
 PmergeMe::iterator PmergeMe::_binarySearch(
