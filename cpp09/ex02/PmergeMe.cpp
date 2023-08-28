@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 19:33:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 23:09:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {
 }
 
 void PmergeMe::run(void) {
-	_printVector(true, _vSequence.begin(), _vSequence.end(), "Before:	");
+	utils::printContainer(true, _vSequence.begin(), _vSequence.end(), "Before:	");
 	_sortV();
-	_printVector(true, _vSequence.begin(), _vSequence.end(), "After:	");
+	utils::printContainer(true, _vSequence.begin(), _vSequence.end(), "After:	");
 	std::cout << std::endl;
 }
 
@@ -48,7 +48,7 @@ void PmergeMe::_sortV(void) {
 	std::cout << GREY << "vector: sorting time: "
 			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
 			<< RESET << std::endl;
-	_checkIfIsSorted(_vSequence.begin(), _vSequence.end());
+	utils::checkIfIsSorted(_vSequence.begin(), _vSequence.end());
 }
 
 void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
@@ -59,7 +59,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	element_size = std::pow(2, iteration);
 	size = std::distance(first, last) / element_size;
 	pair_size = std::pow(2, iteration + 1);
-	printDetails(iteration, size, element_size, pair_size);
+	utils::printDetails(iteration, size, element_size, pair_size);
 	if (size <= 1)
 		return ;
 	if (size == 2)
@@ -74,7 +74,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	_sortPairs(first, last, element_size, pair_size);
 
 	_mergeInsertion(first, last, iteration + 1);
-	_printAfterRecursion(iteration, first, last, element_size);
+	utils::printAfterRecursion(iteration, first, last, element_size);
 
 	pend_size = size / 2 + (odd.first ? 1 : 0);
 	pend = _createPend(first, pend_size, size / 2, element_size, odd);
@@ -82,7 +82,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	_insertFirstElement(pend.begin(), pend.begin() + element_size);
 	order = _getInsertionOrder(pend_size); ///////
 	_insertElements(first, size, element_size, order, pend);
-	// _checkIfIsSorted(first, _vSequence.end(), element_size);
+	// utils::checkIfIsSorted(first, _vSequence.end(), element_size);
 	// dá pra saber que eles são menores do que os mesmos índices correspondentes...
 	// inserir último número (se for ímpar) com binary search
 }
@@ -122,10 +122,14 @@ void PmergeMe::_insertElements(
 		else
 			pairs_reference.insert(pairs_reference.begin() + std::distance(first, p), *order_it);
 
-		_printVector(DEBUG, pairs_reference.begin(), pairs_reference.end(), "Pairs reference: ");
-		_printVector(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
+		utils::printAfterInsert(
+			DEBUG,
+			pairs_reference.begin(), pairs_reference.end(),
+			_vSequence.begin(), _vSequence.end(),
+			"_vSequence: "
+		);
 	}
-	_printVector(DEBUG, pend.begin(), pend.end(), "Pend: ");
+	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 }
 
 PmergeMe::iterator PmergeMe::_binarySearch(
@@ -159,7 +163,7 @@ PmergeMe::vector PmergeMe::_createPairsReference(int size) {
 	pairs_reference.push_back(1);
 	for (int i = 1; i <= half_size; i++)
 		pairs_reference.push_back(i);
-	_printVector(
+	utils::printContainer(
 		DEBUG, pairs_reference.begin(), pairs_reference.end(), "Pairs reference: "
 	);
 	return pairs_reference;
@@ -184,7 +188,7 @@ PmergeMe::vector PmergeMe::_getInsertionOrder(const int& size) {
 		}
 		last = *it;
 	}
-	_printVector(DEBUG, order.begin(), order.end(), "Insertion order: ");
+	utils::printContainer(DEBUG, order.begin(), order.end(), "Insertion order: ");
 	return order;
 }
 
@@ -199,13 +203,13 @@ PmergeMe::vector PmergeMe::_jacobsthalSequence(const int& size) {
 		last_but_one = last;
 		last = tmp;
 	}
-	_printVector(DEBUG, jacob.begin(), jacob.end(), "Jacobsthal sequence: ");
+	utils::printContainer(DEBUG, jacob.begin(), jacob.end(), "Jacobsthal sequence: ");
 	return jacob;
 }
 
 void PmergeMe::_insertFirstElement(iterator first, iterator last) {
 	_vSequence.insert(_vSequence.begin(), first, last);
-	_printVector(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
+	utils::printContainer(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
 }
 
 void PmergeMe::_removePendElements(iterator first, int half_size, int element_size) {
@@ -235,10 +239,10 @@ PmergeMe::vector PmergeMe::_createPend(
 		pend.push_back(odd.second.at(0));
 	else if (odd.first)
 		pend.insert(pend.end(), odd.second.begin(), odd.second.end());
-	_printVector(DEBUG, pend.begin(), pend.end(), "Pend: ");
+	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 	_removePendElements(first, half_size, element_size);
-	_printVector(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	_printVector(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
+	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
+	utils::printContainer(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
 	return pend;
 }
 
@@ -271,8 +275,8 @@ PmergeMe::odd_t PmergeMe::_removeLastElement(iterator last, int element_size) {
 	}
 	odd = std::pair<bool, vector >(true, odd_vector);
 	_vSequence.erase(last, last + element_size);
-	_printVector(DEBUG, odd.second.begin(), odd.second.end(), "odd size - removed element: ");
-	_printVector(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
+	utils::printContainer(DEBUG, odd.second.begin(), odd.second.end(), "odd size - removed element: ");
+	utils::printContainer(DEBUG, _vSequence.begin(), _vSequence.end(), "_vSequence: ");
 	return odd;
 }
 
@@ -285,34 +289,6 @@ void PmergeMe::_sortSize2(iterator first, int element_size) {
 	}
 }
 
-void PmergeMe::_printVector(
-	bool print, const_iterator begin, const_iterator end, std::string const& description
-) const {
-	if (print) {
-		std::cout << GREY << description;
-		for (const_iterator it = begin; it != end; it++)
-			std::cout << *it << " ";
-		std::cout << RESET << std::endl;
-	}
-}
-
-void PmergeMe::_printAfterRecursion(
-	int iteration, iterator first, iterator last, int element_size
-) {
-	if (DEBUG) {
-		std::cout << GREY << "\n------------------------------------------\n"
-			<< "iteration " << iteration
-			<< ":\nPairs after merge insertion with bigger numbers: | ";
-		for (iterator it = first; it != last; it += element_size) {
-			for (int i = 0; i < element_size; i++) {
-				std::cout << *(it + i) << " ";
-			}
-			std::cout << "| ";
-		}
-		std::cout << RESET << std::endl;
-	}
-}
-
 void PmergeMe::_fillVector(char *input[]) {
 	clock_t t;
 	int i = 0;
@@ -320,7 +296,7 @@ void PmergeMe::_fillVector(char *input[]) {
 	// testar usar reserve
 	t = std::clock();
 	while (input[i]) {
-		_vSequence.push_back(_getNumber(input[i]));
+		_vSequence.push_back(utils::getNumber(input[i]));
 		i++;
 	}
 
@@ -329,52 +305,6 @@ void PmergeMe::_fillVector(char *input[]) {
 		std::cout << GREY << "vector: input insertion time: "
 				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
 				<< RESET << std::endl;
-}
-
-void PmergeMe::_checkIfIsSorted(const_iterator begin, const_iterator end) const {
-	bool sorted = true;
-	int count = 0;
-
-	for (const_iterator it = begin + 1; it != end; it++) {
-		if (*(it - 1) > *it) {
-			std::cout << ORANGE << *(it - 1) << " and " << *it << std::endl;
-			sorted = false;
-			count++;
-		}
-	}
-	if (!sorted)
-		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
-	else if (DEBUG)
-		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
-}
-
-void PmergeMe::_checkIfIsSorted(
-	const_iterator begin, const_iterator end, int element_size
-) const {
-	bool sorted = true;
-	int count = 0;
-
-	for (const_iterator it = begin + element_size; it != end; it++) {
-		if (*(it - element_size) > *it) {
-			std::cout << ORANGE << *(it - element_size) << " and " << *it << std::endl;
-			sorted = false;
-			count++;
-		}
-	}
-	if (!sorted)
-		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
-	else if (DEBUG)
-		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
-}
-
-unsigned int PmergeMe::_getNumber(std::string const str_nb) {
-	std::stringstream	ss;
-	unsigned int		nb;
-
-	ss << str_nb;
-	ss >> nb;
-
-	return nb;
 }
 
 PmergeMe::vector PmergeMe::getVSequence(void) const {
@@ -394,7 +324,7 @@ void PmergeMe::_checkInput(char *input[]) {
 			}
 			j++;
 		}
-		nb = _getNumber(input[i]);
+		nb = utils::getNumber(input[i]);
 		if (nb > __INT_MAX__) {
 			throw NumberToHigh();
 		}

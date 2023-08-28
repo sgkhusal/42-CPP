@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 19:26:09 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/27 22:42:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PMERGE_ME_HPP
 
 # include <iostream>
-# include <sstream>
 # include <ctime>
 # include <exception>
 # include <vector>
@@ -64,19 +63,7 @@ private:
 	);
 
 	void	_fillVector(char *input[]);
-	void	_printVector(
-		bool print, const_iterator begin, const_iterator end, std::string const& description
-	) const;
-	void	_printAfterRecursion(
-		int iteration, iterator first, iterator last, int element_size
-	);
-	void	_checkIfIsSorted(const_iterator begin, const_iterator end) const;
-	void	_checkIfIsSorted(
-		const_iterator begin, const_iterator end, int element_size
-	) const;
-
 	void	_checkInput(char *input[]);
-	unsigned int _getNumber(std::string const str_nb);
 
 	class InvalidInput: public std::exception {
 		public:
