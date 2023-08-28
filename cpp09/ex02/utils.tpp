@@ -6,14 +6,14 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 23:04:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:07:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.hpp"
 
 namespace utils {
-	
+
 template<typename Iter>
 void checkIfIsSorted(Iter first, Iter last) {
 	bool sorted = true;
@@ -28,6 +28,26 @@ void checkIfIsSorted(Iter first, Iter last) {
 	}
 	if (!sorted)
 		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
+	else if (DEBUG)
+		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
+}
+
+template<typename Iter>
+void checkIfIsSorted(Iter first, Iter last, int element_size) {
+	bool sorted = true;
+	int count = 0;
+
+	for (Iter it = first + element_size; it != last; it += element_size) {
+		if (*(it - element_size) > *it) {
+			std::cout << ORANGE << *(it - element_size) << " and " << *it << std::endl;
+			sorted = false;
+			count++;
+		}
+	}
+	if (!sorted) {
+		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
+		exit(1);
+	}
 	else if (DEBUG)
 		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
 }

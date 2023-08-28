@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/27 23:11:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/28 00:04:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <iostream>
 # include <sstream>
+# include <cstdlib>
 
 # ifndef DEBUG
     #define DEBUG false
@@ -31,6 +32,9 @@ unsigned int getNumber(std::string const str_nb);
 
 template<typename Iter>
 void checkIfIsSorted(Iter first, Iter last);
+
+template<typename Iter>
+void checkIfIsSorted(Iter first, Iter last, int element_size);
 
 void printDetails(int iteration, int size, int element_size, int pair_size);
 
