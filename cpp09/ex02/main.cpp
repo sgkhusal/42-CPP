@@ -6,24 +6,22 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:21 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/20 23:15:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/29 00:35:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.hpp"
 #include "PmergeMe.hpp"
 
 int main(int argc, char *argv[]) {
-	if (argc == 1) {
-		std::cout << ORANGE << "Error: missing integer sequence to be sorted"
-				<< std::endl;
-		return 1;
-	}
 	try {
-		PmergeMe p = PmergeMe(&argv[1]);
-		p.run();
+		utils::checkInput(argc, &argv[0]);
 	} catch (std::exception const& e) {
 		std::cout << ORANGE << e.what() << RESET << std::endl;
 		return 1;
 	}
+	PmergeMe p = PmergeMe(&argv[1]);
+	p.sort();
+	std::cout << std::endl;
 	return 0;
 }

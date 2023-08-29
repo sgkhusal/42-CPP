@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 01:07:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/29 00:34:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ void checkIfIsSorted(Iter first, Iter last, int element_size) {
 
 template<typename Iter>
 void printContainer(Iter first, Iter last) {
-	for (Iter it = first; it != last; it++)
-		std::cout << *it << " ";
+	std::for_each(first, last, &printElement);
 }
 
 template<typename Iter>

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 01:44:46 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/28 23:13:23 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,21 @@ public:
 	~PmergeMe(void);
 	PmergeMe const& operator=(PmergeMe const& p);
 
-	vector	getVSequence(void) const;
-	void	run(void);
+	vector	getSequence(void) const;
+	void	sort(void);
 
 private:
 	PmergeMe(void);
 
-	vector	_vSequence;
+	vector		_sequence;
+	void		_fillSequence(char *input[]);
 
-	void		_sortV(void);
 	void		_mergeInsertion(iterator first, iterator last, int iteration);
 
-	void		_sortSize2(iterator first, int element_size);
 	odd_t		_removeLastElement(iterator last, int element_size);
-	void		_sortPairs(iterator first, iterator last, int e_size, int p_size);
 	vector		_createPend(
 		iterator first, int pend_size, int half_size, int element_size, odd_t odd
 	);
-	void		_removePendElements(iterator first, int half_size, int element_size);
 	void		_insertFirstElement(iterator first, iterator last);
 	vector		_jacobsthalSequence(const int& size);
 	vector		_getInsertionOrder(const int& size);
@@ -61,23 +58,22 @@ private:
 	iterator _findPosition(
 		iterator first, iterator order_it, int element_size, vector pend, vector& pairs_reference
 	);
-	iterator	_binarySearch(
-		iterator first, iterator last, int value, int element_size
+
+	template<typename Iter>
+	void		_sortSize2(Iter first, int element_size);
+
+	template<typename Iter>
+	void		_sortPairs(Iter first, Iter last, int e_size, int p_size);
+
+	template<typename Iter>
+	void		_removePendElements(Iter first, int half_size, int element_size);
+
+	template<typename Iter>
+	Iter		_binarySearch(
+		Iter first, Iter last, int value, int element_size
 	);
-
-	void	_fillVector(char *input[]);
-	void	_checkInput(char *input[]);
-
-	class InvalidInput: public std::exception {
-		public:
-			virtual const char* what() const throw();
-	};
-
-	class NumberToHigh: public std::exception {
-		public:
-			virtual const char* what() const throw();
-	};
-
 };
+
+# include "PmergeMe.tpp"
 
 #endif
