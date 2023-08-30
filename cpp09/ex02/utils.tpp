@@ -6,13 +6,32 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/29 00:34:52 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:20:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.hpp"
 
 namespace utils {
+
+template<typename Container>
+void fillContainer(Container& c, char* input[]) {
+	clock_t t;
+	int i = 0;
+
+	// testar usar reserve para vector
+	t = std::clock();
+	while (input[i]) {
+		c.push_back(getNumber(input[i]));
+		i++;
+	}
+
+	t = std::clock() - t;
+	if (DEBUG)
+		std::cout << GREY << "vector: input insertion time: "
+				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
+				<< RESET << std::endl;
+}
 
 template<typename Iter>
 void checkIfIsSorted(Iter first, Iter last) {

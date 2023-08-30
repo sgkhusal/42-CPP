@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 23:29:58 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:19:49 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 # include <sstream>
 # include <cstdlib>
 # include <algorithm>
+# include <ctime>
+
+#include <list>
+#include <vector>
 
 # ifndef DEBUG
     #define DEBUG false
@@ -32,6 +36,9 @@ namespace utils {
 unsigned int	getNumber(std::string const str_nb);
 void			checkInput(int argc, char *input[]);
 void 			printElement(int nb);
+
+template<typename Container>
+void			fillContainer(Container& c, char const*input[]);
 
 template<typename Iter>
 void checkIfIsSorted(Iter first, Iter last);
