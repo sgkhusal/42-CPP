@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/30 21:53:04 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:02:28 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,13 @@ public:
 
 	vector	getVector(void) const;
 	list	getList(void) const;
+	size_t	size(void) const;
 	void	sort(void);
 
 private:
 	PmergeMe(void);
 
+	size_t		_size;
 	vector		_v;
 	list		_l;
 	clock_t		_vt;

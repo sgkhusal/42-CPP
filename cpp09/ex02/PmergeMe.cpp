@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/30 21:53:40 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:11:20 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 PmergeMe::PmergeMe(void) { }
 
-PmergeMe::PmergeMe(char *input[]): _vt(0), _lt(0) {
+PmergeMe::PmergeMe(char *input[]): _size(0), _vt(0), _lt(0) {
+	while(input[_size])
+		_size++;
 	_fillVector(input);
 	_fillList(input);
 }
@@ -44,13 +46,26 @@ void PmergeMe::sort(void) {
 	_mergeInsertion(_v.begin(), _v.end(), 0);
 	utils::checkIfIsSorted(_v.begin(), _v.end());
 	t = std::clock() - t;
-	std::cout << GREY << "vector: sorting time: "
-			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
-			<< RESET << std::endl;
+	_vt += t;
+
+	t = std::clock();
+	// _mergeInsertion(_l.begin(), _l.end(), 0);
+	// utils::checkIfIsSorted(_l.begin(), _l.end());
+	t = std::clock() - t;
+	_lt += t;
+
 
 	utils::printContainer(
 		true, _v.begin(), _v.end(), "After:	"
 	);
+	std::cout << GREY << "Time to process a range of " << _size
+			<< " elements with std::<vector>: "
+			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< RESET << std::endl;
+	std::cout << GREY << "Time to process a range of " << _size
+			<< " elements with std::<list>:   "
+			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< RESET << std::endl;
 }
 
 void PmergeMe::_mergeInsertion(v_iterator first, v_iterator last, int iteration) {
@@ -253,10 +268,7 @@ void PmergeMe::_fillVector(char *input[]) {
 	int i = 0;
 
 	_vt = std::clock();
-	while (input[i])
-		i++;
-	_v.reserve(i);
-	i = 0;
+	_v.reserve(_size);
 	while (input[i]) {
 		_v.push_back(utils::getNumber(input[i]));
 		i++;
@@ -289,4 +301,8 @@ PmergeMe::vector PmergeMe::getVector(void) const {
 
 PmergeMe::list PmergeMe::getList(void) const {
 	return this->_l;
+}
+
+size_t PmergeMe::size(void) const {
+	return this->_size;
 }
