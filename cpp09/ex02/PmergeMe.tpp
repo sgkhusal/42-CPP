@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 22:24:15 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:55:47 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 # define PMERGE_ME_TPP
 
 # include "PmergeMe.hpp"
+
+// template<typename Container>
+// void PmergeMe::sort(Container& c) {
+// 	clock_t t;
+
+// 	t = std::clock();
+// 	utils::printContainer(
+// 		true, c.begin(), c.end(), "Before:	"
+// 	);
+// 	_mergeInsertion(c.begin(), c.end(), 0);
+// 	utils::checkIfIsSorted(c.begin(), c.end());
+// 	t = std::clock() - t;
+// 	std::cout << GREY << "vector: sorting time: "
+// 			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+// 			<< RESET << std::endl;
+// }
 
 template<typename Iter>
 void PmergeMe::_sortSize2(Iter first, int element_size) {
@@ -53,7 +69,7 @@ void PmergeMe::_removePendElements(
 
 	for (int i = half_size; i > 0; i--) {
 		it = first + (i * 2 - 1) * element_size;
-		_sequence.erase(it, it + element_size);
+		_v.erase(it, it + element_size);
 	}
 }
 
@@ -78,5 +94,30 @@ Iter PmergeMe::_binarySearch(
 	else
 		return _binarySearch(middle, last, value, element_size);
 }
+
+// template<class ForwardIt>
+// ForwardIt lower_bound(ForwardIt first, ForwardIt last, const int& value, const int& element_size)
+// {
+//     ForwardIt it;
+//     typename std::iterator_traits<ForwardIt>::difference_type size, middle;
+
+// 	size = std::distance(first, last) / element_size;
+//     while (size > 0)
+//     {
+//         it = first;
+//         middle = size / 2 * element_size;
+//         std::advance(it, middle);
+
+//         if (*it < value)
+//         {
+//             first = ++it;
+//             size -= middle + 1;
+//         }
+//         else
+//             size = middle;
+//     }
+
+//     return first;
+// }
 
 #endif

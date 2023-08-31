@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/29 00:21:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/30 21:53:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 PmergeMe::PmergeMe(void) { }
 
-PmergeMe::PmergeMe(char *input[]) {
-	_fillSequence(input);
+PmergeMe::PmergeMe(char *input[]): _vt(0), _lt(0) {
+	_fillVector(input);
+	_fillList(input);
 }
 
 PmergeMe::~PmergeMe(void) { }
@@ -26,7 +27,8 @@ PmergeMe::PmergeMe(PmergeMe const& p) {
 
 PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {//////////
 	if (this != &p) {
-		this->_sequence = p.getSequence();
+		this->_v = p.getVector();
+		this->_l = p.getList();
 	}
 	return *this;
 }
@@ -35,26 +37,26 @@ void PmergeMe::sort(void) {
 	clock_t t;
 
 	utils::printContainer(
-		true, _sequence.begin(), _sequence.end(), "Before:	"
+		true, _v.begin(), _v.end(), "Before:	"
 	);
 
 	t = std::clock();
-	_mergeInsertion(_sequence.begin(), _sequence.end(), 0);
-	utils::checkIfIsSorted(_sequence.begin(), _sequence.end());
+	_mergeInsertion(_v.begin(), _v.end(), 0);
+	utils::checkIfIsSorted(_v.begin(), _v.end());
 	t = std::clock() - t;
 	std::cout << GREY << "vector: sorting time: "
 			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
 			<< RESET << std::endl;
 
 	utils::printContainer(
-		true, _sequence.begin(), _sequence.end(), "After:	"
+		true, _v.begin(), _v.end(), "After:	"
 	);
 }
 
-void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
+void PmergeMe::_mergeInsertion(v_iterator first, v_iterator last, int iteration) {
 	int		size, element_size, pair_size, pend_size;
 	vector	pend, order, pairs_reference;
-	odd_t	odd;
+	v_odd_t	odd;
 
 	element_size = std::pow(2, iteration);
 	size = std::distance(first, last) / element_size;
@@ -69,7 +71,7 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 		odd = _removeLastElement(last, element_size);
 	}
 	else
-		odd = odd_t(false, vector());
+		odd = v_odd_t(false, vector());
 
 	_sortPairs(first, last, element_size, pair_size);
 
@@ -84,14 +86,14 @@ void PmergeMe::_mergeInsertion(iterator first, iterator last, int iteration) {
 	_insertElements(first, size, element_size, order, pend);
 	if (element_size != 1)
 		utils::checkIfIsSorted(
-			_sequence.begin(), _sequence.end(), element_size);
+			_v.begin(), _v.end(), element_size);
 }
 
 void PmergeMe::_insertElements(
-	iterator first, int size, int element_size, vector order, vector pend
+	v_iterator first, int size, int element_size, vector order, vector pend
 ) { // é dispendioso passar o order e o pend dessa forma??
 	vector pairs_reference;
-	iterator order_it, p, elem_init, elem_final;
+	v_iterator order_it, p, elem_init, elem_final;
 	size_t d;
 
 	pairs_reference = _createPairsReference(size);
@@ -99,7 +101,7 @@ void PmergeMe::_insertElements(
 		p = _findPosition(first, order_it, element_size, pend, pairs_reference);
 		elem_init = pend.begin() + (*order_it - 1) * element_size;
 		elem_final = elem_init + element_size;
-		_sequence.insert(p, elem_init, elem_final);
+		_v.insert(p, elem_init, elem_final);
 
 		d = std::distance(first, p) / element_size;
 		if (d > pairs_reference.size())
@@ -110,17 +112,17 @@ void PmergeMe::_insertElements(
 		utils::printAfterInsert(
 			DEBUG,
 			pairs_reference.begin(), pairs_reference.end(),
-			_sequence.begin(), _sequence.end(),
+			_v.begin(), _v.end(),
 			"_vSequence: "
 		);
 	}
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 }
 
-PmergeMe::iterator PmergeMe::_findPosition(
-	iterator first, iterator order_it, int element_size, vector pend, vector& pairs_reference
+PmergeMe::v_iterator PmergeMe::_findPosition(
+	v_iterator first, v_iterator order_it, int element_size, vector pend, vector& pairs_reference
 ) {
-	iterator last, pairs_reference_it;
+	v_iterator last, pairs_reference_it;
 	int idx = 0, value;
 
 	pairs_reference_it = pairs_reference.begin();
@@ -158,7 +160,7 @@ PmergeMe::vector PmergeMe::_createPairsReference(int size) {
 PmergeMe::vector PmergeMe::_getInsertionOrder(const int& size) {
 	vector jacob, order(1, 1);
 	int j, last = 1;
-	iterator it;
+	v_iterator it;
 
 	if (size < 3) {
 		if (size == 2)
@@ -197,18 +199,18 @@ PmergeMe::vector PmergeMe::_jacobsthalSequence(const int& size) {
 	return jacob;
 }
 
-void PmergeMe::_insertFirstElement(iterator first, iterator last) {
-	_sequence.insert(_sequence.begin(), first, last);
+void PmergeMe::_insertFirstElement(v_iterator first, v_iterator last) {
+	_v.insert(_v.begin(), first, last);
 	utils::printContainer(
-		DEBUG, _sequence.begin(), _sequence.end(), "_sequence: "
+		DEBUG, _v.begin(), _v.end(), "_v: "
 	);
 }
 
 PmergeMe::vector PmergeMe::_createPend(
-	iterator first, int pend_size, int half_size, int element_size, odd_t odd
+	v_iterator first, int pend_size, int half_size, int element_size, v_odd_t odd
 ) {
 	vector pend;
-	iterator it;
+	v_iterator it;
 
 	pend.reserve(pend_size * element_size);
 	for (int i = 1; i <= half_size; i++) {
@@ -224,12 +226,12 @@ PmergeMe::vector PmergeMe::_createPend(
 	_removePendElements(first, half_size, element_size);
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 	utils::printContainer(
-		DEBUG, _sequence.begin(), _sequence.end(), "_vSequence: "
+		DEBUG, _v.begin(), _v.end(), "_vSequence: "
 	);
 	return pend;
 }
 
-PmergeMe::odd_t PmergeMe::_removeLastElement(iterator last, int element_size) {
+PmergeMe::v_odd_t PmergeMe::_removeLastElement(v_iterator last, int element_size) {
 	std::pair<bool, vector > odd;
 	vector odd_vector;
 
@@ -237,34 +239,54 @@ PmergeMe::odd_t PmergeMe::_removeLastElement(iterator last, int element_size) {
 		odd_vector.push_back(*(last + i));
 	}
 	odd = std::pair<bool, vector >(true, odd_vector);
-	_sequence.erase(last, last + element_size);
+	_v.erase(last, last + element_size);
 	utils::printContainer(
 		DEBUG, odd.second.begin(), odd.second.end(), "odd size: removed element: "
 	);
 	utils::printContainer(
-		DEBUG, _sequence.begin(), _sequence.end(), "_sequence: "
+		DEBUG, _v.begin(), _v.end(), "_v: "
 	);
 	return odd;
 }
 
-void PmergeMe::_fillSequence(char *input[]) {
-	clock_t t;
+void PmergeMe::_fillVector(char *input[]) {
 	int i = 0;
 
-	// testar usar reserve
-	t = std::clock();
+	_vt = std::clock();
+	while (input[i])
+		i++;
+	_v.reserve(i);
+	i = 0;
 	while (input[i]) {
-		_sequence.push_back(utils::getNumber(input[i]));
+		_v.push_back(utils::getNumber(input[i]));
 		i++;
 	}
-
-	t = std::clock() - t;
+	_vt = std::clock() - _vt;
 	if (DEBUG)
 		std::cout << GREY << "vector: input insertion time: "
-				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
+				<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
 				<< RESET << std::endl;
 }
 
-PmergeMe::vector PmergeMe::getSequence(void) const {
-	return this->_sequence;
+void PmergeMe::_fillList(char *input[]) {
+	int i = 0;
+
+	_lt = std::clock();
+	while (input[i]) {
+		_l.push_back(utils::getNumber(input[i]));
+		i++;
+	}
+	_lt = std::clock() - _lt;
+	if (DEBUG)
+		std::cout << GREY << "list: input insertion time: "
+				<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+				<< RESET << std::endl;
+}
+
+PmergeMe::vector PmergeMe::getVector(void) const {
+	return this->_v;
+}
+
+PmergeMe::list PmergeMe::getList(void) const {
+	return this->_l;
 }
