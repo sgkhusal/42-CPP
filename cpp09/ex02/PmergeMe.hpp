@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/30 22:02:28 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/31 00:35:54 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,29 @@ public:
 private:
 	PmergeMe(void);
 
-	size_t		_size;
-	vector		_v;
-	list		_l;
-	clock_t		_vt;
-	clock_t		_lt;
-	void		_fillVector(char *input[]);
-	void		_fillList(char *input[]);
+	size_t	_size;
+	vector	_v;
+	list	_l;
+	clock_t	_vt;
+	clock_t	_lt;
+	void	_fillVector(char *input[]);
+	void	_fillList(char *input[]);
 
-	void		_mergeInsertion(v_iterator first, v_iterator last, int iteration);
+	void	_vMergeInsertion(v_iterator first, v_iterator last, int iteration);
+	void	_lMergeInsertion(l_iterator first, l_iterator last, int iteration);
 
-	v_odd_t		_removeLastElement(v_iterator last, int element_size);
-	vector		_createPend(
+	v_odd_t	_removeLastElementV(v_iterator last, int element_size);
+	l_odd_t	_removeLastElementL(l_iterator last, int element_size);
+	void _sortVPairs(v_iterator first, v_iterator last, int e_size, int p_size);
+	void _sortLPairs(l_iterator first, int e_size, int p_size, int size);
+	vector	_createPend(
 		v_iterator first, int pend_size, int half_size, int element_size, v_odd_t odd
 	);
-	void		_insertFirstElement(v_iterator first, v_iterator last);
-	vector		_jacobsthalSequence(const int& size);
-	vector		_getInsertionOrder(const int& size);
-	vector		_createPairsReference(int size);
-	void		_insertElements(
+	void	_insertFirstElement(v_iterator first, v_iterator last);
+	vector	_jacobsthalSequence(const int& size);
+	vector	_getInsertionOrder(const int& size);
+	vector	_createPairsReference(int size);
+	void	_insertElements(
 		v_iterator first, int size, int element_size, vector order, vector pend
 	);
 	v_iterator _findPosition(
@@ -73,16 +77,16 @@ private:
 	);
 
 	template<typename Iter>
-	void		_sortSize2(Iter first, int element_size);
+	void	_sortSize2(Iter first, int element_size);
 
 	template<typename Iter>
-	void		_sortPairs(Iter first, Iter last, int e_size, int p_size);
+	void	_swapPair(Iter ita, Iter itb, int element_size);
 
 	template<typename Iter>
-	void		_removePendElements(Iter first, int half_size, int element_size);
+	void	_removePendElements(Iter first, int half_size, int element_size);
 
 	template<typename Iter>
-	Iter		_binarySearch(
+	Iter	_binarySearch(
 		Iter first, Iter last, int value, int element_size
 	);
 };

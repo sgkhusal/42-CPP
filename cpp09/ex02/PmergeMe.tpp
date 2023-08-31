@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/30 21:55:47 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/31 00:36:06 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,50 +15,19 @@
 
 # include "PmergeMe.hpp"
 
-// template<typename Container>
-// void PmergeMe::sort(Container& c) {
-// 	clock_t t;
-
-// 	t = std::clock();
-// 	utils::printContainer(
-// 		true, c.begin(), c.end(), "Before:	"
-// 	);
-// 	_mergeInsertion(c.begin(), c.end(), 0);
-// 	utils::checkIfIsSorted(c.begin(), c.end());
-// 	t = std::clock() - t;
-// 	std::cout << GREY << "vector: sorting time: "
-// 			<< ((float)t)/CLOCKS_PER_SEC * 1000 << " micro seconds"
-// 			<< RESET << std::endl;
-// }
-
 template<typename Iter>
 void PmergeMe::_sortSize2(Iter first, int element_size) {
-	Iter it = first;
+	Iter ita = first, itb = first;
 
-	if (*it > *(it + element_size)) {
-		for (int i = 0; i < element_size; i++)
-			std::swap(*(it + i), *(it + element_size + i));
-	}
+	std::advance(itb, element_size);
+	if (*ita > *(itb))
+		_swapPair(ita, itb, element_size);
 }
 
 template<typename Iter>
-void PmergeMe::_sortPairs(Iter first, Iter last, int e_size, int p_size) {
-	for (Iter it = first; it != last; it += p_size) {
-		if (*it < *(it + e_size)) {
-			for (int i = 0; i < e_size; i++)
-				std::swap(*(it + i), *(it + e_size + i));
-		}
-	}
-	if (DEBUG) {
-		std::cout << "Pairs ordered: | ";
-		for (Iter it = first; it != last; it += p_size) {
-			for (int i = 0; i < p_size; i++) {
-				std::cout << *(it + i) << " ";
-			}
-			std::cout << "| ";
-		}
-		std::cout << RESET << std::endl;
-	}
+void PmergeMe::_swapPair(Iter ita, Iter itb, int element_size) {
+	for (int i = 0; i < element_size; i++)
+		std::swap(*ita++, *itb++);
 }
 
 template<typename Iter>

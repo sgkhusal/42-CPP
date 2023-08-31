@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/30 22:11:20 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/31 00:38:41 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,22 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {//////////
 void PmergeMe::sort(void) {
 	clock_t t;
 
-	utils::printContainer(
-		true, _v.begin(), _v.end(), "Before:	"
-	);
+	utils::printContainer(true, _l.begin(), _l.end(), "Before:	");
 
 	t = std::clock();
-	_mergeInsertion(_v.begin(), _v.end(), 0);
+	_vMergeInsertion(_v.begin(), _v.end(), 0);
 	utils::checkIfIsSorted(_v.begin(), _v.end());
 	t = std::clock() - t;
 	_vt += t;
 
 	t = std::clock();
-	// _mergeInsertion(_l.begin(), _l.end(), 0);
+	_lMergeInsertion(_l.begin(), _l.end(), 0);
 	// utils::checkIfIsSorted(_l.begin(), _l.end());
 	t = std::clock() - t;
 	_lt += t;
 
-
-	utils::printContainer(
-		true, _v.begin(), _v.end(), "After:	"
-	);
+	utils::printContainer(true, _v.begin(), _v.end(), "After:	");
+	utils::printContainer(true, _l.begin(), _l.end(), "After:	");
 	std::cout << GREY << "Time to process a range of " << _size
 			<< " elements with std::<vector>: "
 			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
@@ -68,7 +64,7 @@ void PmergeMe::sort(void) {
 			<< RESET << std::endl;
 }
 
-void PmergeMe::_mergeInsertion(v_iterator first, v_iterator last, int iteration) {
+void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration) {
 	int		size, element_size, pair_size, pend_size;
 	vector	pend, order, pairs_reference;
 	v_odd_t	odd;
@@ -83,14 +79,14 @@ void PmergeMe::_mergeInsertion(v_iterator first, v_iterator last, int iteration)
 		return _sortSize2(first, element_size);
 	if (size % 2 == 1) {
 		last = last - element_size;
-		odd = _removeLastElement(last, element_size);
+		odd = _removeLastElementV(last, element_size);
 	}
 	else
 		odd = v_odd_t(false, vector());
 
-	_sortPairs(first, last, element_size, pair_size);
+	_sortVPairs(first, last, element_size, pair_size);
 
-	_mergeInsertion(first, last, iteration + 1);
+	_vMergeInsertion(first, last, iteration + 1);
 	utils::printAfterRecursion(iteration, first, last, element_size);
 
 	pend_size = size / 2 + (odd.first ? 1 : 0);
@@ -102,6 +98,43 @@ void PmergeMe::_mergeInsertion(v_iterator first, v_iterator last, int iteration)
 	if (element_size != 1)
 		utils::checkIfIsSorted(
 			_v.begin(), _v.end(), element_size);
+}
+
+void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration) {
+	int		size, element_size, pair_size; //, pend_size;
+	list	pend, order, pairs_reference;
+	l_odd_t	odd;
+
+	element_size = std::pow(2, iteration);
+	size = std::distance(first, last) / element_size;
+	pair_size = std::pow(2, iteration + 1);
+	utils::printDetails(iteration, size, element_size, pair_size);
+	if (size <= 1)
+		return ;
+	if (size == 2)
+		return _sortSize2(first, element_size);
+	if (size % 2 == 1) {
+		for (int i = 0; i < element_size; i++)
+			last--;
+		odd = _removeLastElementL(last, element_size);
+	}
+	else
+		odd = l_odd_t(false, list());
+
+	_sortLPairs(first, element_size, pair_size, size / pair_size);
+
+	// _lMergeInsertion(first, last, iteration + 1);
+	// utils::printAfterRecursion(iteration, first, last, element_size);
+
+	// pend_size = size / 2 + (odd.first ? 1 : 0);
+	// pend = _createPend(first, pend_size, size / 2, element_size, odd);
+
+	// _insertFirstElement(pend.begin(), pend.begin() + element_size);
+	// order = _getInsertionOrder(pend_size);
+	// _insertElements(first, size, element_size, order, pend);
+	// if (element_size != 1)
+	// 	utils::checkIfIsSorted(
+	// 		_v.begin(), _v.end(), element_size);
 }
 
 void PmergeMe::_insertElements(
@@ -246,21 +279,83 @@ PmergeMe::vector PmergeMe::_createPend(
 	return pend;
 }
 
-PmergeMe::v_odd_t PmergeMe::_removeLastElement(v_iterator last, int element_size) {
-	std::pair<bool, vector > odd;
+void PmergeMe::_sortVPairs(v_iterator first, v_iterator last, int e_size, int p_size) {
+	for (v_iterator it = first; it != last; it += p_size) {
+		if (*it < *(it + e_size))
+			_swapPair(it, it + e_size, e_size);
+	}
+	if (DEBUG) {
+		std::cout << "Pairs ordered: | ";
+		for (v_iterator it = first; it != last; it += p_size) {
+			for (int i = 0; i < p_size; i++) {
+				std::cout << *(it + i) << " ";
+			}
+			std::cout << "| ";
+		}
+		std::cout << RESET << std::endl;
+	}
+}
+
+void PmergeMe::_sortLPairs(l_iterator first, int e_size, int p_size, int size) {
+	l_iterator ita = first, itb;
+
+	std::cout << "sortPairs: pair size: " << size << "; element_size: " << e_size << std::endl;
+	itb = ita;
+	std::advance(itb, e_size);
+	for (int i = 0; i < size; i++) {
+		std::cout << *ita << " and " << *itb << std::endl;
+		if (*ita < *itb)
+			_swapPair(ita, itb, e_size);
+		std::advance(ita, p_size);
+		std::advance(itb, p_size);
+	}
+	// if (DEBUG) {
+	// 	std::cout << "Pairs ordered: | ";
+	// 	for (l_iterator it = first; it != last; it += p_size) {
+	// 		for (int i = 0; i < p_size; i++) {
+	// 			std::cout << *(it + i) << " ";
+	// 		}
+	// 		std::cout << "| ";
+	// 	}
+	// 	std::cout << RESET << std::endl;
+	// }
+}
+
+PmergeMe::v_odd_t PmergeMe::_removeLastElementV(
+	v_iterator last, int element_size
+) {
+	v_odd_t odd;
 	vector odd_vector;
 
 	for (int i = 0; i < element_size; i++) {
 		odd_vector.push_back(*(last + i));
 	}
-	odd = std::pair<bool, vector >(true, odd_vector);
+	odd = v_odd_t(true, odd_vector);
 	_v.erase(last, last + element_size);
 	utils::printContainer(
 		DEBUG, odd.second.begin(), odd.second.end(), "odd size: removed element: "
 	);
+	utils::printContainer(DEBUG, _v.begin(), _v.end(), "vector: ");
+	return odd;
+}
+
+PmergeMe::l_odd_t PmergeMe::_removeLastElementL(
+	l_iterator last, int element_size
+) {
+	l_odd_t odd;
+	list odd_list;
+	l_iterator it = last;
+
+	for (int i = 0; i < element_size; i++) {
+		odd_list.push_back(*it);
+		it++;
+	}
+	odd = l_odd_t(true, odd_list);
+	_l.erase(last, it);
 	utils::printContainer(
-		DEBUG, _v.begin(), _v.end(), "_v: "
+		DEBUG, odd.second.begin(), odd.second.end(), "odd size: removed element: "
 	);
+	utils::printContainer(DEBUG, _l.begin(), _l.end(), "list: ");
 	return odd;
 }
 
