@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 12:59:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:42:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,8 +232,8 @@ PmergeMe::v_iterator PmergeMe::_vFindPosition(
 PmergeMe::l_iterator PmergeMe::_lFindPosition(
 	l_iterator first, l_iterator order_it, int element_size, list pend, list& pairs_reference
 ) {
-	l_iterator last, pairs_reference_it, p;
-	int idx = 0; //, value;
+	l_iterator last, pairs_reference_it, value;
+	int idx = 0;
 
 	pairs_reference_it = pairs_reference.begin();
 	while (
@@ -249,11 +249,9 @@ PmergeMe::l_iterator PmergeMe::_lFindPosition(
 		std::advance(last, (pairs_reference.size() - 1) * element_size);
 	else // não manda o par, porque já sabe que é menor; manda o elemento anterior
 		std::advance(last, (idx - 1) * element_size);
-	p = pend.begin();
-	std::advance(p, (*order_it - 1) * element_size);
-	// value = *p;
-	// return _binarySearch(first, last, value, element_size);
-	return p;
+	value = pend.begin();
+	std::advance(value, (*order_it - 1) * element_size);
+	return _binarySearch(first, last, *value, element_size);
 }
 
 void PmergeMe::_vInsertFirstElement(v_iterator first, v_iterator last) {
@@ -339,7 +337,6 @@ void PmergeMe::_lRemovePendElements(
 		std::advance(f, (i * 2 - 1) * element_size);
 		last = f;
 		std::advance(last, element_size);
-		std::cout << "remove: " << *f << " " << *last << std::endl;
 		_l.erase(f, last);
 	}
 }

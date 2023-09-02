@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 13:01:44 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:42:56 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,22 +93,26 @@ template<typename Iter>
 Iter PmergeMe::_binarySearch(
 	Iter first, Iter last, int value, int element_size
 ) {
-	size_t	size;
-	Iter middle;
+	size_t	size, middle;
+	Iter pos;
 
-	size = std::distance(first, last);
-	if (size / element_size == 1) {
+	size = std::distance(first, last) / element_size;
+	if (size == 1) {
 		if (value < *first)
 			return first;
 		if (value < *last)
 			return last;
-		return last + element_size;
+		pos = last;
+		std::advance(pos, element_size);
+		return pos;
 	}
-	middle = first + (size / element_size / 2 * element_size);
-	if (value < *middle)
-		return _binarySearch(first, middle, value, element_size);
+	middle = size / 2 * element_size;
+	pos = first;
+	std::advance(pos, middle);
+	if (value < *pos)
+		return _binarySearch(first, pos, value, element_size);
 	else
-		return _binarySearch(middle, last, value, element_size);
+		return _binarySearch(pos, last, value, element_size);
 }
 
 template<class ForwardIt>
@@ -127,7 +131,7 @@ ForwardIt _lower_bound(ForwardIt first, ForwardIt last, const int& value, const 
         if (*it < value)
         {
             first = ++it;
-            size -= middle / element_size + 1;
+            size -= (middle / element_size + 1);
         }
         else
             size = middle / element_size;
