@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/01 23:25:16 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 01:30:26 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <cmath>
 # include <vector>
 # include <list>
+# include <typeinfo>
+# include <cstring>
 
 # include "utils.hpp"
 
@@ -72,14 +74,18 @@ private:
 	void	_lRemovePendElements(l_iterator first, int half_size, int element_size);
 	void	_vInsertFirstElement(v_iterator first, v_iterator last);
 	void	_lInsertFirstElement(l_iterator first, int element_size);
-	vector	_jacobsthalSequence(const int& size);
-	vector	_getInsertionOrder(const int& size);
-	vector	_createPairsReference(int size);
-	void	_insertElements(
+	// vector	_vCreatePairsReference(int size);
+	void	_vInsertElements(
 		v_iterator first, int size, int element_size, vector order, vector pend
 	);
-	v_iterator _findPosition(
+	void	_lInsertElements(
+		l_iterator first, int size, int element_size, list order, list pend
+	);
+	v_iterator _vFindPosition(
 		v_iterator first, v_iterator order_it, int element_size, vector pend, vector& pairs_reference
+	);
+	l_iterator _lFindPosition(
+		l_iterator first, l_iterator order_it, int element_size, list pend, list& pairs_reference
 	);
 
 	template<typename Iter>
@@ -88,10 +94,21 @@ private:
 	template<typename Iter>
 	void	_swapPair(Iter ita, Iter itb, int element_size);
 
+	template<typename Container>
+	Container	_createPairsReference(const int& size);
+
+	template<typename Container, typename Iter>
+	Container	_getInsertionOrder(const int& size);
+
+	template<typename Container>
+	Container	_jacobsthalSequence(const int& size);
+
 	template<typename Iter>
 	Iter	_binarySearch(
 		Iter first, Iter last, int value, int element_size
 	);
+	template<class ForwardIt>
+	ForwardIt _lower_bound(ForwardIt first, ForwardIt last, const int& value, const int& element_size);
 };
 
 # include "PmergeMe.tpp"

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/01 22:57:30 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 01:37:13 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,12 +131,7 @@ void printAfterRecursion(
 		std::cout << GREY << "\n------------------------------------------\n"
 			<< "iteration " << iteration
 			<< ":\nPairs after merge insertion with bigger numbers: | ";
-		for (Iter it = first; it != last; it += element_size) {
-			for (int i = 0; i < element_size; i++) {
-				std::cout << *(it + i) << " ";
-			}
-			std::cout << "| ";
-		}
+		utils::printContainer(first, last, element_size);
 		std::cout << RESET << std::endl;
 	}
 }
