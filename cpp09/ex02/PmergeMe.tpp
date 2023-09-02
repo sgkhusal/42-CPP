@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 15:02:38 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:28:51 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void PmergeMe::_createPairsReference(const int& size, Container& pr) {
 
 template<typename Iter>
 Iter PmergeMe::_binarySearch(
-	Iter first, Iter last, int value, int element_size
+	Iter first, Iter last, const int& value, const int& element_size
 ) {
 	size_t	size, middle;
 	Iter pos;
@@ -135,29 +135,38 @@ Iter PmergeMe::_binarySearch(
 		return _binarySearch(pos, last, value, element_size);
 }
 
-template<class ForwardIt>
-ForwardIt _lower_bound(ForwardIt first, ForwardIt last, const int& value, const int& element_size)
-{
-    ForwardIt it;
-    typename std::iterator_traits<ForwardIt>::difference_type size, middle;
+// template<class Iter>
+// Iter PmergeMe::_binarySearch(
+// 	Iter first, Iter last, const int& value, const int& element_size
+// ) {
+// 	size_t size, middle;
+// 	Iter it;
 
-	size = std::distance(first, last) / element_size;
-    while (size > 0)
-    {
-        it = first;
-        middle = size / 2 * element_size;
-        std::advance(it, middle);
+// 	size = std::distance(first, last) / element_size;
+// 	while (size > 0)
+// 	{
+// 		if (size == 1) {
+// 			if (value < *first)
+// 				return first;
+// 			if (value < *last)
+// 				return last;
+// 			it = last;
+// 			std::advance(it, element_size);
+// 			return it;
+// 		}
+// 		it = first;
+// 		middle = size / 2 * element_size;
+// 		std::advance(it, middle);
 
-        if (*it < value)
-        {
-            first = ++it;
-            size -= (middle / element_size + 1);
-        }
-        else
-            size = middle / element_size;
-    }
-
-    return first;
-}
+// 		if (*it < value)
+// 		{
+// 			first = ++it;
+// 			size -= (middle / element_size + 1);
+// 		}
+// 		else
+// 			size = middle / element_size;
+// 	}
+// 	return first;
+// }
 
 #endif

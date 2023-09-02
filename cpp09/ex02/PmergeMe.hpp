@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 15:05:37 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 17:55:01 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ private:
 	v_odd_t	_vRemoveLastElement(v_iterator last, int element_size);
 	l_odd_t	_lRemoveLastElement(l_iterator last, int element_size);
 	void _vSortPairs(v_iterator first, v_iterator last, int e_size, int p_size);
-	void _lSortPairs(l_iterator first, int e_size, int p_size, int size);
+	void _lSortPairs(l_iterator first, l_iterator last, int e_size, int p_size);
 	void	_vRemovePendElements(v_iterator first, int half_size, int element_size);
 	void	_lRemovePendElements(l_iterator first, int half_size, int element_size);
 	void	_vInsertFirstElement(v_iterator first, v_iterator last);
@@ -103,7 +103,7 @@ private:
 
 	template<typename Iter>
 	Iter	_binarySearch(
-		Iter first, Iter last, int value, int element_size
+		Iter first, Iter last, const int& value, const int& element_size
 	);
 	template<class ForwardIt>
 	ForwardIt _lower_bound(ForwardIt first, ForwardIt last, const int& value, const int& element_size);
