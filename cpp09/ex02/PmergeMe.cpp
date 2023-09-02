@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 01:32:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 12:59:19 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration
 	pend = _vCreatePend(first, pend_size, size / 2, element_size, odd);
 
 	_vInsertFirstElement(pend.begin(), pend.begin() + element_size);
-	order = _getInsertionOrder<vector, v_iterator>(pend_size);
+	order.reserve(size);
+	_getInsertionOrder<vector, v_iterator>(pend_size, order);
 	_vInsertElements(first, size, element_size, order, pend);
 	if (element_size != 1)
 		utils::checkIfIsSorted(
@@ -131,7 +132,7 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 	pend = _lCreatePend(first, pend_size, size / 2, element_size, odd);
 
 	_lInsertFirstElement(pend.begin(), element_size);
-	order = _getInsertionOrder<list, l_iterator>(pend_size);
+	_getInsertionOrder<list, l_iterator>(pend_size, order);
 	_lInsertElements(first, size, element_size, order, pend);
 	// if (element_size != 1)
 	// 	utils::checkIfIsSorted(
@@ -145,7 +146,8 @@ void PmergeMe::_vInsertElements(
 	v_iterator order_it, p, elem_init, elem_final;
 	size_t d;
 
-	pairs_reference = _createPairsReference<vector>(size);
+	pairs_reference.reserve(size);
+	_createPairsReference(size, pairs_reference);
 	for (order_it = order.begin() + 1; order_it != order.end(); order_it++) {
 		p = _vFindPosition(first, order_it, element_size, pend, pairs_reference);
 		elem_init = pend.begin() + (*order_it - 1) * element_size;
@@ -175,7 +177,7 @@ void PmergeMe::_lInsertElements(
 	l_iterator order_it, p, elem_init, elem_final, tmp;
 	size_t d;
 
-	pairs_reference = _createPairsReference<list>(size);
+	_createPairsReference(size, pairs_reference);
 	for (order_it = ++order.begin(); order_it != order.end(); order_it++) {
 		p = _lFindPosition(first, order_it, element_size, pend, pairs_reference);
 		elem_init = pend.begin();
@@ -253,20 +255,6 @@ PmergeMe::l_iterator PmergeMe::_lFindPosition(
 	// return _binarySearch(first, last, value, element_size);
 	return p;
 }
-
-// PmergeMe::vector PmergeMe::_vCreatePairsReference(int size) {
-// 	vector pairs_reference;
-// 	int half_size = size / 2;
-
-// 	pairs_reference.reserve(size);
-// 	pairs_reference.push_back(1);
-// 	for (int i = 1; i <= half_size; i++)
-// 		pairs_reference.push_back(i);
-// 	utils::printContainer(
-// 		DEBUG, pairs_reference.begin(), pairs_reference.end(), "Pairs reference: "
-// 	);
-// 	return pairs_reference;
-// }
 
 void PmergeMe::_vInsertFirstElement(v_iterator first, v_iterator last) {
 	_v.insert(_v.begin(), first, last);

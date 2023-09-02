@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 01:30:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:01:50 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ private:
 	void	_swapPair(Iter ita, Iter itb, int element_size);
 
 	template<typename Container>
-	Container	_createPairsReference(const int& size);
+	void	_createPairsReference(const int& size, Container& pr);
 
 	template<typename Container, typename Iter>
-	Container	_getInsertionOrder(const int& size);
+	void	_getInsertionOrder(const int& size, Container& order);
 
 	template<typename Container>
 	Container	_jacobsthalSequence(const int& size);

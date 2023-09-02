@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 01:29:05 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:01:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ Container PmergeMe::_jacobsthalSequence(const int& size) {
 }
 
 template<typename Container, typename Iter>
-Container PmergeMe::_getInsertionOrder(const int& size) {
-	Container jacob, order(1, 1);
+void PmergeMe::_getInsertionOrder(const int& size, Container& order) {
+	Container jacob;
 	int j, last = 1;
 	Iter it;
-	vector check;
 
+	order.push_back(1);
 	if (size < 3) {
 		if (size == 2)
 			order.push_back(2);
-		return order;
+		return;
 	}
 	jacob = _jacobsthalSequence<Container>(size);
 	it = jacob.begin();
@@ -75,22 +75,18 @@ Container PmergeMe::_getInsertionOrder(const int& size) {
 	utils::printContainer(
 		DEBUG, order.begin(), order.end(), "Insertion order: "
 	);
-	return order;
 }
 
 template<typename Container>
-Container PmergeMe::_createPairsReference(const int& size) {
-	Container pairs_reference;
+void PmergeMe::_createPairsReference(const int& size, Container& pr) {
 	int half_size = size / 2;
 
-	// pairs_reference.reserve(size);
-	pairs_reference.push_back(1);
+	pr.push_back(1);
 	for (int i = 1; i <= half_size; i++)
-		pairs_reference.push_back(i);
+		pr.push_back(i);
 	utils::printContainer(
-		DEBUG, pairs_reference.begin(), pairs_reference.end(), "Pairs reference: "
+		DEBUG, pr.begin(), pr.end(), "Pairs reference: "
 	);
-	return pairs_reference;
 }
 
 template<typename Iter>
