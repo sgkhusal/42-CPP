@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 13:01:50 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:05:37 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,10 @@ private:
 	l_odd_t	_lRemoveLastElement(l_iterator last, int element_size);
 	void _vSortPairs(v_iterator first, v_iterator last, int e_size, int p_size);
 	void _lSortPairs(l_iterator first, int e_size, int p_size, int size);
-	vector	_vCreatePend(
-		v_iterator first, int pend_size, int half_size, int element_size, v_odd_t odd
-	);
-	list	_lCreatePend(
-		l_iterator first, int pend_size, int half_size, int element_size, l_odd_t odd
-	);
 	void	_vRemovePendElements(v_iterator first, int half_size, int element_size);
 	void	_lRemovePendElements(l_iterator first, int half_size, int element_size);
 	void	_vInsertFirstElement(v_iterator first, v_iterator last);
 	void	_lInsertFirstElement(l_iterator first, int element_size);
-	// vector	_vCreatePairsReference(int size);
 	void	_vInsertElements(
 		v_iterator first, int size, int element_size, vector order, vector pend
 	);
@@ -93,6 +86,11 @@ private:
 
 	template<typename Iter>
 	void	_swapPair(Iter ita, Iter itb, int element_size);
+
+	template<typename Container, typename Iter, typename Odd>
+	void	_createPend(
+		Container &pend, Iter first, int half_size, int element_size, Odd odd
+	);
 
 	template<typename Container>
 	void	_createPairsReference(const int& size, Container& pr);

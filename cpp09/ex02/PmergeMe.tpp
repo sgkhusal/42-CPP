@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 13:42:56 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:02:38 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ void PmergeMe::_swapPair(Iter ita, Iter itb, int element_size) {
 		// std::cout << "2. ita e itb: " << *a << " " << *b << std::endl;
 		std::swap(*ita++, *itb++);
 	}
+}
+
+template<typename Container, typename Iter, typename Odd>
+void PmergeMe::_createPend(
+	Container &pend, Iter first, int half_size, int element_size, Odd odd
+) {
+	Iter it;
+
+	it = first;
+	for (int i = 1; i <= half_size; i++) {
+		std::advance(it, element_size);
+		for (int j = 0; j < element_size; j++) {
+			pend.push_back(*it);
+			it++;
+		}
+	}
+	if (odd.first && element_size == 1)
+		pend.push_back(*(odd.second.begin()));
+	else if (odd.first)
+		pend.insert(pend.end(), odd.second.begin(), odd.second.end());
 }
 
 template<typename Container>

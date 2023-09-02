@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 14:12:31 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:33:53 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void PmergeMe::sort(void) {
 }
 
 void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration) {
-	int		size, element_size, pair_size, pend_size;
+	int		size, element_size, pair_size, pend_size, half_size;
 	vector	pend, order, pairs_reference;
 	v_odd_t	odd;
 
@@ -89,8 +89,13 @@ void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration
 	_vMergeInsertion(first, last, iteration + 1);
 	utils::printAfterRecursion(iteration, first, last, element_size);
 
-	pend_size = size / 2 + (odd.first ? 1 : 0);
-	pend = _vCreatePend(first, pend_size, size / 2, element_size, odd);
+	half_size = size / 2;
+	pend_size = half_size + (odd.first ? 1 : 0);
+	pend.reserve(pend_size * element_size);
+	_createPend(pend, first, size / 2, element_size, odd);
+	_vRemovePendElements(first, half_size, element_size);
+	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
+	utils::printContainer(DEBUG, _v.begin(), _v.end(), "vector: ");
 
 	_vInsertFirstElement(pend.begin(), pend.begin() + element_size);
 	order.reserve(size);
@@ -101,7 +106,7 @@ void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration
 }
 
 void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration) {
-	int		size, element_size, pair_size, pend_size;
+	int		size, element_size, pair_size, pend_size, half_size;
 	list	pend, order, pairs_reference;
 	l_odd_t	odd;
 
@@ -125,12 +130,20 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 	_lSortPairs(first, element_size, pair_size, size);
 
 	_lMergeInsertion(first, last, iteration + 1);
+	first = _l.begin();
+	last = _l.end();
 	utils::printAfterRecursion(iteration, first, last, element_size);
 
-	pend_size = size / 2 + (odd.first ? 1 : 0);
-	pend = _lCreatePend(first, pend_size, size / 2, element_size, odd);
+	half_size = size / 2;
+	pend_size = half_size + (odd.first ? 1 : 0);
+	_createPend(pend, first, size / 2, element_size, odd);
+	_lRemovePendElements(first, half_size, element_size);
+	last = _l.end();
+	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
+	utils::printContainer(DEBUG, _l.begin(), _l.end(), "list: ");
 
 	_lInsertFirstElement(pend.begin(), element_size);
+	first = _l.begin();
 	_getInsertionOrder<list, l_iterator>(pend_size, order);
 	_lInsertElements(first, size, element_size, order, pend);
 	if (element_size != 1)
@@ -183,6 +196,7 @@ void PmergeMe::_lInsertElements(
 		elem_final = elem_init;
 		std::advance(elem_final, element_size);
 		_l.insert(p, elem_init, elem_final);
+		first = _l.begin();
 
 		d = std::distance(first, p) / element_size;
 		if (d > pairs_reference.size())
@@ -254,7 +268,9 @@ PmergeMe::l_iterator PmergeMe::_lFindPosition(
 
 void PmergeMe::_vInsertFirstElement(v_iterator first, v_iterator last) {
 	_v.insert(_v.begin(), first, last);
-	utils::printContainer(DEBUG, _v.begin(), _v.end(), "- vector: ");
+	utils::printContainer(
+		DEBUG, _v.begin(), _v.end(), "vector after insert pend's first element: "
+	);
 }
 
 void PmergeMe::_lInsertFirstElement(l_iterator first, int element_size) {
@@ -262,55 +278,9 @@ void PmergeMe::_lInsertFirstElement(l_iterator first, int element_size) {
 
 	std::advance(last, element_size);
 	_l.insert(_l.begin(), first, last);
-	utils::printContainer(DEBUG, _l.begin(), _l.end(), "- list: ");
-}
-
-PmergeMe::vector PmergeMe::_vCreatePend(
-	v_iterator first, int pend_size, int half_size, int element_size, v_odd_t odd
-) {
-	vector pend;
-	v_iterator it;
-
-	pend.reserve(pend_size * element_size);
-	for (int i = 1; i <= half_size; i++) {
-		it = first + (i * 2 - 1) * element_size;
-		for (int j = 0; j < element_size; j++)
-			pend.push_back(*(it + j));
-	}
-	if (odd.first && element_size == 1)
-		pend.push_back(odd.second.at(0));
-	else if (odd.first)
-		pend.insert(pend.end(), odd.second.begin(), odd.second.end());
-	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	_vRemovePendElements(first, half_size, element_size);
-	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	utils::printContainer(DEBUG, _v.begin(), _v.end(), "- vector: ");
-	return pend;
-}
-
-PmergeMe::list PmergeMe::_lCreatePend(
-	l_iterator first, int pend_size, int half_size, int element_size, l_odd_t odd
-) {
-	list pend;
-	l_iterator it = first;
-
-	for (int i = 1; i <= half_size; i++) {
-		std::advance(it, (i * 2 - 1) * element_size);
-		for (int j = 0; j < element_size; j++) {
-			pend.push_back(*it);
-			it++;
-		}
-	}
-	if (odd.first && element_size == 1)
-		pend.push_back(*(odd.second.begin()));
-	else if (odd.first)
-		pend.insert(pend.end(), odd.second.begin(), odd.second.end());
-	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	(void)pend_size;
-	_lRemovePendElements(first, half_size, element_size);
-	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	utils::printContainer(DEBUG, _l.begin(), _l.end(), "- list: ");
-	return pend;
+	utils::printContainer(
+		DEBUG, _l.begin(), _l.end(), "list after insert pend's first element: "
+	);
 }
 
 void PmergeMe::_vRemovePendElements(
