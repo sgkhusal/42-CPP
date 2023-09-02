@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 13:54:27 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:18:02 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ unsigned int	getNumber(std::string const str_nb);
 void			checkInput(int argc, char *input[]);
 void 			printElement(int nb);
 
-template<typename Container>
-void			fillContainer(Container& c, char const*input[]);
+template<typename Iter>
+bool isSorted(Iter first, Iter last);
 
 template<typename Iter>
 void checkIfIsSorted(Iter first, Iter last, std::string type);

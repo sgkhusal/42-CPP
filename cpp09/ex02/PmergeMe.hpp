@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 17:55:01 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:43:11 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 # define PMERGE_ME_HPP
 
 # include <iostream>
-# include <ctime>
+# include <ctime> // clock
 # include <exception>
-# include <cmath>
+# include <cmath> // pow
 # include <vector>
 # include <list>
-# include <typeinfo>
-# include <cstring>
+# include <cstdlib> // rand
 
 # include "utils.hpp"
 
@@ -36,19 +35,23 @@ public:
 	typedef list::const_iterator l_const_iterator;  // não está sendo usado...
 	typedef std::pair<bool, list > l_odd_t;
 
-	PmergeMe(char *input[]);
+	/* Canonical form */
+	PmergeMe(void);
 	PmergeMe(PmergeMe const& p);
 	~PmergeMe(void);
 	PmergeMe const& operator=(PmergeMe const& p);
 
+	PmergeMe(char *input[]);
+	void	sort(void);
+
+	/* getters */
 	vector	getVector(void) const;
 	list	getList(void) const;
 	size_t	size(void) const;
-	void	sort(void);
+	clock_t	getVectorProcessTime(void) const;
+	clock_t	getListProcessTime(void) const;
 
 private:
-	PmergeMe(void);
-
 	size_t	_size;
 	vector	_v;
 	list	_l;
@@ -56,6 +59,8 @@ private:
 	clock_t	_lt;
 	void	_fillVector(char *input[]);
 	void	_fillList(char *input[]);
+	void	_printInitial(void) const;
+	void	_printResult(void) const;
 
 	void	_vMergeInsertion(v_iterator first, v_iterator last, int iteration);
 	void	_lMergeInsertion(l_iterator first, l_iterator last, int iteration);
@@ -80,6 +85,8 @@ private:
 	l_iterator _lFindPosition(
 		l_iterator first, l_iterator order_it, int element_size, list pend, list& pairs_reference
 	);
+
+	/* TEMPLATES */
 
 	template<typename Iter>
 	void	_sortSize2(Iter first, int element_size);

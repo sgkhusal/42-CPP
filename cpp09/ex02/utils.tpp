@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 14:15:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:21:44 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 namespace utils {
 
-template<typename Container> /////////////////////////////
-void fillContainer(Container& c, char* input[]) {
-	clock_t t;
-	int i = 0;
+template<typename Iter>
+bool isSorted(Iter first, Iter last) {
+	Iter ita = first, itb;
 
-	// testar usar reserve para vector
-	t = std::clock();
-	while (input[i]) {
-		c.push_back(getNumber(input[i]));
-		i++;
+	for (itb = ++first; itb != last; itb++) {
+		if (*ita > *itb) {
+			return false;
+		}
+		++ita;
 	}
-
-	t = std::clock() - t;
-	if (DEBUG)
-		std::cout << GREY << "vector: input insertion time: "
-				<< ((float)t)/CLOCKS_PER_SEC << " seconds"
-				<< RESET << std::endl;
+	return true;
 }
 
 template<typename Iter>
@@ -48,7 +42,7 @@ void checkIfIsSorted(Iter first, Iter last, std::string type) {
 		++ita;
 	}
 	if (!sorted)
-		std::cout << "KO: " << type << " is not sorted: " << count
+		std::cout << ORANGE << "KO: " << type << " is not sorted: " << count
 				<< RESET << std::endl;
 	else //if (DEBUG)
 		std::cout << GREEN << "OK: " << type << " is sorted"
@@ -72,11 +66,11 @@ void checkIfIsSorted(Iter first, Iter last, int element_size, std::string type) 
 		std::advance(itb, element_size);
 	}
 	if (!sorted) {
-		std::cout << "KO: " << type << " is not sorted: " << count
+		std::cout << ORANGE << "KO: " << type << " is not sorted: " << count
 				<< RESET << std::endl;
 		exit(1);
 	}
-	else //if (DEBUG)
+	else if (DEBUG)
 		std::cout << GREEN << "OK: " << type << " is sorted"
 				<< RESET << std::endl;
 }

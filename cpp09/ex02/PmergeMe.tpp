@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 18:28:51 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:44:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void PmergeMe::_sortSize2(Iter first, int element_size) {
 template<typename Iter>
 void PmergeMe::_swapPair(Iter ita, Iter itb, int element_size) {
 	for (int i = 0; i < element_size; i++) {
-		// std::cout << "2. ita e itb: " << *a << " " << *b << std::endl;
 		std::swap(*ita++, *itb++);
 	}
 }

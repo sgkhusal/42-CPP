@@ -6,13 +6,16 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 18:49:32 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:41:08 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(void) { }
+PmergeMe::PmergeMe(void): _size(0), _vt(0), _lt(0) {
+	this->_v = vector();
+	this->_l = list();
+}
 
 PmergeMe::PmergeMe(char *input[]): _size(0), _vt(0), _lt(0) {
 	while(input[_size])
@@ -23,14 +26,24 @@ PmergeMe::PmergeMe(char *input[]): _size(0), _vt(0), _lt(0) {
 
 PmergeMe::~PmergeMe(void) { }
 
-PmergeMe::PmergeMe(PmergeMe const& p) {
+PmergeMe::PmergeMe(PmergeMe const& p): _size(0), _vt(0), _lt(0) {
 	*this = p;
 }
 
-PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {//////////
+PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {
+	vector v = p.getVector();
+	list l = p.getList();
+
 	if (this != &p) {
-		this->_v = p.getVector();
-		this->_l = p.getList();
+		if (this->_size > 0) {
+			this->_v.erase(_v.begin(), _v.end());
+			this->_l.erase(_l.begin(), _l.end());
+		}
+		this->_v.insert(_v.begin(), v.begin(), v.end());
+		this->_l.insert(_l.begin(), l.begin(), l.end());
+		this->_size = p.size();
+		this->_vt = p.getVectorProcessTime();
+		this->_lt = p.getListProcessTime();
 	}
 	return *this;
 }
@@ -38,30 +51,34 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {//////////
 void PmergeMe::sort(void) {
 	clock_t t;
 
-	// utils::printContainer(true, _l.begin(), _l.end(), "Before:	");
+	if (_size == 0) {
+		std::cout << ORANGE << "Error: empty sequence" << RESET << std::endl;
+		return ;
+	}
+
+	_printInitial();
 
 	t = std::clock();
-	_vMergeInsertion(_v.begin(), _v.end(), 0);
-	utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
+	if (utils::isSorted(_v.begin(), _v.end()))
+		std::cout << GREEN << "vector already ordered\n";
+	else {
+		_vMergeInsertion(_v.begin(), _v.end(), 0);
+		utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
+	}
 	t = std::clock() - t;
 	_vt += t;
 
 	t = std::clock();
-	_lMergeInsertion(_l.begin(), _l.end(), 0);
-	utils::checkIfIsSorted(_l.begin(), _l.end(), "list");
+	if (utils::isSorted(_l.begin(), _l.end()))
+		std::cout << GREEN << "list already ordered\n";
+	else {
+		_lMergeInsertion(_l.begin(), _l.end(), 0);
+		utils::checkIfIsSorted(_l.begin(), _l.end(), "list");
+	}
 	t = std::clock() - t;
 	_lt += t;
 
-	// utils::printContainer(true, _v.begin(), _v.end(), "After:	");
-	// utils::printContainer(true, _l.begin(), _l.end(), "After:	");
-	std::cout << GREY << "Time to process a range of " << _size
-			<< " elements with std::<vector>: "
-			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
-			<< RESET << std::endl;
-	std::cout << GREY << "Time to process a range of " << _size
-			<< " elements with std::<list>:   "
-			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
-			<< RESET << std::endl;
+	_printResult();
 }
 
 void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration) {
@@ -412,12 +429,12 @@ void PmergeMe::_fillVector(char *input[]) {
 }
 
 void PmergeMe::_fillList(char *input[]) {
-	int i = 0;
+	int i = _size - 1;
 
 	_lt = std::clock();
-	while (input[i]) {
-		_l.push_back(utils::getNumber(input[i]));
-		i++;
+	while (i >= 0) {
+		_l.push_front(utils::getNumber(input[i]));
+		i--;
 	}
 	_lt = std::clock() - _lt;
 	if (DEBUG)
@@ -436,4 +453,36 @@ PmergeMe::list PmergeMe::getList(void) const {
 
 size_t PmergeMe::size(void) const {
 	return this->_size;
+}
+
+clock_t PmergeMe::getVectorProcessTime(void) const {
+	return this->_vt;
+}
+
+clock_t PmergeMe::getListProcessTime(void) const {
+	return this->_lt;
+}
+
+void PmergeMe::_printInitial(void) const {
+	srand(time(NULL));
+	if (rand() % 2 + 1)
+		utils::printContainer(true, _v.begin(), _v.end(), "Before:	");
+	else
+		utils::printContainer(true, _l.begin(), _l.end(), "Before:	");
+}
+
+void PmergeMe::_printResult(void) const {
+	if (rand() % 2 + 1)
+		utils::printContainer(true, _v.begin(), _v.end(), "After:	");
+	else
+		utils::printContainer(true, _l.begin(), _l.end(), "After:	");
+
+	std::cout << GREY << "Time to process a range of " << _size
+			<< " elements with std::<vector>: " << std::fixed
+			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< RESET << std::endl;
+	std::cout << GREY << "Time to process a range of " << _size
+			<< " elements with std::<list>:   " << std::fixed
+			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< RESET << std::endl;
 }
