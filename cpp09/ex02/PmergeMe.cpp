@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/31 00:38:41 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/01 20:56:21 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,14 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 		for (int i = 0; i < element_size; i++)
 			last--;
 		odd = _removeLastElementL(last, element_size);
+		last = _l.end();
 	}
 	else
 		odd = l_odd_t(false, list());
 
 	_sortLPairs(first, element_size, pair_size, size / pair_size);
 
-	// _lMergeInsertion(first, last, iteration + 1);
+	_lMergeInsertion(first, last, iteration + 1);
 	// utils::printAfterRecursion(iteration, first, last, element_size);
 
 	// pend_size = size / 2 + (odd.first ? 1 : 0);
@@ -299,26 +300,19 @@ void PmergeMe::_sortVPairs(v_iterator first, v_iterator last, int e_size, int p_
 void PmergeMe::_sortLPairs(l_iterator first, int e_size, int p_size, int size) {
 	l_iterator ita = first, itb;
 
-	std::cout << "sortPairs: pair size: " << size << "; element_size: " << e_size << std::endl;
 	itb = ita;
 	std::advance(itb, e_size);
 	for (int i = 0; i < size; i++) {
-		std::cout << *ita << " and " << *itb << std::endl;
 		if (*ita < *itb)
 			_swapPair(ita, itb, e_size);
 		std::advance(ita, p_size);
 		std::advance(itb, p_size);
 	}
-	// if (DEBUG) {
-	// 	std::cout << "Pairs ordered: | ";
-	// 	for (l_iterator it = first; it != last; it += p_size) {
-	// 		for (int i = 0; i < p_size; i++) {
-	// 			std::cout << *(it + i) << " ";
-	// 		}
-	// 		std::cout << "| ";
-	// 	}
-	// 	std::cout << RESET << std::endl;
-	// }
+	if (DEBUG) {
+		std::cout << GREY << "Pairs ordered: | ";
+		utils::printContainer(_l.begin(), _l.end(), e_size);
+		std::cout << RESET << std::endl;
+	}
 }
 
 PmergeMe::v_odd_t PmergeMe::_removeLastElementV(

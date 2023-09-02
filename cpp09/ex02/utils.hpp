@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/29 01:19:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:35:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void printDetails(int iteration, int size, int element_size, int pair_size);
 
 template<typename Iter>
 void printContainer(Iter first, Iter last);
+
+template<typename Iter>
+void printContainer(Iter first, Iter last, int e_size);
 
 template<typename Iter>
 void printContainer(
