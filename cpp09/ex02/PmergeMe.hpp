@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/31 00:35:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:25:16 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,20 @@ private:
 	void	_vMergeInsertion(v_iterator first, v_iterator last, int iteration);
 	void	_lMergeInsertion(l_iterator first, l_iterator last, int iteration);
 
-	v_odd_t	_removeLastElementV(v_iterator last, int element_size);
-	l_odd_t	_removeLastElementL(l_iterator last, int element_size);
-	void _sortVPairs(v_iterator first, v_iterator last, int e_size, int p_size);
-	void _sortLPairs(l_iterator first, int e_size, int p_size, int size);
-	vector	_createPend(
+	v_odd_t	_vRemoveLastElement(v_iterator last, int element_size);
+	l_odd_t	_lRemoveLastElement(l_iterator last, int element_size);
+	void _vSortPairs(v_iterator first, v_iterator last, int e_size, int p_size);
+	void _lSortPairs(l_iterator first, int e_size, int p_size, int size);
+	vector	_vCreatePend(
 		v_iterator first, int pend_size, int half_size, int element_size, v_odd_t odd
 	);
-	void	_insertFirstElement(v_iterator first, v_iterator last);
+	list	_lCreatePend(
+		l_iterator first, int pend_size, int half_size, int element_size, l_odd_t odd
+	);
+	void	_vRemovePendElements(v_iterator first, int half_size, int element_size);
+	void	_lRemovePendElements(l_iterator first, int half_size, int element_size);
+	void	_vInsertFirstElement(v_iterator first, v_iterator last);
+	void	_lInsertFirstElement(l_iterator first, int element_size);
 	vector	_jacobsthalSequence(const int& size);
 	vector	_getInsertionOrder(const int& size);
 	vector	_createPairsReference(int size);
@@ -81,9 +87,6 @@ private:
 
 	template<typename Iter>
 	void	_swapPair(Iter ita, Iter itb, int element_size);
-
-	template<typename Iter>
-	void	_removePendElements(Iter first, int half_size, int element_size);
 
 	template<typename Iter>
 	Iter	_binarySearch(
