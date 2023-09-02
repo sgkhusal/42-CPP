@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 18:28:19 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:49:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ PmergeMe const& PmergeMe::operator=(PmergeMe const& p) {//////////
 void PmergeMe::sort(void) {
 	clock_t t;
 
-	utils::printContainer(true, _l.begin(), _l.end(), "Before:	");
+	// utils::printContainer(true, _l.begin(), _l.end(), "Before:	");
 
-	// t = std::clock();
-	// _vMergeInsertion(_v.begin(), _v.end(), 0);
-	// utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
-	// t = std::clock() - t;
-	// _vt += t;
+	t = std::clock();
+	_vMergeInsertion(_v.begin(), _v.end(), 0);
+	utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
+	t = std::clock() - t;
+	_vt += t;
 
 	t = std::clock();
 	_lMergeInsertion(_l.begin(), _l.end(), 0);
@@ -54,10 +54,10 @@ void PmergeMe::sort(void) {
 
 	// utils::printContainer(true, _v.begin(), _v.end(), "After:	");
 	// utils::printContainer(true, _l.begin(), _l.end(), "After:	");
-	// std::cout << GREY << "Time to process a range of " << _size
-	// 		<< " elements with std::<vector>: "
-	// 		<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
-	// 		<< RESET << std::endl;
+	std::cout << GREY << "Time to process a range of " << _size
+			<< " elements with std::<vector>: "
+			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< RESET << std::endl;
 	std::cout << GREY << "Time to process a range of " << _size
 			<< " elements with std::<list>:   "
 			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
@@ -195,14 +195,14 @@ void PmergeMe::_lInsertElements(
 	for (order_it = ++order.begin(); order_it != order.end(); order_it++) {
 		first = _l.begin();
 		p = _lFindPosition(first, order_it, element_size, pend, pairs_reference);
+		d = std::distance(first, p) / element_size;
+
 		elem_init = pend.begin();
 		std::advance(elem_init, (*order_it - 1) * element_size);
 		elem_final = elem_init;
 		std::advance(elem_final, element_size);
 		_l.insert(p, elem_init, elem_final);
-		first = _l.begin();
 
-		d = std::distance(first, p) / element_size;
 		if (d > pairs_reference.size())
 			pairs_reference.insert(pairs_reference.end(), *order_it);
 		else {
