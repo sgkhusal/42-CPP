@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 01:37:13 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:15:32 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 namespace utils {
 
-template<typename Container>
+template<typename Container> /////////////////////////////
 void fillContainer(Container& c, char* input[]) {
 	clock_t t;
 	int i = 0;
@@ -34,41 +34,51 @@ void fillContainer(Container& c, char* input[]) {
 }
 
 template<typename Iter>
-void checkIfIsSorted(Iter first, Iter last) {
+void checkIfIsSorted(Iter first, Iter last, std::string type) {
+	Iter ita = first, itb;
 	bool sorted = true;
 	int count = 0;
 
-	for (Iter it = first + 1; it != last; it++) {
-		if (*(it - 1) > *it) {
-			std::cout << ORANGE << *(it - 1) << " and " << *it << std::endl;
+	for (itb = ++first; itb != last; itb++) {
+		if (*ita > *itb) {
+			std::cout << ORANGE << *ita << " and " << *itb << std::endl;
 			sorted = false;
-			count++;
+			++count;
 		}
+		++ita;
 	}
 	if (!sorted)
-		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
-	else if (DEBUG)
-		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
+		std::cout << "KO: " << type << " is not sorted: " << count
+				<< RESET << std::endl;
+	else //if (DEBUG)
+		std::cout << GREEN << "OK: " << type << " is sorted"
+				<< RESET << std::endl;
 }
 
 template<typename Iter>
-void checkIfIsSorted(Iter first, Iter last, int element_size) {
+void checkIfIsSorted(Iter first, Iter last, int element_size, std::string type) {
+	Iter ita = first, itb = first;
 	bool sorted = true;
 	int count = 0;
 
-	for (Iter it = first + element_size; it != last; it += element_size) {
-		if (*(it - element_size) > *it) {
-			std::cout << ORANGE << *(it - element_size) << " and " << *it << std::endl;
+	std::advance(itb, element_size);
+	while (itb != last) {
+		if (*ita > *itb) {
+			std::cout << ORANGE << *ita << " and " << *itb << std::endl;
 			sorted = false;
 			count++;
 		}
+		ita = itb;
+		std::advance(itb, element_size);
 	}
 	if (!sorted) {
-		std::cout << "KO: vector is not sorted: " << count << RESET << std::endl;
+		std::cout << "KO: " << type << " is not sorted: " << count
+				<< RESET << std::endl;
 		exit(1);
 	}
-	else if (DEBUG)
-		std::cout << GREEN << "OK: vector is sorted" << RESET << std::endl;
+	else //if (DEBUG)
+		std::cout << GREEN << "OK: " << type << " is sorted"
+				<< RESET << std::endl;
 }
 
 template<typename Iter>

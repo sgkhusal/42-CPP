@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 13:42:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:12:31 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void PmergeMe::sort(void) {
 
 	t = std::clock();
 	_vMergeInsertion(_v.begin(), _v.end(), 0);
-	utils::checkIfIsSorted(_v.begin(), _v.end());
+	utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
 	t = std::clock() - t;
 	_vt += t;
 
 	t = std::clock();
 	_lMergeInsertion(_l.begin(), _l.end(), 0);
-	// utils::checkIfIsSorted(_l.begin(), _l.end());
+	utils::checkIfIsSorted(_l.begin(), _l.end(), "list");
 	t = std::clock() - t;
 	_lt += t;
 
@@ -97,8 +97,7 @@ void PmergeMe::_vMergeInsertion(v_iterator first, v_iterator last, int iteration
 	_getInsertionOrder<vector, v_iterator>(pend_size, order);
 	_vInsertElements(first, size, element_size, order, pend);
 	if (element_size != 1)
-		utils::checkIfIsSorted(
-			_v.begin(), _v.end(), element_size);
+		utils::checkIfIsSorted(_v.begin(), _v.end(), element_size, "vector");
 }
 
 void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration) {
@@ -134,9 +133,8 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 	_lInsertFirstElement(pend.begin(), element_size);
 	_getInsertionOrder<list, l_iterator>(pend_size, order);
 	_lInsertElements(first, size, element_size, order, pend);
-	// if (element_size != 1)
-	// 	utils::checkIfIsSorted(
-	// 		_v.begin(), _v.end(), element_size);
+	if (element_size != 1)
+		utils::checkIfIsSorted(_l.begin(), _l.end(), element_size, "list");
 }
 
 void PmergeMe::_vInsertElements(
@@ -164,7 +162,7 @@ void PmergeMe::_vInsertElements(
 			DEBUG,
 			pairs_reference.begin(), pairs_reference.end(),
 			_v.begin(), _v.end(),
-			"_vSequence: "
+			"- vector: "
 		);
 	}
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
@@ -199,7 +197,7 @@ void PmergeMe::_lInsertElements(
 			DEBUG,
 			pairs_reference.begin(), pairs_reference.end(),
 			_l.begin(), _l.end(),
-			"_l: "
+			"- list: "
 		);
 	}
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
@@ -256,7 +254,7 @@ PmergeMe::l_iterator PmergeMe::_lFindPosition(
 
 void PmergeMe::_vInsertFirstElement(v_iterator first, v_iterator last) {
 	_v.insert(_v.begin(), first, last);
-	utils::printContainer(DEBUG, _v.begin(), _v.end(), "_v: ");
+	utils::printContainer(DEBUG, _v.begin(), _v.end(), "- vector: ");
 }
 
 void PmergeMe::_lInsertFirstElement(l_iterator first, int element_size) {
@@ -264,7 +262,7 @@ void PmergeMe::_lInsertFirstElement(l_iterator first, int element_size) {
 
 	std::advance(last, element_size);
 	_l.insert(_l.begin(), first, last);
-	utils::printContainer(DEBUG, _l.begin(), _l.end(), "_l: ");
+	utils::printContainer(DEBUG, _l.begin(), _l.end(), "- list: ");
 }
 
 PmergeMe::vector PmergeMe::_vCreatePend(
@@ -286,7 +284,7 @@ PmergeMe::vector PmergeMe::_vCreatePend(
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 	_vRemovePendElements(first, half_size, element_size);
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	utils::printContainer(DEBUG, _v.begin(), _v.end(), "_v: ");
+	utils::printContainer(DEBUG, _v.begin(), _v.end(), "- vector: ");
 	return pend;
 }
 
@@ -311,7 +309,7 @@ PmergeMe::list PmergeMe::_lCreatePend(
 	(void)pend_size;
 	_lRemovePendElements(first, half_size, element_size);
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
-	utils::printContainer(DEBUG, _l.begin(), _l.end(), "_l: ");
+	utils::printContainer(DEBUG, _l.begin(), _l.end(), "- list: ");
 	return pend;
 }
 
@@ -388,7 +386,7 @@ PmergeMe::v_odd_t PmergeMe::_vRemoveLastElement(
 	utils::printContainer(
 		DEBUG, odd.second.begin(), odd.second.end(), "odd size: removed element: "
 	);
-	utils::printContainer(DEBUG, _v.begin(), _v.end(), "vector: ");
+	utils::printContainer(DEBUG, _v.begin(), _v.end(), "- vector: ");
 	return odd;
 }
 

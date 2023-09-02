@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/31 10:35:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 13:54:27 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ template<typename Container>
 void			fillContainer(Container& c, char const*input[]);
 
 template<typename Iter>
-void checkIfIsSorted(Iter first, Iter last);
+void checkIfIsSorted(Iter first, Iter last, std::string type);
 
 template<typename Iter>
-void checkIfIsSorted(Iter first, Iter last, int element_size);
+void checkIfIsSorted(Iter first, Iter last, int element_size, std::string type);
 
 void printDetails(int iteration, int size, int element_size, int pair_size);
 
