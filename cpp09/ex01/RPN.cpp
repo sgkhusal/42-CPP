@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 09:39:02 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/19 17:24:21 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/03 12:48:52 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void RPN::_checkInput(std::string const input) {
 	for (it = input.begin(); it != end; it++) {
 		if (
 			!std::isdigit(*it)
+			&& *it != ' '
 			&& _validOperations.find(*it) == std::string::npos
 		)
 			throw InvalidInput();
