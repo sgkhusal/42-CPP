@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 22:40:03 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:32:17 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 	_lInsertFirstElement(pend.begin(), element_size);
 	first = _l.begin();
 	_getInsertionOrder<list, l_iterator>(pend_size, order);
-	_lInsertElements(first, size, element_size, order, pend);
+	_lInsertElements(first, element_size, order, pend);
 	if (element_size != 1)
 		utils::checkIfIsSorted(_l.begin(), _l.end(), element_size, "list");
 }
@@ -182,8 +182,7 @@ void PmergeMe::_vInsertElements(
 	v_iterator order_it, p, elem_init, elem_final;
 	size_t d;
 
-	pairs_reference.reserve(size);
-	_createPairsReference(size, pairs_reference);
+	pairs_reference = _vCreatePairsReference(size);
 	for (order_it = order.begin() + 1; order_it != order.end(); order_it++) {
 		p = _vFindPosition(first, order_it, element_size, pend, pairs_reference);
 		elem_init = pend.begin() + (*order_it - 1) * element_size;
@@ -206,31 +205,21 @@ void PmergeMe::_vInsertElements(
 }
 
 void PmergeMe::_lInsertElements(
-	l_iterator first, int size, int element_size, list order, list pend
+	l_iterator first, int element_size, list order, list pend
 ) {
-	list pairs_reference;
-	l_iterator order_it, p, elem_init, elem_final, tmp;
-	size_t d;
+	std::list<l_iterator> pairs_reference;
+	l_iterator order_it, p, elem_init, elem_final;
 
-	_createPairsReference(size, pairs_reference);
+	pairs_reference = _lCreatePairsReference(element_size);
 	for (order_it = ++order.begin(); order_it != order.end(); order_it++) {
 		first = _l.begin();
 		p = _lFindPosition(first, order_it, element_size, pend, pairs_reference);
-		d = std::distance(first, p) / element_size;
 
 		elem_init = pend.begin();
 		std::advance(elem_init, (*order_it - 1) * element_size);
 		elem_final = elem_init;
 		std::advance(elem_final, element_size);
 		_l.insert(p, elem_init, elem_final);
-
-		if (d > pairs_reference.size())
-			pairs_reference.insert(pairs_reference.end(), *order_it);
-		else {
-			tmp = pairs_reference.begin();
-			std::advance(tmp, d);
-			pairs_reference.insert(tmp, *order_it);
-		}
 
 		utils::printAfterInsert(
 			pairs_reference.begin(), pairs_reference.end(),
@@ -239,6 +228,38 @@ void PmergeMe::_lInsertElements(
 		);
 	}
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
+}
+
+PmergeMe::vector PmergeMe::_vCreatePairsReference(const int& size) {
+	int half_size = size / 2;
+	vector pairs_reference;
+
+	pairs_reference.reserve(size);
+	pairs_reference.push_back(1);
+	for (int i = 1; i <= half_size; i++)
+		pairs_reference.push_back(i);
+	utils::printContainer(
+		DEBUG, pairs_reference.begin(), pairs_reference.end(), "Pairs reference: "
+	);
+
+	return pairs_reference;
+}
+
+std::list<PmergeMe::l_iterator>	PmergeMe::_lCreatePairsReference(const int& e_size) {
+	std::list<l_iterator> pairs_reference;
+	l_iterator it, end;
+
+	it = _l.begin();
+	end = _l.end();
+	if (it == end)
+		return pairs_reference;
+	std::advance(it, e_size);
+	while (it != end) {
+		pairs_reference.push_back(it);
+		std::advance(it, e_size);
+	}
+
+	return pairs_reference;
 }
 
 PmergeMe::v_iterator PmergeMe::_vFindPosition(
@@ -264,27 +285,20 @@ PmergeMe::v_iterator PmergeMe::_vFindPosition(
 }
 
 PmergeMe::l_iterator PmergeMe::_lFindPosition(
-	l_iterator first, l_iterator order_it, int element_size, list pend, list& pairs_reference
+	l_iterator first, l_iterator order_it, int element_size, list pend, std::list<l_iterator>& pairs_reference
 ) {
-	l_iterator last, pairs_reference_it, value;
-	int idx = 0;
-
-	pairs_reference_it = pairs_reference.begin();
-	last = pairs_reference.end();
-	while (pairs_reference_it != last && *pairs_reference_it != *order_it) {
-		pairs_reference_it++;
-		idx++;
-	}
+	std::list<l_iterator>::const_iterator it;
+	l_iterator last, value;
 
 	first = _l.begin();
-	if (pairs_reference_it == last) {
-		last = first;
-		std::advance(last, (pairs_reference.size() - 1) * element_size);
+	it = pairs_reference.begin();
+	std::advance(it, *order_it - 1);
+	if (it == pairs_reference.end()) {
+		last = _l.end();
+		std::advance(last, -element_size);
 	}
-	else {
-		last = first;
-		std::advance(last, (idx - 1) * element_size);
-	}
+	else
+		last = *it;
 	value = pend.begin();
 	std::advance(value, (*order_it - 1) * element_size);
 	return _binarySearch(first, last, *value, element_size);

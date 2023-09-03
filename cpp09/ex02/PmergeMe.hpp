@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 22:42:36 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:16:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,31 @@ private:
 	l_odd_t	_lRemoveLastElement(l_iterator last, int element_size);
 	void _vSortPairs(v_iterator first, v_iterator last, int e_size, int p_size);
 	void _lSortPairs(l_iterator first, l_iterator last, int e_size, int p_size);
-	void	_vRemovePendElements(v_iterator first, int half_size, int element_size);
-	void	_lRemovePendElements(l_iterator first, int half_size, int element_size);
-	void	_vInsertFirstElement(v_iterator first, v_iterator last);
-	void	_lInsertFirstElement(l_iterator first, int element_size);
-	void	_vInsertElements(
+	void _vRemovePendElements(v_iterator first, int half_size, int element_size);
+	void _lRemovePendElements(l_iterator first, int half_size, int element_size);
+	void _vInsertFirstElement(v_iterator first, v_iterator last);
+	void _lInsertFirstElement(l_iterator first, int element_size);
+	void _vInsertElements(
 		v_iterator first, int size, int element_size, vector order, vector pend
 	);
-	void	_lInsertElements(
-		l_iterator first, int size, int element_size, list order, list pend
+	void _lInsertElements(
+		l_iterator first, int element_size, list order, list pend
 	);
+	vector 					_vCreatePairsReference(const int& size);
+	std::list<l_iterator>	_lCreatePairsReference(const int& e_size);
 	v_iterator _vFindPosition(
-		v_iterator first, v_iterator order_it, int element_size, vector pend, vector& pairs_reference
+		v_iterator first,
+		v_iterator order_it,
+		int element_size,
+		vector pend,
+		vector& pairs_reference
 	);
 	l_iterator _lFindPosition(
-		l_iterator first, l_iterator order_it, int element_size, list pend, list& pairs_reference
+		l_iterator first,
+		l_iterator order_it,
+		int element_size,
+		list pend,
+		std::list<l_iterator>& pairs_reference
 	);
 
 	/* TEMPLATES */
@@ -111,8 +121,6 @@ private:
 	Iter	_binarySearch(
 		Iter first, Iter last, const int& value, const int& element_size
 	);
-	template<class ForwardIt>
-	ForwardIt _lower_bound(ForwardIt first, ForwardIt last, const int& value, const int& element_size);
 };
 
 # include "PmergeMe.tpp"

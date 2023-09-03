@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 22:44:42 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:32:40 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,11 @@ void printContainer(
 template<typename Iter>
 void printAfterInsert(
 	Iter p_first, Iter p_last, Iter c_first, Iter c_last, std::string const& container
+);
+
+template<typename Iter1, typename Iter2>
+void printAfterInsert(
+	Iter1 p_first, Iter1 p_last, Iter2 c_first, Iter2 c_last, std::string const& container
 );
 
 template<typename Iter>

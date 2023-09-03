@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 21:09:06 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 20:54:26 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:30:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,9 @@ void PmergeMe::_getInsertionOrder(const int& size, Container& order) {
 	if (size < 3) {
 		if (size == 2)
 			order.push_back(2);
+		utils::printContainer(
+			DEBUG, order.begin(), order.end(), "Insertion order: "
+		);
 		return;
 	}
 	jacob = _jacobsthalSequence<Container>(size);

@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 22:57:44 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 21:38:49 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:31:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,21 @@ void printAfterInsert(
 	if (DEBUG) {
 		std::cout << GREY << "Pairs reference: ";
 		printContainer(p_first, p_last);
+		std::cout << GREY << container;
+		printContainer(c_first, c_last);
+		std::cout << RESET << std::endl;
+	}
+}
+
+template<typename Iter1, typename Iter2>
+void printAfterInsert(
+	Iter1 p_first, Iter1 p_last, Iter2 c_first, Iter2 c_last, std::string const& container
+) {
+	if (DEBUG) {
+		std::cout << GREY << "Pairs reference: ";
+		for (Iter1 it = p_first; it != p_last; it++) {
+			printElement(*(*it));
+		}
 		std::cout << GREY << container;
 		printContainer(c_first, c_last);
 		std::cout << RESET << std::endl;
