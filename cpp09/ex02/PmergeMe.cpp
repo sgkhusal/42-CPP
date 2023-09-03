@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:18 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 20:41:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:40:03 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,16 @@ PmergeMe::PmergeMe(void): _size(0), _vt(0), _lt(0) {
 	this->_l = list();
 }
 
-PmergeMe::PmergeMe(char *input[]): _size(0), _vt(0), _lt(0) {
-	while(input[_size])
-		_size++;
+PmergeMe::PmergeMe(int size, char *input[]): _size(size), _vt(0), _lt(0) {
+	clock_t t;
+
+	t = std::clock();
+	utils::checkInput(_size, input);
+	t = std::clock() - t;
 	_fillVector(input);
 	_fillList(input);
+	_vt += t;
+	_lt += t;
 }
 
 PmergeMe::~PmergeMe(void) { }
@@ -60,8 +65,9 @@ void PmergeMe::sort(void) {
 
 	t = std::clock();
 	if (utils::isSorted(_v.begin(), _v.end()))
-		std::cout << GREEN << "vector already ordered\n";
+		std::cout << "vector already ordered\n";
 	else {
+		utils::checkUniqueNumbers(_v.begin(), _v.end());
 		_vMergeInsertion(_v.begin(), _v.end(), 0);
 		utils::checkIfIsSorted(_v.begin(), _v.end(), "vector");
 	}
@@ -70,8 +76,9 @@ void PmergeMe::sort(void) {
 
 	t = std::clock();
 	if (utils::isSorted(_l.begin(), _l.end()))
-		std::cout << GREEN << "list already ordered\n";
+		std::cout << "list already ordered\n";
 	else {
+		utils::checkUniqueNumbers(_l.begin(), _l.end());
 		_lMergeInsertion(_l.begin(), _l.end(), 0);
 		utils::checkIfIsSorted(_l.begin(), _l.end(), "list");
 	}
@@ -157,8 +164,6 @@ void PmergeMe::_lMergeInsertion(l_iterator first, l_iterator last, int iteration
 	pend_size = half_size + (odd.first ? 1 : 0);
 	_createPend(pend, first, size / 2, element_size, odd);
 	_lRemovePendElements(first, half_size, element_size);
-	// first = _l.begin();
-	last = _l.end();
 	utils::printContainer(DEBUG, pend.begin(), pend.end(), "Pend: ");
 	utils::printContainer(DEBUG, _l.begin(), _l.end(), "list: ");
 
@@ -192,7 +197,6 @@ void PmergeMe::_vInsertElements(
 			pairs_reference.insert(pairs_reference.begin() + d, *order_it);
 
 		utils::printAfterInsert(
-			DEBUG,
 			pairs_reference.begin(), pairs_reference.end(),
 			_v.begin(), _v.end(),
 			"- vector: "
@@ -229,7 +233,6 @@ void PmergeMe::_lInsertElements(
 		}
 
 		utils::printAfterInsert(
-			DEBUG,
 			pairs_reference.begin(), pairs_reference.end(),
 			_l.begin(), _l.end(),
 			"- list: "
@@ -254,7 +257,7 @@ PmergeMe::v_iterator PmergeMe::_vFindPosition(
 	if (pairs_reference_it == last) {
 		last = first + (pairs_reference.size() - 1) * element_size;
 	}
-	else // não manda o par, porque já sabe que é menor; manda o elemento anterior
+	else
 		last = first + (idx - 1) * element_size;
 	value = pend.at((*order_it - 1) * element_size);
 	return _binarySearch(first, last, value, element_size);
@@ -279,7 +282,6 @@ PmergeMe::l_iterator PmergeMe::_lFindPosition(
 		std::advance(last, (pairs_reference.size() - 1) * element_size);
 	}
 	else {
-		// não manda o par, porque já sabe que é menor; manda o elemento anterior
 		last = first;
 		std::advance(last, (idx - 1) * element_size);
 	}
@@ -343,7 +345,6 @@ void PmergeMe::_vSortPairs(v_iterator first, v_iterator last, int e_size, int p_
 	}
 }
 
-// TODO: testar transformar em uma única
 void PmergeMe::_lSortPairs(l_iterator first, l_iterator last, int e_size, int p_size) {
 	l_iterator ita, itb;
 	int i;
@@ -352,12 +353,9 @@ void PmergeMe::_lSortPairs(l_iterator first, l_iterator last, int e_size, int p_
 	itb = first;
 	std::advance(itb, e_size);
 	while (ita != last) {
-		// std::cout << *ita << " " << * itb << std::endl;
 		if (*ita < *itb) {
-			for (i = 0; i < e_size; i++) {
-				// std::cout << "2. ita e itb: " << *a << " " << *b << std::endl;
+			for (i = 0; i < e_size; i++)
 				std::swap(*ita++, *itb++);
-			}
 			std::advance(ita, e_size);
 			std::advance(itb, e_size);
 		}
@@ -365,7 +363,6 @@ void PmergeMe::_lSortPairs(l_iterator first, l_iterator last, int e_size, int p_
 			std::advance(ita, p_size);
 			std::advance(itb, p_size);
 		}
-		// std::cout << *ita << " " << * itb << std::endl;
 	}
 	if (DEBUG) {
 		std::cout << GREY << "Pairs ordered: | ";
@@ -479,10 +476,10 @@ void PmergeMe::_printResult(void) const {
 
 	std::cout << GREY << "Time to process a range of " << _size
 			<< " elements with std::<vector>: " << std::fixed
-			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< ((float)_vt)/CLOCKS_PER_SEC * 1000 << " microseconds"
 			<< RESET << std::endl;
 	std::cout << GREY << "Time to process a range of " << _size
 			<< " elements with std::<list>:   " << std::fixed
-			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " micro seconds"
+			<< ((float)_lt)/CLOCKS_PER_SEC * 1000 << " microseconds"
 			<< RESET << std::endl;
 }

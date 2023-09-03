@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:21 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 20:35:54 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:41:00 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,13 @@ void copiesTest(PmergeMe const& p);
 
 int main(int argc, char *argv[]) {
 	try {
-		utils::checkInput(argc, &argv[0]);
+		PmergeMe p = PmergeMe(argc - 1, &argv[1]);
+		p.sort();
+		std::cout << std::endl;
 	} catch (std::exception const& e) {
 		std::cout << ORANGE << e.what() << RESET << std::endl;
 		return 1;
 	}
-
-	PmergeMe p = PmergeMe(&argv[1]);
-
-	p.sort();
-
-	std::cout << std::endl;
 	return 0;
 }
 

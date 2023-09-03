@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:15:34 by sguilher          #+#    #+#             */
-/*   Updated: 2023/08/28 23:29:08 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:43:39 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ unsigned int getNumber(std::string const str_nb) {
 	return nb;
 }
 
-void checkInput(int argc, char *input[]) {
+void checkInput(int size, char *input[]) {
 	int i = 1, j = 0;
 	unsigned int nb;
 
-	if (argc == 1) {
+	if (size == 0) {
 		throw std::runtime_error(
 			"Error: missing integer sequence to be sorted"
 		);

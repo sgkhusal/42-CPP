@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 16:12:57 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 20:18:02 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:44:42 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 namespace utils {
 
 unsigned int	getNumber(std::string const str_nb);
-void			checkInput(int argc, char *input[]);
+void			checkInput(int size, char *input[]);
 void 			printElement(int nb);
 
 template<typename Iter>
@@ -61,7 +61,7 @@ void printContainer(
 
 template<typename Iter>
 void printAfterInsert(
-	bool print, Iter p_first, Iter p_last, Iter c_first, Iter c_last, std::string const& description
+	Iter p_first, Iter p_last, Iter c_first, Iter c_last, std::string const& container
 );
 
 template<typename Iter>

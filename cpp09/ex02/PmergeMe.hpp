@@ -6,7 +6,7 @@
 /*   By: sguilher <sguilher@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:59:15 by sguilher          #+#    #+#             */
-/*   Updated: 2023/09/02 20:43:11 by sguilher         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:42:36 by sguilher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,13 @@
 
 class PmergeMe {
 public:
+	/* typedefs */
 	typedef std::vector<int> vector;
 	typedef vector::iterator v_iterator;
-	typedef vector::const_iterator v_const_iterator;  // não está sendo usado...
 	typedef std::pair<bool, vector > v_odd_t;
 
 	typedef std::list<int> list;
 	typedef list::iterator l_iterator;
-	typedef list::const_iterator l_const_iterator;  // não está sendo usado...
 	typedef std::pair<bool, list > l_odd_t;
 
 	/* Canonical form */
@@ -41,7 +40,7 @@ public:
 	~PmergeMe(void);
 	PmergeMe const& operator=(PmergeMe const& p);
 
-	PmergeMe(char *input[]);
+	PmergeMe(int size, char *input[]);
 	void	sort(void);
 
 	/* getters */
